@@ -8,7 +8,7 @@ function RouteComponent() {
   return (
     <div className="bg-base-100 shadow-2xs h-screen w-sm">
       <Link className="btn btn-primary" to="/">
-        Preview
+        Close
       </Link>
     </div>
   );

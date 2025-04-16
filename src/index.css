@@ -1,2 +1,31 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+
+
+.tree {
+    max-width: 100%;
+}
+
+.tree button[role="treeitem"] {
+    display: flex;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 0 0 2px 0;
+}
+
+.treeitem {
+    width: 100%;
+    text-align: left;
+    background-color: white;
+    padding: 6px 10px;
+    position: relative;
+    border-radius: 8px;
+    transition: background-color .2s ease;
+    cursor: pointer;
+    @apply flex;
+}
+
+.treeitem:hover {
+    background-color: var(--selected-color);
+}
