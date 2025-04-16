@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
-import { Link } from '@tanstack/react-router';
 
 export function Navbar() {
   const toggle = useAppStore(state => state.toggle);
+  const toggleEdit = useAppStore(state => state.toggleEdit);
+  const isEditing = useAppStore(state => state.edit);
   return (
     <div className="navbar bg-base-100">
       <div className="flex-none">
@@ -18,7 +19,9 @@ export function Navbar() {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/editor">Edit</Link>
+            <button onClick={toggleEdit} className="btn btn-ghost">
+              {isEditing ? 'Preview' : 'Edit'}
+            </button>
           </li>
         </ul>
       </div>

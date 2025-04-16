@@ -11,7 +11,6 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as EditorImport } from './routes/editor'
 import { Route as PathlessLayoutImport } from './routes/_pathlessLayout'
 import { Route as PathlessLayoutIndexImport } from './routes/_pathlessLayout/index'
 import { Route as PathlessLayoutManageImport } from './routes/_pathlessLayout/manage'
@@ -20,12 +19,6 @@ import { Route as PathlessLayoutDescriptionImport } from './routes/_pathlessLayo
 import { Route as PathlessLayoutBasemapImport } from './routes/_pathlessLayout/basemap'
 
 // Create/Update Routes
-
-const EditorRoute = EditorImport.update({
-  id: '/editor',
-  path: '/editor',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const PathlessLayoutRoute = PathlessLayoutImport.update({
   id: '/_pathlessLayout',
@@ -71,13 +64,6 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof PathlessLayoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/editor': {
-      id: '/editor'
-      path: '/editor'
-      fullPath: '/editor'
-      preLoaderRoute: typeof EditorImport
       parentRoute: typeof rootRoute
     }
     '/_pathlessLayout/basemap': {
@@ -142,7 +128,6 @@ const PathlessLayoutRouteWithChildren = PathlessLayoutRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof PathlessLayoutRouteWithChildren
-  '/editor': typeof EditorRoute
   '/basemap': typeof PathlessLayoutBasemapRoute
   '/description': typeof PathlessLayoutDescriptionRoute
   '/legend': typeof PathlessLayoutLegendRoute
@@ -151,7 +136,6 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/editor': typeof EditorRoute
   '/basemap': typeof PathlessLayoutBasemapRoute
   '/description': typeof PathlessLayoutDescriptionRoute
   '/legend': typeof PathlessLayoutLegendRoute
@@ -162,7 +146,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_pathlessLayout': typeof PathlessLayoutRouteWithChildren
-  '/editor': typeof EditorRoute
   '/_pathlessLayout/basemap': typeof PathlessLayoutBasemapRoute
   '/_pathlessLayout/description': typeof PathlessLayoutDescriptionRoute
   '/_pathlessLayout/legend': typeof PathlessLayoutLegendRoute
@@ -172,20 +155,12 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/editor'
-    | '/basemap'
-    | '/description'
-    | '/legend'
-    | '/manage'
-    | '/'
+  fullPaths: '' | '/basemap' | '/description' | '/legend' | '/manage' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/editor' | '/basemap' | '/description' | '/legend' | '/manage' | '/'
+  to: '/basemap' | '/description' | '/legend' | '/manage' | '/'
   id:
     | '__root__'
     | '/_pathlessLayout'
-    | '/editor'
     | '/_pathlessLayout/basemap'
     | '/_pathlessLayout/description'
     | '/_pathlessLayout/legend'
@@ -196,12 +171,10 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
-  EditorRoute: typeof EditorRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
-  EditorRoute: EditorRoute,
 }
 
 export const routeTree = rootRoute
@@ -214,8 +187,7 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_pathlessLayout",
-        "/editor"
+        "/_pathlessLayout"
       ]
     },
     "/_pathlessLayout": {
@@ -227,9 +199,6 @@ export const routeTree = rootRoute
         "/_pathlessLayout/manage",
         "/_pathlessLayout/"
       ]
-    },
-    "/editor": {
-      "filePath": "editor.tsx"
     },
     "/_pathlessLayout/basemap": {
       "filePath": "_pathlessLayout/basemap.tsx",

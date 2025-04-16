@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { LayerTree } from '../../components/LayerTree';
-import { useTreeStore } from '../../hooks/tree';
+import { useAppStore } from '../../hooks/app';
 
 export const Route = createFileRoute('/_pathlessLayout/')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const items = useTreeStore(state => state.items);
+  const items = useAppStore(state => state.items);
   return <LayerTree items={items} />;
 }
