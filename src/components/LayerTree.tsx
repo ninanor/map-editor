@@ -51,7 +51,7 @@ function ItemRender({ item, editable }: ItemRenderProps) {
     );
   }
   return (
-    <button
+    <div
       {...item.getProps()}
       style={{
         paddingLeft: `${item.getItemMeta().level * 20}px`,
@@ -84,7 +84,7 @@ function ItemRender({ item, editable }: ItemRenderProps) {
           )}
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 
