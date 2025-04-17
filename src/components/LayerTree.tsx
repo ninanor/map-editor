@@ -1,27 +1,50 @@
-import { hotkeysCoreFeature, syncDataLoaderFeature } from '@headless-tree/core';
+import {
+  createOnDropHandler,
+  dragAndDropFeature,
+  hotkeysCoreFeature,
+  keyboardDragAndDropFeature,
+  selectionFeature,
+  syncDataLoaderFeature,
+} from '@headless-tree/core';
 import { useTree } from '@headless-tree/react';
 import { TREE_ROOT_ID } from '../config';
 import { Item, Tree } from '../utils';
 import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquare, faSquareMinus, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { useMemo } from 'react';
 
 type LayerTreeProps = {
   items: Tree;
+  updateChildren: (itemId: string, newChildren: string[]) => void;
+  editable?: boolean;
 };
 
-export function LayerTree({ items }: LayerTreeProps) {
+const FEATURES = [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature];
+
+export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
+  const features = useMemo(() => {
+    if (editable) {
+      return [...FEATURES, dragAndDropFeature, keyboardDragAndDropFeature];
+    }
+    return FEATURES;
+  }, [editable]);
   const tree = useTree<Item>({
     rootItemId: TREE_ROOT_ID,
     getItemName: item => item.getItemData().name,
     isItemFolder: item => !!item.getItemData().isFolder,
+    canReorder: editable,
     dataLoader: {
       getItem: itemId => items[itemId],
       getChildren: itemId => items[itemId].children ?? [],
     },
+    onDrop: createOnDropHandler((item, newChildren) => {
+      updateChildren(item.getId(), newChildren);
+    }),
+    canDropForeignDragObject: (_, target) => target.item.isFolder(),
     indent: 20,
-    features: [syncDataLoaderFeature, hotkeysCoreFeature],
+    features,
   });
   return (
     <div {...tree.getContainerProps()} className="tree">
@@ -49,6 +72,7 @@ export function LayerTree({ items }: LayerTreeProps) {
           </div>
         </button>
       ))}
+      <div style={tree.getDragLineStyle()} className="dragline" />
     </div>
   );
 }

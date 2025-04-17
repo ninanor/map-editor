@@ -8,5 +8,7 @@ export const Route = createFileRoute('/_pathlessLayout/')({
 
 function RouteComponent() {
   const items = useAppStore(state => state.items);
-  return <LayerTree items={items} />;
+  const isEditing = useAppStore(state => state.edit);
+  const updateChildren = useAppStore(state => state.updateTreeItemChildren);
+  return <LayerTree items={items} updateChildren={updateChildren} editable={isEditing} />;
 }

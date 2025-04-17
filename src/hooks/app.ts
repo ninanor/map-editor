@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { Layer, LayerMap, Tree } from '../utils';
+import { Item, Layer, LayerMap, Tree } from '../utils';
 import { BASE_TREE } from '../config';
 import { MapViewState } from '@deck.gl/core';
 import { BASEMAP } from '@deck.gl/carto';
@@ -27,6 +27,7 @@ type AppActions = {
   setTitle: (title: string) => void;
   setSubtitle: (subtitle: string) => void;
   setDescription: (description: string) => void;
+  updateTreeItemChildren: (id: string, newChildren: string[]) => void;
 };
 
 export const useAppStore = create<AppState & AppActions>()(
@@ -73,6 +74,10 @@ export const useAppStore = create<AppState & AppActions>()(
       setDescription: (description: string) =>
         set(state => {
           state.description = description;
+        }),
+      updateTreeItemChildren: (id: string, newChildren: string[]) =>
+        set(state => {
+          state.items[id].children = newChildren;
         }),
     })),
   ),
