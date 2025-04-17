@@ -14,7 +14,7 @@ import { TREE_ROOT_ID } from '../config';
 import { Item, Tree } from '../utils';
 import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquare } from '@fortawesome/free-regular-svg-icons';
+// import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCaretDown, faCaretRight, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useCallback, useMemo } from 'react';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +58,7 @@ function ItemRender({ item, editable }: ItemRenderProps) {
       }}
     >
       <div
-        className={cx('treeitem', {
+        className={cx('treeitem flex items-center', {
           focused: item.isFocused(),
           expanded: item.isExpanded(),
           // selected: item.isSelected(),
@@ -67,7 +67,7 @@ function ItemRender({ item, editable }: ItemRenderProps) {
       >
         <div className="w-5">
           {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
-          {!item.isFolder() && <FontAwesomeIcon icon={faSquare} />}
+          {/* {!item.isFolder() && <FontAwesomeIcon icon={faSquare} />} */}
         </div>
         <div>{item.getItemName()}</div>
         <div className="ml-2 flex">
