@@ -28,6 +28,7 @@ type AppActions = {
   setSubtitle: (subtitle: string) => void;
   setDescription: (description: string) => void;
   updateTreeItemChildren: (id: string, newChildren: string[]) => void;
+  updateTreeItemName: (id: string, name: string) => void;
 };
 
 export const useAppStore = create<AppState & AppActions>()(
@@ -78,6 +79,10 @@ export const useAppStore = create<AppState & AppActions>()(
       updateTreeItemChildren: (id: string, newChildren: string[]) =>
         set(state => {
           state.items[id].children = newChildren;
+        }),
+      updateTreeItemName: (id: string, name: string) =>
+        set(state => {
+          state.items[id].name = name;
         }),
     })),
   ),

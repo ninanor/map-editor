@@ -4,8 +4,10 @@ import {
   hotkeysCoreFeature,
   ItemInstance,
   keyboardDragAndDropFeature,
+  renamingFeature,
   selectionFeature,
   syncDataLoaderFeature,
+  propMemoizationFeature,
 } from '@headless-tree/core';
 import { useTree } from '@headless-tree/react';
 import { TREE_ROOT_ID } from '../config';
@@ -13,13 +15,14 @@ import { Item, Tree } from '../utils';
 import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretRight, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useMemo } from 'react';
 
 type LayerTreeProps = {
   items: Tree;
   updateChildren: (itemId: string, newChildren: string[]) => void;
   editable?: boolean;
+  onRename: (itemId: string, value: string) => void;
 };
 
 const FEATURES = [
@@ -28,9 +31,62 @@ const FEATURES = [
   hotkeysCoreFeature,
   dragAndDropFeature,
   keyboardDragAndDropFeature,
+  renamingFeature,
+  propMemoizationFeature,
 ];
 
-export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
+type ItemRenderProps = {
+  item: ItemInstance<Item>;
+  editable?: boolean;
+};
+
+function ItemRender({ item, editable }: ItemRenderProps) {
+  if (item.isRenaming()) {
+    return (
+      <div className="renaming-item" style={{ marginLeft: `${item.getItemMeta().level * 20}px` }}>
+        <input {...item.getRenameInputProps()} />
+      </div>
+    );
+  }
+  return (
+    <button
+      {...item.getProps()}
+      style={{
+        paddingLeft: `${item.getItemMeta().level * 20}px`,
+      }}
+    >
+      <div
+        className={cx('treeitem', {
+          focused: item.isFocused(),
+          expanded: item.isExpanded(),
+          // selected: item.isSelected(),
+          folder: item.isFolder(),
+        })}
+      >
+        <div className="w-5">
+          {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
+          {!item.isFolder() && <FontAwesomeIcon icon={faSquare} />}
+        </div>
+        <div>{item.getItemName()}</div>
+        <div className="ml-2 flex">
+          {editable && (
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={e => {
+                e.stopPropagation();
+                item.startRenaming();
+              }}
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </button>
+          )}
+        </div>
+      </div>
+    </button>
+  );
+}
+
+export function LayerTree({ items, updateChildren, editable, onRename }: LayerTreeProps) {
   const onDrop = useMemo(() => {
     if (!editable) {
       return undefined;
@@ -45,11 +101,14 @@ export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
     getItemName: item => item.getItemData().name,
     isItemFolder: item => !!item.getItemData().isFolder,
     canReorder: editable,
+    onRename: (item, value) => onRename(item.getId(), value),
     dataLoader: {
       getItem: itemId => items[itemId],
       getChildren: itemId => items[itemId].children ?? [],
     },
     onDrop,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    canRename: (_item: ItemInstance<Item>) => !!editable,
     canDropForeignDragObject: (_, target) => target.item.isFolder(),
     indent: 20,
     features: FEATURES,
@@ -57,28 +116,7 @@ export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
   return (
     <div {...tree.getContainerProps()} className="tree">
       {tree.getItems().map(item => (
-        <button
-          {...item.getProps()}
-          key={item.getId()}
-          style={{
-            paddingLeft: `${item.getItemMeta().level * 20}px`,
-          }}
-        >
-          <div
-            className={cx('treeitem', {
-              focused: item.isFocused(),
-              expanded: item.isExpanded(),
-              // selected: item.isSelected(),
-              folder: item.isFolder(),
-            })}
-          >
-            <div className="w-5">
-              {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
-              {!item.isFolder() && <FontAwesomeIcon icon={faSquare} />}
-            </div>
-            <div>{item.getItemName()}</div>
-          </div>
-        </button>
+        <ItemRender key={item.getId()} item={item} editable={editable} />
       ))}
       <div style={tree.getDragLineStyle()} className="dragline" />
     </div>
