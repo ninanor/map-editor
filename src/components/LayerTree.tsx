@@ -5,6 +5,7 @@ import { Item, Tree } from '../utils';
 import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare, faSquareMinus, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 type LayerTreeProps = {
   items: Tree;
@@ -41,7 +42,7 @@ export function LayerTree({ items }: LayerTreeProps) {
             })}
           >
             <div className="w-5">
-              {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faSquareMinus : faSquarePlus} />}
+              {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
               {!item.isFolder() && <FontAwesomeIcon icon={faSquare} />}
             </div>
             <div>{item.getItemName()}</div>
