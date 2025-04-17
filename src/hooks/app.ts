@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { Item, Layer, LayerMap, Tree } from '../utils';
-import { BASE_TREE } from '../config';
+import { Layer, LayerMap, Tree } from '../utils';
+import { BASE_TREE, TREE_ROOT_ID } from '../config';
 import { MapViewState } from '@deck.gl/core';
 import { BASEMAP } from '@deck.gl/carto';
+import { nanoid } from 'nanoid';
 
 type AppState = {
   open: boolean;
@@ -29,6 +30,7 @@ type AppActions = {
   setDescription: (description: string) => void;
   updateTreeItemChildren: (id: string, newChildren: string[]) => void;
   updateTreeItemName: (id: string, name: string) => void;
+  addTreeItemFolder: (callback?: CallableFunction) => void;
 };
 
 export const useAppStore = create<AppState & AppActions>()(
@@ -83,6 +85,16 @@ export const useAppStore = create<AppState & AppActions>()(
       updateTreeItemName: (id: string, name: string) =>
         set(state => {
           state.items[id].name = name;
+        }),
+      addTreeItemFolder: (callback?: CallableFunction) =>
+        set(state => {
+          const id = nanoid();
+          state.items[id] = {
+            name: `Item ${Object.keys(state.items).length}`,
+            isFolder: true,
+            children: [],
+          };
+          state.items[TREE_ROOT_ID].children?.push(id);
         }),
     })),
   ),

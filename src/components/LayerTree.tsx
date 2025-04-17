@@ -16,13 +16,15 @@ import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCaretDown, faCaretRight, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 type LayerTreeProps = {
   items: Tree;
   updateChildren: (itemId: string, newChildren: string[]) => void;
   editable?: boolean;
   onRename: (itemId: string, value: string) => void;
+  onAddFolder: (callback?: CallableFunction) => void;
 };
 
 const FEATURES = [
@@ -86,7 +88,7 @@ function ItemRender({ item, editable }: ItemRenderProps) {
   );
 }
 
-export function LayerTree({ items, updateChildren, editable, onRename }: LayerTreeProps) {
+export function LayerTree({ items, updateChildren, editable, onRename, onAddFolder }: LayerTreeProps) {
   const onDrop = useMemo(() => {
     if (!editable) {
       return undefined;
@@ -113,12 +115,29 @@ export function LayerTree({ items, updateChildren, editable, onRename }: LayerTr
     indent: 20,
     features: FEATURES,
   });
+
+  const addFolder = useCallback(() => {
+    onAddFolder();
+    requestAnimationFrame(tree.rebuildTree);
+  }, [onAddFolder, tree]);
+
   return (
-    <div {...tree.getContainerProps()} className="tree">
-      {tree.getItems().map(item => (
-        <ItemRender key={item.getId()} item={item} editable={editable} />
-      ))}
-      <div style={tree.getDragLineStyle()} className="dragline" />
-    </div>
+    <>
+      {editable && (
+        <ul className="menu menu-horizontal bg-base-200 rounded-box">
+          <li>
+            <button className="btn btn-sm btn-primary" onClick={addFolder}>
+              <FontAwesomeIcon icon={faPlusCircle} /> Folder
+            </button>
+          </li>
+        </ul>
+      )}
+      <div {...tree.getContainerProps()} className="tree">
+        {tree.getItems().map(item => (
+          <ItemRender key={item.getId()} item={item} editable={editable} />
+        ))}
+        <div style={tree.getDragLineStyle()} className="dragline" />
+      </div>
+    </>
   );
 }

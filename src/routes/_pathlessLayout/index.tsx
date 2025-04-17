@@ -11,5 +11,15 @@ function RouteComponent() {
   const isEditing = useAppStore(state => state.edit);
   const updateChildren = useAppStore(state => state.updateTreeItemChildren);
   const renameItem = useAppStore(state => state.updateTreeItemName);
-  return <LayerTree items={items} updateChildren={updateChildren} editable={isEditing} onRename={renameItem} />;
+  const addFolder = useAppStore(state => state.addTreeItemFolder);
+
+  return (
+    <LayerTree
+      items={items}
+      updateChildren={updateChildren}
+      editable={isEditing}
+      onRename={renameItem}
+      onAddFolder={addFolder}
+    />
+  );
 }
