@@ -8,7 +8,15 @@ export const Route = createFileRoute('/_pathlessLayout')({
 });
 
 function RouteComponent() {
-  const open = useAppStore(state => (state.open ? 'p-2 w-sm' : 'w-0'));
+  const open = useAppStore(state => {
+    if (!state.open) {
+      return 'w-0';
+    }
+    if (state.edit) {
+      return 'p-2 w-2xl';
+    }
+    return 'p-2 w-sm';
+  });
   const title = useAppStore(state => state.title);
   const subtitle = useAppStore(state => state.subtitle);
   const isEditing = useAppStore(state => state.edit);

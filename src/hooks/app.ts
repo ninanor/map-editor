@@ -26,6 +26,7 @@ type AppActions = {
   remove: (id: string) => void;
   setTitle: (title: string) => void;
   setSubtitle: (subtitle: string) => void;
+  setDescription: (description: string) => void;
 };
 
 export const useAppStore = create<AppState & AppActions>()(
@@ -68,6 +69,10 @@ export const useAppStore = create<AppState & AppActions>()(
       setSubtitle: (subtitle: string) =>
         set(state => {
           state.subtitle = subtitle;
+        }),
+      setDescription: (description: string) =>
+        set(state => {
+          state.description = description;
         }),
     })),
   ),
