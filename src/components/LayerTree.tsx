@@ -2,6 +2,7 @@ import {
   createOnDropHandler,
   dragAndDropFeature,
   hotkeysCoreFeature,
+  ItemInstance,
   keyboardDragAndDropFeature,
   selectionFeature,
   syncDataLoaderFeature,
@@ -21,15 +22,24 @@ type LayerTreeProps = {
   editable?: boolean;
 };
 
-const FEATURES = [syncDataLoaderFeature, selectionFeature, hotkeysCoreFeature];
+const FEATURES = [
+  syncDataLoaderFeature,
+  selectionFeature,
+  hotkeysCoreFeature,
+  dragAndDropFeature,
+  keyboardDragAndDropFeature,
+];
 
 export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
-  const features = useMemo(() => {
-    if (editable) {
-      return [...FEATURES, dragAndDropFeature, keyboardDragAndDropFeature];
+  const onDrop = useMemo(() => {
+    if (!editable) {
+      return undefined;
     }
-    return FEATURES;
-  }, [editable]);
+    return createOnDropHandler((item: ItemInstance<Item>, newChildren) => {
+      updateChildren(item.getId(), newChildren);
+    });
+  }, [editable, updateChildren]);
+
   const tree = useTree<Item>({
     rootItemId: TREE_ROOT_ID,
     getItemName: item => item.getItemData().name,
@@ -39,12 +49,10 @@ export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
       getItem: itemId => items[itemId],
       getChildren: itemId => items[itemId].children ?? [],
     },
-    onDrop: createOnDropHandler((item, newChildren) => {
-      updateChildren(item.getId(), newChildren);
-    }),
+    onDrop,
     canDropForeignDragObject: (_, target) => target.item.isFolder(),
     indent: 20,
-    features,
+    features: FEATURES,
   });
   return (
     <div {...tree.getContainerProps()} className="tree">

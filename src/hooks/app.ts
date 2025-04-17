@@ -34,7 +34,7 @@ export const useAppStore = create<AppState & AppActions>()(
   devtools(
     immer(set => ({
       open: true,
-      edit: true,
+      edit: false,
       title: 'Title',
       subtitle: 'Subtitle',
       description: '',
