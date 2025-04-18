@@ -1,9 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import { PageErrorComponent } from '../../components/PageErrorComponent';
 
 export const Route = createFileRoute('/_pathlessLayout/legend')({
   component: RouteComponent,
-})
+  errorComponent: PageErrorComponent,
+});
 
 function RouteComponent() {
-  return <div>Hello "/_pathlessLayout/legend"!</div>
+  return <div></div>;
 }

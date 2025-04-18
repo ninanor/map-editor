@@ -1,0 +1,45 @@
+{
+    "id": "default",
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "layers": {},
+    "layerOrder": [],
+    "baseMap": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+    "viewState": {
+        "longitude": 10,
+        "latitude": 63,
+        "zoom": 4
+    },
+    "items": {
+        "root": {
+            "name": "Layers",
+            "isFolder": true,
+            "children": [
+                "folder1",
+                "folder2"
+            ]
+        },
+        "folder1": {
+            "name": "Folder 1",
+            "isFolder": true,
+            "children": [
+                "test"
+            ]
+        },
+        "folder2": {
+            "name": "Folder 2",
+            "isFolder": true,
+            "children": [
+                "test2"
+            ]
+        },
+        "test": {
+            "name": "Test",
+            "isFolder": false
+        },
+        "test2": {
+            "name": "Test2",
+            "isFolder": false
+        }
+    }
+}

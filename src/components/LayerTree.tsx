@@ -16,7 +16,7 @@ import cx from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { faCaretDown, faCaretRight, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 type LayerTreeProps = {
@@ -115,6 +115,10 @@ export function LayerTree({ items, updateChildren, editable, onRename, onAddFold
     indent: 20,
     features: FEATURES,
   });
+
+  // useEffect(() => {
+  //   tree.rebuildTree();
+  // }, [items, tree]);
 
   const addFolder = useCallback(() => {
     onAddFolder();
