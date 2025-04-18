@@ -8,9 +8,6 @@ import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 
 type AppState = {
-  id: string | null;
-  open: boolean;
-  edit: boolean;
   title: string;
   subtitle: string;
   description: string;
@@ -22,8 +19,6 @@ type AppState = {
 };
 
 type AppActions = {
-  toggle: () => void;
-  toggleEdit: () => void;
   add: (id: string, layer: Layer) => void;
   remove: (id: string) => void;
   setTitle: (title: string) => void;
@@ -37,7 +32,6 @@ type AppActions = {
 export const useAppStore = create<AppState & AppActions>()(
   devtools(
     immer(set => ({
-      id: null,
       open: true,
       edit: false,
       title: '',
@@ -52,14 +46,6 @@ export const useAppStore = create<AppState & AppActions>()(
         latitude: 63,
         zoom: 4,
       },
-      toggleEdit: () =>
-        set(state => {
-          state.edit = !state.edit;
-        }),
-      toggle: () =>
-        set(state => {
-          state.open = !state.open;
-        }),
       add: (id: string, layer: Layer) =>
         set(state => {
           state.layers[id] = layer;
@@ -82,21 +68,27 @@ export const useAppStore = create<AppState & AppActions>()(
         }),
       updateTreeItemChildren: (id: string, newChildren: string[]) =>
         set(state => {
-          state.items[id].children = newChildren;
+          if (state.items) {
+            state.items[id].children = newChildren;
+          }
         }),
       updateTreeItemName: (id: string, name: string) =>
         set(state => {
-          state.items[id].name = name;
+          if (state.items) {
+            state.items[id].name = name;
+          }
         }),
       addTreeItemFolder: () =>
         set(state => {
           const id = nanoid();
-          state.items[id] = {
-            name: `Item ${Object.keys(state.items).length}`,
-            isFolder: true,
-            children: [],
-          };
-          state.items[TREE_ROOT_ID].children?.push(id);
+          if (state.items) {
+            state.items[id] = {
+              name: `Item ${Object.keys(state.items).length}`,
+              isFolder: true,
+              children: [],
+            };
+            state.items[TREE_ROOT_ID].children?.push(id);
+          }
         }),
     })),
   ),

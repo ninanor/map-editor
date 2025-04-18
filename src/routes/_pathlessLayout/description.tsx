@@ -3,6 +3,7 @@ import Markdown from 'react-markdown';
 import { useAppStore } from '../../hooks/app';
 import { DescriptionEditor } from '../../components/DescriptionEditor';
 import { PageErrorComponent } from '../../components/PageErrorComponent';
+import { useUIisEditing } from '../../hooks/ui';
 
 export const Route = createFileRoute('/_pathlessLayout/description')({
   component: RouteComponent,
@@ -11,7 +12,7 @@ export const Route = createFileRoute('/_pathlessLayout/description')({
 
 function RouteComponent() {
   const description = useAppStore(state => state.description);
-  const isEditing = useAppStore(state => state.edit);
+  const isEditing = useUIisEditing();
   return isEditing ? (
     <DescriptionEditor />
   ) : (

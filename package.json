@@ -13,6 +13,7 @@
   "dependencies": {
     "@deck.gl/carto": "^9.1.9",
     "@deck.gl/core": "^9.1.9",
+    "@deck.gl/json": "^9.1.11",
     "@deck.gl/layers": "^9.1.9",
     "@deck.gl/react": "^9.1.9",
     "@deck.gl/widgets": "^9.1.9",

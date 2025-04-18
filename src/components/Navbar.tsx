@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useAppStore } from '../hooks/app';
+import { useUIActions, useUIisEditing } from '../hooks/ui';
 
 export function Navbar() {
-  const toggle = useAppStore(state => state.toggle);
-  const toggleEdit = useAppStore(state => state.toggleEdit);
-  const isEditing = useAppStore(state => state.edit);
+  const { toggleOpen, toggleEdit } = useUIActions();
+  const isEditing = useUIisEditing();
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-none">
-        <button className="btn btn-square btn-ghost" onClick={toggle}>
+        <button className="btn btn-square btn-ghost" onClick={toggleOpen}>
           <FontAwesomeIcon icon={faBars} />
         </button>
       </div>

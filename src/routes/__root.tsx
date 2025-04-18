@@ -5,11 +5,12 @@ import { Map } from '../components/Map';
 import { Navbar } from '../components/Navbar';
 import { configQueryOptions } from '../config';
 import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
+import { useUIActions, useUIisReady } from '../hooks/ui';
 
 type AppSearch = {
   url: string;
@@ -57,14 +58,16 @@ export function ConfigErrorComponent({ error }: ErrorComponentProps) {
 }
 
 function RootComponent() {
-  const ready = useAppStore(state => !!state.id);
+  const ready = useUIisReady();
+  const { setReady } = useUIActions();
   const { url } = Route.useSearch();
   const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url || '/config.json'));
   console.log(config.data);
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
-  }, [config.data]);
+    setReady(true);
+  }, [config.data, setReady]);
 
   if (!ready || isLoading) {
     <div className="flex justify-center items-center w-screen h-screen bg-primary/20">

@@ -14,6 +14,9 @@ importers:
       '@deck.gl/core':
         specifier: ^9.1.9
         version: 9.1.9
+      '@deck.gl/json':
+        specifier: ^9.1.11
+        version: 9.1.11(@deck.gl/core@9.1.9)
       '@deck.gl/layers':
         specifier: ^9.1.9
         version: 9.1.9(@deck.gl/core@9.1.9)(@loaders.gl/core@4.3.3)(@luma.gl/core@9.1.7)(@luma.gl/engine@9.1.7(@luma.gl/core@9.1.7)(@luma.gl/shadertools@9.1.7(@luma.gl/core@9.1.7)))
@@ -412,6 +415,11 @@ packages:
       '@deck.gl/core': ^9.1.0
       '@luma.gl/core': ^9.1.5
       '@luma.gl/webgl': ^9.1.5
+
+  '@deck.gl/json@9.1.11':
+    resolution: {integrity: sha512-rSV5AqWqmt0/C9rgldk21Pbsfqk+OrrttG42VZBjCYW3RkosSOr0aUhSlAx3/tERXUNZoN46WBtzQWV1GQptxg==}
+    peerDependencies:
+      '@deck.gl/core': ^9.1.0
 
   '@deck.gl/json@9.1.9':
     resolution: {integrity: sha512-wxSt/A+N2Cz6oJTW5F0ELM5ljXbF/zU9gM/bUYo+LVm92xfveT337rl3njtAIeDHluyBiJlhMrhSs8ts5YwxlQ==}
@@ -4613,6 +4621,11 @@ snapshots:
       '@luma.gl/webgl': 9.1.7(@luma.gl/core@9.1.7)
       '@math.gl/core': 4.1.0
       '@types/google.maps': 3.58.1
+
+  '@deck.gl/json@9.1.11(@deck.gl/core@9.1.9)':
+    dependencies:
+      '@deck.gl/core': 9.1.9
+      jsep: 0.3.5
 
   '@deck.gl/json@9.1.9(@deck.gl/core@9.1.9)':
     dependencies:
