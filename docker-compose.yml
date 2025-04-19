@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  titiler:
+    image: ghcr.io/ninanor/titiler-app-titiler:next
+    environment:
+      - TITILER_API_CORS_ORIGINS=*
+      - TITILER_API_CACHECONTROL=no-cache
+      - FORWARDED_ALLOW_IPS=*
+      - REDIS_HOST=redis
+    ports:
+      - '8989:80'
+
+  redis:
+    image: redis

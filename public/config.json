@@ -22,24 +22,29 @@
         "folder1": {
             "name": "Folder 1",
             "isFolder": true,
-            "children": [
-                "test"
-            ]
+            "children": []
         },
         "folder2": {
             "name": "Folder 2",
             "isFolder": true,
             "children": [
-                "test2"
+                "test"
             ]
         },
         "test": {
             "name": "Test",
-            "isFolder": false
-        },
-        "test2": {
-            "name": "Test2",
-            "isFolder": false
+            "isFolder": false,
+            "layer": {
+                "@@type": "TitilerLayer",
+                "data": {
+                    "url": "https://pycsw.nina.no/media/maps/sources/192/pollinator_potentential_0301.tif.cog",
+                    "colormap_name": "ylorbr_r",
+                    "rescale": [
+                        0,
+                        1
+                    ]
+                }
+            }
         }
     }
 }
