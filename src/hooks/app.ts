@@ -6,6 +6,8 @@ import { TREE_ROOT_ID } from '../config';
 import { MapViewState } from '@deck.gl/core';
 import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
+import { createSelector } from 'reselect';
+import { jsonConverter } from '../layers/getMapConfig';
 
 type AppState = {
   title: string;
@@ -24,7 +26,8 @@ type AppActions = {
     setDescription: (description: string) => void;
     updateTreeItemChildren: (id: string, newChildren: string[]) => void;
     updateTreeItemName: (id: string, name: string) => void;
-    addTreeItemFolder: (callback?: CallableFunction) => void;
+    addTreeItemFolder: () => void;
+    toggleLayer: (id: string) => void;
   };
 };
 
@@ -79,9 +82,47 @@ export const useAppStore = create<AppState & AppActions>()(
               state.items[TREE_ROOT_ID].children?.push(id);
             }
           }),
+        toggleLayer: (id: string) =>
+          set(state => {
+            if (state.layerOrder.includes(id)) {
+              state.layerOrder = state.layerOrder.filter(lid => id != lid);
+            } else {
+              state.layerOrder.push(id);
+            }
+          }),
       },
     })),
   ),
 );
 
 export const useAppActions = () => useAppStore(state => state.actions);
+
+const createAppSelector = createSelector.withTypes<AppState>();
+
+const layerSelector = createAppSelector(
+  state => state.layerOrder,
+  state => state.items,
+  (layerOrder: string[], items: Tree) => {
+    return layerOrder.map(lid => ({
+      id: lid,
+      ...items[lid],
+    }));
+  },
+);
+
+const mapSelector = createAppSelector(
+  layerSelector,
+  state => state.viewState,
+  (layers, viewState) => {
+    return jsonConverter.convert({
+      layers: layers.map(l => ({
+        id: l.id,
+        ...l.layer,
+      })),
+      initialViewState: viewState,
+    });
+  },
+);
+
+export const useLayers = () => useAppStore(layerSelector);
+export const useMapConf = () => useAppStore(mapSelector);

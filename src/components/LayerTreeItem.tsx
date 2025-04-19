@@ -1,8 +1,10 @@
-import { faCaretDown, faCaretRight, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretRight, faEdit, faSquare, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { ItemInstance } from '@headless-tree/core';
 import cx from 'classnames';
 import { Item } from '../utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppActions, useAppStore } from '../hooks/app';
+import { MouseEventHandler, useCallback } from 'react';
 
 type ItemRenderProps = {
   item: ItemInstance<Item>;
@@ -10,6 +12,19 @@ type ItemRenderProps = {
 };
 
 export function ItemRender({ item, editable }: ItemRenderProps) {
+  const layerOrder = useAppStore(state => state.layerOrder);
+  const isVisible = layerOrder.includes(item.getId());
+  const { toggleLayer } = useAppActions();
+  const { onClick, ...props } = item.getProps();
+  const cb = useCallback<MouseEventHandler>(
+    e => {
+      onClick(e);
+      if (!item.isFolder()) {
+        toggleLayer(item.getId());
+      }
+    },
+    [onClick, item, toggleLayer],
+  );
   if (item.isRenaming()) {
     return (
       <div className="renaming-item" style={{ marginLeft: `${item.getItemMeta().level * 20}px` }}>
@@ -17,9 +32,11 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
       </div>
     );
   }
+
   return (
     <div
-      {...item.getProps()}
+      {...props}
+      onClick={cb}
       style={{
         paddingLeft: `${item.getItemMeta().level * 20}px`,
       }}
@@ -32,9 +49,9 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
           folder: item.isFolder(),
         })}
       >
-        <div className="w-5">
+        <div className="w-10">
           {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
-          {/* {!item.isFolder() && <FontAwesomeIcon icon={faSquare} />} */}
+          {!item.isFolder() && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
         </div>
         <div>{item.getItemName()}</div>
         <div className="ml-2 flex">

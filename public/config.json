@@ -32,7 +32,7 @@
             ]
         },
         "test": {
-            "name": "Test",
+            "name": "Pollinator potential",
             "isFolder": false,
             "layer": {
                 "@@type": "TitilerLayer",
