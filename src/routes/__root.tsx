@@ -1,10 +1,16 @@
-import { ErrorComponentProps, Outlet, createRootRoute, useRouter, ErrorComponent } from '@tanstack/react-router';
+import {
+  ErrorComponentProps,
+  Outlet,
+  useRouter,
+  ErrorComponent,
+  createRootRouteWithContext,
+} from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Map } from '../components/Map';
 import { Navbar } from '../components/Navbar';
 import { configQueryOptions } from '../config';
-import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
+import { QueryClient, useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +22,11 @@ type AppSearch = {
   url: string;
 };
 
-export const Route = createRootRoute({
+type RouterContext = {
+  queryClient: QueryClient;
+};
+
+export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
   validateSearch: (search: Record<string, unknown>): AppSearch => {
     return {

@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, useLocation } from '@tanstack/react-router';
-import { useAppStore } from '../hooks/app';
+import { useAppActions, useAppStore } from '../hooks/app';
 import classnames from 'classnames';
 import { TABS } from '../config';
 import { useUIisEditing, useUISidebarClass } from '../hooks/ui';
@@ -13,8 +13,7 @@ function RouteComponent() {
   const title = useAppStore(state => state.title);
   const subtitle = useAppStore(state => state.subtitle);
   const isEditing = useUIisEditing();
-  const setTitle = useAppStore(state => state.setTitle);
-  const setSubtitle = useAppStore(state => state.setSubtitle);
+  const { setTitle, setSubtitle } = useAppActions();
   const location = useLocation();
 
   return (

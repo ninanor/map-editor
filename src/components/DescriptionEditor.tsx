@@ -13,7 +13,7 @@ import {
 } from '@mdxeditor/editor';
 import '@mdxeditor/editor/style.css';
 
-import { useAppStore } from '../hooks/app';
+import { useAppActions, useAppStore } from '../hooks/app';
 
 const PLUGINS = [
   headingsPlugin(),
@@ -35,7 +35,7 @@ const PLUGINS = [
 
 export function DescriptionEditor() {
   const description = useAppStore(state => state.description);
-  const setDescription = useAppStore(state => state.setDescription);
+  const { setDescription } = useAppActions();
 
   return (
     <>

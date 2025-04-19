@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { LayerTree } from '../../components/LayerTree';
-import { useAppStore } from '../../hooks/app';
+import { useAppActions, useAppStore } from '../../hooks/app';
 import { PageErrorComponent } from '../../components/PageErrorComponent';
 import { useUIisEditing } from '../../hooks/ui';
 
@@ -12,9 +12,7 @@ export const Route = createFileRoute('/_pathlessLayout/')({
 function RouteComponent() {
   const items = useAppStore(state => state.items);
   const isEditing = useUIisEditing();
-  const updateChildren = useAppStore(state => state.updateTreeItemChildren);
-  const renameItem = useAppStore(state => state.updateTreeItemName);
-  const addFolder = useAppStore(state => state.addTreeItemFolder);
+  const { updateTreeItemChildren, updateTreeItemName, addTreeItemFolder } = useAppActions();
 
   if (!items) {
     return null;
@@ -23,10 +21,10 @@ function RouteComponent() {
   return (
     <LayerTree
       items={items}
-      updateChildren={updateChildren}
+      updateChildren={updateTreeItemChildren}
       editable={isEditing}
-      onRename={renameItem}
-      onAddFolder={addFolder}
+      onRename={updateTreeItemName}
+      onAddFolder={addTreeItemFolder}
     />
   );
 }
