@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
+import { MapConfig } from './types';
 
 export const TABS = [
   {
@@ -26,7 +27,7 @@ export const TABS = [
 
 export const TREE_ROOT_ID = 'root';
 
-export const fetchConfig = async (url: string) => axios.get(url);
+export const fetchConfig = async (url: string) => axios.get<MapConfig>(url);
 
 export const configQueryOptions = (url: string) =>
   queryOptions({

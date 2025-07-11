@@ -1,7 +1,7 @@
 import { _Tile2DHeader, TileLayer } from '@deck.gl/geo-layers';
 import { BitmapLayer } from '@deck.gl/layers';
 
-type TitilerLayerProps = {
+interface TitilerLayerProps {
   data: {
     titiler: string;
     colormap_name?: string;
@@ -9,7 +9,7 @@ type TitilerLayerProps = {
     rescale?: number[];
     bidx?: number | number[];
   };
-};
+}
 
 export class TitilerLayer extends TileLayer {
   constructor(props: TitilerLayerProps) {

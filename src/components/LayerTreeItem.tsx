@@ -10,15 +10,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ItemInstance } from '@headless-tree/core';
 import cx from 'classnames';
-import { Item } from '../utils';
+import { Item } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppActions, useAppStore } from '../hooks/app';
 import { MouseEventHandler, useCallback } from 'react';
 
-type ItemRenderProps = {
+interface ItemRenderProps {
   item: ItemInstance<Item>;
   editable?: boolean;
-};
+}
 
 export function ItemRender({ item, editable }: ItemRenderProps) {
   const layerOrder = useAppStore(state => state.layerOrder);

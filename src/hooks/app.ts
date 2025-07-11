@@ -1,23 +1,14 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { Tree } from '../utils';
+import { ItemWithID, MapConfig, Tree } from '../types';
 import { TREE_ROOT_ID } from '../config';
-import { MapViewState } from '@deck.gl/core';
 import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
 import { jsonConverter } from '../layers/getMapConfig';
-
-type AppState = {
-  title: string;
-  subtitle: string;
-  description: string;
-  items: Tree | null;
-  layerOrder: string[];
-  baseMap: string;
-  viewState: MapViewState;
-};
+import { MapViewProps, MapViewState } from '@deck.gl/core';
+import { DeckGLProps } from '@deck.gl/react';
 
 interface AppActions {
   actions: {
@@ -31,9 +22,12 @@ interface AppActions {
   };
 }
 
-export const useAppStore = create<AppState & AppActions>()(
+type AppState = MapConfig & AppActions;
+
+export const useAppStore = create<AppState>()(
   devtools(
     immer(set => ({
+      id: '',
       title: '',
       subtitle: '',
       description: '',
@@ -102,7 +96,11 @@ const createAppSelector = createSelector.withTypes<AppState>();
 const layerSelector = createAppSelector(
   state => state.layerOrder,
   state => state.items,
-  (layerOrder: string[], items: Tree) => {
+  (layerOrder: string[], items: Tree | null) => {
+    if (!items) {
+      return [];
+    }
+
     return layerOrder.map(lid => ({
       id: lid,
       ...items[lid],
@@ -113,14 +111,14 @@ const layerSelector = createAppSelector(
 const mapSelector = createAppSelector(
   layerSelector,
   state => state.viewState,
-  (layers, viewState) => {
+  (layers: ItemWithID[], viewState: MapViewState) => {
     return jsonConverter.convert({
       layers: layers.map(l => ({
         id: l.id,
         ...l.layer,
       })),
       initialViewState: viewState,
-    });
+    }) as DeckGLProps;
   },
 );
 

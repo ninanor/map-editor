@@ -11,20 +11,20 @@ import {
 } from '@headless-tree/core';
 import { useTree } from '@headless-tree/react';
 import { TREE_ROOT_ID } from '../config';
-import { Item, Tree } from '../utils';
+import { Item, Tree } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { useCallback, useMemo } from 'react';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { ItemRender } from './LayerTreeItem';
 
-type LayerTreeProps = {
+interface LayerTreeProps {
   items: Tree;
   updateChildren: (itemId: string, newChildren: string[]) => void;
   editable?: boolean;
   onRename: (itemId: string, value: string) => void;
   onAddFolder: (callback?: CallableFunction) => void;
-};
+}
 
 const FEATURES = [
   syncDataLoaderFeature,

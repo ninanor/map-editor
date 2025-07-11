@@ -18,13 +18,13 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
 import { useUIActions, useUIisReady } from '../hooks/ui';
 
-type AppSearch = {
+interface AppSearch {
   url: string;
-};
+}
 
-type RouterContext = {
+interface RouterContext {
   queryClient: QueryClient;
-};
+}
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
@@ -57,7 +57,7 @@ export function ConfigErrorComponent({ error }: ErrorComponentProps) {
         type="button"
         className="btn btn-primary"
         onClick={() => {
-          router.invalidate();
+          router.invalidate().then().catch(console.error);
         }}
       >
         retry
