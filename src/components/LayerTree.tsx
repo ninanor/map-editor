@@ -72,10 +72,15 @@ export function LayerTree({ items, updateChildren, editable, onRename, onAddFold
   return (
     <>
       {editable && (
-        <ul className="menu menu-horizontal bg-base-200 rounded-box">
+        <ul className="menu menu-horizontal bg-base-200 rounded-box gap-2">
           <li>
-            <button className="btn btn-sm btn-primary" onClick={addFolder}>
+            <button type="button" className="btn btn-sm btn-primary" onClick={addFolder}>
               <FontAwesomeIcon icon={faPlusCircle} /> Folder
+            </button>
+          </li>
+          <li>
+            <button type="button" className="btn btn-sm btn-primary">
+              <FontAwesomeIcon icon={faPlusCircle} /> Layer
             </button>
           </li>
         </ul>

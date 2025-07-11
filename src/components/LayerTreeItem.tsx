@@ -1,4 +1,13 @@
-import { faCaretDown, faCaretRight, faEdit, faSquare, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretDown,
+  faCaretRight,
+  faCog,
+  faDownload,
+  faEdit,
+  faInfoCircle,
+  faSquare,
+  faSquareCheck,
+} from '@fortawesome/free-solid-svg-icons';
 import { ItemInstance } from '@headless-tree/core';
 import cx from 'classnames';
 import { Item } from '../utils';
@@ -56,14 +65,50 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
         <div>{item.getItemName()}</div>
         <div className="ml-2 flex">
           {editable && (
+            <>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={e => {
+                  e.stopPropagation();
+                  item.startRenaming();
+                }}
+              >
+                <FontAwesomeIcon icon={faEdit} />
+              </button>
+              {!item.isFolder() && (
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={e => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCog} />
+                </button>
+              )}
+            </>
+          )}
+          {!editable && (
             <button
+              type="button"
               className="btn btn-ghost btn-sm"
               onClick={e => {
                 e.stopPropagation();
-                item.startRenaming();
               }}
             >
-              <FontAwesomeIcon icon={faEdit} />
+              <FontAwesomeIcon icon={faInfoCircle} />
+            </button>
+          )}
+          {!editable && !item.isFolder() && (
+            <button
+              type="button"
+              className="btn btn-ghost btn-sm"
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
+              <FontAwesomeIcon icon={faDownload} />
             </button>
           )}
         </div>

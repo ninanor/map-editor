@@ -54,6 +54,7 @@ export function ConfigErrorComponent({ error }: ErrorComponentProps) {
   return (
     <div>
       <button
+        type="button"
         className="btn btn-primary"
         onClick={() => {
           router.invalidate();
