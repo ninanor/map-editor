@@ -25,7 +25,10 @@
     "@headless-tree/core": "^0.0.15",
     "@headless-tree/react": "^0.0.15",
     "@loaders.gl/core": "^4.3.4",
+    "@loaders.gl/loader-utils": "^4.3.4",
+    "@loaders.gl/mvt": "^4.3.4",
     "@loaders.gl/pmtiles": "^4.3.4",
+    "@loaders.gl/schema": "^4.3.4",
     "@mdxeditor/editor": "^3.39.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.11",
@@ -45,6 +48,7 @@
     "react-markdown": "^10.1.0",
     "reselect": "^5.1.1",
     "tailwindcss": "^4.1.11",
+    "zstd-codec": "^0.1.5",
     "zustand": "^5.0.6"
   },
   "devDependencies": {
