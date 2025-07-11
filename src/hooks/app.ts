@@ -19,7 +19,7 @@ type AppState = {
   viewState: MapViewState;
 };
 
-type AppActions = {
+interface AppActions {
   actions: {
     setTitle: (title: string) => void;
     setSubtitle: (subtitle: string) => void;
@@ -29,7 +29,7 @@ type AppActions = {
     addTreeItemFolder: () => void;
     toggleLayer: (id: string) => void;
   };
-};
+}
 
 export const useAppStore = create<AppState & AppActions>()(
   devtools(

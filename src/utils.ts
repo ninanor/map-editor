@@ -4,14 +4,10 @@ export interface Item {
   isFolder?: boolean;
 }
 
-export interface Tree {
-  [key: string]: Item;
-}
+export type Tree = Record<string, Item>;
 
 export interface Layer {
   id: string;
 }
 
-export type LayerMap = {
-  [key: string]: Layer;
-};
+export type LayerMap = Record<string, Layer>;
