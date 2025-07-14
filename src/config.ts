@@ -25,6 +25,21 @@ export const TABS = [
   },
 ];
 
+export const EDIT_TABS = [
+  {
+    id: '/edit',
+    label: 'Kartlag',
+  },
+  {
+    id: '/edit/description',
+    label: 'Beskrivelse',
+  },
+  {
+    id: '/edit/basemap',
+    label: 'Bakgrunnskart',
+  },
+];
+
 export const TREE_ROOT_ID = 'root';
 
 export const fetchConfig = async (url: string) => axios.get<MapConfig>(url);

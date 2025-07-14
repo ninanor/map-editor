@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { PageErrorComponent } from '../../components/PageErrorComponent';
+import { PageErrorComponent } from '../../../components/PageErrorComponent';
 
-export const Route = createFileRoute('/_pathlessLayout/legend')({
+export const Route = createFileRoute('/_layout/_view/basemap')({
   component: RouteComponent,
   errorComponent: PageErrorComponent,
 });

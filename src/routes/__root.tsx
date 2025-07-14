@@ -7,8 +7,6 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Map } from '../components/Map';
-import { Navbar } from '../components/Navbar';
 import { configQueryOptions } from '../config';
 import { QueryClient, useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
@@ -88,15 +86,7 @@ function RootComponent() {
 
   return (
     <Fragment>
-      <div className="flex">
-        <Outlet />
-        <div className="flex flex-col flex-auto">
-          <Navbar />
-          <div className="relative w-full h-full">
-            <Map />
-          </div>
-        </div>
-      </div>
+      <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-left" />
     </Fragment>

@@ -7,7 +7,7 @@ import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
 import { jsonConverter } from '../layers/getMapConfig';
-import { MapViewProps, MapViewState } from '@deck.gl/core';
+import { MapViewState } from '@deck.gl/core';
 import { DeckGLProps } from '@deck.gl/react';
 
 interface AppActions {

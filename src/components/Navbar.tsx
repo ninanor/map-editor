@@ -1,17 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { useUIActions, useUIisEditing } from '../hooks/ui';
+import { useUIActions } from '../hooks/ui';
 import { useAppStore } from '../hooks/app';
+import { Link, useMatch } from '@tanstack/react-router';
 
 export function Navbar() {
-  const { toggleOpen, toggleEdit } = useUIActions();
-  const isEditing = useUIisEditing();
+  const { toggleOpen } = useUIActions();
   const title = useAppStore(state => state.title);
-
+  const isEditing = useMatch({ from: '/_layout/edit', shouldThrow: false });
   return (
     <div className="navbar bg-base-100">
       <div className="flex-none">
-        <button className="btn btn-square btn-ghost" onClick={toggleOpen}>
+        <button type="button" className="btn btn-square btn-ghost" onClick={toggleOpen}>
           <FontAwesomeIcon icon={faBars} />
         </button>
       </div>
@@ -21,9 +21,9 @@ export function Navbar() {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <button onClick={toggleEdit} className="btn btn-ghost">
+            <Link to={isEditing ? '/' : '/edit'} type="button" className="btn btn-ghost">
               {isEditing ? 'Preview' : 'Edit'}
-            </button>
+            </Link>
           </li>
         </ul>
       </div>

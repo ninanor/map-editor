@@ -9,155 +9,260 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PathlessLayoutRouteImport } from './routes/_pathlessLayout'
-import { Route as PathlessLayoutIndexRouteImport } from './routes/_pathlessLayout/index'
-import { Route as PathlessLayoutManageRouteImport } from './routes/_pathlessLayout/manage'
-import { Route as PathlessLayoutLegendRouteImport } from './routes/_pathlessLayout/legend'
-import { Route as PathlessLayoutDescriptionRouteImport } from './routes/_pathlessLayout/description'
-import { Route as PathlessLayoutBasemapRouteImport } from './routes/_pathlessLayout/basemap'
+import { Route as LayoutRouteImport } from './routes/_layout'
+import { Route as LayoutEditRouteImport } from './routes/_layout/edit'
+import { Route as LayoutViewRouteImport } from './routes/_layout/_view'
+import { Route as LayoutEditIndexRouteImport } from './routes/_layout/edit/index'
+import { Route as LayoutViewIndexRouteImport } from './routes/_layout/_view/index'
+import { Route as LayoutEditDescriptionRouteImport } from './routes/_layout/edit/description'
+import { Route as LayoutViewManageRouteImport } from './routes/_layout/_view/manage'
+import { Route as LayoutViewLegendRouteImport } from './routes/_layout/_view/legend'
+import { Route as LayoutViewDescriptionRouteImport } from './routes/_layout/_view/description'
+import { Route as LayoutViewBasemapRouteImport } from './routes/_layout/_view/basemap'
 
-const PathlessLayoutRoute = PathlessLayoutRouteImport.update({
-  id: '/_pathlessLayout',
+const LayoutRoute = LayoutRouteImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PathlessLayoutIndexRoute = PathlessLayoutIndexRouteImport.update({
+const LayoutEditRoute = LayoutEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutViewRoute = LayoutViewRouteImport.update({
+  id: '/_view',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutEditIndexRoute = LayoutEditIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PathlessLayoutRoute,
+  getParentRoute: () => LayoutEditRoute,
 } as any)
-const PathlessLayoutManageRoute = PathlessLayoutManageRouteImport.update({
+const LayoutViewIndexRoute = LayoutViewIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LayoutViewRoute,
+} as any)
+const LayoutEditDescriptionRoute = LayoutEditDescriptionRouteImport.update({
+  id: '/description',
+  path: '/description',
+  getParentRoute: () => LayoutEditRoute,
+} as any)
+const LayoutViewManageRoute = LayoutViewManageRouteImport.update({
   id: '/manage',
   path: '/manage',
-  getParentRoute: () => PathlessLayoutRoute,
+  getParentRoute: () => LayoutViewRoute,
 } as any)
-const PathlessLayoutLegendRoute = PathlessLayoutLegendRouteImport.update({
+const LayoutViewLegendRoute = LayoutViewLegendRouteImport.update({
   id: '/legend',
   path: '/legend',
-  getParentRoute: () => PathlessLayoutRoute,
+  getParentRoute: () => LayoutViewRoute,
 } as any)
-const PathlessLayoutDescriptionRoute =
-  PathlessLayoutDescriptionRouteImport.update({
-    id: '/description',
-    path: '/description',
-    getParentRoute: () => PathlessLayoutRoute,
-  } as any)
-const PathlessLayoutBasemapRoute = PathlessLayoutBasemapRouteImport.update({
+const LayoutViewDescriptionRoute = LayoutViewDescriptionRouteImport.update({
+  id: '/description',
+  path: '/description',
+  getParentRoute: () => LayoutViewRoute,
+} as any)
+const LayoutViewBasemapRoute = LayoutViewBasemapRouteImport.update({
   id: '/basemap',
   path: '/basemap',
-  getParentRoute: () => PathlessLayoutRoute,
+  getParentRoute: () => LayoutViewRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/basemap': typeof PathlessLayoutBasemapRoute
-  '/description': typeof PathlessLayoutDescriptionRoute
-  '/legend': typeof PathlessLayoutLegendRoute
-  '/manage': typeof PathlessLayoutManageRoute
-  '/': typeof PathlessLayoutIndexRoute
+  '/edit': typeof LayoutEditRouteWithChildren
+  '/basemap': typeof LayoutViewBasemapRoute
+  '/description': typeof LayoutViewDescriptionRoute
+  '/legend': typeof LayoutViewLegendRoute
+  '/manage': typeof LayoutViewManageRoute
+  '/edit/description': typeof LayoutEditDescriptionRoute
+  '/': typeof LayoutViewIndexRoute
+  '/edit/': typeof LayoutEditIndexRoute
 }
 export interface FileRoutesByTo {
-  '/basemap': typeof PathlessLayoutBasemapRoute
-  '/description': typeof PathlessLayoutDescriptionRoute
-  '/legend': typeof PathlessLayoutLegendRoute
-  '/manage': typeof PathlessLayoutManageRoute
-  '/': typeof PathlessLayoutIndexRoute
+  '/basemap': typeof LayoutViewBasemapRoute
+  '/description': typeof LayoutViewDescriptionRoute
+  '/legend': typeof LayoutViewLegendRoute
+  '/manage': typeof LayoutViewManageRoute
+  '/edit/description': typeof LayoutEditDescriptionRoute
+  '/': typeof LayoutViewIndexRoute
+  '/edit': typeof LayoutEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_pathlessLayout': typeof PathlessLayoutRouteWithChildren
-  '/_pathlessLayout/basemap': typeof PathlessLayoutBasemapRoute
-  '/_pathlessLayout/description': typeof PathlessLayoutDescriptionRoute
-  '/_pathlessLayout/legend': typeof PathlessLayoutLegendRoute
-  '/_pathlessLayout/manage': typeof PathlessLayoutManageRoute
-  '/_pathlessLayout/': typeof PathlessLayoutIndexRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/_view': typeof LayoutViewRouteWithChildren
+  '/_layout/edit': typeof LayoutEditRouteWithChildren
+  '/_layout/_view/basemap': typeof LayoutViewBasemapRoute
+  '/_layout/_view/description': typeof LayoutViewDescriptionRoute
+  '/_layout/_view/legend': typeof LayoutViewLegendRoute
+  '/_layout/_view/manage': typeof LayoutViewManageRoute
+  '/_layout/edit/description': typeof LayoutEditDescriptionRoute
+  '/_layout/_view/': typeof LayoutViewIndexRoute
+  '/_layout/edit/': typeof LayoutEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/basemap' | '/description' | '/legend' | '/manage' | '/'
+  fullPaths:
+    | '/edit'
+    | '/basemap'
+    | '/description'
+    | '/legend'
+    | '/manage'
+    | '/edit/description'
+    | '/'
+    | '/edit/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/basemap' | '/description' | '/legend' | '/manage' | '/'
+  to:
+    | '/basemap'
+    | '/description'
+    | '/legend'
+    | '/manage'
+    | '/edit/description'
+    | '/'
+    | '/edit'
   id:
     | '__root__'
-    | '/_pathlessLayout'
-    | '/_pathlessLayout/basemap'
-    | '/_pathlessLayout/description'
-    | '/_pathlessLayout/legend'
-    | '/_pathlessLayout/manage'
-    | '/_pathlessLayout/'
+    | '/_layout'
+    | '/_layout/_view'
+    | '/_layout/edit'
+    | '/_layout/_view/basemap'
+    | '/_layout/_view/description'
+    | '/_layout/_view/legend'
+    | '/_layout/_view/manage'
+    | '/_layout/edit/description'
+    | '/_layout/_view/'
+    | '/_layout/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
+  LayoutRoute: typeof LayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_pathlessLayout': {
-      id: '/_pathlessLayout'
+    '/_layout': {
+      id: '/_layout'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof PathlessLayoutRouteImport
+      preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_pathlessLayout/': {
-      id: '/_pathlessLayout/'
+    '/_layout/edit': {
+      id: '/_layout/edit'
+      path: '/edit'
+      fullPath: '/edit'
+      preLoaderRoute: typeof LayoutEditRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/_view': {
+      id: '/_layout/_view'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutViewRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/edit/': {
+      id: '/_layout/edit/'
+      path: '/'
+      fullPath: '/edit/'
+      preLoaderRoute: typeof LayoutEditIndexRouteImport
+      parentRoute: typeof LayoutEditRoute
+    }
+    '/_layout/_view/': {
+      id: '/_layout/_view/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof PathlessLayoutIndexRouteImport
-      parentRoute: typeof PathlessLayoutRoute
+      preLoaderRoute: typeof LayoutViewIndexRouteImport
+      parentRoute: typeof LayoutViewRoute
     }
-    '/_pathlessLayout/manage': {
-      id: '/_pathlessLayout/manage'
+    '/_layout/edit/description': {
+      id: '/_layout/edit/description'
+      path: '/description'
+      fullPath: '/edit/description'
+      preLoaderRoute: typeof LayoutEditDescriptionRouteImport
+      parentRoute: typeof LayoutEditRoute
+    }
+    '/_layout/_view/manage': {
+      id: '/_layout/_view/manage'
       path: '/manage'
       fullPath: '/manage'
-      preLoaderRoute: typeof PathlessLayoutManageRouteImport
-      parentRoute: typeof PathlessLayoutRoute
+      preLoaderRoute: typeof LayoutViewManageRouteImport
+      parentRoute: typeof LayoutViewRoute
     }
-    '/_pathlessLayout/legend': {
-      id: '/_pathlessLayout/legend'
+    '/_layout/_view/legend': {
+      id: '/_layout/_view/legend'
       path: '/legend'
       fullPath: '/legend'
-      preLoaderRoute: typeof PathlessLayoutLegendRouteImport
-      parentRoute: typeof PathlessLayoutRoute
+      preLoaderRoute: typeof LayoutViewLegendRouteImport
+      parentRoute: typeof LayoutViewRoute
     }
-    '/_pathlessLayout/description': {
-      id: '/_pathlessLayout/description'
+    '/_layout/_view/description': {
+      id: '/_layout/_view/description'
       path: '/description'
       fullPath: '/description'
-      preLoaderRoute: typeof PathlessLayoutDescriptionRouteImport
-      parentRoute: typeof PathlessLayoutRoute
+      preLoaderRoute: typeof LayoutViewDescriptionRouteImport
+      parentRoute: typeof LayoutViewRoute
     }
-    '/_pathlessLayout/basemap': {
-      id: '/_pathlessLayout/basemap'
+    '/_layout/_view/basemap': {
+      id: '/_layout/_view/basemap'
       path: '/basemap'
       fullPath: '/basemap'
-      preLoaderRoute: typeof PathlessLayoutBasemapRouteImport
-      parentRoute: typeof PathlessLayoutRoute
+      preLoaderRoute: typeof LayoutViewBasemapRouteImport
+      parentRoute: typeof LayoutViewRoute
     }
   }
 }
 
-interface PathlessLayoutRouteChildren {
-  PathlessLayoutBasemapRoute: typeof PathlessLayoutBasemapRoute
-  PathlessLayoutDescriptionRoute: typeof PathlessLayoutDescriptionRoute
-  PathlessLayoutLegendRoute: typeof PathlessLayoutLegendRoute
-  PathlessLayoutManageRoute: typeof PathlessLayoutManageRoute
-  PathlessLayoutIndexRoute: typeof PathlessLayoutIndexRoute
+interface LayoutViewRouteChildren {
+  LayoutViewBasemapRoute: typeof LayoutViewBasemapRoute
+  LayoutViewDescriptionRoute: typeof LayoutViewDescriptionRoute
+  LayoutViewLegendRoute: typeof LayoutViewLegendRoute
+  LayoutViewManageRoute: typeof LayoutViewManageRoute
+  LayoutViewIndexRoute: typeof LayoutViewIndexRoute
 }
 
-const PathlessLayoutRouteChildren: PathlessLayoutRouteChildren = {
-  PathlessLayoutBasemapRoute: PathlessLayoutBasemapRoute,
-  PathlessLayoutDescriptionRoute: PathlessLayoutDescriptionRoute,
-  PathlessLayoutLegendRoute: PathlessLayoutLegendRoute,
-  PathlessLayoutManageRoute: PathlessLayoutManageRoute,
-  PathlessLayoutIndexRoute: PathlessLayoutIndexRoute,
+const LayoutViewRouteChildren: LayoutViewRouteChildren = {
+  LayoutViewBasemapRoute: LayoutViewBasemapRoute,
+  LayoutViewDescriptionRoute: LayoutViewDescriptionRoute,
+  LayoutViewLegendRoute: LayoutViewLegendRoute,
+  LayoutViewManageRoute: LayoutViewManageRoute,
+  LayoutViewIndexRoute: LayoutViewIndexRoute,
 }
 
-const PathlessLayoutRouteWithChildren = PathlessLayoutRoute._addFileChildren(
-  PathlessLayoutRouteChildren,
+const LayoutViewRouteWithChildren = LayoutViewRoute._addFileChildren(
+  LayoutViewRouteChildren,
 )
 
+interface LayoutEditRouteChildren {
+  LayoutEditDescriptionRoute: typeof LayoutEditDescriptionRoute
+  LayoutEditIndexRoute: typeof LayoutEditIndexRoute
+}
+
+const LayoutEditRouteChildren: LayoutEditRouteChildren = {
+  LayoutEditDescriptionRoute: LayoutEditDescriptionRoute,
+  LayoutEditIndexRoute: LayoutEditIndexRoute,
+}
+
+const LayoutEditRouteWithChildren = LayoutEditRoute._addFileChildren(
+  LayoutEditRouteChildren,
+)
+
+interface LayoutRouteChildren {
+  LayoutViewRoute: typeof LayoutViewRouteWithChildren
+  LayoutEditRoute: typeof LayoutEditRouteWithChildren
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutViewRoute: LayoutViewRouteWithChildren,
+  LayoutEditRoute: LayoutEditRouteWithChildren,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
+  LayoutRoute: LayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

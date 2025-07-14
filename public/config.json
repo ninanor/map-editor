@@ -2,7 +2,6 @@
     "id": "default",
     "title": "Title",
     "subtitle": "Subtitle",
-    "layers": {},
     "layerOrder": [],
     "baseMap": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
     "viewState": {

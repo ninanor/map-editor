@@ -20,10 +20,10 @@ import { ItemRender } from './LayerTreeItem';
 
 interface LayerTreeProps {
   items: Tree;
-  updateChildren: (itemId: string, newChildren: string[]) => void;
+  updateChildren?: (itemId: string, newChildren: string[]) => void;
   editable?: boolean;
-  onRename: (itemId: string, value: string) => void;
-  onAddFolder: (callback?: CallableFunction) => void;
+  onRename?: (itemId: string, value: string) => void;
+  onAddFolder?: (callback?: CallableFunction) => void;
 }
 
 const FEATURES = [
@@ -38,7 +38,7 @@ const FEATURES = [
 
 export function LayerTree({ items, updateChildren, editable, onRename, onAddFolder }: LayerTreeProps) {
   const onDrop = useMemo(() => {
-    if (!editable) {
+    if (!editable || !updateChildren) {
       return undefined;
     }
     return createOnDropHandler((item: ItemInstance<Item>, newChildren) => {
@@ -51,7 +51,7 @@ export function LayerTree({ items, updateChildren, editable, onRename, onAddFold
     getItemName: item => item.getItemData().name,
     isItemFolder: item => !!item.getItemData().isFolder,
     canReorder: editable,
-    onRename: (item, value) => onRename(item.getId(), value),
+    onRename: (item, value) => (onRename ? onRename(item.getId(), value) : void 0),
     dataLoader: {
       getItem: itemId => items[itemId],
       getChildren: itemId => items[itemId].children ?? [],
@@ -65,8 +65,10 @@ export function LayerTree({ items, updateChildren, editable, onRename, onAddFold
   });
 
   const addFolder = useCallback(() => {
-    onAddFolder();
-    requestAnimationFrame(tree.rebuildTree);
+    if (onAddFolder) {
+      onAddFolder();
+      requestAnimationFrame(tree.rebuildTree);
+    }
   }, [onAddFolder, tree]);
 
   return (

@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { PageErrorComponent } from '../../components/PageErrorComponent';
-import { useLayers } from '../../hooks/app';
+import { PageErrorComponent } from '../../../components/PageErrorComponent';
+import { useLayers } from '../../../hooks/app';
 
-export const Route = createFileRoute('/_pathlessLayout/manage')({
+export const Route = createFileRoute('/_layout/_view/manage')({
   component: RouteComponent,
   errorComponent: PageErrorComponent,
 });
