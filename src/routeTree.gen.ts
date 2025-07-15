@@ -19,6 +19,7 @@ import { Route as LayoutViewManageRouteImport } from './routes/_layout/_view/man
 import { Route as LayoutViewLegendRouteImport } from './routes/_layout/_view/legend'
 import { Route as LayoutViewDescriptionRouteImport } from './routes/_layout/_view/description'
 import { Route as LayoutViewBasemapRouteImport } from './routes/_layout/_view/basemap'
+import { Route as LayoutEditLayersAddRouteImport } from './routes/_layout/edit/layers.add'
 import { Route as LayoutEditLayersLayerIdRouteImport } from './routes/_layout/edit/layers.$layerId'
 import { Route as LayoutEditFoldersAddRouteImport } from './routes/_layout/edit/folders.add'
 import { Route as LayoutEditFoldersFolderIdRouteImport } from './routes/_layout/edit/folders.$folderId'
@@ -71,6 +72,11 @@ const LayoutViewBasemapRoute = LayoutViewBasemapRouteImport.update({
   path: '/basemap',
   getParentRoute: () => LayoutViewRoute,
 } as any)
+const LayoutEditLayersAddRoute = LayoutEditLayersAddRouteImport.update({
+  id: '/layers/add',
+  path: '/layers/add',
+  getParentRoute: () => LayoutEditRoute,
+} as any)
 const LayoutEditLayersLayerIdRoute = LayoutEditLayersLayerIdRouteImport.update({
   id: '/layers/$layerId',
   path: '/layers/$layerId',
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/edit/folders/$folderId': typeof LayoutEditFoldersFolderIdRoute
   '/edit/folders/add': typeof LayoutEditFoldersAddRoute
   '/edit/layers/$layerId': typeof LayoutEditLayersLayerIdRoute
+  '/edit/layers/add': typeof LayoutEditLayersAddRoute
 }
 export interface FileRoutesByTo {
   '/basemap': typeof LayoutViewBasemapRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/edit/folders/$folderId': typeof LayoutEditFoldersFolderIdRoute
   '/edit/folders/add': typeof LayoutEditFoldersAddRoute
   '/edit/layers/$layerId': typeof LayoutEditLayersLayerIdRoute
+  '/edit/layers/add': typeof LayoutEditLayersAddRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/_layout/edit/folders/$folderId': typeof LayoutEditFoldersFolderIdRoute
   '/_layout/edit/folders/add': typeof LayoutEditFoldersAddRoute
   '/_layout/edit/layers/$layerId': typeof LayoutEditLayersLayerIdRoute
+  '/_layout/edit/layers/add': typeof LayoutEditLayersAddRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/edit/folders/$folderId'
     | '/edit/folders/add'
     | '/edit/layers/$layerId'
+    | '/edit/layers/add'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/basemap'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/edit/folders/$folderId'
     | '/edit/folders/add'
     | '/edit/layers/$layerId'
+    | '/edit/layers/add'
   id:
     | '__root__'
     | '/_layout'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/_layout/edit/folders/$folderId'
     | '/_layout/edit/folders/add'
     | '/_layout/edit/layers/$layerId'
+    | '/_layout/edit/layers/add'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -248,6 +260,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutViewBasemapRouteImport
       parentRoute: typeof LayoutViewRoute
     }
+    '/_layout/edit/layers/add': {
+      id: '/_layout/edit/layers/add'
+      path: '/layers/add'
+      fullPath: '/edit/layers/add'
+      preLoaderRoute: typeof LayoutEditLayersAddRouteImport
+      parentRoute: typeof LayoutEditRoute
+    }
     '/_layout/edit/layers/$layerId': {
       id: '/_layout/edit/layers/$layerId'
       path: '/layers/$layerId'
@@ -298,6 +317,7 @@ interface LayoutEditRouteChildren {
   LayoutEditFoldersFolderIdRoute: typeof LayoutEditFoldersFolderIdRoute
   LayoutEditFoldersAddRoute: typeof LayoutEditFoldersAddRoute
   LayoutEditLayersLayerIdRoute: typeof LayoutEditLayersLayerIdRoute
+  LayoutEditLayersAddRoute: typeof LayoutEditLayersAddRoute
 }
 
 const LayoutEditRouteChildren: LayoutEditRouteChildren = {
@@ -306,6 +326,7 @@ const LayoutEditRouteChildren: LayoutEditRouteChildren = {
   LayoutEditFoldersFolderIdRoute: LayoutEditFoldersFolderIdRoute,
   LayoutEditFoldersAddRoute: LayoutEditFoldersAddRoute,
   LayoutEditLayersLayerIdRoute: LayoutEditLayersLayerIdRoute,
+  LayoutEditLayersAddRoute: LayoutEditLayersAddRoute,
 }
 
 const LayoutEditRouteWithChildren = LayoutEditRoute._addFileChildren(

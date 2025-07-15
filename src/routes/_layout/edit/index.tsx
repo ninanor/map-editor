@@ -27,9 +27,9 @@ function RouteComponent() {
           </Link>
         </li>
         <li>
-          <button type="button" className="btn btn-sm btn-primary">
+          <Link to="/edit/layers/add" className="btn btn-sm btn-primary">
             <FontAwesomeIcon icon={faPlusCircle} /> Layer
-          </button>
+          </Link>
         </li>
       </ul>
       {items && <LayerTree items={items} updateChildren={updateTreeItemChildren} editable />}

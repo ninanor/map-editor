@@ -18,6 +18,7 @@ interface AppActions {
     updateTreeItemFolder: (id: string, item: Omit<Folder, 'children' | 'type'>) => void;
     updateTreeItemLayer: (id: string, item: Omit<Layer, 'type' | 'layer'>) => void;
     addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
+    addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'layer' | 'type'>) => void;
     toggleLayer: (id: string) => void;
   };
 }
@@ -82,6 +83,22 @@ export const useAppStore = create<AppState>()(
                 type: 'folder',
                 description: item.description,
                 children: [],
+              };
+              parent.children.push(id);
+            }
+          }),
+        addTreeItemLayer: item =>
+          set(state => {
+            const id = nanoid();
+            const parent = state.items ? state.items[item.parent] : null;
+            if (state.items && parent?.type === 'folder') {
+              state.items[id] = {
+                name: item.name,
+                type: 'layer',
+                description: item.description,
+                layer: {
+                  id,
+                },
               };
               parent.children.push(id);
             }
