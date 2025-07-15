@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { Item, ItemWithID, MapConfig, Tree } from '../types';
+import { Folder, Layer, LayerWithId, MapConfig, Tree } from '../types';
 import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
@@ -15,9 +15,9 @@ interface AppActions {
     setSubtitle: (subtitle: string) => void;
     setDescription: (description: string) => void;
     updateTreeItemChildren: (id: string, newChildren: string[]) => void;
-    updateTreeItemFolder: (id: string, item: Item) => void;
-    updateTreeItemLayer: (id: string, item: Item) => void;
-    addTreeItemFolder: (item: Item & { parent: string }) => void;
+    updateTreeItemFolder: (id: string, item: Omit<Folder, 'children' | 'type'>) => void;
+    updateTreeItemLayer: (id: string, item: Omit<Layer, 'type' | 'layer'>) => void;
+    addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
     toggleLayer: (id: string) => void;
   };
 }
@@ -54,18 +54,18 @@ export const useAppStore = create<AppState>()(
           }),
         updateTreeItemChildren: (id: string, newChildren: string[]) =>
           set(state => {
-            if (state.items) {
+            if (state.items && state.items[id].type == 'folder') {
               state.items[id].children = newChildren;
             }
           }),
-        updateTreeItemFolder: (id: string, item: Item) =>
+        updateTreeItemFolder: (id, item) =>
           set(state => {
             if (state.items) {
               state.items[id].name = item.name;
               state.items[id].description = item.description;
             }
           }),
-        updateTreeItemLayer: (id: string, item: Item) =>
+        updateTreeItemLayer: (id, item) =>
           set(state => {
             if (state.items) {
               state.items[id].name = item.name;
@@ -75,14 +75,15 @@ export const useAppStore = create<AppState>()(
         addTreeItemFolder: item =>
           set(state => {
             const id = nanoid();
-            if (state.items) {
+            const parent = state.items ? state.items[item.parent] : null;
+            if (state.items && parent?.type === 'folder') {
               state.items[id] = {
                 name: item.name,
-                isFolder: true,
+                type: 'folder',
                 description: item.description,
                 children: [],
               };
-              state.items[item.parent].children?.push(id);
+              parent.children.push(id);
             }
           }),
         toggleLayer: (id: string) =>
@@ -105,14 +106,14 @@ const createAppSelector = createSelector.withTypes<AppState>();
 const layerSelector = createAppSelector(
   state => state.layerOrder,
   state => state.items,
-  (layerOrder: string[], items: Tree | null) => {
+  (layerOrder: string[], items: Tree | null): LayerWithId[] => {
     if (!items) {
       return [];
     }
 
     return layerOrder.map(lid => ({
       id: lid,
-      ...items[lid],
+      ...(items[lid] as Layer),
     }));
   },
 );
@@ -125,7 +126,7 @@ const folderNameSelector = createAppSelector(
     }
 
     return Object.keys(items)
-      .filter(id => items[id].isFolder)
+      .filter(id => items[id].type === 'folder')
       .map(id => ({
         value: id,
         label: items[id].name,
@@ -136,11 +137,11 @@ const folderNameSelector = createAppSelector(
 const mapSelector = createAppSelector(
   layerSelector,
   state => state.viewState,
-  (layers: ItemWithID[], viewState: MapViewState) => {
+  (layers: LayerWithId[], viewState: MapViewState) => {
     return jsonConverter.convert({
-      layers: layers.map(l => ({
-        id: l.id,
-        ...l.layer,
+      layers: layers.map(({ layer, id }) => ({
+        ...layer,
+        id,
       })),
       initialViewState: viewState,
     }) as DeckGLProps;

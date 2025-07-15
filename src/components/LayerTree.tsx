@@ -10,8 +10,7 @@ import {
 } from '@headless-tree/core';
 import { useTree } from '@headless-tree/react';
 import { TREE_ROOT_ID } from '../config';
-import { Item, Tree } from '../types';
-// import { faSquare } from '@fortawesome/free-regular-svg-icons';
+import { Folder, Layer, Tree } from '../types';
 import { useMemo } from 'react';
 import { ItemRender } from './LayerTreeItem';
 
@@ -19,7 +18,6 @@ interface LayerTreeProps {
   items: Tree;
   updateChildren?: (itemId: string, newChildren: string[]) => void;
   editable?: boolean;
-  onAddFolder?: (callback?: CallableFunction) => void;
 }
 
 const FEATURES = [
@@ -36,23 +34,21 @@ export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
     if (!editable || !updateChildren) {
       return undefined;
     }
-    return createOnDropHandler((item: ItemInstance<Item>, newChildren) => {
+    return createOnDropHandler((item: ItemInstance<Layer | Folder>, newChildren) => {
       updateChildren(item.getId(), newChildren);
     });
   }, [editable, updateChildren]);
 
-  const tree = useTree<Item>({
+  const tree = useTree<Layer | Folder>({
     rootItemId: TREE_ROOT_ID,
     getItemName: item => item.getItemData().name,
-    isItemFolder: item => !!item.getItemData().isFolder,
+    isItemFolder: item => item.getItemData().type === 'folder',
     canReorder: editable,
     dataLoader: {
       getItem: itemId => items[itemId],
-      getChildren: itemId => items[itemId].children ?? [],
+      getChildren: itemId => (items[itemId].type === 'folder' ? items[itemId].children : []),
     },
     onDrop,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    canRename: (_item: ItemInstance<Item>) => !!editable,
     canDropForeignDragObject: (_, target) => target.item.isFolder(),
     indent: 20,
     features: FEATURES,

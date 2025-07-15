@@ -12,7 +12,7 @@
     "items": {
         "root": {
             "name": "Layers",
-            "isFolder": true,
+            "type": "folder",
             "children": [
                 "folder1",
                 "folder2"
@@ -20,12 +20,12 @@
         },
         "folder1": {
             "name": "Folder 1",
-            "isFolder": true,
+            "type": "folder",
             "children": []
         },
         "folder2": {
             "name": "Folder 2",
-            "isFolder": true,
+            "type": "folder",
             "children": [
                 "test",
                 "pmtiles"
@@ -33,7 +33,7 @@
         },
         "test": {
             "name": "Pollinator potential",
-            "isFolder": false,
+            "type": "layer",
             "layer": {
                 "@@type": "TitilerLayer",
                 "data": {
@@ -48,7 +48,7 @@
         },
         "pmtiles": {
             "name": "pmtiles",
-            "isFolder": false,
+            "type": "layer",
             "layer": {
                 "@@type": "TileSourceLayer",
                 "tileSource": "https://4sq-studio-public.s3.us-west-2.amazonaws.com/pmtiles-test/161727fe-7952-4e57-aa05-850b3086b0b2.pmtiles"

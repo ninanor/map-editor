@@ -60,11 +60,19 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
           {editable && (
             <>
               {item.isFolder() ? (
-                <Link to={`/edit/folders/$folderId`} params={{ folderId: item.getId() }}>
+                <Link
+                  to={`/edit/folders/$folderId`}
+                  params={{ folderId: item.getId() }}
+                  onClick={e => e.stopPropagation()}
+                >
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               ) : (
-                <Link to={`/edit/layers/$layerId`} params={{ layerId: item.getId() }}>
+                <Link
+                  to={`/edit/layers/$layerId`}
+                  params={{ layerId: item.getId() }}
+                  onClick={e => e.stopPropagation()}
+                >
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               )}

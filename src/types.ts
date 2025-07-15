@@ -1,16 +1,24 @@
 import { MapViewState, LayerProps } from '@deck.gl/core';
 
-export interface Item {
+export interface Folder {
+  type: 'folder';
+
   name: string;
-  children?: string[];
-  isFolder?: boolean;
-  layer?: LayerProps;
   description?: string;
+  children: string[];
 }
 
-export interface ItemWithID extends Item {
-  id: string;
+export interface Layer {
+  type: 'layer';
+
+  name: string;
+  description?: string;
+  layer: LayerProps;
 }
+
+export type LayerWithId = Layer & { id: string };
+
+export type Item = Folder | Layer;
 
 export type Tree = Record<string, Item>;
 
