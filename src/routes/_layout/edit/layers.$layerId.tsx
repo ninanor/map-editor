@@ -41,7 +41,7 @@ function RouteComponent() {
         }}
       >
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Update folder</legend>
+          <legend className="fieldset-legend">Update layer</legend>
 
           <form.Field
             name="name"
