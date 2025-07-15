@@ -6,7 +6,7 @@ import { MDXEditor } from '@mdxeditor/editor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-export const Route = createFileRoute('/_layout/edit/folders/$folderId')({
+export const Route = createFileRoute('/_layout/edit/layers/$layerId')({
   component: RouteComponent,
 });
 
@@ -14,8 +14,8 @@ function RouteComponent() {
   const actions = useAppActions();
   const navigate = useNavigate();
 
-  const { folderId } = Route.useParams();
-  const folder = useItem(folderId);
+  const { layerId } = Route.useParams();
+  const folder = useItem(layerId);
 
   const form = useForm({
     defaultValues: {
@@ -23,7 +23,7 @@ function RouteComponent() {
       description: folder?.description ?? '',
     },
     onSubmit: async ({ value }) => {
-      actions.updateTreeItemFolder(folderId, value);
+      actions.updateTreeItemLayer(layerId, value);
       await navigate({ to: '/edit' });
     },
   });

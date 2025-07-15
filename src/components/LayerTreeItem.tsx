@@ -59,9 +59,15 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
         <div className="ml-2 flex">
           {editable && (
             <>
-              <Link to={`/edit/folders/$folderId`} params={{ folderId: item.getId() }}>
-                <FontAwesomeIcon icon={faEdit} />
-              </Link>
+              {item.isFolder() ? (
+                <Link to={`/edit/folders/$folderId`} params={{ folderId: item.getId() }}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </Link>
+              ) : (
+                <Link to={`/edit/layers/$layerId`} params={{ layerId: item.getId() }}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </Link>
+              )}
             </>
           )}
           {!editable && (
