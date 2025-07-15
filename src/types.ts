@@ -5,6 +5,7 @@ export interface Item {
   children?: string[];
   isFolder?: boolean;
   layer?: LayerProps;
+  description?: string;
 }
 
 export interface ItemWithID extends Item {

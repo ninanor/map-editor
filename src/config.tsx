@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
+
 import { MapConfig } from './types';
 
 export const TABS = [

@@ -1,37 +1,7 @@
-import {
-  BlockTypeSelect,
-  BoldItalicUnderlineToggles,
-  CreateLink,
-  MDXEditor,
-  UndoRedo,
-  headingsPlugin,
-  listsPlugin,
-  markdownShortcutPlugin,
-  quotePlugin,
-  thematicBreakPlugin,
-  toolbarPlugin,
-} from '@mdxeditor/editor';
-import '@mdxeditor/editor/style.css';
+import { MDXEditor } from '@mdxeditor/editor';
 
 import { useAppActions, useAppStore } from '../hooks/app';
-
-const PLUGINS = [
-  headingsPlugin(),
-  listsPlugin(),
-  quotePlugin(),
-  thematicBreakPlugin(),
-  markdownShortcutPlugin(),
-  toolbarPlugin({
-    toolbarContents: () => (
-      <>
-        <UndoRedo />
-        <BoldItalicUnderlineToggles />
-        <CreateLink />
-        <BlockTypeSelect />
-      </>
-    ),
-  }),
-];
+import { PLUGINS } from '../mdxPlugins';
 
 export function DescriptionEditor() {
   const description = useAppStore(state => state.description);
@@ -40,7 +10,7 @@ export function DescriptionEditor() {
   return (
     <>
       <MDXEditor
-        contentEditableClassName="prose prose-slate prose-md"
+        contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64"
         markdown={description}
         onChange={setDescription}
         plugins={PLUGINS}

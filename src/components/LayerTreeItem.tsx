@@ -1,7 +1,6 @@
 import {
   faCaretDown,
   faCaretRight,
-  faCog,
   faDownload,
   faEdit,
   faInfoCircle,
@@ -27,6 +26,7 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
   const { onClick, ...props } = item.getProps();
   const cb = useCallback<MouseEventHandler>(
     e => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       onClick(e);
       if (!item.isFolder()) {
         toggleLayer(item.getId());
@@ -34,13 +34,6 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
     },
     [onClick, item, toggleLayer],
   );
-  if (item.isRenaming()) {
-    return (
-      <div className="renaming-item" style={{ marginLeft: `${item.getItemMeta().level * 20}px` }}>
-        <input {...item.getRenameInputProps()} />
-      </div>
-    );
-  }
 
   return (
     <div
@@ -54,7 +47,6 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
         className={cx('treeitem flex items-center', {
           focused: item.isFocused(),
           expanded: item.isExpanded(),
-          // selected: item.isSelected(),
           folder: item.isFolder(),
         })}
       >
@@ -71,22 +63,10 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
                 className="btn btn-ghost btn-sm"
                 onClick={e => {
                   e.stopPropagation();
-                  item.startRenaming();
                 }}
               >
                 <FontAwesomeIcon icon={faEdit} />
               </button>
-              {!item.isFolder() && (
-                <button
-                  type="button"
-                  className="btn btn-ghost btn-sm"
-                  onClick={e => {
-                    e.stopPropagation();
-                  }}
-                >
-                  <FontAwesomeIcon icon={faCog} />
-                </button>
-              )}
             </>
           )}
           {!editable && (

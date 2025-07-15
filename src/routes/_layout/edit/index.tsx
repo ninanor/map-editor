@@ -1,7 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { LayerTree } from '../../../components/LayerTree';
 import { useAppActions, useAppStore } from '../../../hooks/app';
 import { PageErrorComponent } from '../../../components/PageErrorComponent';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Route = createFileRoute('/_layout/edit/')({
   component: RouteComponent,
@@ -10,19 +12,27 @@ export const Route = createFileRoute('/_layout/edit/')({
 
 function RouteComponent() {
   const items = useAppStore(state => state.items);
-  const { updateTreeItemChildren, updateTreeItemName, addTreeItemFolder } = useAppActions();
+  const { updateTreeItemChildren } = useAppActions();
 
   if (!items) {
     return null;
   }
 
   return (
-    <LayerTree
-      items={items}
-      updateChildren={updateTreeItemChildren}
-      editable
-      onRename={updateTreeItemName}
-      onAddFolder={addTreeItemFolder}
-    />
+    <>
+      <ul className="menu menu-horizontal bg-base-200 rounded-box gap-2">
+        <li>
+          <Link to="/edit/folders/add" className="btn btn-sm btn-primary" preload="intent">
+            <FontAwesomeIcon icon={faPlusCircle} /> Folder
+          </Link>
+        </li>
+        <li>
+          <button type="button" className="btn btn-sm btn-primary">
+            <FontAwesomeIcon icon={faPlusCircle} /> Layer
+          </button>
+        </li>
+      </ul>
+      {items && <LayerTree items={items} updateChildren={updateTreeItemChildren} editable />}
+    </>
   );
 }

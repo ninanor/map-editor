@@ -5,8 +5,6 @@ import {
   ErrorComponent,
   createRootRouteWithContext,
 } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { configQueryOptions } from '../config';
 import { QueryClient, useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
@@ -17,7 +15,7 @@ import { useAppStore } from '../hooks/app';
 import { useUIActions, useUIisReady } from '../hooks/ui';
 
 interface AppSearch {
-  url: string;
+  url?: string;
 }
 
 interface RouterContext {
@@ -33,7 +31,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   },
   loaderDeps: ({ search: { url } }) => ({ url }),
   loader: ({ context: { queryClient }, deps: { url } }) => {
-    return queryClient.ensureQueryData(configQueryOptions(url || '/config.json'));
+    return queryClient.ensureQueryData(configQueryOptions(url ?? '/config.json'));
   },
   errorComponent: ConfigErrorComponent,
 });
@@ -70,7 +68,7 @@ function RootComponent() {
   const ready = useUIisReady();
   const { setReady } = useUIActions();
   const { url } = Route.useSearch();
-  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url || '/config.json'));
+  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? '/config.json'));
   console.log(config.data);
 
   useEffect(() => {
@@ -87,8 +85,6 @@ function RootComponent() {
   return (
     <Fragment>
       <Outlet />
-      <ReactQueryDevtools buttonPosition="bottom-right" />
-      <TanStackRouterDevtools position="bottom-left" />
     </Fragment>
   );
 }

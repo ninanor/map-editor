@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
 
+@plugin "daisyui";
 
 .tree {
     max-width: 100%;
@@ -28,14 +28,7 @@
 }
 
 .treeitem:hover {
-    @apply bg-primary/50;
-}
-
-.renaming-item {
-    @apply bg-primary/50;
-    margin-bottom: 2px;
-    border-radius: 8px;
-    padding: 4px 10px 5px 24px;
+    /* @apply bg-primary/50; */
 }
 
 .renaming-item input {
@@ -64,7 +57,7 @@ button:focus-visible .treeitem.focused,
 }
 
 .treeitem.drop {
-    @apply border-primary;
+    /* @apply border-primary; */
     background-color: #e1f1f8;
 }
 

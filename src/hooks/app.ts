@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { ItemWithID, MapConfig, Tree } from '../types';
-import { TREE_ROOT_ID } from '../config';
+import { Item, ItemWithID, MapConfig, Tree } from '../types';
 import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
@@ -17,7 +16,7 @@ interface AppActions {
     setDescription: (description: string) => void;
     updateTreeItemChildren: (id: string, newChildren: string[]) => void;
     updateTreeItemName: (id: string, name: string) => void;
-    addTreeItemFolder: () => void;
+    addTreeItemFolder: (item: Item & { parent: string }) => void;
     toggleLayer: (id: string) => void;
   };
 }
@@ -64,16 +63,17 @@ export const useAppStore = create<AppState>()(
               state.items[id].name = name;
             }
           }),
-        addTreeItemFolder: () =>
+        addTreeItemFolder: item =>
           set(state => {
             const id = nanoid();
             if (state.items) {
               state.items[id] = {
-                name: `Item ${Object.keys(state.items).length}`,
+                name: item.name,
                 isFolder: true,
+                description: item.description,
                 children: [],
               };
-              state.items[TREE_ROOT_ID].children?.push(id);
+              state.items[item.parent].children?.push(id);
             }
           }),
         toggleLayer: (id: string) =>
@@ -108,6 +108,22 @@ const layerSelector = createAppSelector(
   },
 );
 
+const folderSelector = createAppSelector(
+  state => state.items,
+  (items: Tree | null) => {
+    if (!items) {
+      return [];
+    }
+
+    return Object.keys(items)
+      .filter(id => items[id].isFolder)
+      .map(id => ({
+        value: id,
+        label: items[id].name,
+      }));
+  },
+);
+
 const mapSelector = createAppSelector(
   layerSelector,
   state => state.viewState,
@@ -124,3 +140,4 @@ const mapSelector = createAppSelector(
 
 export const useLayers = () => useAppStore(layerSelector);
 export const useMapConf = () => useAppStore(mapSelector);
+export const useFolderNames = () => useAppStore(folderSelector);
