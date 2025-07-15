@@ -15,7 +15,7 @@ interface AppActions {
     setSubtitle: (subtitle: string) => void;
     setDescription: (description: string) => void;
     updateTreeItemChildren: (id: string, newChildren: string[]) => void;
-    updateTreeItemName: (id: string, name: string) => void;
+    updateTreeItemFolder: (id: string, item: Item) => void;
     addTreeItemFolder: (item: Item & { parent: string }) => void;
     toggleLayer: (id: string) => void;
   };
@@ -57,10 +57,11 @@ export const useAppStore = create<AppState>()(
               state.items[id].children = newChildren;
             }
           }),
-        updateTreeItemName: (id: string, name: string) =>
+        updateTreeItemFolder: (id: string, item: Item) =>
           set(state => {
             if (state.items) {
-              state.items[id].name = name;
+              state.items[id].name = item.name;
+              state.items[id].description = item.description;
             }
           }),
         addTreeItemFolder: item =>
@@ -108,7 +109,7 @@ const layerSelector = createAppSelector(
   },
 );
 
-const folderSelector = createAppSelector(
+const folderNameSelector = createAppSelector(
   state => state.items,
   (items: Tree | null) => {
     if (!items) {
@@ -140,4 +141,7 @@ const mapSelector = createAppSelector(
 
 export const useLayers = () => useAppStore(layerSelector);
 export const useMapConf = () => useAppStore(mapSelector);
-export const useFolderNames = () => useAppStore(folderSelector);
+export const useFolderNames = () => useAppStore(folderNameSelector);
+export const useFolder = (id: string) => {
+  return useAppStore(state => (state.items ? state.items[id] : null));
+};

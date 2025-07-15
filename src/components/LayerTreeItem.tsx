@@ -13,6 +13,7 @@ import { Item } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppActions, useAppStore } from '../hooks/app';
 import { MouseEventHandler, useCallback } from 'react';
+import { Link } from '@tanstack/react-router';
 
 interface ItemRenderProps {
   item: ItemInstance<Item>;
@@ -58,15 +59,9 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
         <div className="ml-2 flex">
           {editable && (
             <>
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                onClick={e => {
-                  e.stopPropagation();
-                }}
-              >
+              <Link to={`/edit/folders/$folderId`} params={{ folderId: item.getId() }}>
                 <FontAwesomeIcon icon={faEdit} />
-              </button>
+              </Link>
             </>
           )}
           {!editable && (
