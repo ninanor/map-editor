@@ -20,6 +20,10 @@ interface ItemRenderProps {
   editable?: boolean;
 }
 
+const noPropagate = (e: React.MouseEvent) => {
+  e.stopPropagation();
+};
+
 export function ItemRender({ item, editable }: ItemRenderProps) {
   const layerOrder = useAppStore(state => state.layerOrder);
   const isVisible = layerOrder.includes(item.getId());
@@ -36,6 +40,10 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
     [onClick, item, toggleLayer],
   );
 
+  const data = item.getItemData();
+  const isFolder = item.isFolder();
+  const id = item.getId();
+
   return (
     <div
       {...props}
@@ -48,55 +56,42 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
         className={cx('treeitem flex items-center', {
           focused: item.isFocused(),
           expanded: item.isExpanded(),
-          folder: item.isFolder(),
+          folder: isFolder,
         })}
       >
         <div className="w-10">
-          {item.isFolder() && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
-          {!item.isFolder() && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
+          {isFolder && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
+          {!isFolder && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
         </div>
         <div>{item.getItemName()}</div>
         <div className="ml-2 flex">
           {editable && (
             <>
-              {item.isFolder() ? (
-                <Link
-                  to={`/edit/folders/$folderId`}
-                  params={{ folderId: item.getId() }}
-                  onClick={e => e.stopPropagation()}
-                >
+              {isFolder ? (
+                <Link to={`/edit/folders/$folderId`} params={{ folderId: id }} onClick={noPropagate}>
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               ) : (
-                <Link
-                  to={`/edit/layers/$layerId`}
-                  params={{ layerId: item.getId() }}
-                  onClick={e => e.stopPropagation()}
-                >
+                <Link to={`/edit/layers/$layerId`} params={{ layerId: id }} onClick={noPropagate}>
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               )}
             </>
           )}
-          {!editable && (
-            <button
-              type="button"
-              className="btn btn-ghost btn-sm"
-              onClick={e => {
-                e.stopPropagation();
-              }}
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-            </button>
-          )}
+          {!editable &&
+            (isFolder
+              ? data.description && (
+                  <Link to={`/folders/$folderId`} params={{ folderId: id }} onClick={noPropagate}>
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                  </Link>
+                )
+              : data.description && (
+                  <Link to={`/layers/$layerId`} params={{ layerId: id }} onClick={noPropagate}>
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                  </Link>
+                ))}
           {!editable && !item.isFolder() && (
-            <button
-              type="button"
-              className="btn btn-ghost btn-sm"
-              onClick={e => {
-                e.stopPropagation();
-              }}
-            >
+            <button type="button" className="btn btn-ghost btn-sm" onClick={noPropagate}>
               <FontAwesomeIcon icon={faDownload} />
             </button>
           )}
