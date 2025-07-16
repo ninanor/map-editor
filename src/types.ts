@@ -13,7 +13,7 @@ export interface Layer {
 
   name: string;
   description?: string;
-  layer: LayerProps;
+  layer: Omit<LayerProps, 'id'>;
 }
 
 export type LayerWithId = Layer & { id: string };

@@ -18,7 +18,7 @@ interface AppActions {
     updateTreeItemFolder: (id: string, item: Omit<Folder, 'children' | 'type'>) => void;
     updateTreeItemLayer: (id: string, item: Omit<Layer, 'type' | 'layer'>) => void;
     addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
-    addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'layer' | 'type'>) => void;
+    addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'type'>) => void;
     toggleLayer: (id: string) => void;
   };
 }
@@ -96,9 +96,7 @@ export const useAppStore = create<AppState>()(
                 name: item.name,
                 type: 'layer',
                 description: item.description,
-                layer: {
-                  id,
-                },
+                layer: item.layer,
               };
               parent.children.push(id);
             }
