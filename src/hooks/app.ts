@@ -8,6 +8,7 @@ import { createSelector } from 'reselect';
 import { jsonConverter } from '../layers/getMapConfig';
 import { MapViewState } from '@deck.gl/core';
 import { DeckGLProps } from '@deck.gl/react';
+import { arrayMove } from '@dnd-kit/sortable';
 
 interface AppActions {
   actions: {
@@ -21,6 +22,7 @@ interface AppActions {
     addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'type'>) => void;
     toggleLayer: (id: string) => void;
     setExpandedItems: (expand: string[]) => void;
+    moveToIndex: (source: string, target: string) => void;
   };
 }
 
@@ -92,6 +94,14 @@ export const useAppStore = create<AppState>()(
               };
               parent.children.push(id);
             }
+          }),
+        moveToIndex: (source, target) =>
+          set(state => {
+            state.layerOrder = arrayMove(
+              state.layerOrder,
+              state.layerOrder.indexOf(source),
+              state.layerOrder.indexOf(target),
+            );
           }),
         addTreeItemLayer: item =>
           set(state => {
