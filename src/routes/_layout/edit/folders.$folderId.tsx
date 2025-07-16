@@ -4,7 +4,8 @@ import { useForm } from '@tanstack/react-form';
 import { PLUGINS } from '../../../mdxPlugins';
 import { MDXEditor } from '@mdxeditor/editor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useCallback } from 'react';
 
 export const Route = createFileRoute('/_layout/edit/folders/$folderId')({
   component: RouteComponent,
@@ -27,6 +28,11 @@ function RouteComponent() {
       await navigate({ to: '/edit' });
     },
   });
+
+  const handleDelete = useCallback(() => {
+    actions.removeTreeItemFolder(folderId);
+    navigate({ to: '/edit' }).catch(console.error);
+  }, [folderId, actions, navigate]);
 
   return (
     <>
@@ -91,6 +97,12 @@ function RouteComponent() {
           />
         </fieldset>
       </form>
+
+      <div className="mt-3 flex">
+        <button type="button" className="btn btn-error" onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
     </>
   );
 }

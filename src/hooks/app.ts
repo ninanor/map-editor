@@ -17,6 +17,8 @@ interface AppActions {
     setDescription: (description: string) => void;
     updateTreeItemChildren: (id: string, newChildren: string[]) => void;
     updateTreeItemFolder: (id: string, item: Omit<Folder, 'children' | 'type'>) => void;
+    removeTreeItemFolder: (id: string) => void;
+    removeTreeItemLayer: (id: string) => void;
     updateTreeItemLayer: (id: string, item: Omit<Layer, 'type' | 'layer'>) => void;
     addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
     addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'type'>) => void;
@@ -78,6 +80,34 @@ export const useAppStore = create<AppState>()(
             if (state.items) {
               state.items[id].name = item.name;
               state.items[id].description = item.description;
+            }
+          }),
+        removeTreeItemFolder: id =>
+          set(state => {
+            if (state.items?.[id] && state.items[id].type === 'folder' && state.items[id].children.length === 0) {
+              delete state.items[id];
+              Object.keys(state.items).forEach(key => {
+                if (state.items && state.items[key].type === 'folder') {
+                  const idx = state.items[key].children.indexOf(id);
+                  if (idx >= 0) {
+                    state.items[key].children.splice(idx, 1);
+                  }
+                }
+              });
+            }
+          }),
+        removeTreeItemLayer: id =>
+          set(state => {
+            if (state.items?.[id] && state.items[id].type === 'layer') {
+              delete state.items[id];
+              Object.keys(state.items).forEach(key => {
+                if (state.items && state.items[key].type === 'folder') {
+                  const idx = state.items[key].children.indexOf(id);
+                  if (idx >= 0) {
+                    state.items[key].children.splice(idx, 1);
+                  }
+                }
+              });
             }
           }),
         updateTreeItemLayer: (id, item) =>
