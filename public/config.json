@@ -9,6 +9,9 @@
         "latitude": 63,
         "zoom": 4
     },
+    "expandedItems": [
+        "folder2"
+    ],
     "items": {
         "root": {
             "name": "Layers",

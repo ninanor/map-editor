@@ -7,6 +7,7 @@ import {
   selectionFeature,
   syncDataLoaderFeature,
   propMemoizationFeature,
+  SetStateFn,
 } from '@headless-tree/core';
 import { useTree } from '@headless-tree/react';
 import { TREE_ROOT_ID } from '../config';
@@ -18,6 +19,8 @@ interface LayerTreeProps {
   items: Tree;
   updateChildren?: (itemId: string, newChildren: string[]) => void;
   editable?: boolean;
+  expandedItems: string[];
+  setExpandedItems: SetStateFn<string[]>;
 }
 
 const FEATURES = [
@@ -29,7 +32,7 @@ const FEATURES = [
   propMemoizationFeature,
 ];
 
-export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
+export function LayerTree({ items, updateChildren, editable, expandedItems, setExpandedItems }: LayerTreeProps) {
   const onDrop = useMemo(() => {
     if (!editable || !updateChildren) {
       return undefined;
@@ -40,6 +43,10 @@ export function LayerTree({ items, updateChildren, editable }: LayerTreeProps) {
   }, [editable, updateChildren]);
 
   const tree = useTree<Layer | Folder>({
+    state: {
+      expandedItems,
+    },
+    setExpandedItems,
     rootItemId: TREE_ROOT_ID,
     getItemName: item => item.getItemData().name,
     isItemFolder: item => item.getItemData().type === 'folder',

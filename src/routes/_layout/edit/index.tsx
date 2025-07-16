@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { LayerTree } from '../../../components/LayerTree';
-import { useAppActions, useAppStore } from '../../../hooks/app';
+import { useAppActions, useAppStore, useExpandedItems } from '../../../hooks/app';
 import { PageErrorComponent } from '../../../components/PageErrorComponent';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SetStateFn } from '@headless-tree/core';
 
 export const Route = createFileRoute('/_layout/edit/')({
   component: RouteComponent,
@@ -12,7 +13,8 @@ export const Route = createFileRoute('/_layout/edit/')({
 
 function RouteComponent() {
   const items = useAppStore(state => state.items);
-  const { updateTreeItemChildren } = useAppActions();
+  const { updateTreeItemChildren, setExpandedItems } = useAppActions();
+  const expandedItems = useExpandedItems();
 
   if (!items) {
     return null;
@@ -32,7 +34,15 @@ function RouteComponent() {
           </Link>
         </li>
       </ul>
-      {items && <LayerTree items={items} updateChildren={updateTreeItemChildren} editable />}
+      {items && (
+        <LayerTree
+          items={items}
+          updateChildren={updateTreeItemChildren}
+          editable
+          expandedItems={expandedItems}
+          setExpandedItems={setExpandedItems as SetStateFn<string[]>}
+        />
+      )}
     </>
   );
 }

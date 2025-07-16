@@ -20,6 +20,7 @@ interface AppActions {
     addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
     addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'type'>) => void;
     toggleLayer: (id: string) => void;
+    setExpandedItems: (expand: string[]) => void;
   };
 }
 
@@ -32,6 +33,7 @@ export const useAppStore = create<AppState>()(
       title: '',
       subtitle: '',
       description: '',
+      expandedItems: [],
       items: null,
       layerOrder: [],
       baseMap: BASEMAP.POSITRON,
@@ -44,6 +46,10 @@ export const useAppStore = create<AppState>()(
         setTitle: (title: string) =>
           set(state => {
             state.title = title;
+          }),
+        setExpandedItems: expandedItems =>
+          set(state => {
+            state.expandedItems = expandedItems;
           }),
         setSubtitle: (subtitle: string) =>
           set(state => {
@@ -169,3 +175,5 @@ export const useFolderNames = () => useAppStore(folderNameSelector);
 export const useItem = (id: string) => {
   return useAppStore(state => (state.items ? state.items[id] : null));
 };
+
+export const useExpandedItems = () => useAppStore(state => state.expandedItems);

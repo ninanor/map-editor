@@ -33,4 +33,5 @@ export interface MapConfig {
   layerOrder: LayerID[];
   viewState: MapViewState;
   items: Tree | null;
+  expandedItems: string[];
 }
