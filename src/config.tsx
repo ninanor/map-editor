@@ -36,6 +36,10 @@ export const EDIT_TABS = [
     label: 'Beskrivelse',
   },
   {
+    id: '/edit/manage',
+    label: 'Active Kartlag',
+  },
+  {
     id: '/edit/basemap',
     label: 'Bakgrunnskart',
   },

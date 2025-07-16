@@ -8,7 +8,7 @@ export const Route = createFileRoute('/_layout/_view/basemap')({
   errorComponent: PageErrorComponent,
 });
 
-function RouteComponent() {
+export function RouteComponent() {
   const styles = useBaseMapStyles();
   const viewState = useAppStore(state => state.viewState);
   const { setBaseMap } = useAppActions();

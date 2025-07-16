@@ -14,7 +14,7 @@ export function MDXField({ label }: { label: string }) {
         onChange={field.handleChange}
         plugins={PLUGINS}
         onBlur={field.handleBlur}
-        contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64"
+        contentEditableClassName="prose prose-slate prose-md bg-base-100 border-neutral-content border rounded min-h-64"
       />
     </>
   );

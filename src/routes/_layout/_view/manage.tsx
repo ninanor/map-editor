@@ -40,7 +40,7 @@ function SortableItem({ id, name }: LayerWithId) {
   );
 }
 
-function RouteComponent() {
+export function RouteComponent() {
   const layers = useLayers();
   const sensors = useSensors(
     useSensor(PointerSensor),

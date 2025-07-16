@@ -14,7 +14,9 @@ import { Route as LayoutEditRouteImport } from './routes/_layout/edit'
 import { Route as LayoutViewRouteImport } from './routes/_layout/_view'
 import { Route as LayoutEditIndexRouteImport } from './routes/_layout/edit/index'
 import { Route as LayoutViewIndexRouteImport } from './routes/_layout/_view/index'
+import { Route as LayoutEditManageRouteImport } from './routes/_layout/edit/manage'
 import { Route as LayoutEditDescriptionRouteImport } from './routes/_layout/edit/description'
+import { Route as LayoutEditBasemapRouteImport } from './routes/_layout/edit/basemap'
 import { Route as LayoutViewManageRouteImport } from './routes/_layout/_view/manage'
 import { Route as LayoutViewLegendRouteImport } from './routes/_layout/_view/legend'
 import { Route as LayoutViewDescriptionRouteImport } from './routes/_layout/_view/description'
@@ -49,9 +51,19 @@ const LayoutViewIndexRoute = LayoutViewIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutViewRoute,
 } as any)
+const LayoutEditManageRoute = LayoutEditManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
+  getParentRoute: () => LayoutEditRoute,
+} as any)
 const LayoutEditDescriptionRoute = LayoutEditDescriptionRouteImport.update({
   id: '/description',
   path: '/description',
+  getParentRoute: () => LayoutEditRoute,
+} as any)
+const LayoutEditBasemapRoute = LayoutEditBasemapRouteImport.update({
+  id: '/basemap',
+  path: '/basemap',
   getParentRoute: () => LayoutEditRoute,
 } as any)
 const LayoutViewManageRoute = LayoutViewManageRouteImport.update({
@@ -113,7 +125,9 @@ export interface FileRoutesByFullPath {
   '/description': typeof LayoutViewDescriptionRoute
   '/legend': typeof LayoutViewLegendRoute
   '/manage': typeof LayoutViewManageRoute
+  '/edit/basemap': typeof LayoutEditBasemapRoute
   '/edit/description': typeof LayoutEditDescriptionRoute
+  '/edit/manage': typeof LayoutEditManageRoute
   '/': typeof LayoutViewIndexRoute
   '/edit/': typeof LayoutEditIndexRoute
   '/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
@@ -128,7 +142,9 @@ export interface FileRoutesByTo {
   '/description': typeof LayoutViewDescriptionRoute
   '/legend': typeof LayoutViewLegendRoute
   '/manage': typeof LayoutViewManageRoute
+  '/edit/basemap': typeof LayoutEditBasemapRoute
   '/edit/description': typeof LayoutEditDescriptionRoute
+  '/edit/manage': typeof LayoutEditManageRoute
   '/': typeof LayoutViewIndexRoute
   '/edit': typeof LayoutEditIndexRoute
   '/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
@@ -147,7 +163,9 @@ export interface FileRoutesById {
   '/_layout/_view/description': typeof LayoutViewDescriptionRoute
   '/_layout/_view/legend': typeof LayoutViewLegendRoute
   '/_layout/_view/manage': typeof LayoutViewManageRoute
+  '/_layout/edit/basemap': typeof LayoutEditBasemapRoute
   '/_layout/edit/description': typeof LayoutEditDescriptionRoute
+  '/_layout/edit/manage': typeof LayoutEditManageRoute
   '/_layout/_view/': typeof LayoutViewIndexRoute
   '/_layout/edit/': typeof LayoutEditIndexRoute
   '/_layout/_view/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
@@ -165,7 +183,9 @@ export interface FileRouteTypes {
     | '/description'
     | '/legend'
     | '/manage'
+    | '/edit/basemap'
     | '/edit/description'
+    | '/edit/manage'
     | '/'
     | '/edit/'
     | '/folders/$folderId'
@@ -180,7 +200,9 @@ export interface FileRouteTypes {
     | '/description'
     | '/legend'
     | '/manage'
+    | '/edit/basemap'
     | '/edit/description'
+    | '/edit/manage'
     | '/'
     | '/edit'
     | '/folders/$folderId'
@@ -198,7 +220,9 @@ export interface FileRouteTypes {
     | '/_layout/_view/description'
     | '/_layout/_view/legend'
     | '/_layout/_view/manage'
+    | '/_layout/edit/basemap'
     | '/_layout/edit/description'
+    | '/_layout/edit/manage'
     | '/_layout/_view/'
     | '/_layout/edit/'
     | '/_layout/_view/folders/$folderId'
@@ -250,11 +274,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutViewIndexRouteImport
       parentRoute: typeof LayoutViewRoute
     }
+    '/_layout/edit/manage': {
+      id: '/_layout/edit/manage'
+      path: '/manage'
+      fullPath: '/edit/manage'
+      preLoaderRoute: typeof LayoutEditManageRouteImport
+      parentRoute: typeof LayoutEditRoute
+    }
     '/_layout/edit/description': {
       id: '/_layout/edit/description'
       path: '/description'
       fullPath: '/edit/description'
       preLoaderRoute: typeof LayoutEditDescriptionRouteImport
+      parentRoute: typeof LayoutEditRoute
+    }
+    '/_layout/edit/basemap': {
+      id: '/_layout/edit/basemap'
+      path: '/basemap'
+      fullPath: '/edit/basemap'
+      preLoaderRoute: typeof LayoutEditBasemapRouteImport
       parentRoute: typeof LayoutEditRoute
     }
     '/_layout/_view/manage': {
@@ -355,7 +393,9 @@ const LayoutViewRouteWithChildren = LayoutViewRoute._addFileChildren(
 )
 
 interface LayoutEditRouteChildren {
+  LayoutEditBasemapRoute: typeof LayoutEditBasemapRoute
   LayoutEditDescriptionRoute: typeof LayoutEditDescriptionRoute
+  LayoutEditManageRoute: typeof LayoutEditManageRoute
   LayoutEditIndexRoute: typeof LayoutEditIndexRoute
   LayoutEditFoldersFolderIdRoute: typeof LayoutEditFoldersFolderIdRoute
   LayoutEditFoldersAddRoute: typeof LayoutEditFoldersAddRoute
@@ -364,7 +404,9 @@ interface LayoutEditRouteChildren {
 }
 
 const LayoutEditRouteChildren: LayoutEditRouteChildren = {
+  LayoutEditBasemapRoute: LayoutEditBasemapRoute,
   LayoutEditDescriptionRoute: LayoutEditDescriptionRoute,
+  LayoutEditManageRoute: LayoutEditManageRoute,
   LayoutEditIndexRoute: LayoutEditIndexRoute,
   LayoutEditFoldersFolderIdRoute: LayoutEditFoldersFolderIdRoute,
   LayoutEditFoldersAddRoute: LayoutEditFoldersAddRoute,

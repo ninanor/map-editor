@@ -10,7 +10,7 @@ function RouteComponent() {
   const location = useLocation();
 
   return (
-    <div className={classNames('bg-base-100 shadow-2xs h-screen w-md p-2')}>
+    <div className={classNames('bg-green-50 shadow-2xs h-screen w-md p-2')}>
       <div role="tablist" className="tabs tabs-border my-3">
         {EDIT_TABS.map(tab => (
           <Link

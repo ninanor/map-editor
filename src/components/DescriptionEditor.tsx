@@ -10,7 +10,7 @@ export function DescriptionEditor() {
   return (
     <>
       <MDXEditor
-        contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64"
+        contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64 bg-base-100"
         markdown={description}
         onChange={setDescription}
         plugins={PLUGINS}
