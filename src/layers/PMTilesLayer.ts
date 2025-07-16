@@ -153,8 +153,6 @@ export class TileSourceLayer extends CompositeLayer<TileSourceLayerProps> {
 
     const devicePixelRatio = this.context.device.getCanvasContext().getDevicePixelRatio();
 
-    alert();
-
     return [
       new MVTSourceLayer({
         // HACK: Trigger new layer via id prop to force clear tile cache
