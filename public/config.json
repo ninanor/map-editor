@@ -3,7 +3,7 @@
     "title": "Title",
     "subtitle": "Subtitle",
     "layerOrder": [],
-    "baseMap": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+    "baseMap": "positron",
     "viewState": {
         "longitude": 10,
         "latitude": 63,

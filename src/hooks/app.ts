@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { Folder, Layer, LayerWithId, MapConfig, Tree } from '../types';
+import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, Tree } from '../types';
 import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
@@ -23,6 +23,7 @@ interface AppActions {
     toggleLayer: (id: string) => void;
     setExpandedItems: (expand: string[]) => void;
     moveToIndex: (source: string, target: string) => void;
+    setBaseMap: (baseMapId: string) => void;
   };
 }
 
@@ -36,9 +37,14 @@ export const useAppStore = create<AppState>()(
       subtitle: '',
       description: '',
       expandedItems: [],
+      styles: {
+        positron: BASEMAP.POSITRON,
+        voyager: BASEMAP.VOYAGER,
+        darkMatter: BASEMAP.DARK_MATTER,
+      },
       items: null,
       layerOrder: [],
-      baseMap: BASEMAP.POSITRON,
+      baseMap: 'positron',
       viewState: {
         longitude: 10,
         latitude: 63,
@@ -125,6 +131,10 @@ export const useAppStore = create<AppState>()(
               state.layerOrder.push(id);
             }
           }),
+        setBaseMap: id =>
+          set(state => {
+            state.baseMap = id;
+          }),
       },
     })),
   ),
@@ -187,3 +197,18 @@ export const useItem = (id: string) => {
 };
 
 export const useExpandedItems = () => useAppStore(state => state.expandedItems);
+export const useBaseMap = () => useAppStore(state => state.styles[state.baseMap] ?? '');
+
+const baseMapStylesSelector = createAppSelector(
+  state => state.baseMap,
+  state => state.styles,
+  (activeId, styles: Record<string, string>) => {
+    return Object.keys(styles).map(id => ({
+      style: styles[id],
+      id,
+      active: activeId === id,
+    })) as BaseMapStyle[];
+  },
+);
+
+export const useBaseMapStyles = () => useAppStore(baseMapStylesSelector);

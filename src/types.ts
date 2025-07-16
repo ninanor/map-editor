@@ -24,12 +24,19 @@ export type Tree = Record<string, Item>;
 
 type LayerID = string;
 
+export interface BaseMapStyle {
+  id: string;
+  style: string;
+  active: boolean;
+}
+
 export interface MapConfig {
   id: string;
   title: string;
   description: string;
   subtitle: string;
   baseMap: string;
+  styles: Record<string, string>;
   layerOrder: LayerID[];
   viewState: MapViewState;
   items: Tree | null;
