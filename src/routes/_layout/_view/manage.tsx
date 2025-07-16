@@ -5,8 +5,6 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
-  DragOverlay,
-  DragStartEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -20,7 +18,6 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { LayerWithId } from '../../../types';
-import { useState } from 'react';
 
 export const Route = createFileRoute('/_layout/_view/manage')({
   component: RouteComponent,
@@ -31,6 +28,7 @@ function SortableItem({ id, name }: LayerWithId) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     transform: CSS.Transform.toString(transform),
     transition,
   };
