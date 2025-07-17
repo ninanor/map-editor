@@ -1,4 +1,10 @@
-import { MapViewState, LayerProps } from '@deck.gl/core';
+import { MapViewState } from '@deck.gl/core';
+
+declare global {
+  interface Window {
+    TITILER_API_URL: string;
+  }
+}
 
 export interface Folder {
   type: 'folder';
@@ -13,7 +19,7 @@ export interface Layer {
 
   name: string;
   description?: string;
-  layer: Omit<LayerProps, 'id'>;
+  layer: LayerConfig;
 }
 
 export type LayerWithId = Layer & { id: string };
@@ -41,4 +47,24 @@ export interface MapConfig {
   viewState: MapViewState;
   items: Tree | null;
   expandedItems: string[];
+  config: {
+    titiler_api_url: string;
+  };
 }
+
+export interface RasterLayer {
+  '@@type': 'TitilerLayer';
+  data: {
+    url: string;
+    colormap_name?: string;
+    rescale?: number[];
+    bidx?: number[];
+  };
+}
+
+export interface VectorLayer {
+  '@@type': 'TileSourceLayer';
+  tileSource: string;
+}
+
+export type LayerConfig = RasterLayer | VectorLayer;

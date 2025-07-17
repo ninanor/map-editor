@@ -4,6 +4,7 @@ import { TREE_ROOT_ID } from '../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useAppForm } from '../../../hooks/form';
+import { nanoid } from 'nanoid';
 
 export const Route = createFileRoute('/_layout/edit/layers/add')({
   component: RouteComponent,
@@ -25,13 +26,18 @@ function RouteComponent() {
       description: '',
       parent: TREE_ROOT_ID,
       layer: {
-        '@@type': 'TileSourceLayer',
+        '@@type': 'TileSourceLayer' as const,
         tileSource: '',
       },
     },
     onSubmit: async ({ value }) => {
-      actions.addTreeItemLayer(value);
-      await navigate({ to: '/edit' });
+      const id = nanoid();
+
+      actions.addTreeItemLayer({
+        ...value,
+        id,
+      });
+      await navigate({ to: '/edit/layers/$layerId', params: { layerId: id } });
     },
   });
 
@@ -61,20 +67,9 @@ function RouteComponent() {
               name="layer.@@type"
               children={field => <field.SelectField label="Layer type" options={LAYER_TYPE_OPTIONS} />}
             />
-
-            <form.Subscribe selector={state => state.values.layer['@@type']}>
-              {layerType =>
-                layerType === LAYER_TYPE_OPTIONS[1].value && (
-                  <form.AppField
-                    name="layer.tileSource"
-                    children={field => <field.TextField label="Source URL" required />}
-                  />
-                )
-              }
-            </form.Subscribe>
-
-            <form.SubscribeButton />
           </fieldset>
+
+          <form.SubscribeButton />
         </form>
       </form.AppForm>
     </>

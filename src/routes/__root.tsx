@@ -69,11 +69,11 @@ function RootComponent() {
   const { setReady } = useUIActions();
   const { url } = Route.useSearch();
   const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? '/config.json'));
-  console.log(config.data);
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
     setReady(true);
+    window.TITILER_API_URL = config.data.config.titiler_api_url;
   }, [config.data, setReady]);
 
   if (!ready || isLoading) {

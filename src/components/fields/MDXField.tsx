@@ -10,7 +10,7 @@ export function MDXField({ label }: { label: string }) {
         {label}
       </label>
       <MDXEditor
-        markdown={field.state.value}
+        markdown={field.state.value || ''}
         onChange={field.handleChange}
         plugins={PLUGINS}
         onBlur={field.handleBlur}

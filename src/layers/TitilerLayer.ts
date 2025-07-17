@@ -3,7 +3,6 @@ import { BitmapLayer } from '@deck.gl/layers';
 
 interface TitilerLayerProps {
   data: {
-    titiler: string;
     colormap_name?: string;
     url: string;
     rescale?: number[];
@@ -13,8 +12,8 @@ interface TitilerLayerProps {
 
 export class TitilerLayer extends TileLayer {
   constructor(props: TitilerLayerProps) {
-    const { titiler = location.origin + '/titiler', bidx = 1, ...other } = props.data;
-    const url = new URL(titiler);
+    const { bidx = 1, ...other } = props.data;
+    const url = new URL(window.TITILER_API_URL);
     url.pathname += '/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x';
     if (Array.isArray(bidx)) {
       bidx.forEach(index => {

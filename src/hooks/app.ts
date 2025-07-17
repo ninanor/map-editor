@@ -19,9 +19,9 @@ interface AppActions {
     updateTreeItemFolder: (id: string, item: Omit<Folder, 'children' | 'type'>) => void;
     removeTreeItemFolder: (id: string) => void;
     removeTreeItemLayer: (id: string) => void;
-    updateTreeItemLayer: (id: string, item: Omit<Layer, 'type' | 'layer'>) => void;
+    updateTreeItemLayer: (id: string, item: Omit<Layer, 'type'>) => void;
     addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
-    addTreeItemLayer: (item: Omit<Layer & { parent: string }, 'type'>) => void;
+    addTreeItemLayer: (item: Omit<Layer & { parent: string; id: string }, 'type'>) => void;
     toggleLayer: (id: string) => void;
     setExpandedItems: (expand: string[]) => void;
     moveToIndex: (source: string, target: string) => void;
@@ -51,6 +51,9 @@ export const useAppStore = create<AppState>()(
         longitude: 10,
         latitude: 63,
         zoom: 4,
+      },
+      config: {
+        titiler_api_url: '',
       },
       actions: {
         setTitle: (title: string) =>
@@ -112,9 +115,10 @@ export const useAppStore = create<AppState>()(
           }),
         updateTreeItemLayer: (id, item) =>
           set(state => {
-            if (state.items) {
+            if (state.items?.[id]?.type === 'layer') {
               state.items[id].name = item.name;
               state.items[id].description = item.description;
+              state.items[id].layer = item.layer;
             }
           }),
         addTreeItemFolder: item =>
@@ -141,16 +145,15 @@ export const useAppStore = create<AppState>()(
           }),
         addTreeItemLayer: item =>
           set(state => {
-            const id = nanoid();
             const parent = state.items ? state.items[item.parent] : null;
             if (state.items && parent?.type === 'folder') {
-              state.items[id] = {
+              state.items[item.id] = {
                 name: item.name,
                 type: 'layer',
                 description: item.description,
                 layer: item.layer,
               };
-              parent.children.push(id);
+              parent.children.push(item.id);
             }
           }),
         toggleLayer: (id: string) =>
@@ -224,6 +227,14 @@ export const useMapConf = () => useAppStore(mapSelector);
 export const useFolderNames = () => useAppStore(folderNameSelector);
 export const useItem = (id: string) => {
   return useAppStore(state => (state.items ? state.items[id] : null));
+};
+
+export const useLayer = (id: string): Layer | null => {
+  return useAppStore(state => (state.items?.[id]?.type === 'layer' ? state.items[id] : null));
+};
+
+export const useFolder = (id: string): Folder | null => {
+  return useAppStore(state => (state.items?.[id]?.type === 'folder' ? state.items[id] : null));
 };
 
 export const useExpandedItems = () => useAppStore(state => state.expandedItems);
