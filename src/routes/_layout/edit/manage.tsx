@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { PageErrorComponent } from '../../../components/PageErrorComponent';
-
-import { RouteComponent } from '../_view/manage';
+import { ManageLayers } from '../../../pages/ManageLayers';
 
 export const Route = createFileRoute('/_layout/edit/manage')({
-  component: RouteComponent,
+  component: ManageLayers,
   errorComponent: PageErrorComponent,
 });
