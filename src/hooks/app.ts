@@ -55,6 +55,7 @@ export const useAppStore = create<AppState>()(
       config: {
         titiler_api_url: '',
         theme: 'light',
+        language: 'en',
       },
       actions: {
         setTitle: (title: string) =>

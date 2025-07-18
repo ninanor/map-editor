@@ -5,7 +5,6 @@ import { resources } from './translations';
 void i18n.use(initReactI18next).init({
   resources,
   lng: 'en',
-  debug: true,
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

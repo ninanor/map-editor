@@ -79,6 +79,8 @@ export type TileSourceLayerProps = Omit<TileLayerProps, 'data'> & {
   uniquePropertyId?: string;
   /** The currently highlighted unique property id */
   highlightedFeatureId?: string;
+  getFillColor: number[];
+  getLineColor: number[];
 };
 
 /**
@@ -93,6 +95,8 @@ export class TileSourceLayer extends CompositeLayer<TileSourceLayerProps> {
   static defaultProps = {
     ...TileLayer.defaultProps,
     layerMode: 'tile',
+    getFillColor: [0, 0, 0],
+    getLineColor: [0, 0, 0],
   };
 
   initializeState() {
@@ -153,15 +157,17 @@ export class TileSourceLayer extends CompositeLayer<TileSourceLayerProps> {
 
     const devicePixelRatio = this.context.device.getCanvasContext().getDevicePixelRatio();
 
+    console.log(this.props);
+
     return [
       new MVTSourceLayer({
         // HACK: Trigger new layer via id prop to force clear tile cache
         id: String(tileSource?.url),
         data: tileSource,
 
-        getLineColor: [0, 0, 0],
+        getLineColor: this.props.getLineColor,
         getLineWidth: 1,
-        getFillColor: [100, 120, 140],
+        getFillColor: this.props.getFillColor,
         lineWidthUnits: 'pixels',
         pickable: true,
         autoHighlight: true,
@@ -182,7 +188,7 @@ export class TileSourceLayer extends CompositeLayer<TileSourceLayerProps> {
 
   /** TileLayer configured to render both image tiles and vector tiles */
   renderTileLayer() {
-    const { metadata, onTilesLoad } = this.props;
+    const { metadata, onTilesLoad, getLineColor, getFillColor } = this.props;
     const { tileSource }: { tileSource: TileSource } = this.state;
     const minZoom = metadata?.minZoom || 0;
     const maxZoom = metadata?.maxZoom || 30;
@@ -201,6 +207,8 @@ export class TileSourceLayer extends CompositeLayer<TileSourceLayerProps> {
         minZoom,
         maxZoom,
         tileSize: 256,
+        getLineColor,
+        getFillColor,
         // TOOD - why is this needed?
         zoomOffset: devicePixelRatio === 1 ? -1 : 0,
         renderSubLayers,
@@ -237,10 +245,14 @@ interface Tile {
 function renderSubLayers(props: TileSourceLayerProps & Tile) {
   const {
     tileSource,
+    getFillColor,
+    getLineColor,
     tile: {
       bbox: { west, south, east, north },
     },
   } = props;
+
+  console.log(tileSource);
 
   const layers: Layer[] = [];
 
@@ -254,7 +266,8 @@ function renderSubLayers(props: TileSourceLayerProps & Tile) {
           autoHighlight: true,
           lineWidthScale: 500,
           lineWidthMinPixels: 0.5,
-          getFillColor: [100, 120, 140, 255],
+          getFillColor,
+          getLineColor,
           highlightColor: [0, 0, 200, 255],
         }),
       );
