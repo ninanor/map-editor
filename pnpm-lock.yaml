@@ -119,6 +119,9 @@ importers:
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
+      pmtiles:
+        specifier: ^4.3.0
+        version: 4.3.0
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
@@ -146,6 +149,9 @@ importers:
       reselect:
         specifier: ^5.1.1
         version: 5.1.1
+      rgb-hex:
+        specifier: ^4.1.0
+        version: 4.1.0
       tailwindcss:
         specifier: ^4.1.11
         version: 4.1.11
@@ -3773,6 +3779,9 @@ packages:
   pmtiles@3.2.1:
     resolution: {integrity: sha512-3R4fBwwoli5mw7a6t1IGwOtfmcSAODq6Okz0zkXhS1zi9sz1ssjjIfslwPvcWw5TNhdjNBUg9fgfPLeqZlH6ng==}
 
+  pmtiles@4.3.0:
+    resolution: {integrity: sha512-wnzQeSiYT/MyO63o7AVxwt7+uKqU0QUy2lHrivM7GvecNy0m1A4voVyGey7bujnEW5Hn+ZzLdvHPoFaqrOzbPA==}
+
   point-in-polygon-hao@1.2.4:
     resolution: {integrity: sha512-x2pcvXeqhRHlNRdhLs/tgFapAbSSe86wa/eqmj1G6pWftbEs5aVRJhRGM6FYSUERKu0PjekJzMq0gsI2XyiclQ==}
 
@@ -3982,6 +3991,10 @@ packages:
   reusify@1.1.0:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  rgb-hex@4.1.0:
+    resolution: {integrity: sha512-UZLM57BW09Yi9J1R3OP8B1yCbbDK3NT8BDtihGZkGkGEs2b6EaV85rsfJ6yK4F+8UbxFFmfA+9xHT5ZWhN1gDQ==}
+    engines: {node: '>=12'}
 
   robust-predicates@3.0.2:
     resolution: {integrity: sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg==}
@@ -8934,6 +8947,10 @@ snapshots:
       '@types/leaflet': 1.9.20
       fflate: 0.8.2
 
+  pmtiles@4.3.0:
+    dependencies:
+      fflate: 0.8.2
+
   point-in-polygon-hao@1.2.4:
     dependencies:
       robust-predicates: 3.0.2
@@ -9145,6 +9162,8 @@ snapshots:
       protocol-buffers-schema: 3.6.0
 
   reusify@1.1.0: {}
+
+  rgb-hex@4.1.0: {}
 
   robust-predicates@3.0.2: {}
 

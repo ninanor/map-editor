@@ -9,6 +9,7 @@ import { jsonConverter } from '../layers/getMapConfig';
 import { MapViewState } from '@deck.gl/core';
 import { DeckGLProps } from '@deck.gl/react';
 import { arrayMove } from '@dnd-kit/sortable';
+import { toMaplibreSources } from '../libs/toMaplibre';
 
 interface AppActions {
   actions: {
@@ -56,6 +57,7 @@ export const useAppStore = create<AppState>()(
         titiler_api_url: '',
         theme: 'light',
         language: 'en',
+        engine: 'maplibre',
       },
       actions: {
         setTitle: (title: string) =>
@@ -210,7 +212,7 @@ const folderNameSelector = createAppSelector(
   },
 );
 
-const mapSelector = createAppSelector(
+const deckglMapSelector = createAppSelector(
   layerSelector,
   state => state.viewState,
   (layers: LayerWithId[], viewState: MapViewState) => {
@@ -224,8 +226,21 @@ const mapSelector = createAppSelector(
   },
 );
 
+const maplibreMapSelector = createAppSelector(
+  state => state.viewState,
+  layerSelector,
+  state => state.config.titiler_api_url,
+  (viewState: MapViewState, layers: LayerWithId[], titiler_api_url: string) => {
+    return {
+      initialViewState: viewState,
+      sources: toMaplibreSources(layers, titiler_api_url),
+    };
+  },
+);
+
 export const useLayers = () => useAppStore(layerSelector);
-export const useMapConf = () => useAppStore(mapSelector);
+export const useDeckGLMapConf = () => useAppStore(deckglMapSelector);
+export const useMaplibreMapConf = () => useAppStore(maplibreMapSelector);
 export const useFolderNames = () => useAppStore(folderNameSelector);
 export const useItem = (id: string) => {
   return useAppStore(state => (state.items ? state.items[id] : null));

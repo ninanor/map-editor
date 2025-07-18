@@ -54,7 +54,8 @@
             "type": "layer",
             "layer": {
                 "@@type": "TileSourceLayer",
-                "tileSource": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles"
+                "tileSource": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles",
+                "layer": "ch"
             }
         }
     },

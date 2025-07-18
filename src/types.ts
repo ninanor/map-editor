@@ -51,6 +51,7 @@ export interface MapConfig {
     titiler_api_url: string;
     theme: string;
     language: string;
+    engine: 'maplibre' | 'deckgl';
   };
 }
 
@@ -67,6 +68,7 @@ export interface RasterLayer {
 export interface VectorLayer {
   '@@type': 'TileSourceLayer';
   tileSource: string;
+  getFillColor?: number[];
 }
 
 export type LayerConfig = RasterLayer | VectorLayer;
