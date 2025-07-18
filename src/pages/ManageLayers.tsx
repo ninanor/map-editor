@@ -16,6 +16,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { LayerWithId } from '../types';
 import { useAppActions, useLayers } from '../hooks/app';
+import { useTranslation } from 'react-i18next';
 
 function SortableItem({ id, name }: LayerWithId) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -42,6 +43,7 @@ export function ManageLayers() {
     }),
   );
   const { moveToIndex } = useAppActions();
+  const { t } = useTranslation();
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -54,7 +56,7 @@ export function ManageLayers() {
   return (
     <div className="p-5">
       <ul className="list bg-base-100 text-base-content rounded-box shadow-md">
-        {layers.length === 0 && <li className="list-row">No layer found</li>}
+        {layers.length === 0 && <li className="list-row">{t('no-layer-found')}</li>}
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={layers} strategy={verticalListSortingStrategy}>
             {layers.map(layer => (

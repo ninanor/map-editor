@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../hooks/app';
 import { Link, useMatch } from '@tanstack/react-router';
 
 export function Navbar() {
   const title = useAppStore(state => state.title);
   const isEditing = useMatch({ from: '/_layout/edit', shouldThrow: false });
+  const { t } = useTranslation();
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -13,7 +15,7 @@ export function Navbar() {
         <ul className="menu menu-horizontal px-1">
           <li>
             <Link to={isEditing ? '/' : '/edit'} className="btn btn-ghost">
-              {isEditing ? 'Preview' : 'Edit'}
+              {t(isEditing ? 'preview' : 'edit')}
             </Link>
           </li>
         </ul>

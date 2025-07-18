@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { EDIT_TABS } from '../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/_layout/edit')({
   component: RouteComponent,
@@ -10,12 +11,13 @@ export const Route = createFileRoute('/_layout/edit')({
 
 function RouteComponent() {
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <div className="bg-warning/95 shadow-2xs h-screen w-md p-2 text-warning-content">
       <h2 className="text-xl font-bold">
         <FontAwesomeIcon icon={faEdit} className="mr-3" />
-        Edit Mode
+        {t('edit-mode')}
       </h2>
       <div role="tablist" className="tabs tabs-border my-3">
         {EDIT_TABS.map(tab => (
@@ -25,7 +27,7 @@ function RouteComponent() {
             to={tab.id}
             key={tab.id}
           >
-            {tab.label}
+            {t(tab.label)}
           </Link>
         ))}
       </div>

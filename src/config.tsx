@@ -6,42 +6,42 @@ import { MapConfig } from './types';
 export const TABS = [
   {
     id: '/',
-    label: 'Kartlag',
+    label: 'layers',
   },
   {
     id: '/description',
-    label: 'Beskrivelse',
+    label: 'description',
   },
   {
     id: '/manage',
-    label: 'Active Kartlag',
+    label: 'active-layers',
   },
   {
     id: '/legend',
-    label: 'Tegnforklaring',
+    label: 'legend',
   },
   {
     id: '/basemap',
-    label: 'Bakgrunnskart',
+    label: 'basemap',
   },
 ];
 
 export const EDIT_TABS = [
   {
     id: '/edit',
-    label: 'Kartlag',
+    label: 'layers',
   },
   {
     id: '/edit/description',
-    label: 'Beskrivelse',
+    label: 'description',
   },
   {
     id: '/edit/manage',
-    label: 'Active Kartlag',
+    label: 'active-layers',
   },
   {
     id: '/edit/basemap',
-    label: 'Bakgrunnskart',
+    label: 'basemap',
   },
 ];
 

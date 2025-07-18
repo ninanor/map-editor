@@ -50,6 +50,7 @@ export interface MapConfig {
   config: {
     titiler_api_url: string;
     theme: string;
+    language: string;
   };
 }
 
