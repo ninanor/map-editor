@@ -49,6 +49,7 @@ export interface MapConfig {
   expandedItems: string[];
   config: {
     titiler_api_url: string;
+    theme: string;
   };
 }
 

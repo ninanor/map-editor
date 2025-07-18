@@ -22,7 +22,7 @@ function RouteComponent() {
 
   return (
     <>
-      <ul className="menu menu-horizontal bg-base-200 rounded-box gap-2">
+      <ul className="menu menu-horizontal gap-2 mb-2 w-full">
         <li>
           <Link to="/edit/folders/add" className="btn btn-sm btn-primary" preload="intent">
             <FontAwesomeIcon icon={faPlusCircle} /> Folder

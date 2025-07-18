@@ -59,6 +59,7 @@
         }
     },
     "config": {
-        "titiler_api_url": "http://localhost:5173/titiler"
+        "titiler_api_url": "http://localhost:5173/titiler",
+        "theme": "nord"
     }
 }

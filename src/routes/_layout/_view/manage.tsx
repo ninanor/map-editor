@@ -60,7 +60,7 @@ export function RouteComponent() {
 
   return (
     <div className="p-5">
-      <ul className="list bg-base-100 rounded-box shadow-md">
+      <ul className="list bg-base-100 text-base-content rounded-box shadow-md">
         {layers.length === 0 && <li className="list-row">No layer found</li>}
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={layers} strategy={verticalListSortingStrategy}>

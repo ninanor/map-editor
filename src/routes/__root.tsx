@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
 import { useUIActions, useUIisReady } from '../hooks/ui';
+import { Head } from '../components/Head';
 
 interface AppSearch {
   url?: string;
@@ -84,6 +85,7 @@ function RootComponent() {
 
   return (
     <Fragment>
+      <Head />
       <Outlet />
     </Fragment>
   );
