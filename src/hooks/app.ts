@@ -11,6 +11,13 @@ import { DeckGLProps } from '@deck.gl/react';
 import { arrayMove } from '@dnd-kit/sortable';
 import { toMaplibreSources } from '../libs/toMaplibre';
 
+export interface AppMeta {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: string;
+}
+
 interface AppActions {
   actions: {
     setTitle: (title: string) => void;
@@ -27,6 +34,7 @@ interface AppActions {
     setExpandedItems: (expand: string[]) => void;
     moveToIndex: (source: string, target: string) => void;
     setBaseMap: (baseMapId: string) => void;
+    updateMeta: (meta: AppMeta) => void;
   };
 }
 
@@ -60,6 +68,13 @@ export const useAppStore = create<AppState>()(
         engine: 'maplibre',
       },
       actions: {
+        updateMeta: meta =>
+          set(state => {
+            state.title = meta.title;
+            state.subtitle = meta.subtitle;
+            state.icon = meta.icon;
+            state.description = meta.description;
+          }),
         setTitle: (title: string) =>
           set(state => {
             state.title = title;
@@ -181,6 +196,21 @@ export const useAppActions = () => useAppStore(state => state.actions);
 
 const createAppSelector = createSelector.withTypes<AppState>();
 
+const appMetaSelector = createAppSelector(
+  state => state.title,
+  state => state.subtitle,
+  state => state.icon,
+  state => state.description,
+  (title: string, subtitle: string, icon: string, description: string) => {
+    return {
+      title,
+      subtitle,
+      icon,
+      description,
+    };
+  },
+);
+
 const layerSelector = createAppSelector(
   state => state.layerOrder,
   state => state.items,
@@ -270,3 +300,4 @@ const baseMapStylesSelector = createAppSelector(
 );
 
 export const useBaseMapStyles = () => useAppStore(baseMapStylesSelector);
+export const useAppMeta = () => useAppStore(appMetaSelector);

@@ -1,7 +1,8 @@
 {
     "id": "default",
     "title": "Title",
-    "subtitle": "Subtitle",
+    "icon": "https://maps.nina.no/assets/logosmall-BFfoJdyr.png",
+    "subtitle": "",
     "layerOrder": [],
     "baseMap": "positron",
     "viewState": {

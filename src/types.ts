@@ -40,6 +40,7 @@ export interface MapConfig {
   id: string;
   title: string;
   description: string;
+  icon?: string;
   subtitle: string;
   baseMap: string;
   styles: Record<string, string>;
