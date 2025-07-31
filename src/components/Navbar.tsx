@@ -11,15 +11,17 @@ export function Navbar() {
       <div className="flex-1">
         <a className="font-bold text-xl">{title}</a>
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to={isEditing ? '/' : '/edit'} className="btn btn-ghost">
-              {t(isEditing ? 'preview' : 'edit')}
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {!window.MAP_EDITOR_DISABLE_EDIT && (
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link to={isEditing ? '/' : '/edit'} className="btn btn-ghost">
+                {t(isEditing ? 'preview' : 'edit')}
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

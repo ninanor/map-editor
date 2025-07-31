@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
 
 import { useAppActions, useAppStore } from '../../../hooks/app';
-import { useActionState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { MapConfig, MapSettings } from '../../../types';
 import { SettingsForm } from '../../../components/forms/SettingsForm';
 

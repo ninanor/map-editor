@@ -1,9 +1,10 @@
 import { LANGUAGES, THEMES } from '../../config';
 import { useAppForm } from '../../hooks/form';
+import { MapSettings } from '../../types';
 
 interface SettingsFormProps {
-  defaultValues: any;
-  onSubmit: (props: { value: any }) => any | Promise<any>;
+  defaultValues: MapSettings;
+  onSubmit: (props: { value: MapSettings }) => void | Promise<void>;
 }
 
 export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {

@@ -74,7 +74,6 @@ function RootComponent() {
   useEffect(() => {
     useAppStore.setState(() => config.data);
     setReady(true);
-    window.TITILER_API_URL = config.data.config.titiler_api_url;
   }, [config.data, setReady]);
 
   if (!ready || isLoading) {

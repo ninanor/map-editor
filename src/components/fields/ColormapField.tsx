@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useFieldContext } from '../../hooks/form';
 import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useAppStore } from '../../hooks/app';
 
 interface ColorMapResponse {
   colorMaps: string[];
@@ -16,8 +17,9 @@ const colormapsQueryOptions = (url: string) =>
 
 export function ColormapField({ label }: { label: string }) {
   const field = useFieldContext<string>();
+  const titiler_uri = useAppStore(store => store.config.titiler_api_url);
 
-  const { data } = useQuery(colormapsQueryOptions(window.TITILER_API_URL + '/colorMaps'));
+  const { data } = useQuery(colormapsQueryOptions(titiler_uri + '/colorMaps'));
 
   return (
     <>
@@ -38,7 +40,7 @@ export function ColormapField({ label }: { label: string }) {
         ))}
       </select>
       <p>Preview:</p>
-      <img className="w-full" src={`${window.TITILER_API_URL}/colorMaps/${field.state.value}?format=png`} />
+      <img className="w-full" src={`${titiler_uri}/colorMaps/${field.state.value}?format=png`} />
     </>
   );
 }
