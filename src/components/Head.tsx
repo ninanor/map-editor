@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from '@dr.pogodin/react-helmet';
 import { useAppStore } from '../hooks/app';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
