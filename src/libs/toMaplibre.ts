@@ -1,5 +1,5 @@
 import { LayerWithId, TitilerSource, PMTileSource } from '../types';
-import { SourceProps } from 'react-map-gl/maplibre';
+import { SourceProps } from '@vis.gl/react-maplibre';
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourceProps {
   const l = layer.layer as TitilerSource;
@@ -48,8 +48,8 @@ function buildPMTilesLayer(layer: LayerWithId): SourceProps {
 
 function layerToSource(
   value: LayerWithId,
-  index: number,
-  array: LayerWithId[],
+  _index: number,
+  _array: LayerWithId[],
   titiler_api_url: string,
 ): SourceProps | null {
   if ('titiler' in value.layer) {

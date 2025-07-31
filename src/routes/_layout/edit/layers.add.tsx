@@ -5,14 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useAppForm } from '../../../hooks/form';
 import { nanoid } from 'nanoid';
+import { LayerConfig, PMTileSource, TitilerSource } from '../../../types';
 
 export const Route = createFileRoute('/_layout/edit/layers/add')({
   component: RouteComponent,
 });
 
 const LAYER_TYPE_OPTIONS = [
-  { value: 'TitilerLayer', label: 'Raster (COGTiff)' },
-  { value: 'TileSourceLayer', label: 'Vector (PMTiles)' },
+  { value: 'raster', label: 'Raster (COGTiff)' },
+  { value: 'vector', label: 'Vector (PMTiles)' },
 ];
 
 function RouteComponent() {
@@ -26,16 +27,44 @@ function RouteComponent() {
       description: '',
       parent: TREE_ROOT_ID,
       layer: {
-        '@@type': 'TileSourceLayer' as const,
-        tileSource: '',
+        type: 'vector',
+        pmtiles: {
+          layer: '',
+          url: '',
+        },
       },
     },
     onSubmit: async ({ value }) => {
       const id = nanoid();
 
+      let layer: LayerConfig | null = null;
+
+      if (value.layer.type === 'vector') {
+        layer = {
+          ...value.layer,
+          pmtiles: {
+            layer: '',
+            url: '',
+          },
+        } as PMTileSource;
+      }
+
+      if (value.layer.type === 'raster') {
+        layer = {
+          ...value.layer,
+          titiler: {
+            url: '',
+          },
+        } as TitilerSource;
+      }
+      if (!layer) {
+        throw Error('Layer type not supported');
+      }
+
       actions.addTreeItemLayer({
         ...value,
         id,
+        layer,
       });
       await navigate({ to: '/edit/layers/$layerId', params: { layerId: id } });
     },
@@ -64,7 +93,7 @@ function RouteComponent() {
             />
             <form.AppField name="description" children={field => <field.MDXField label="Description" />} />
             <form.AppField
-              name="layer.@@type"
+              name="layer.type"
               children={field => <field.SelectField label="Layer type" options={LAYER_TYPE_OPTIONS} />}
             />
           </fieldset>
