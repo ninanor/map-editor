@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { MapConfig } from './types';
-import { BASEMAP } from '@deck.gl/carto';
+import BASEMAP from './libs/basemaps';
 
 export const TABS = [
   {
