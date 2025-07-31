@@ -44,6 +44,10 @@ export const EDIT_TABS = [
     id: '/edit/basemap',
     label: 'basemap',
   },
+  {
+    id: '/edit/settings',
+    label: 'settings',
+  },
 ];
 
 export const TREE_ROOT_ID = 'root';

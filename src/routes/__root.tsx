@@ -69,7 +69,7 @@ function RootComponent() {
   const ready = useUIisReady();
   const { setReady } = useUIActions();
   const { url } = Route.useSearch();
-  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? '/config.json'));
+  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? 'config.json'));
 
   useEffect(() => {
     useAppStore.setState(() => config.data);

@@ -14,6 +14,7 @@ import { Route as LayoutEditRouteImport } from './routes/_layout/edit'
 import { Route as LayoutViewRouteImport } from './routes/_layout/_view'
 import { Route as LayoutEditIndexRouteImport } from './routes/_layout/edit/index'
 import { Route as LayoutViewIndexRouteImport } from './routes/_layout/_view/index'
+import { Route as LayoutEditSettingsRouteImport } from './routes/_layout/edit/settings'
 import { Route as LayoutEditManageRouteImport } from './routes/_layout/edit/manage'
 import { Route as LayoutEditDescriptionRouteImport } from './routes/_layout/edit/description'
 import { Route as LayoutEditBasemapRouteImport } from './routes/_layout/edit/basemap'
@@ -50,6 +51,11 @@ const LayoutViewIndexRoute = LayoutViewIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LayoutViewRoute,
+} as any)
+const LayoutEditSettingsRoute = LayoutEditSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => LayoutEditRoute,
 } as any)
 const LayoutEditManageRoute = LayoutEditManageRouteImport.update({
   id: '/manage',
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/edit/basemap': typeof LayoutEditBasemapRoute
   '/edit/description': typeof LayoutEditDescriptionRoute
   '/edit/manage': typeof LayoutEditManageRoute
+  '/edit/settings': typeof LayoutEditSettingsRoute
   '/': typeof LayoutViewIndexRoute
   '/edit/': typeof LayoutEditIndexRoute
   '/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/edit/basemap': typeof LayoutEditBasemapRoute
   '/edit/description': typeof LayoutEditDescriptionRoute
   '/edit/manage': typeof LayoutEditManageRoute
+  '/edit/settings': typeof LayoutEditSettingsRoute
   '/': typeof LayoutViewIndexRoute
   '/edit': typeof LayoutEditIndexRoute
   '/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/_layout/edit/basemap': typeof LayoutEditBasemapRoute
   '/_layout/edit/description': typeof LayoutEditDescriptionRoute
   '/_layout/edit/manage': typeof LayoutEditManageRoute
+  '/_layout/edit/settings': typeof LayoutEditSettingsRoute
   '/_layout/_view/': typeof LayoutViewIndexRoute
   '/_layout/edit/': typeof LayoutEditIndexRoute
   '/_layout/_view/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/edit/basemap'
     | '/edit/description'
     | '/edit/manage'
+    | '/edit/settings'
     | '/'
     | '/edit/'
     | '/folders/$folderId'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/edit/basemap'
     | '/edit/description'
     | '/edit/manage'
+    | '/edit/settings'
     | '/'
     | '/edit'
     | '/folders/$folderId'
@@ -223,6 +234,7 @@ export interface FileRouteTypes {
     | '/_layout/edit/basemap'
     | '/_layout/edit/description'
     | '/_layout/edit/manage'
+    | '/_layout/edit/settings'
     | '/_layout/_view/'
     | '/_layout/edit/'
     | '/_layout/_view/folders/$folderId'
@@ -273,6 +285,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof LayoutViewIndexRouteImport
       parentRoute: typeof LayoutViewRoute
+    }
+    '/_layout/edit/settings': {
+      id: '/_layout/edit/settings'
+      path: '/settings'
+      fullPath: '/edit/settings'
+      preLoaderRoute: typeof LayoutEditSettingsRouteImport
+      parentRoute: typeof LayoutEditRoute
     }
     '/_layout/edit/manage': {
       id: '/_layout/edit/manage'
@@ -396,6 +415,7 @@ interface LayoutEditRouteChildren {
   LayoutEditBasemapRoute: typeof LayoutEditBasemapRoute
   LayoutEditDescriptionRoute: typeof LayoutEditDescriptionRoute
   LayoutEditManageRoute: typeof LayoutEditManageRoute
+  LayoutEditSettingsRoute: typeof LayoutEditSettingsRoute
   LayoutEditIndexRoute: typeof LayoutEditIndexRoute
   LayoutEditFoldersFolderIdRoute: typeof LayoutEditFoldersFolderIdRoute
   LayoutEditFoldersAddRoute: typeof LayoutEditFoldersAddRoute
@@ -407,6 +427,7 @@ const LayoutEditRouteChildren: LayoutEditRouteChildren = {
   LayoutEditBasemapRoute: LayoutEditBasemapRoute,
   LayoutEditDescriptionRoute: LayoutEditDescriptionRoute,
   LayoutEditManageRoute: LayoutEditManageRoute,
+  LayoutEditSettingsRoute: LayoutEditSettingsRoute,
   LayoutEditIndexRoute: LayoutEditIndexRoute,
   LayoutEditFoldersFolderIdRoute: LayoutEditFoldersFolderIdRoute,
   LayoutEditFoldersAddRoute: LayoutEditFoldersAddRoute,
