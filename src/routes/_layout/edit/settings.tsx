@@ -45,14 +45,16 @@ function RouteComponent() {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach(file => {
-      console.log(file);
       const reader = new FileReader();
 
+      // TODO: improve logging and error management
       reader.onabort = () => console.log('file reading was aborted');
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = () => {
         const config = JSON.parse(reader.result as string) as MapConfig;
         console.log(config);
+
+        // TODO: set configurations in a safer way!
         useAppStore.setState(() => config);
       };
       reader.readAsText(file);
