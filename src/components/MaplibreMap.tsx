@@ -1,4 +1,4 @@
-import { Layer, Map as MaplibreMap, Source } from 'react-map-gl/maplibre';
+import { Layer, Map as MaplibreMap, Source } from '@vis.gl/react-maplibre';
 import { useBaseMap, useMaplibreMapConf } from '../hooks/app';
 import maplibregl from 'maplibre-gl';
 import { Protocol } from 'pmtiles';

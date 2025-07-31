@@ -1,10 +1,9 @@
-import { Map } from 'react-map-gl/maplibre';
-import { MapViewState } from '@deck.gl/core';
+import { Map, ViewState } from '@vis.gl/react-maplibre';
 import { useCallback } from 'react';
 import classNames from 'classnames';
 
 interface BaseMapProps {
-  initialViewState: MapViewState;
+  initialViewState: Partial<ViewState>;
   style: string;
   id: string;
   onClick: (id: string) => void;
