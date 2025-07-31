@@ -2,9 +2,10 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
 
-import { useAppStore } from '../../../hooks/app';
-import { useCallback } from 'react';
-import { MapConfig } from '../../../types';
+import { useAppActions, useAppStore } from '../../../hooks/app';
+import { useActionState, useCallback } from 'react';
+import { MapConfig, MapSettings } from '../../../types';
+import { SettingsForm } from '../../../components/forms/SettingsForm';
 
 export const Route = createFileRoute('/_layout/edit/settings')({
   component: RouteComponent,
@@ -42,6 +43,7 @@ const style = {
 
 function RouteComponent() {
   const { t } = useTranslation();
+  const actions = useAppActions();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach(file => {
@@ -60,6 +62,8 @@ function RouteComponent() {
       reader.readAsText(file);
     });
   }, []);
+
+  const settings = useAppStore(store => store.config);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -80,6 +84,8 @@ function RouteComponent() {
         <input {...getInputProps()} />
         <p>Drag 'n' drop a configuration, or click to select one</p>
       </div>
+
+      <SettingsForm defaultValues={settings} onSubmit={({ value }) => actions.setSettings(value as MapSettings)} />
     </div>
   );
 }

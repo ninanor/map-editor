@@ -38,6 +38,12 @@ export interface BaseMapStyle {
   active: boolean;
 }
 
+export interface MapSettings {
+  titiler_api_url: string;
+  theme: string;
+  language: string;
+}
+
 export interface MapConfig {
   id: string;
   title: string;
@@ -50,11 +56,7 @@ export interface MapConfig {
   viewState: Partial<ViewState>;
   items: Tree | null;
   expandedItems: string[];
-  config: {
-    titiler_api_url: string;
-    theme: string;
-    language: string;
-  };
+  config: MapSettings;
 }
 
 export interface TitilerSource extends Partial<Source> {

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, Tree } from '../types';
+import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, MapSettings, Tree } from '../types';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
 import { ViewState } from '@vis.gl/react-maplibre';
@@ -33,6 +33,7 @@ interface AppActions {
     moveToIndex: (source: string, target: string) => void;
     setBaseMap: (baseMapId: string) => void;
     updateMeta: (meta: AppMeta) => void;
+    setSettings: (conf: MapSettings) => void;
   };
 }
 
@@ -53,6 +54,10 @@ export const useAppStore = create<AppState>()(
         setTitle: (title: string) =>
           set(state => {
             state.title = title;
+          }),
+        setSettings: settings =>
+          set(state => {
+            state.config = settings;
           }),
         setExpandedItems: expandedItems =>
           set(state => {
