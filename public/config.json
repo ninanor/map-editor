@@ -36,16 +36,16 @@
             ]
         },
         "test": {
-            "name": "Pollinator potential",
+            "name": "Azores fishing",
             "type": "layer",
             "layer": {
-                "@@type": "TitilerLayer",
-                "data": {
-                    "url": "https://pycsw.nina.no/media/maps/sources/192/pollinator_potentential_0301.tif.cog",
+                "type": "raster",
+                "titiler": {
+                    "url": "https://github.com/GeoTIFF/test-data/raw/refs/heads/main/files/gfw-azores.tif",
                     "colormap_name": "ylorbr_r",
                     "rescale": [
                         0,
-                        1
+                        573
                     ]
                 }
             }
@@ -54,9 +54,11 @@
             "name": "pmtiles",
             "type": "layer",
             "layer": {
-                "@@type": "TileSourceLayer",
-                "tileSource": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles",
-                "layer": "ch"
+                "type": "vector",
+                "pmtiles": {
+                    "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles",
+                    "layer": "ch"
+                }
             }
         }
     },

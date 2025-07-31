@@ -1,6 +1,5 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { Navbar } from '../components/Navbar';
-import { useAppStore } from '../hooks/app';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -9,11 +8,9 @@ export const Route = createFileRoute('/_layout')({
   component: RouteComponent,
 });
 
-const LazyDeckGLMap = React.lazy(() => import('../components/DeckGLEngineMap'));
 const LazyMaplibreMap = React.lazy(() => import('../components/MaplibreMap'));
 
 function RouteComponent() {
-  const engine = useAppStore(state => state.config.engine);
   return (
     <div className="flex">
       <Outlet />
@@ -29,7 +26,7 @@ function RouteComponent() {
               </div>
             }
           >
-            {engine === 'deckgl' ? <LazyDeckGLMap /> : <LazyMaplibreMap />}
+            <LazyMaplibreMap />
           </React.Suspense>
         </div>
       </div>

@@ -24,15 +24,7 @@ export function PMTilesLayerForm({ defaultValues, onSubmit }: PMTilesLayerFormPr
 
           <form.AppField name="name" children={field => <field.TextField label="Name" required />} />
           <form.AppField name="description" children={field => <field.MDXField label="Description" />} />
-          <form.AppField name="layer.tileSource" children={field => <field.TextField label="Source URL" required />} />
-          <form.AppField
-            name="layer.getFillColor"
-            children={field => <field.ColorPickerField label="Fill color" required />}
-          />
-          <form.AppField
-            name="layer.getLineColor"
-            children={field => <field.ColorPickerField label="Line color" required />}
-          />
+          <form.AppField name="layer.pmtiles.url" children={field => <field.TextField label="Source URL" required />} />
           <form.SubscribeButton />
         </fieldset>
       </form>

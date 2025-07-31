@@ -2,6 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { MapConfig } from './types';
+import { BASEMAP } from '@deck.gl/carto';
 
 export const TABS = [
   {
@@ -54,3 +55,29 @@ export const configQueryOptions = (url: string) =>
     queryKey: ['config'],
     queryFn: () => fetchConfig(url),
   });
+
+export const defaultConfigBase = {
+  id: '',
+  title: '',
+  subtitle: '',
+  description: '',
+  expandedItems: [],
+  styles: {
+    positron: BASEMAP.POSITRON,
+    voyager: BASEMAP.VOYAGER,
+    darkMatter: BASEMAP.DARK_MATTER,
+  },
+  items: null,
+  layerOrder: [],
+  baseMap: BASEMAP.POSITRON,
+  viewState: {
+    longitude: 10,
+    latitude: 63,
+    zoom: 4,
+  },
+  config: {
+    titiler_api_url: '',
+    theme: 'light',
+    language: 'en',
+  },
+};

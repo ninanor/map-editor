@@ -1,10 +1,9 @@
-import { LayerWithId, RasterLayer, VectorLayer } from '../types';
+import { LayerWithId, TitilerSource, PMTileSource } from '../types';
 import { SourceProps } from 'react-map-gl/maplibre';
-import rgbHex from 'rgb-hex';
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourceProps {
-  const l = layer.layer as RasterLayer;
-  const { bidx = 1, ...other } = l.data;
+  const l = layer.layer as TitilerSource;
+  const { bidx = 1, ...other } = l.titiler;
   const search = new URLSearchParams();
 
   if (Array.isArray(bidx)) {
@@ -30,20 +29,18 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourcePr
 }
 
 function buildPMTilesLayer(layer: LayerWithId): SourceProps {
-  const l = layer.layer as VectorLayer;
-
-  const fillColor = l.getFillColor ? l.getFillColor.slice(0, 4) : [0, 0, 0];
+  const l = layer.layer as PMTileSource;
 
   return {
     type: 'vector',
     id: layer.id,
-    url: `pmtiles://${l.tileSource}`,
+    url: `pmtiles://${l.pmtiles.url}`,
     children: {
       id: layer.id,
-      'source-layer': l.layer,
+      'source-layer': l.pmtiles.layer,
       type: 'fill',
       paint: {
-        'fill-color': '#' + rgbHex(fillColor[0], fillColor[1], fillColor[2]),
+        'fill-color': '#000',
       },
     },
   };
@@ -55,10 +52,10 @@ function layerToSource(
   array: LayerWithId[],
   titiler_api_url: string,
 ): SourceProps | null {
-  if (value.layer['@@type'] === 'TitilerLayer') {
+  if ('titiler' in value.layer) {
     return buildRasterLayer(value, titiler_api_url);
   }
-  if (value.layer['@@type'] === 'TileSourceLayer') {
+  if ('pmtiles' in value.layer) {
     return buildPMTilesLayer(value);
   }
   return null;

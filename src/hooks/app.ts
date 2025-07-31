@@ -2,14 +2,12 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
 import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, Tree } from '../types';
-import { BASEMAP } from '@deck.gl/carto';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
-import { jsonConverter } from '../layers/getMapConfig';
-import { MapViewState } from '@deck.gl/core';
-import { DeckGLProps } from '@deck.gl/react';
+import { ViewState } from '@vis.gl/react-maplibre';
 import { arrayMove } from '@dnd-kit/sortable';
 import { toMaplibreSources } from '../libs/toMaplibre';
+import { defaultConfigBase } from '../config';
 
 export interface AppMeta {
   title: string;
@@ -43,30 +41,7 @@ type AppState = MapConfig & AppActions;
 export const useAppStore = create<AppState>()(
   devtools(
     immer(set => ({
-      id: '',
-      title: '',
-      subtitle: '',
-      description: '',
-      expandedItems: [],
-      styles: {
-        positron: BASEMAP.POSITRON,
-        voyager: BASEMAP.VOYAGER,
-        darkMatter: BASEMAP.DARK_MATTER,
-      },
-      items: null,
-      layerOrder: [],
-      baseMap: 'positron',
-      viewState: {
-        longitude: 10,
-        latitude: 63,
-        zoom: 4,
-      },
-      config: {
-        titiler_api_url: '',
-        theme: 'light',
-        language: 'en',
-        engine: 'maplibre',
-      },
+      ...defaultConfigBase,
       actions: {
         updateMeta: meta =>
           set(state => {
@@ -201,7 +176,7 @@ const appMetaSelector = createAppSelector(
   state => state.subtitle,
   state => state.icon,
   state => state.description,
-  (title: string, subtitle: string, icon: string, description: string) => {
+  (title: string, subtitle?: string, icon?: string, description?: string) => {
     return {
       title,
       subtitle,
@@ -242,25 +217,11 @@ const folderNameSelector = createAppSelector(
   },
 );
 
-const deckglMapSelector = createAppSelector(
-  layerSelector,
-  state => state.viewState,
-  (layers: LayerWithId[], viewState: MapViewState) => {
-    return jsonConverter.convert({
-      layers: layers.map(({ layer, id }) => ({
-        ...layer,
-        id,
-      })),
-      initialViewState: viewState,
-    }) as DeckGLProps;
-  },
-);
-
 const maplibreMapSelector = createAppSelector(
   state => state.viewState,
   layerSelector,
   state => state.config.titiler_api_url,
-  (viewState: MapViewState, layers: LayerWithId[], titiler_api_url: string) => {
+  (viewState: Partial<ViewState>, layers: LayerWithId[], titiler_api_url: string) => {
     return {
       initialViewState: viewState,
       sources: toMaplibreSources(layers, titiler_api_url),
@@ -269,7 +230,6 @@ const maplibreMapSelector = createAppSelector(
 );
 
 export const useLayers = () => useAppStore(layerSelector);
-export const useDeckGLMapConf = () => useAppStore(deckglMapSelector);
 export const useMaplibreMapConf = () => useAppStore(maplibreMapSelector);
 export const useFolderNames = () => useAppStore(folderNameSelector);
 export const useItem = (id: string) => {

@@ -1,4 +1,6 @@
-import { MapViewState } from '@deck.gl/core';
+import { ViewState } from '@vis.gl/react-maplibre';
+
+import { Source } from 'maplibre-gl';
 
 declare global {
   interface Window {
@@ -45,20 +47,19 @@ export interface MapConfig {
   baseMap: string;
   styles: Record<string, string>;
   layerOrder: LayerID[];
-  viewState: MapViewState;
+  viewState: Partial<ViewState>;
   items: Tree | null;
   expandedItems: string[];
   config: {
     titiler_api_url: string;
     theme: string;
     language: string;
-    engine: 'maplibre' | 'deckgl';
   };
 }
 
-export interface RasterLayer {
-  '@@type': 'TitilerLayer';
-  data: {
+export interface TitilerSource extends Partial<Source> {
+  type: 'raster';
+  titiler: {
     url: string;
     colormap_name?: string;
     rescale?: number[];
@@ -66,10 +67,12 @@ export interface RasterLayer {
   };
 }
 
-export interface VectorLayer {
-  '@@type': 'TileSourceLayer';
-  tileSource: string;
-  getFillColor?: number[];
+export interface PMTileSource extends Partial<Source> {
+  type: 'vector';
+  pmtiles: {
+    url: string;
+    layer: string;
+  };
 }
 
-export type LayerConfig = RasterLayer | VectorLayer;
+export type LayerConfig = TitilerSource | PMTileSource | Partial<Source>;

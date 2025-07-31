@@ -26,14 +26,12 @@ function RouteComponent() {
   };
 
   const FormClass = useMemo(() => {
-    switch (layer?.layer['@@type']) {
-      case 'TitilerLayer':
-        return TitilerLayerForm;
-      case 'TileSourceLayer':
-        return PMTilesLayerForm;
-      default:
-        return () => null;
+    if ('titiler' in (layer?.layer ?? {})) {
+      return TitilerLayerForm;
+    } else if ('pmtiles' in (layer?.layer ?? {})) {
+      return PMTilesLayerForm;
     }
+    return () => null;
   }, [layer]);
 
   const handleDelete = useCallback(() => {
