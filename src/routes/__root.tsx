@@ -32,7 +32,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   },
   loaderDeps: ({ search: { url } }) => ({ url }),
   loader: ({ context: { queryClient }, deps: { url } }) => {
-    return queryClient.ensureQueryData(configQueryOptions(url ?? '/config.json'));
+    return queryClient.ensureQueryData(configQueryOptions(url ?? 'config.json'));
   },
   errorComponent: ConfigErrorComponent,
 });
