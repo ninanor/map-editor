@@ -27,7 +27,7 @@ export function TitilerLayerForm({ defaultValues, onSubmit }: TitilerLayerFormPr
           <form.AppField name="layer.titiler.url" children={field => <field.TextField label="Source URL" required />} />
           <form.AppField
             name="layer.titiler.colormap_name"
-            children={field => <field.ColormapField label="Color map" required />}
+            children={field => <field.ColormapField label="Color map" />}
           />
 
           <form.SubscribeButton />

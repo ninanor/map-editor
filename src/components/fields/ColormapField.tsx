@@ -14,7 +14,7 @@ const colormapsQueryOptions = (url: string) =>
     queryFn: () => fetchColormaps(url),
   });
 
-export function ColormapField({ label }: { label: string; options: { value: string; label: string }[] }) {
+export function ColormapField({ label }: { label: string }) {
   const field = useFieldContext<string>();
 
   const { data } = useQuery(colormapsQueryOptions(window.TITILER_API_URL + '/colorMaps'));
