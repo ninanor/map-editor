@@ -1,8 +1,14 @@
-import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { RouterProvider, createRouter, createHashHistory } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './query';
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
+
+import './index.css';
+import '@mdxeditor/editor/style.css';
+import './i18n';
+
+const hashHistory = createHashHistory();
 
 const router = createRouter({
   routeTree,
@@ -14,6 +20,7 @@ const router = createRouter({
   // This will ensure that the loader is always called when the route is preloaded or visited
   defaultPreloadStaleTime: 0,
   scrollRestoration: true,
+  history: hashHistory,
 });
 
 declare module '@tanstack/react-router' {
