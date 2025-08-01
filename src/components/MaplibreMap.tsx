@@ -1,4 +1,12 @@
-import { Layer, Map as MaplibreMap, Source } from 'react-map-gl/maplibre';
+import {
+  FullscreenControl,
+  GeolocateControl,
+  Layer,
+  Map as MaplibreMap,
+  NavigationControl,
+  ScaleControl,
+  Source,
+} from 'react-map-gl/maplibre';
 import { useBaseMap, useMaplibreMapConf } from '../hooks/app';
 import maplibregl from 'maplibre-gl';
 import { Protocol } from 'pmtiles';
@@ -21,6 +29,10 @@ export default function Map() {
   return (
     <MaplibreMap mapStyle={basemap} initialViewState={initialViewState}>
       <GeocoderControl position="top-left" />
+      <NavigationControl position="top-right" />
+      <GeolocateControl position="top-right" />
+      <FullscreenControl position="top-right" />
+      <ScaleControl />
       {sources.map(({ id, children, ...props }) => (
         <Source key={id} {...props}>
           <Layer {...children} />
