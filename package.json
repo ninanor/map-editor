@@ -1,6 +1,5 @@
 {
-  "name": "@nina/map-editor",
-  "private": true,
+  "name": "@ninanor/map-editor",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
