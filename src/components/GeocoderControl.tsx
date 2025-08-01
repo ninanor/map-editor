@@ -1,7 +1,11 @@
 /* global fetch */
 import { useState } from 'react';
 import { useControl, Marker, MarkerProps, ControlPosition } from 'react-map-gl/maplibre';
-import MaplibreGeocoder, { MaplibreGeocoderApi, MaplibreGeocoderOptions } from '@maplibre/maplibre-gl-geocoder';
+import MaplibreGeocoder, {
+  CarmenGeojsonFeature,
+  MaplibreGeocoderApi,
+  MaplibreGeocoderOptions,
+} from '@maplibre/maplibre-gl-geocoder';
 
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
 
@@ -16,72 +20,66 @@ type GeocoderControlProps = Omit<MaplibreGeocoderOptions, 'maplibregl' | 'marker
   onError?: (e: object) => void;
 };
 
-/* eslint-disable camelcase */
 const geocoderApi: MaplibreGeocoderApi = {
   forwardGeocode: async config => {
     const features = [];
     try {
-      const request = `https://nominatim.openstreetmap.org/search?q=${config.query}&format=geojson&polygon_geojson=1&addressdetails=1`;
+      const request = `https://nominatim.openstreetmap.org/search?q=${config.query as string}&format=geojson&polygon_geojson=1&addressdetails=1`;
       const response = await fetch(request);
       const geojson = (await response.json()) as {
+        features: CarmenGeojsonFeature[];
         type: string;
-        features: {
-          bbox: number[];
-          properties: {
-            display_name: string;
-          };
-        }[];
       };
       for (const feature of geojson.features) {
-        const center = [
-          feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
-          feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2,
-        ];
-        const point = {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: center,
-          },
-          place_name: feature.properties.display_name,
-          properties: feature.properties,
-          text: feature.properties.display_name,
-          place_type: ['place'],
-          center,
-        };
-        features.push(point);
+        let center = [];
+        if (feature.bbox) {
+          center = [
+            feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
+            feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2,
+          ];
+          const point = {
+            type: 'Feature' as const,
+            geometry: {
+              type: 'Point' as const,
+              coordinates: center,
+            },
+            place_name: feature.properties?.display_name as string,
+            properties: feature.properties,
+            text: feature.properties?.display_name as string,
+            place_type: ['place'],
+            center,
+            id: feature.id,
+          };
+          features.push(point);
+        }
       }
     } catch (e) {
-      console.error(`Failed to forwardGeocode with error: ${e}`); // eslint-disable-line
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      console.error(`Failed to forwardGeocode with error: ${e}`);
     }
 
     return {
       features,
+      type: 'FeatureCollection' as const,
     };
   },
 };
 
-/* eslint-disable complexity,max-statements */
 export default function GeocoderControl(props: GeocoderControlProps) {
-  const [marker, setMarker] = useState(null);
+  const [marker, setMarker] = useState<number[] | null>(null);
 
-  const geocoder = useControl<MaplibreGeocoder>(
-    ({ mapLib }) => {
+  useControl<MaplibreGeocoder>(
+    () => {
       const ctrl = new MaplibreGeocoder(geocoderApi, {
         ...props,
         marker: false,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        maplibregl: mapLib,
       });
-      ctrl.on('result', evt => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ctrl.on('result', (evt: { result: CarmenGeojsonFeature & { center: number[] } }) => {
         const result = evt.result;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const location =
           result && (result.center ?? (result.geometry?.type === 'Point' && result.geometry.coordinates));
-        if (location && props.marker) {
-          const markerProps = typeof props.marker === 'object' ? props.marker : {};
-          setMarker(<Marker {...markerProps} longitude={location[0]} latitude={location[1]} />);
+        if (location) {
+          setMarker([location[0], location[1]]);
         } else {
           setMarker(null);
         }
@@ -94,57 +92,11 @@ export default function GeocoderControl(props: GeocoderControlProps) {
     },
   );
 
-  if (geocoder._map) {
-    if (geocoder.getProximity() !== props.proximity && props.proximity !== undefined) {
-      geocoder.setProximity(props.proximity);
-    }
-    if (geocoder.getRenderFunction() !== props.render && props.render !== undefined) {
-      geocoder.setRenderFunction(props.render);
-    }
-    if (geocoder.getLanguage() !== props.language && props.language !== undefined) {
-      geocoder.setLanguage(props.language);
-    }
-    if (geocoder.getZoom() !== props.zoom && props.zoom !== undefined) {
-      geocoder.setZoom(props.zoom);
-    }
-    if (geocoder.getFlyTo() !== props.flyTo && props.flyTo !== undefined) {
-      geocoder.setFlyTo(props.flyTo);
-    }
-    if (geocoder.getPlaceholder() !== props.placeholder && props.placeholder !== undefined) {
-      geocoder.setPlaceholder(props.placeholder);
-    }
-    if (geocoder.getCountries() !== props.countries && props.countries !== undefined) {
-      geocoder.setCountries(props.countries);
-    }
-    if (geocoder.getTypes() !== props.types && props.types !== undefined) {
-      geocoder.setTypes(props.types);
-    }
-    if (geocoder.getMinLength() !== props.minLength && props.minLength !== undefined) {
-      geocoder.setMinLength(props.minLength);
-    }
-    if (geocoder.getLimit() !== props.limit && props.limit !== undefined) {
-      geocoder.setLimit(props.limit);
-    }
-    if (geocoder.getFilter() !== props.filter && props.filter !== undefined) {
-      geocoder.setFilter(props.filter);
-    }
-    // if (geocoder.getOrigin() !== props.origin && props.origin !== undefined) {
-    //   geocoder.setOrigin(props.origin);
-    // }
-    // if (geocoder.getAutocomplete() !== props.autocomplete && props.autocomplete !== undefined) {
-    //   geocoder.setAutocomplete(props.autocomplete);
-    // }
-    // if (geocoder.getFuzzyMatch() !== props.fuzzyMatch && props.fuzzyMatch !== undefined) {
-    //   geocoder.setFuzzyMatch(props.fuzzyMatch);
-    // }
-    // if (geocoder.getRouting() !== props.routing && props.routing !== undefined) {
-    //   geocoder.setRouting(props.routing);
-    // }
-    // if (geocoder.getWorldview() !== props.worldview && props.worldview !== undefined) {
-    //   geocoder.setWorldview(props.worldview);
-    // }
+  if (!marker) {
+    return null;
   }
-  return marker;
+
+  return <Marker {...(props.marker ?? Object())} longitude={marker[0]} latitude={marker[1]} />;
 }
 
 const noop = (_: unknown) => _;

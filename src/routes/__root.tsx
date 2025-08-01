@@ -12,7 +12,7 @@ import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
-import { useUIActions, useUIisReady, useUIStore } from '../hooks/ui';
+import { useUIStore } from '../hooks/ui';
 import { Head } from '../components/Head';
 
 interface AppSearch {
