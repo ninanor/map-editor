@@ -4,10 +4,15 @@ import { Link, useMatch } from '@tanstack/react-router';
 import { useUIStore } from '../hooks/ui';
 
 export function Navbar() {
-  const title = useAppStore(state => state.title);
+  const title = useAppStore(state => state.subtitle);
   const editable = useUIStore(state => state.editable);
   const isEditing = useMatch({ from: '/_layout/edit', shouldThrow: false });
   const { t } = useTranslation();
+
+  if (!title && !editable) {
+    return null;
+  }
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">

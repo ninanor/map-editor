@@ -12,7 +12,6 @@ function RouteComponent() {
   const location = useLocation();
   const title = useAppStore(state => state.title);
   const icon = useAppStore(state => state.icon);
-  const subtitle = useAppStore(state => state.subtitle);
   const { t } = useTranslation();
 
   return (
@@ -21,7 +20,6 @@ function RouteComponent() {
         {icon && <img src={icon} className="w-20" />}
         <div className="grow">
           <h1 className="text-2xl font-bold">{title}</h1>
-          {subtitle && <h2 className="text-lg text-base-400">{subtitle}</h2>}
         </div>
       </div>
 

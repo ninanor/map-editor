@@ -7,6 +7,7 @@ export function Head() {
   const theme = useAppStore(state => state.config.theme);
   const language = useAppStore(state => state.config.language);
   const title = useAppStore(state => state.title);
+  const icon = useAppStore(state => state.icon);
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export function Head() {
     <Helmet>
       <html data-theme={theme} lang={language}></html>
       <title>{title}</title>
+      <link rel="icon" type="image/x-icon" href={icon} />
     </Helmet>
   );
 }
