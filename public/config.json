@@ -63,7 +63,7 @@
         }
     },
     "config": {
-        "titiler_api_url": "http://localhost:5173/titiler",
+        "titiler_api_url": "/titiler",
         "theme": "nord",
         "language": "no",
         "footer": {

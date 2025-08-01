@@ -11,7 +11,6 @@ export default defineConfig({
       '/titiler': {
         target: 'http://localhost:8989',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/titiler/, ''),
       },
     },
   },

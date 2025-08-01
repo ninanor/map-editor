@@ -1,3 +1,7 @@
+upstream titiler_upstream {
+    server titiler:80;
+}
+
 server {
     listen       80;
     server_name  localhost;
@@ -5,6 +9,10 @@ server {
 
     location / {
         try_files $uri /index.html;
+    }
+
+    location /titiler/ {
+        proxy_pass http://titiler_upstream;
     }
 
     error_page   500 502 503 504  /50x.html;
