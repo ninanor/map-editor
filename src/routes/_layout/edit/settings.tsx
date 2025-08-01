@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 
 import { useAppActions, useAppStore } from '../../../hooks/app';
 import { useCallback } from 'react';
-import { MapConfig, MapSettings } from '../../../types';
+import { MapConfig } from '../../../types';
 import { SettingsForm } from '../../../components/forms/SettingsForm';
 
 export const Route = createFileRoute('/_layout/edit/settings')({
@@ -85,7 +85,7 @@ function RouteComponent() {
         <p>Drag 'n' drop a configuration, or click to select one</p>
       </div>
 
-      <SettingsForm defaultValues={settings} onSubmit={({ value }) => actions.setSettings(value as MapSettings)} />
+      <SettingsForm defaultValues={settings} onSubmit={({ value }) => actions.setSettings(value)} />
     </div>
   );
 }
