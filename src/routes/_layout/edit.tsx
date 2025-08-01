@@ -1,12 +1,21 @@
-import { createFileRoute, Link, Outlet, useLocation } from '@tanstack/react-router';
+import { createFileRoute, Link, Outlet, redirect, useLocation } from '@tanstack/react-router';
 import classNames from 'classnames';
 import { EDIT_TABS } from '../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { useUIStore } from '../../hooks/ui';
 
 export const Route = createFileRoute('/_layout/edit')({
   component: RouteComponent,
+  beforeLoad: () => {
+    if (!useUIStore.getState().editable) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({
+        to: '/',
+      });
+    }
+  },
 });
 
 function RouteComponent() {

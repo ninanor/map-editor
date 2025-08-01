@@ -2,39 +2,35 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
-type UIState = {
-  open: boolean;
-  ready: boolean;
-};
+interface UIState {
+  editable: boolean;
+  defaultConfig: string;
+}
 
-type UIActions = {
+interface UIActions {
   actions: {
-    toggleOpen: () => void;
-    setReady: (ready: boolean) => void;
+    setEditable: (editable: boolean) => void;
+    setDefaultConfig: (path: string) => void;
   };
-};
+}
 
 export const useUIStore = create<UIState & UIActions>()(
   devtools(
     immer(set => ({
-      open: true,
-      edit: false,
-      ready: false,
+      editable: false,
+      defaultConfig: 'config.json',
       actions: {
-        toggleOpen: () =>
+        setEditable: (editable: boolean) =>
           set(state => {
-            state.open = !state.open;
+            state.editable = editable;
           }),
-        setReady: (ready: boolean) =>
+        setDefaultConfig: path =>
           set(state => {
-            state.ready = ready;
+            state.defaultConfig = path;
           }),
       },
     })),
   ),
 );
-
-export const useUIisOpen = () => useUIStore(state => state.open);
-export const useUIisReady = () => useUIStore(state => state.ready);
 
 export const useUIActions = () => useUIStore(state => state.actions);

@@ -12,7 +12,7 @@ import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
-import { useUIActions, useUIisReady } from '../hooks/ui';
+import { useUIActions, useUIisReady, useUIStore } from '../hooks/ui';
 import { Head } from '../components/Head';
 
 interface AppSearch {
@@ -32,7 +32,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   },
   loaderDeps: ({ search: { url } }) => ({ url }),
   loader: ({ context: { queryClient }, deps: { url } }) => {
-    return queryClient.ensureQueryData(configQueryOptions(url ?? 'config.json'));
+    return queryClient.ensureQueryData(configQueryOptions(url ?? useUIStore.getState().defaultConfig));
   },
   errorComponent: ConfigErrorComponent,
 });
@@ -66,17 +66,15 @@ export function ConfigErrorComponent({ error }: ErrorComponentProps) {
 }
 
 function RootComponent() {
-  const ready = useUIisReady();
-  const { setReady } = useUIActions();
   const { url } = Route.useSearch();
-  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? 'config.json'));
+  const defaultConfigPath = useUIStore(state => state.defaultConfig);
+  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? defaultConfigPath));
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
-    setReady(true);
-  }, [config.data, setReady]);
+  }, [config.data]);
 
-  if (!ready || isLoading) {
+  if (isLoading) {
     <div className="flex justify-center items-center w-screen h-screen bg-primary/20">
       <FontAwesomeIcon icon={faSpinner} spin />
     </div>;
