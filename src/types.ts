@@ -57,12 +57,15 @@ export interface MapSettings {
   footer?: Footer;
 }
 
-export interface MapConfig {
-  id: string;
+export interface MapMeta {
   title: string;
+  subtitle: string;
   description: string;
   icon?: string;
-  subtitle: string;
+}
+
+export interface MapConfig extends MapMeta {
+  id: string;
   baseMap: string;
   styles: Record<string, string>;
   layerOrder: LayerID[];

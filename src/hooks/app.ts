@@ -1,20 +1,13 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, MapSettings, Tree } from '../types';
+import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, MapMeta, MapSettings, Tree } from '../types';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
 import { ViewState } from 'react-map-gl/maplibre';
 import { arrayMove } from '@dnd-kit/sortable';
 import { toMaplibreSources } from '../libs/toMaplibre';
 import { defaultConfigBase } from '../config';
-
-export interface AppMeta {
-  title: string;
-  subtitle: string;
-  description: string;
-  icon: string;
-}
 
 interface AppActions {
   actions: {
@@ -32,7 +25,7 @@ interface AppActions {
     setExpandedItems: (expand: string[]) => void;
     moveToIndex: (source: string, target: string) => void;
     setBaseMap: (baseMapId: string) => void;
-    updateMeta: (meta: AppMeta) => void;
+    updateMeta: (meta: MapMeta) => void;
     setSettings: (conf: MapSettings) => void;
   };
 }
@@ -179,9 +172,9 @@ const createAppSelector = createSelector.withTypes<AppState>();
 const appMetaSelector = createAppSelector(
   state => state.title,
   state => state.subtitle,
-  state => state.icon,
   state => state.description,
-  (title: string, subtitle?: string, icon?: string, description?: string) => {
+  state => state.icon,
+  (title: string, subtitle: string, description: string, icon?: string) => {
     return {
       title,
       subtitle,

@@ -1,15 +1,9 @@
 import { useAppForm } from '../../hooks/form';
-
-interface MapMetadata {
-  title: string;
-  subtitle?: string;
-  icon?: string;
-  description: string;
-}
+import { MapMeta } from '../../types';
 
 interface MapMetadataFormProps {
-  defaultValues: MapMetadata;
-  onSubmit: (props: { value: MapMetadata }) => void | Promise<void>;
+  defaultValues: MapMeta;
+  onSubmit: (props: { value: MapMeta }) => void | Promise<void>;
 }
 
 export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProps) {
