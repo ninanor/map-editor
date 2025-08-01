@@ -65,6 +65,14 @@
     "config": {
         "titiler_api_url": "http://localhost:5173/titiler",
         "theme": "nord",
-        "language": "no"
+        "language": "no",
+        "footer": {
+            "items": [
+                "![](https://maps.nina.no/assets/logowhite-6HSLYLYZ.png)",
+                "Norsk institutt for naturforskning - [www.nina.no](https://www.nina.no)"
+            ],
+            "justify": "justify-between",
+            "align": "items-baseline"
+        }
     }
 }

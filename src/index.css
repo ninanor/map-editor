@@ -187,3 +187,9 @@ button:focus-visible .treeitem.focused,
     margin-bottom: 1rem !important;
     background-color: #e1f1f8;
 }
+
+
+#footer img {
+    height: 28px;
+    @apply max-w-full inline-block p-0 m-0;
+}

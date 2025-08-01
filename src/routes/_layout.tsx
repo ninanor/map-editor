@@ -3,6 +3,7 @@ import { Navbar } from '../components/Navbar';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Footer } from '../components/Footer';
 
 export const Route = createFileRoute('/_layout')({
   component: RouteComponent,
@@ -16,6 +17,7 @@ function RouteComponent() {
       <Outlet />
       <div className="flex flex-col flex-auto">
         <Navbar />
+        <Footer />
         <div className="relative w-full h-full">
           <React.Suspense
             fallback={

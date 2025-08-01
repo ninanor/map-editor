@@ -38,10 +38,23 @@ export interface BaseMapStyle {
   active: boolean;
 }
 
+export interface Footer {
+  items: string[];
+  justify?:
+    | 'justify-center-safe'
+    | 'justify-start'
+    | 'justify-end-safe'
+    | 'justify-between'
+    | 'justify-normal'
+    | 'justify-stretch';
+  align?: 'items-center' | 'items-start' | 'items-end' | 'items-baseline';
+}
+
 export interface MapSettings {
   titiler_api_url: string;
   theme: string;
   language: string;
+  footer?: Footer;
 }
 
 export interface MapConfig {
