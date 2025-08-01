@@ -31,7 +31,7 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AppProps {
+export interface AppProps {
   editable?: boolean;
   defaultConfig?: string;
 }
