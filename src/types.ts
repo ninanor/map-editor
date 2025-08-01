@@ -1,4 +1,4 @@
-import { ViewState } from '@vis.gl/react-maplibre';
+import { ViewState } from 'react-map-gl/maplibre';
 
 import { Source } from 'maplibre-gl';
 

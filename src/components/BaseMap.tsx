@@ -1,4 +1,4 @@
-import { Map, ViewState } from '@vis.gl/react-maplibre';
+import { Map, ViewState } from 'react-map-gl/maplibre';
 import { useCallback } from 'react';
 import classNames from 'classnames';
 

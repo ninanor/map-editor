@@ -4,7 +4,7 @@ import { devtools } from 'zustand/middleware';
 import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, MapSettings, Tree } from '../types';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
-import { ViewState } from '@vis.gl/react-maplibre';
+import { ViewState } from 'react-map-gl/maplibre';
 import { arrayMove } from '@dnd-kit/sortable';
 import { toMaplibreSources } from '../libs/toMaplibre';
 import { defaultConfigBase } from '../config';

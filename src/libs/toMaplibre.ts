@@ -1,5 +1,5 @@
 import { LayerWithId, TitilerSource, PMTileSource } from '../types';
-import { SourceProps } from '@vis.gl/react-maplibre';
+import { SourceProps } from 'react-map-gl/maplibre';
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourceProps {
   const l = layer.layer as TitilerSource;

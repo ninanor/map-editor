@@ -1,9 +1,10 @@
-import { Layer, Map as MaplibreMap, Source } from '@vis.gl/react-maplibre';
+import { Layer, Map as MaplibreMap, Source } from 'react-map-gl/maplibre';
 import { useBaseMap, useMaplibreMapConf } from '../hooks/app';
 import maplibregl from 'maplibre-gl';
 import { Protocol } from 'pmtiles';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useEffect } from 'react';
+import GeocoderControl from './GeocoderControl';
 
 export default function Map() {
   const basemap = useBaseMap();
@@ -19,6 +20,7 @@ export default function Map() {
 
   return (
     <MaplibreMap mapStyle={basemap} initialViewState={initialViewState}>
+      <GeocoderControl position="top-left" />
       {sources.map(({ id, children, ...props }) => (
         <Source key={id} {...props}>
           <Layer {...children} />
