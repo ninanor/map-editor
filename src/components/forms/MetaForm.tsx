@@ -1,8 +1,15 @@
 import { useAppForm } from '../../hooks/form';
 
+interface MapMetadata {
+  title: string;
+  subtitle?: string;
+  icon?: string;
+  description: string;
+}
+
 interface MapMetadataFormProps {
-  defaultValues: any;
-  onSubmit: (props: { value: any }) => any | Promise<any>;
+  defaultValues: MapMetadata;
+  onSubmit: (props: { value: MapMetadata }) => void | Promise<void>;
 }
 
 export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProps) {
@@ -30,7 +37,7 @@ export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProp
               <>
                 <field.TextField label="Icon" required />
                 <label>Preview</label>
-                <img src={field.state.value as string} className="w-25" />
+                <img src={field.state.value} className="w-25" />
               </>
             )}
           />
