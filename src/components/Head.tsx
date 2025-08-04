@@ -2,10 +2,11 @@ import { Helmet } from '@dr.pogodin/react-helmet';
 import { useAppStore } from '../hooks/app';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DEFAULT_LANG, DEFAULT_THEME } from '../config';
 
 export function Head() {
-  const theme = useAppStore(state => state.config.theme);
-  const language = useAppStore(state => state.config.language);
+  const theme = useAppStore(state => state.config?.theme ?? DEFAULT_THEME);
+  const language = useAppStore(state => state.config?.language ?? DEFAULT_LANG);
   const title = useAppStore(state => state.title);
   const icon = useAppStore(state => state.icon);
   const { i18n } = useTranslation();

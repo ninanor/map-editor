@@ -31,19 +31,21 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourcePr
 function buildPMTilesLayer(layer: LayerWithId): SourceProps {
   const l = layer.layer as PMTileSource;
 
-  return {
+  const result = {
     type: 'vector',
     id: layer.id,
     url: `pmtiles://${l.pmtiles.url}`,
     children: {
-      id: layer.id,
-      'source-layer': l.pmtiles.layer,
       type: 'fill',
       paint: {
         'fill-color': '#000',
       },
+      ...l.children,
+      id: layer.id,
     },
   };
+  result.children.key = layer.id + result.children.type;
+  return result;
 }
 
 function layerToSource(

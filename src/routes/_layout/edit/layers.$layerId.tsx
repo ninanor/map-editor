@@ -2,13 +2,21 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useAppActions, useLayer } from '../../../hooks/app';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useCallback, useMemo } from 'react';
-import { TitilerLayerForm } from '../../../components/forms/TitilerLayerForm';
-import { PMTilesLayerForm } from '../../../components/forms/PMTilesLayerForm';
+import { useCallback } from 'react';
 import { Layer } from '../../../types';
+import Form from '@rjsf/daisyui';
+import { LAYER_SCHEMA, LAYER_SCHEMA_UI } from '../../../rjsf/schemas/layer';
+import { widgets } from '../../../rjsf/widgets';
+import AJV8Validator from '@rjsf/validator-ajv8/lib/validator';
 
 export const Route = createFileRoute('/_layout/edit/layers/$layerId')({
   component: RouteComponent,
+});
+
+const validator = new AJV8Validator({
+  ajvOptionsOverrides: {
+    removeAdditional: true,
+  },
 });
 
 function RouteComponent() {
@@ -18,26 +26,17 @@ function RouteComponent() {
   const { layerId } = Route.useParams();
   const layer = useLayer(layerId);
 
-  console.log(layer);
-
-  const onSubmit = ({ value }: { value: Layer }) => {
-    actions.updateTreeItemLayer(layerId, value);
+  const onSubmit = ({ formData }: { formData?: unknown }) => {
+    actions.updateTreeItemLayer(layerId, formData as Layer);
     navigate({ to: '/edit' }).catch(console.error);
   };
-
-  const FormClass = useMemo(() => {
-    if ('titiler' in (layer?.layer ?? {})) {
-      return TitilerLayerForm;
-    } else if ('pmtiles' in (layer?.layer ?? {})) {
-      return PMTilesLayerForm;
-    }
-    return () => null;
-  }, [layer]);
 
   const handleDelete = useCallback(() => {
     actions.removeTreeItemLayer(layerId);
     navigate({ to: '/edit' }).catch(console.error);
   }, [layerId, actions, navigate]);
+
+  console.log(layer);
 
   return (
     <>
@@ -45,7 +44,14 @@ function RouteComponent() {
         <FontAwesomeIcon icon={faArrowLeft} /> Back
       </Link>
 
-      <FormClass defaultValues={layer} onSubmit={onSubmit} />
+      <Form
+        formData={layer}
+        uiSchema={LAYER_SCHEMA_UI}
+        schema={LAYER_SCHEMA}
+        validator={validator}
+        onSubmit={onSubmit}
+        widgets={widgets}
+      />
 
       <div className="mt-3 flex">
         <button type="button" className="btn btn-error" onClick={handleDelete}>

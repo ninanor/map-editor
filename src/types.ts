@@ -89,7 +89,11 @@ export interface PMTileSource extends Partial<Source> {
   type: 'vector';
   pmtiles: {
     url: string;
-    layer: string;
+  };
+  children: {
+    id?: string;
+    key?: string;
+    'source-layer': string;
   };
 }
 

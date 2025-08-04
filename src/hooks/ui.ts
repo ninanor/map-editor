@@ -5,12 +5,14 @@ import { immer } from 'zustand/middleware/immer';
 interface UIState {
   editable: boolean;
   defaultConfig: string;
+  ready?: boolean;
 }
 
 interface UIActions {
   actions: {
     setEditable: (editable: boolean) => void;
     setDefaultConfig: (path: string) => void;
+    setReady: () => void;
   };
 }
 
@@ -27,6 +29,10 @@ export const useUIStore = create<UIState & UIActions>()(
         setDefaultConfig: path =>
           set(state => {
             state.defaultConfig = path;
+          }),
+        setReady: () =>
+          set(state => {
+            state.ready = true;
           }),
       },
     })),

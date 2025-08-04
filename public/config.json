@@ -56,8 +56,10 @@
             "layer": {
                 "type": "vector",
                 "pmtiles": {
-                    "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles",
-                    "layer": "ch"
+                    "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles"
+                },
+                "children": {
+                    "source-layer": "ch"
                 }
             }
         }

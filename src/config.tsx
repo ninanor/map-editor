@@ -109,6 +109,9 @@ export const LANGUAGES = [
   },
 ];
 
+export const DEFAULT_THEME = THEMES[0];
+export const DEFAULT_LANG = LANGUAGES[0].value;
+
 export const defaultConfigBase = {
   id: '',
   title: '',
@@ -130,7 +133,7 @@ export const defaultConfigBase = {
   },
   config: {
     titiler_api_url: '',
-    theme: THEMES[0],
-    language: LANGUAGES[0].value,
+    theme: DEFAULT_THEME,
+    language: DEFAULT_LANG,
   },
 };

@@ -3,7 +3,7 @@ import { useAppStore } from '../hooks/app';
 import classNames from 'classnames';
 
 export function Footer() {
-  const footer = useAppStore(state => state.config.footer);
+  const footer = useAppStore(state => state.config?.footer);
   if (!footer) {
     return null;
   }

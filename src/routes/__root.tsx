@@ -12,7 +12,7 @@ import { AxiosError } from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
-import { useUIStore } from '../hooks/ui';
+import { useUIActions, useUIStore } from '../hooks/ui';
 import { Head } from '../components/Head';
 
 interface AppSearch {
@@ -68,13 +68,16 @@ export function ConfigErrorComponent({ error }: ErrorComponentProps) {
 function RootComponent() {
   const { url } = Route.useSearch();
   const defaultConfigPath = useUIStore(state => state.defaultConfig);
+  const ready = useUIStore(state => state.ready);
   const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(url ?? defaultConfigPath));
+  const uiActions = useUIActions();
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
-  }, [config.data]);
+    uiActions.setReady();
+  }, [uiActions, config.data]);
 
-  if (isLoading) {
+  if (isLoading || !ready) {
     <div className="flex justify-center items-center w-screen h-screen bg-primary/20">
       <FontAwesomeIcon icon={faSpinner} spin />
     </div>;
