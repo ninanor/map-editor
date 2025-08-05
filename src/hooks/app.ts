@@ -224,6 +224,7 @@ const maplibreMapSelector = createAppSelector(
     return {
       initialViewState: viewState,
       sources: toMaplibreSources(layers, titiler_api_url),
+      // TODO: only vector layers should be interactive
       interactiveLayerIds: layerOrder,
     };
   },
