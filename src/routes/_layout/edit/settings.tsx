@@ -75,14 +75,14 @@ function RouteComponent() {
 
   return (
     <div>
-      <h4 className="font-bold">Download configuration</h4>
+      <h4 className="font-bold">{t('download-configuration')}</h4>
       <a className="btn btn-accent" onClick={download}>
-        {t('download-config')}
+        {t('download-configuration')}
       </a>
-      <h4 className="font-bold mt-5">Upload configuration</h4>
+      <h4 className="font-bold mt-5">{t('upload-configuration')}</h4>
       <div {...getRootProps(style)}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop a configuration, or click to select one</p>
+        <p>{t('drag-drop-config')}</p>
       </div>
 
       <SettingsForm defaultValues={settings} onSubmit={({ value }) => actions.setSettings(value)} />

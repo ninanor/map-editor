@@ -1,6 +1,7 @@
 import { LANGUAGES, THEMES } from '../../config';
 import { useAppForm } from '../../hooks/form';
 import { MapSettings } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 interface SettingsFormProps {
   defaultValues: MapSettings;
@@ -8,6 +9,7 @@ interface SettingsFormProps {
 }
 
 export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
+  const { t } = useTranslation();
   const form = useAppForm({
     defaultValues,
     onSubmit,
@@ -22,13 +24,13 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
         }}
       >
         <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Settings</legend>
+          <legend className="fieldset-legend">{t('settings')}</legend>
 
-          <form.AppField name="titiler_api_url" children={field => <field.TextField label="Titiler URL" />} />
-          <form.AppField name="theme" children={field => <field.SelectField label="Theme" options={THEMES} />} />
+          <form.AppField name="titiler_api_url" children={field => <field.TextField label={t('titiler-url')} />} />
+          <form.AppField name="theme" children={field => <field.SelectField label={t('theme')} options={THEMES} />} />
           <form.AppField
             name="language"
-            children={field => <field.SelectField label="Language" options={LANGUAGES} />}
+            children={field => <field.SelectField label={t('language')} options={LANGUAGES} />}
           />
 
           <form.SubscribeButton />

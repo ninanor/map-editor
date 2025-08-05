@@ -1,6 +1,7 @@
 import { MapGeoJSONFeature } from 'maplibre-gl';
 import { useState } from 'react';
 import { Popup as MaplibrePopup } from 'react-map-gl/maplibre';
+import { useTranslation } from 'react-i18next';
 
 export interface PopupInfo {
   lat: number;
@@ -10,13 +11,15 @@ export interface PopupInfo {
 }
 
 function Feature(feat: Partial<MapGeoJSONFeature>) {
+  const { t } = useTranslation();
+  
   return (
     <div className="overflow-x-auto">
       <table className="table table-sm table-pin-rows table-zebra">
         <thead>
           <tr>
-            <th>Field</th>
-            <th>Value</th>
+            <th>{t('field')}</th>
+            <th>{t('value')}</th>
           </tr>
         </thead>
         <tbody>
@@ -34,10 +37,12 @@ function Feature(feat: Partial<MapGeoJSONFeature>) {
 
 function FeatureSelector({ features }: { features: MapGeoJSONFeature[] }) {
   const [selected, setSelected] = useState<number>(0);
+  const { t } = useTranslation();
+  
   return (
     <>
-      <h5 className="font-bold">Found {features.length} features</h5>
-      <label>Select the feature to display</label>
+      <h5 className="font-bold">{t('features-found', { count: features.length })}</h5>
+      <label>{t('select-feature')}</label>
       <select className="select" value={selected} onChange={e => setSelected(parseInt(e.target.value))}>
         {features.map((_, index) => (
           // eslint-disable-next-line react-x/no-array-index-key

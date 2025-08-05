@@ -6,12 +6,14 @@ import { MDXEditor } from '@mdxeditor/editor';
 import { TREE_ROOT_ID } from '../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/_layout/edit/folders/add')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const { t } = useTranslation();
   const actions = useAppActions();
   const navigate = useNavigate();
   const folderNames = useFolderNames();
@@ -31,7 +33,7 @@ function RouteComponent() {
   return (
     <>
       <Link to="/edit">
-        <FontAwesomeIcon icon={faArrowLeft} /> Back
+        <FontAwesomeIcon icon={faArrowLeft} /> {t('back')}
       </Link>
       <form
         onSubmit={e => {
@@ -41,14 +43,14 @@ function RouteComponent() {
         }}
       >
         <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Add folder</legend>
+          <legend className="fieldset-legend">{t('add-folder')}</legend>
 
           <form.Field
             name="name"
             children={field => (
               <>
                 <label htmlFor={field.name} className="label">
-                  Name
+                  {t('name')}
                 </label>
                 <input
                   type="text"
@@ -68,7 +70,7 @@ function RouteComponent() {
             children={field => (
               <>
                 <label htmlFor={field.name} className="label">
-                  Parent Folder
+                  {t('parent-folder')}
                 </label>
                 <select
                   className="select"
@@ -92,7 +94,7 @@ function RouteComponent() {
             children={field => (
               <>
                 <label htmlFor={field.name} className="label">
-                  Description
+                  {t('description')}
                 </label>
                 <MDXEditor
                   markdown={field.state.value}
@@ -109,7 +111,7 @@ function RouteComponent() {
             selector={state => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => (
               <button className="btn btn-neutral mt-4" type="submit" disabled={!canSubmit}>
-                {isSubmitting ? '...' : 'Submit'}
+                {isSubmitting ? t('loading') : t('submit')}
               </button>
             )}
           />

@@ -5,6 +5,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Markdown from 'react-markdown';
 import { Layer } from '../../../types';
 import { Legend } from '../../../components/Legend';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/_layout/_view/layers/$layerId')({
   component: RouteComponent,
@@ -13,18 +14,19 @@ export const Route = createFileRoute('/_layout/_view/layers/$layerId')({
 function RouteComponent() {
   const { layerId } = Route.useParams();
   const layer = useItem(layerId) as Layer;
+  const { t } = useTranslation();
 
   return (
     <>
       <Link to="/">
-        <FontAwesomeIcon icon={faArrowLeft} /> Back
+        <FontAwesomeIcon icon={faArrowLeft} /> {t('back')}
       </Link>
       <div className="prose prose-slate prose-md">
         <h2 className="text-bold text-2xl">{layer?.name}</h2>
         <Markdown>{layer?.description}</Markdown>
         {layer?.layer && (
           <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-4">Legend</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('legend')}</h3>
             <Legend {...layer.layer} />
           </div>
         )}

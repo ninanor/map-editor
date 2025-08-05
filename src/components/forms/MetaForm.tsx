@@ -1,5 +1,6 @@
 import { useAppForm } from '../../hooks/form';
 import { MapMeta } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 interface MapMetadataFormProps {
   defaultValues: MapMeta;
@@ -7,6 +8,7 @@ interface MapMetadataFormProps {
 }
 
 export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProps) {
+  const { t } = useTranslation();
   const form = useAppForm({
     defaultValues,
     onSubmit,
@@ -21,21 +23,21 @@ export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProp
         }}
       >
         <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">Map metadata</legend>
+          <legend className="fieldset-legend">{t('map-metadata')}</legend>
 
-          <form.AppField name="title" children={field => <field.TextField label="Title" required />} />
-          <form.AppField name="subtitle" children={field => <field.TextField label="Subtitle" />} />
+          <form.AppField name="title" children={field => <field.TextField label={t('title')} required />} />
+          <form.AppField name="subtitle" children={field => <field.TextField label={t('subtitle')} />} />
           <form.AppField
             name="icon"
             children={field => (
               <>
-                <field.TextField label="Icon" required />
-                <label>Preview</label>
+                <field.TextField label={t('icon')} required />
+                <label>{t('preview')}</label>
                 <img src={field.state.value} className="w-25" />
               </>
             )}
           />
-          <form.AppField name="description" children={field => <field.MDXField label="Description" />} />
+          <form.AppField name="description" children={field => <field.MDXField label={t('description')} />} />
 
           <form.SubscribeButton />
         </fieldset>
