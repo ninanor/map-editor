@@ -39,7 +39,7 @@ function FeatureSelector({ features }: { features: MapGeoJSONFeature[] }) {
       <h5 className="font-bold">Found {features.length} features</h5>
       <label>Select the feature to display</label>
       <select className="select" value={selected} onChange={e => setSelected(parseInt(e.target.value))}>
-        {features.map((f, index) => (
+        {features.map((_, index) => (
           // eslint-disable-next-line react-x/no-array-index-key
           <option key={index} value={index}>
             {index}
