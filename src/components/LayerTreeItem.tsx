@@ -86,7 +86,7 @@ export function ItemRender({ item, editable, className }: ItemRenderProps) {
                     <FontAwesomeIcon icon={faInfoCircle} />
                   </Link>
                 )
-              : data.description && (
+              : (
                   <Link to={`/layers/$layerId`} params={{ layerId: id }} onClick={noPropagate}>
                     <FontAwesomeIcon icon={faInfoCircle} />
                   </Link>
