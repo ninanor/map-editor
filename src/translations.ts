@@ -51,6 +51,11 @@ export const resources = {
       // Layer types
       'raster-cogtiff': 'Raster (COGTiff)',
       'vector-pmtiles': 'Vector (PMTiles)',
+      
+      // Raster bands
+      bands: 'Bands',
+      'single-band': 'Single band (1)',
+      'rgb-bands': 'RGB bands (1,2,3,4)',
     },
   },
   no: {
@@ -105,6 +110,11 @@ export const resources = {
       // Layer types
       'raster-cogtiff': 'Raster (COGTiff)',
       'vector-pmtiles': 'Vektor (PMTiles)',
+      
+      // Raster bands
+      bands: 'Bånd',
+      'single-band': 'Enkelt bånd (1)',
+      'rgb-bands': 'RGB bånd (1,2,3,4)',
     },
   },
 };

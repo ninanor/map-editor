@@ -84,6 +84,13 @@ export const LAYER_SCHEMA: RJSFSchema = {
           properties: {
             url: { type: 'string' },
             colormap_name: { type: 'string', default: 'viridis' },
+            bidx: {
+              type: 'string',
+              title: 'Bands',
+              default: 'single',
+              enum: ['single', 'rgb'],
+              enumNames: ['Single band (1)', 'RGB bands (1,2,3,4)'],
+            },
             // rescale: {
             //   type: 'array',
             //   prefixItems: [

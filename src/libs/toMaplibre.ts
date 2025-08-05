@@ -5,16 +5,20 @@ type ValueGetter = (value: VectorFillValue) => [string, unknown];
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
   const l = layer.layer as TitilerSource;
-  const { bidx = 1, ...other } = l.titiler;
+  const { bidx = 'single', ...other } = l.titiler;
   const search = new URLSearchParams();
 
-  if (Array.isArray(bidx)) {
-    bidx.forEach(index => {
-      search.append('bidx', index.toString());
-    });
+  // Convert bidx string format to array
+  let bidxArray: number[];
+  if (bidx === 'rgb') {
+    bidxArray = [1, 2, 3, 4];
   } else {
-    search.append('bidx', bidx.toString());
+    bidxArray = [1]; // default single band
   }
+
+  bidxArray.forEach(index => {
+    search.append('bidx', index.toString());
+  });
   Object.entries(other).forEach(([key, value]) => {
     search.append(key, value.toString());
   });
