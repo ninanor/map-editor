@@ -85,6 +85,20 @@ export interface TitilerSource extends Partial<Source> {
   };
 }
 
+export interface VectorFillValue {
+  value: string;
+  description?: string;
+  color: string;
+  borderColor?: string;
+  opacity?: number;
+}
+
+export interface VectorFillLegend {
+  default?: Omit<VectorFillValue, 'value'>;
+  field?: string;
+  values?: VectorFillValue[];
+}
+
 export interface PMTileSource extends Partial<Source> {
   type: 'vector';
   pmtiles: {
@@ -93,7 +107,9 @@ export interface PMTileSource extends Partial<Source> {
   children: {
     id?: string;
     key?: string;
+    type: 'fill' | 'line';
     'source-layer': string;
+    legend?: VectorFillLegend;
   };
 }
 

@@ -59,7 +59,30 @@
                     "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles"
                 },
                 "children": {
-                    "source-layer": "ch"
+                    "source-layer": "ch",
+                    "type": "fill",
+                    "legend": {
+                        "default": {
+                            "opacity": 0.5,
+                            "color": "#de2828",
+                            "description": "Something"
+                        },
+                        "field": "crop_name",
+                        "values": [
+                            {
+                                "value": "Extensiv genutzte Wiesen (ohne Weiden)",
+                                "color": "#00ffff",
+                                "opacity": 1,
+                                "description": "Extensiv genutzte Wiesen (ohne Weiden)"
+                            },
+                            {
+                                "opacity": 1,
+                                "value": "Übrige Dauerwiesen (ohne Weiden)",
+                                "color": "#00da0f",
+                                "description": "Übrige Dauerwiesen (ohne Weiden)"
+                            }
+                        ]
+                    }
                 }
             }
         }

@@ -1,7 +1,9 @@
-import { LayerWithId, TitilerSource, PMTileSource } from '../types';
+import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue } from '../types';
 import { SourceProps } from 'react-map-gl/maplibre';
 
-function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourceProps {
+type ValueGetter = (value: VectorFillValue) => [string, unknown];
+
+function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
   const l = layer.layer as TitilerSource;
   const { bidx = 1, ...other } = l.titiler;
   const search = new URLSearchParams();
@@ -28,32 +30,88 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourcePr
   };
 }
 
-function buildPMTilesLayer(layer: LayerWithId): SourceProps {
+function maplibreMatchExpression(field: string, values: VectorFillValue[], defaultValue: unknown, getter: ValueGetter) {
+  let expr: unknown[] = ['match', ['get', field]];
+
+  values.map(getter).forEach(colorValue => {
+    expr = expr.concat(colorValue);
+  });
+
+  expr.push(defaultValue);
+
+  return expr;
+}
+
+function vectorLegendFill(legend: VectorFillLegend) {
+  if (legend.field) {
+    return {
+      paint: {
+        'fill-color': maplibreMatchExpression(legend.field, legend.values ?? [], legend.default?.color ?? '#000', o => [
+          o.value,
+          o.color,
+        ]),
+        'fill-outline-color': maplibreMatchExpression(
+          legend.field,
+          legend.values ?? [],
+          legend.default?.borderColor ?? legend.default?.color ?? '#000',
+          o => [o.value, o.borderColor ?? o.color],
+        ),
+        'fill-opacity': maplibreMatchExpression(legend.field, legend.values ?? [], legend.default?.opacity ?? 1, o => [
+          o.value,
+          o.opacity ?? 1,
+        ]),
+      },
+      type: 'fill',
+    };
+  } else {
+    return {
+      paint: {
+        'fill-color': legend.default?.color,
+        'fill-outline-color': legend.default?.borderColor ?? legend.default?.color,
+        'fill-opacity': legend.default?.opacity ?? 1,
+      },
+      type: 'fill',
+    };
+  }
+}
+
+function vectorLegendToPaint(type: string, legend: VectorFillLegend | undefined) {
+  if (legend) {
+    switch (type) {
+      case 'fill':
+        return vectorLegendFill(legend);
+    }
+  }
+  return {
+    paint: {
+      'fill-color': '#000',
+    },
+    type: 'fill',
+  };
+}
+
+function buildPMTilesLayer(layer: LayerWithId) {
   const l = layer.layer as PMTileSource;
+
+  const { legend, type, ...children } = l.children;
+  const layerStyle = vectorLegendToPaint(type, legend);
 
   const result = {
     type: 'vector',
     id: layer.id,
     url: `pmtiles://${l.pmtiles.url}`,
     children: {
-      type: 'fill',
-      paint: {
-        'fill-color': '#000',
-      },
-      ...l.children,
+      ...layerStyle,
+      ...children,
       id: layer.id,
     },
   };
+
   result.children.key = layer.id + result.children.type;
   return result;
 }
 
-function layerToSource(
-  value: LayerWithId,
-  _index: number,
-  _array: LayerWithId[],
-  titiler_api_url: string,
-): SourceProps | null {
+function layerToSource(value: LayerWithId, _index: number, _array: LayerWithId[], titiler_api_url: string) {
   if ('titiler' in value.layer) {
     return buildRasterLayer(value, titiler_api_url);
   }

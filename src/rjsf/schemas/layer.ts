@@ -15,20 +15,38 @@ export const LAYER_SCHEMA_UI: UiSchema = {
       'ui:options': { label: false },
       'ui:classNames': 'hidden',
     },
-    pmtiles: {
-      'ui:options': { label: false },
-    },
+    pmtiles: {},
     titiler: {
       colormap_name: {
         'ui:widget': 'ColormapWidget',
       },
-      'ui:options': { label: false },
     },
     children: {
-      paint: {
-        'fill-color': { 'ui:widget': 'ColorPickerWidget' },
-        'fill-outline-color': { 'ui:widget': 'ColorPickerWidget' },
-        'line-color': { 'ui:widget': 'ColorPickerWidget' },
+      legend: {
+        default: {
+          color: {
+            'ui:widget': 'ColorPickerWidget',
+          },
+          borderColor: {
+            'ui:widget': 'ColorPickerWidget',
+          },
+          opacity: {
+            'ui:widget': 'range',
+          },
+        },
+        values: {
+          items: {
+            color: {
+              'ui:widget': 'ColorPickerWidget',
+            },
+            borderColor: {
+              'ui:widget': 'ColorPickerWidget',
+            },
+            opacity: {
+              'ui:widget': 'range',
+            },
+          },
+        },
       },
     },
   },
@@ -128,68 +146,95 @@ export const LAYER_SCHEMA: RJSFSchema = {
               },
               then: {
                 properties: {
-                  paint: {
-                    $ref: '#/$defs/PaintFill',
+                  legend: {
+                    title: 'Legend settings',
+                    type: 'object',
+                    properties: {
+                      default: {
+                        title: 'Default style',
+                        properties: {
+                          color: {
+                            type: 'string',
+                            default: '#000',
+                          },
+                          description: {
+                            type: 'string',
+                            title: 'Description text for the legend',
+                          },
+                          opacity: {
+                            type: 'number',
+                            minimum: 0,
+                            maximum: 1,
+                            default: 1,
+                            multipleOf: 0.1,
+                          },
+                          borderColor: {
+                            type: 'string',
+                            default: '#000',
+                          },
+                        },
+                      },
+                      field: {
+                        title: 'Conditional rendering based on field',
+                        type: 'string',
+                        description: 'Which dataset field should be used for conditional rendering',
+                      },
+                      values: {
+                        type: 'array',
+                        title: 'Conditional values',
+                        items: { $ref: '#/$defs/LegendFillValue' },
+                      },
+                    },
                   },
                 },
               },
             },
-            {
-              if: {
-                properties: {
-                  type: {
-                    const: 'line',
-                  },
-                },
-              },
-              then: {
-                properties: {
-                  paint: {
-                    $ref: '#/$defs/PaintLine',
-                  },
-                },
-              },
-            },
+            // {
+            //   if: {
+            //     properties: {
+            //       type: {
+            //         const: 'line',
+            //       },
+            //     },
+            //   },
+            //   then: {
+            //     properties: {
+            //       legend: {
+            //         $ref: '#/$defs/LegendLine',
+            //       },
+            //     },
+            //   },
+            // },
           ],
         },
       },
     },
-    PaintFill: {
+    LegendFillValue: {
       type: 'object',
+      title: 'Conditional Value',
       properties: {
-        'fill-opacity': {
+        value: {
+          type: 'string',
+          title: 'Expected value of the field',
+        },
+        color: {
+          type: 'string',
+        },
+        description: {
+          type: 'string',
+          title: 'Description text for the legend',
+        },
+        opacity: {
           type: 'number',
           minimum: 0,
           maximum: 1,
+          multipleOf: 0.1,
+          default: 1,
         },
-        'fill-color': {
+        borderColor: {
           type: 'string',
-          default: '#000',
-        },
-        'fill-outline-color': {
-          type: 'string',
-          default: '#000',
         },
       },
-      additionalProperties: false,
-    },
-    PaintLine: {
-      type: 'object',
-      properties: {
-        'line-opacity': {
-          type: 'number',
-          minimum: 0,
-          maximum: 1,
-        },
-        'line-color': {
-          type: 'string',
-          default: '#000',
-        },
-        'line-width': {
-          type: 'number',
-        },
-      },
-      additionalProperties: false,
     },
   },
 };

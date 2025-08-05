@@ -26,6 +26,8 @@ export default function Map() {
     };
   }, []);
 
+  console.log(sources);
+
   return (
     <MaplibreMap mapStyle={basemap} initialViewState={initialViewState}>
       <GeocoderControl position="top-left" />
@@ -33,9 +35,9 @@ export default function Map() {
       <GeolocateControl position="top-right" />
       <FullscreenControl position="top-right" />
       <ScaleControl />
-      {sources.map(({ id, children, ...props }) => (
+      {sources.map(({ id, children: { key, ...children }, ...props }) => (
         <Source key={id} {...props}>
-          <Layer {...children} />
+          <Layer key={key} {...children} />
         </Source>
       ))}
     </MaplibreMap>

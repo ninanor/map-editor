@@ -201,3 +201,21 @@ button:focus-visible .treeitem.focused,
   @apply overflow-auto;
   max-height: calc(100vh * 0.75);
 }
+
+.rjsf .title-field {
+  @apply !mb-0;
+}
+
+.rjsf .title-field h2 {
+  /* @apply hidden; */
+  @apply !text-lg mb-0 mt-1;
+}
+
+.rjsf .title-field .divider {
+  /* @apply hidden; */
+  @apply my-0;
+}
+
+.rjsf .form-control {
+  @apply ps-4;
+}
