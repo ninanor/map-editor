@@ -26,12 +26,12 @@ function RouteComponent() {
     <>
       <ul className="menu menu-horizontal gap-2 mb-2 w-full">
         <li>
-          <Link to="/edit/folders/add" className="btn btn-sm btn-primary" preload="intent">
+          <Link to="/edit/folders/add" className="btn btn-sm btn-accent" preload="intent">
             <FontAwesomeIcon icon={faPlusCircle} /> {t('folder')}
           </Link>
         </li>
         <li>
-          <Link to="/edit/layers/add" className="btn btn-sm btn-primary">
+          <Link to="/edit/layers/add" className="btn btn-sm btn-accent">
             <FontAwesomeIcon icon={faPlusCircle} /> {t('layer')}
           </Link>
         </li>

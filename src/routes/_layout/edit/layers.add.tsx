@@ -83,7 +83,7 @@ function RouteComponent() {
             form.handleSubmit().catch(console.error);
           }}
         >
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
             <legend className="fieldset-legend">Add layer</legend>
 
             <form.AppField name="name" children={field => <field.TextField label="Name" required />} />

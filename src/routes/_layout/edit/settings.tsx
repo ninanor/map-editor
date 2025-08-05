@@ -76,7 +76,7 @@ function RouteComponent() {
   return (
     <div>
       <h4 className="font-bold">Download configuration</h4>
-      <a className="btn btn-primary" onClick={download}>
+      <a className="btn btn-accent" onClick={download}>
         {t('download-config')}
       </a>
       <h4 className="font-bold mt-5">Upload configuration</h4>

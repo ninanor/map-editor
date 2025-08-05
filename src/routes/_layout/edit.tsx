@@ -23,7 +23,7 @@ function RouteComponent() {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-warning/95 shadow-2xs h-screen w-md p-2 text-warning-content">
+    <div id="edit-bar" className="bg-primary shadow-2xs h-screen w-md p-2 text-primary-content">
       <h2 className="text-xl font-bold">
         <FontAwesomeIcon icon={faEdit} className="mr-3" />
         {t('edit-mode')}
@@ -32,7 +32,9 @@ function RouteComponent() {
         {EDIT_TABS.map(tab => (
           <Link
             role="tab"
-            className={classNames('tab text-warning-content', { 'tab-active': location.pathname === tab.id })}
+            className={classNames('tab !text-primary-content', {
+              'tab-active !text-accent-content': location.pathname === tab.id,
+            })}
             to={tab.id}
             key={tab.id}
           >

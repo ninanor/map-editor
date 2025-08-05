@@ -89,7 +89,7 @@
     },
     "config": {
         "titiler_api_url": "/titiler",
-        "theme": "nord",
+        "theme": "nina",
         "language": "no",
         "footer": {
             "items": [

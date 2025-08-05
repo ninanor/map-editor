@@ -21,6 +21,7 @@ interface LayerTreeProps {
   editable?: boolean;
   expandedItems: string[];
   setExpandedItems: SetStateFn<string[]>;
+  className?: string;
 }
 
 const FEATURES = [
@@ -32,7 +33,14 @@ const FEATURES = [
   propMemoizationFeature,
 ];
 
-export function LayerTree({ items, updateChildren, editable, expandedItems, setExpandedItems }: LayerTreeProps) {
+export function LayerTree({
+  items,
+  updateChildren,
+  editable,
+  expandedItems,
+  setExpandedItems,
+  className,
+}: LayerTreeProps) {
   const onDrop = useMemo(() => {
     if (!editable || !updateChildren) {
       return undefined;
@@ -65,7 +73,7 @@ export function LayerTree({ items, updateChildren, editable, expandedItems, setE
     <>
       <div {...tree.getContainerProps()} className="tree">
         {tree.getItems().map(item => (
-          <ItemRender key={item.getId()} item={item} editable={editable} />
+          <ItemRender key={item.getId()} item={item} editable={editable} className={className} />
         ))}
         <div style={tree.getDragLineStyle()} className="dragline" />
       </div>

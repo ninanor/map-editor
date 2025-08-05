@@ -18,13 +18,14 @@ import { Link } from '@tanstack/react-router';
 interface ItemRenderProps {
   item: ItemInstance<Item>;
   editable?: boolean;
+  className?: string;
 }
 
 const noPropagate = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
-export function ItemRender({ item, editable }: ItemRenderProps) {
+export function ItemRender({ item, editable, className }: ItemRenderProps) {
   const layerOrder = useAppStore(state => state.layerOrder);
   const isVisible = layerOrder.includes(item.getId());
   const { toggleLayer } = useAppActions();
@@ -53,7 +54,7 @@ export function ItemRender({ item, editable }: ItemRenderProps) {
       }}
     >
       <div
-        className={cx('treeitem flex items-center', {
+        className={cx('treeitem flex items-center', className, {
           focused: item.isFocused(),
           expanded: item.isExpanded(),
           folder: isFolder,

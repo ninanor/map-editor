@@ -6,6 +6,41 @@
   themes: all;
 }
 
+@plugin "daisyui/theme" {
+  name: "nina";
+  default: true;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(98% 0 0);
+  --color-base-300: rgba(0, 0, 0, .06);
+  --color-base-content: oklch(21% 0.006 285.885);
+  --color-primary: #425563;
+  --color-primary-content: oklch(98% 0.003 247.858);
+  --color-secondary: #004F71;
+  --color-secondary-content: oklch(98% 0.003 247.858);
+  --color-accent: #00a4b0;
+  --color-accent-content: oklch(12% 0.042 264.695);
+  --color-neutral: oklch(14% 0.005 285.823);
+  --color-neutral-content: oklch(92% 0.004 286.32);
+  --color-info: #2DCCD3;
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: #7A9A01;
+  --color-success-content: oklch(26% 0.051 172.552);
+  --color-warning: #FFB25B;
+  --color-warning-content: oklch(41% 0.112 45.904);
+  --color-error: oklch(71% 0.194 13.428);
+  --color-error-content: oklch(27% 0.105 12.094);
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 1;
+}
+
 .tree {
   max-width: 100%;
 }
@@ -25,7 +60,11 @@
   position: relative;
   transition: background-color 0.2s ease;
   cursor: pointer;
-  @apply flex bg-base-100 my-1 text-base-content;
+  @apply flex my-1;
+}
+
+#edit-bar .treeitem:hover {
+  @apply bg-accent text-accent-content;
 }
 
 .treeitem:hover {
@@ -198,7 +237,7 @@ button:focus-visible .treeitem.focused,
 } */
 
 .rjsf>.field-template>.form-control {
-  @apply overflow-auto;
+  @apply overflow-auto text-base-content;
   max-height: calc(100vh * 0.75);
 }
 

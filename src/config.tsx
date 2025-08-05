@@ -61,6 +61,7 @@ export const configQueryOptions = (url: string) =>
   });
 
 export const THEMES = [
+  'nina',
   'light',
   'dark',
   'cupcake',
