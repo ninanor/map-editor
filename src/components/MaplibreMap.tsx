@@ -6,17 +6,20 @@ import {
   NavigationControl,
   ScaleControl,
   Source,
+  MapLayerMouseEvent,
 } from 'react-map-gl/maplibre';
 import { useBaseMap, useMaplibreMapConf } from '../hooks/app';
 import maplibregl from 'maplibre-gl';
 import { Protocol } from 'pmtiles';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import GeocoderControl from './GeocoderControl';
+import { Popup, PopupInfo } from './popup';
 
 export default function Map() {
   const basemap = useBaseMap();
-  const { initialViewState, sources } = useMaplibreMapConf();
+  const { initialViewState, sources, interactiveLayerIds } = useMaplibreMapConf();
+  const [popup, setInfoPopup] = useState<PopupInfo | null>(null);
 
   useEffect(() => {
     const protocol = new Protocol();
@@ -26,10 +29,26 @@ export default function Map() {
     };
   }, []);
 
-  console.log(sources);
+  const onClick = useCallback((event: MapLayerMouseEvent) => {
+    const {
+      features,
+      lngLat: { lat, lng },
+    } = event;
+
+    if (features && features.length > 0) {
+      setInfoPopup({ features, lat, lng, onClose: () => setInfoPopup(null) });
+    } else {
+      setInfoPopup(null);
+    }
+  }, []);
 
   return (
-    <MaplibreMap mapStyle={basemap} initialViewState={initialViewState}>
+    <MaplibreMap
+      mapStyle={basemap}
+      initialViewState={initialViewState}
+      onClick={onClick}
+      interactiveLayerIds={interactiveLayerIds}
+    >
       <GeocoderControl position="top-left" />
       <NavigationControl position="top-right" />
       <GeolocateControl position="top-right" />
@@ -37,9 +56,10 @@ export default function Map() {
       <ScaleControl />
       {sources.map(({ id, children: { key, ...children }, ...props }) => (
         <Source key={id} {...props}>
-          <Layer key={key} {...children} />
+          <Layer key={key as string} {...children} />
         </Source>
       ))}
+      {popup && <Popup {...popup} />}
     </MaplibreMap>
   );
 }

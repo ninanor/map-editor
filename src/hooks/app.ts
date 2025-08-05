@@ -219,10 +219,12 @@ const maplibreMapSelector = createAppSelector(
   state => state.viewState,
   layerSelector,
   state => state.config.titiler_api_url,
-  (viewState: Partial<ViewState>, layers: LayerWithId[], titiler_api_url: string) => {
+  state => state.layerOrder,
+  (viewState: Partial<ViewState>, layers: LayerWithId[], titiler_api_url: string, layerOrder: string[]) => {
     return {
       initialViewState: viewState,
       sources: toMaplibreSources(layers, titiler_api_url),
+      interactiveLayerIds: layerOrder,
     };
   },
 );
