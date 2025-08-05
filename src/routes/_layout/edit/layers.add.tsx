@@ -43,8 +43,10 @@ function RouteComponent() {
         layer = {
           ...value.layer,
           pmtiles: {
-            layer: '',
             url: '',
+          },
+          children: {
+            'source-layer': '',
           },
         } as PMTileSource;
       }
