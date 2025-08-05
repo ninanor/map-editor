@@ -53,6 +53,7 @@
         "pmtiles": {
             "name": "pmtiles",
             "type": "layer",
+            "description": "test",
             "layer": {
                 "type": "vector",
                 "pmtiles": {
