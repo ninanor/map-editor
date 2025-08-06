@@ -26,7 +26,6 @@ export const FOLDER_SCHEMA: RJSFSchema = {
     },
     download_url: {
       type: 'string',
-      format: 'uri',
       title: 'Download URL',
     },
     parent: {
