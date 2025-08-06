@@ -1,0 +1,8 @@
+.github
+.tanstack
+.vscode
+nginx
+docker-compose.yml
+Dockerfile
+vite.config.ts
+vite.lib.config.ts
