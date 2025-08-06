@@ -22,7 +22,7 @@ function SortableItem({ id, name }: LayerWithId) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+     
     transform: CSS.Transform.toString(transform),
     transition,
   };
