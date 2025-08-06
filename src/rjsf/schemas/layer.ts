@@ -81,6 +81,7 @@ export const LAYER_SCHEMA: RJSFSchema = {
       properties: {
         titiler: {
           type: 'object',
+          additionalProperties: true,
           properties: {
             url: { type: 'string' },
             colormap_name: { type: 'string', default: 'viridis' },

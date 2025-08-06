@@ -82,6 +82,7 @@ export interface TitilerSource extends Partial<Source> {
     colormap_name?: string;
     rescale?: number[];
     bidx?: string;
+    [key: string]: any; // Allow additional properties
   };
 }
 
