@@ -80,9 +80,9 @@ export interface TitilerSource extends Partial<Source> {
   titiler: {
     url: string;
     colormap_name?: string;
-    rescale?: number[];
+    rescale?: string[];
     bidx?: string;
-    [key: string]: any; // Allow additional properties
+    [key: string]: unknown; // Allow additional properties
   };
 }
 

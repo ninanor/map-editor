@@ -5,7 +5,7 @@ type ValueGetter = (value: VectorFillValue) => [string, unknown];
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
   const l = layer.layer as TitilerSource;
-  const { bidx = 'single', ...other } = l.titiler;
+  const { bidx = 'single', rescale, ...other } = l.titiler;
   const search = new URLSearchParams();
 
   // Convert bidx string format to array
@@ -19,8 +19,16 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
   bidxArray.forEach(index => {
     search.append('bidx', index.toString());
   });
+  if (rescale) {
+    rescale.forEach(v => {
+      search.append('rescale', v);
+    });
+  }
   Object.entries(other).forEach(([key, value]) => {
-    search.append(key, value.toString());
+    if (value !== undefined && value !== null) {
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
+      search.append(key, String(value));
+    }
   });
 
   return {
