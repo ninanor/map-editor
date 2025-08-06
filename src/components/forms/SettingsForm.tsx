@@ -2,6 +2,7 @@ import { LANGUAGES, THEMES } from '../../config';
 import { useAppForm } from '../../hooks/form';
 import { MapSettings } from '../../types';
 import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react';
 
 interface SettingsFormProps {
   defaultValues: MapSettings;
@@ -14,6 +15,11 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
     defaultValues,
     onSubmit,
   });
+
+  const menuOrientationOptions = useMemo(() => [
+    { value: 'horizontal', label: t('horizontal') },
+    { value: 'vertical', label: t('vertical') }
+  ], [t]);
   return (
     <form.AppForm>
       <form
@@ -31,6 +37,15 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
           <form.AppField
             name="language"
             children={field => <field.SelectField label={t('language')} options={LANGUAGES} />}
+          />
+          <form.AppField
+            name="menuOrientation"
+            children={field => (
+              <field.SelectField
+                label={t('menu-orientation')}
+                options={menuOrientationOptions}
+              />
+            )}
           />
 
           <form.SubscribeButton />

@@ -57,6 +57,7 @@ export interface MapSettings {
   theme: string;
   language: string;
   footer?: Footer;
+  menuOrientation?: 'horizontal' | 'vertical';
 }
 
 export interface MapMeta {
