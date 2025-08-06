@@ -94,18 +94,16 @@ export const LAYER_SCHEMA: RJSFSchema = {
                 { const: 'rgb', title: 'RGBA bands (1,2,3,4)' },
               ],
             },
-            // rescale: {
-            //   type: 'array',
-            //   prefixItems: [
-            //     {
-            //       type: 'number',
-            //     },
-            //     {
-            //       type: 'number',
-            //     },
-            //   ],
-            //   items: false,
-            // },
+            rescale: {
+              type: 'array',
+              title: 'Rescale values',
+              description: 'Array of min,max values for each band (e.g., "0,255")',
+              items: {
+                type: 'string',
+                pattern: '^[0-9.-]+,[0-9.-]+$',
+                title: 'Min,Max values',
+              },
+            },
           },
         },
         type: {

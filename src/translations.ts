@@ -56,6 +56,8 @@ export const resources = {
       bands: 'Bands',
       'single-band': 'Single band (1)',
       'rgb-bands': 'RGB bands (1,2,3,4)',
+      'rescale-values': 'Rescale values',
+      'rescale-description': 'Array of min,max values for each band (e.g., "0,255")',
     },
   },
   no: {
@@ -115,6 +117,8 @@ export const resources = {
       bands: 'Bånd',
       'single-band': 'Enkelt bånd (1)',
       'rgb-bands': 'RGB bånd (1,2,3,4)',
+      'rescale-values': 'Skaleringseverdier',
+      'rescale-description': 'Array med min,maks verdier for hvert bånd (f.eks. "0,255")',
     },
   },
 };
