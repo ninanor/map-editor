@@ -6,3 +6,9 @@ docker-compose.yml
 Dockerfile
 vite.config.ts
 vite.lib.config.ts
+.editorconfig
+.dockerignore
+index.html
+public
+eslint.config.js
+tsconfig.*
