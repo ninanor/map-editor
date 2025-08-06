@@ -1,5 +1,6 @@
 import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue } from '../types';
 import { SourceProps } from 'react-map-gl/maplibre';
+import hexRgb from 'hex-rgb';
 
 type ValueGetter = (value: VectorFillValue) => [string, unknown];
 
@@ -31,10 +32,19 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
     }
   });
 
+  let colormap = '';
+
+  if (l.legend.type === 'linear') {
+    search.append('colormap_name', l.legend.colormap_name);
+  } else if (l.legend.type === 'interval') {
+    const cmap = l.legend.intervals.map(i => [[i.min, i.max], hexRgb(i.color, { format: 'array' })]);
+    colormap = `&colormap=${JSON.stringify(cmap)}`;
+  }
+
   return {
     type: 'raster',
     id: layer.id,
-    tiles: [`${titiler_api_url}/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?${search.toString()}`],
+    tiles: [`${titiler_api_url}/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?${search.toString()}${colormap}`],
     children: {
       id: layer.id,
       type: 'raster',

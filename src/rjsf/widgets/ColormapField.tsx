@@ -23,7 +23,11 @@ export function ColormapField(props: WidgetProps) {
 
   return (
     <>
-      <select className="select" value={props.value as string} onChange={e => props.onChange(e.target.value)}>
+      <select
+        className="select"
+        value={(props.value ?? 'viridis') as string}
+        onChange={e => props.onChange(e.target.value)}
+      >
         {isLoading && (
           <option value="" disabled>
             Loading...
@@ -37,7 +41,7 @@ export function ColormapField(props: WidgetProps) {
           ))}
       </select>
       <p>Preview:</p>
-      <img className="w-full" src={`${titiler_uri}/colorMaps/${props.value}?format=png`} />
+      <img className="w-full" src={`${titiler_uri}/colorMaps/${props.value ?? 'viridis'}?format=png`} />
     </>
   );
 }

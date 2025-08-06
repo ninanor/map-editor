@@ -78,15 +78,37 @@ export interface MapConfig extends MapMeta {
   config: MapSettings;
 }
 
+export interface RasterSequentialLegend {
+  type: 'linear';
+  colormap_name: string;
+  min: string;
+  max: string;
+  orientation?: 'horizontal' | 'vertical';
+}
+export interface RasterIntervalLegend {
+  type: 'interval';
+  intervals: {
+    min: number;
+    max: number;
+    color: string;
+    description: string;
+  }[];
+}
+export interface RasterImageLegend {
+  type: 'image';
+  url: string;
+}
+
 export interface TitilerSource extends Partial<Source> {
   type: 'raster';
   titiler: {
     url: string;
-    colormap_name?: string;
+    // colormap_name?: string;
     rescale?: string[];
     bidx?: string;
     [key: string]: unknown; // Allow additional properties
   };
+  legend: RasterSequentialLegend | RasterIntervalLegend;
 }
 
 export interface VectorFillValue {

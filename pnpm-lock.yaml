@@ -86,6 +86,9 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      hex-rgb:
+        specifier: ^5.0.0
+        version: 5.0.0
       i18next:
         specifier: ^25.3.2
         version: 25.3.2(typescript@5.7.3)
@@ -2628,6 +2631,10 @@ packages:
 
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
+
+  hex-rgb@5.0.0:
+    resolution: {integrity: sha512-NQO+lgVUCtHxZ792FodgW0zflK+ozS9X9dwGp9XvvmPlH7pyxd588cn24TD3rmPm/N0AIRXF10Otah8yKqGw4w==}
+    engines: {node: '>=12'}
 
   html-parse-stringify@3.0.1:
     resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
@@ -6683,6 +6690,8 @@ snapshots:
   hast-util-whitespace@3.0.0:
     dependencies:
       '@types/hast': 3.0.4
+
+  hex-rgb@5.0.0: {}
 
   html-parse-stringify@3.0.1:
     dependencies:

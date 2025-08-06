@@ -16,9 +16,17 @@ export const LAYER_SCHEMA_UI: UiSchema = {
       'ui:classNames': 'hidden',
     },
     pmtiles: {},
-    titiler: {
+    titiler: {},
+    legend: {
       colormap_name: {
         'ui:widget': 'ColormapWidget',
+      },
+      intervals: {
+        items: {
+          color: {
+            'ui:widget': 'ColorPickerWidget',
+          },
+        },
       },
     },
     children: {
@@ -91,7 +99,6 @@ export const LAYER_SCHEMA: RJSFSchema = {
           },
           properties: {
             url: { type: 'string' },
-            colormap_name: { type: 'string', default: 'viridis' },
             bidx: {
               title: 'Bands',
               default: 'single',
@@ -115,6 +122,10 @@ export const LAYER_SCHEMA: RJSFSchema = {
         },
         type: {
           const: 'raster',
+        },
+        legend: {
+          $ref: '#/$defs/RasterLinearLegend',
+          title: 'Legend Configuration',
         },
       },
     },
@@ -223,6 +234,74 @@ export const LAYER_SCHEMA: RJSFSchema = {
           ],
         },
       },
+    },
+    RasterLinearLegend: {
+      type: 'object',
+      title: 'Linear Legend',
+      properties: {
+        type: {
+          const: 'linear',
+        },
+        colormap_name: {
+          type: 'string',
+          title: 'Colormap Name',
+        },
+        min: {
+          type: 'string',
+          title: 'Minimum Value description',
+        },
+        max: {
+          type: 'string',
+          title: 'Maximum Value description',
+        },
+        orientation: {
+          type: 'string',
+          title: 'Legend Orientation',
+          default: 'horizontal',
+          oneOf: [
+            { const: 'horizontal', title: 'Horizontal' },
+            { const: 'vertical', title: 'Vertical' },
+          ],
+        },
+      },
+      required: ['type', 'min', 'max', 'colormap_name'],
+    },
+    RasterIntervalLegend: {
+      type: 'object',
+      title: 'Interval Legend',
+      properties: {
+        type: {
+          const: 'interval',
+        },
+        intervals: {
+          type: 'array',
+          minItems: 1,
+          items: {
+            type: 'object',
+            title: 'Interval',
+            properties: {
+              min: {
+                type: 'number',
+                title: 'Minimum',
+              },
+              max: {
+                type: 'number',
+                title: 'Maximum',
+              },
+              color: {
+                type: 'string',
+                title: 'Color',
+              },
+              description: {
+                type: 'string',
+                title: 'Description',
+              },
+            },
+            required: ['min', 'max', 'color', 'description'],
+          },
+        },
+      },
+      required: ['type', 'intervals'],
     },
     LegendFillValue: {
       type: 'object',

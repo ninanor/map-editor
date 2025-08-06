@@ -42,10 +42,13 @@
                 "type": "raster",
                 "titiler": {
                     "url": "https://github.com/GeoTIFF/test-data/raw/refs/heads/main/files/gfw-azores.tif",
-                    "colormap_name": "ylorbr_r",
                     "rescale": [
                         "0,573"
                     ]
+                },
+                "legend": {
+                    "type": "linear",
+                    "colormap_name": "ylorbr_r"
                 }
             }
         },
