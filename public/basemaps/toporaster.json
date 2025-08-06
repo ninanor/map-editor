@@ -1,0 +1,25 @@
+{
+    "version": 8,
+    "name": "Toporaster Norway",
+    "sources": {
+        "toporaster": {
+            "type": "raster",
+            "tiles": [
+                "https://cache.kartverket.no/v1/wmts/1.0.0/toporaster/default/webmercator/{z}/{y}/{x}.png"
+            ],
+            "minzoom": 0,
+            "maxzoom": 14,
+            "scheme": "xyz",
+            "tileSize": 512,
+            "attribution": "<a target='_blank' href='https://kartkatalog.geonorge.no/metadata/topografisk-norgeskart-wmts--cache/8f381180-1a47-4453-bee7-9a3d64843efa'>Kartverket</a>"
+        }
+    },
+    "layers": [
+        {
+            "id": "topo",
+            "type": "raster",
+            "source": "toporaster"
+        }
+    ],
+    "id": "toporaster-norway"
+}

@@ -123,6 +123,7 @@ export const defaultConfigBase = {
     positron: BASEMAP.POSITRON,
     voyager: BASEMAP.VOYAGER,
     darkMatter: BASEMAP.DARK_MATTER,
+    toporaster: '/basemaps/toporaster.json',
   },
   items: null,
   layerOrder: [],
