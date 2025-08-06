@@ -25,6 +25,7 @@ export const resources = {
       name: 'Name',
       'parent-folder': 'Parent Folder',
       'layer-type': 'Layer type',
+      'download-url': 'Download URL',
       
       // Button text
       back: 'Back',
@@ -86,6 +87,7 @@ export const resources = {
       name: 'Navn',
       'parent-folder': 'Overordnet mappe',
       'layer-type': 'Lagtype',
+      'download-url': 'Nedlastings-URL',
       
       // Button text
       back: 'Tilbake',

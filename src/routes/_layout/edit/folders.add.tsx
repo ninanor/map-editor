@@ -1,16 +1,31 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useAppActions, useFolderNames } from '../../../hooks/app';
-import { useForm } from '@tanstack/react-form';
-import { PLUGINS } from '../../../mdxPlugins';
-import { MDXEditor } from '@mdxeditor/editor';
 import { TREE_ROOT_ID } from '../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import Form from '@rjsf/daisyui';
+import { FOLDER_SCHEMA, FOLDER_SCHEMA_UI } from '../../../rjsf/schemas/folder';
+import { widgets } from '../../../rjsf/widgets';
+import AJV8Validator from '@rjsf/validator-ajv8/lib/validator';
 
 export const Route = createFileRoute('/_layout/edit/folders/add')({
   component: RouteComponent,
 });
+
+const validator = new AJV8Validator({
+  ajvOptionsOverrides: {
+    removeAdditional: true,
+  },
+});
+
+const DEFAULT_FORM_DATA = {
+  name: '',
+  description: '',
+  parent: TREE_ROOT_ID,
+  download_url: '',
+  type: 'folder',
+};
 
 function RouteComponent() {
   const { t } = useTranslation();
@@ -18,105 +33,36 @@ function RouteComponent() {
   const navigate = useNavigate();
   const folderNames = useFolderNames();
 
-  const form = useForm({
-    defaultValues: {
-      name: '',
-      description: '',
-      parent: TREE_ROOT_ID,
+  const schema = {
+    ...FOLDER_SCHEMA,
+    properties: {
+      ...FOLDER_SCHEMA.properties,
+      parent: {
+        type: 'string' as const,
+        title: 'Parent Folder',
+        oneOf: folderNames.map(f => ({ const: f.value, title: f.label })),
+      },
     },
-    onSubmit: async ({ value }) => {
-      actions.addTreeItemFolder(value);
-      await navigate({ to: '/edit' });
-    },
-  });
+  };
+
+  const handleSubmit = async (data: any) => {
+    actions.addTreeItemFolder(data.formData);
+    await navigate({ to: '/edit' });
+  };
 
   return (
     <>
       <Link to="/edit">
         <FontAwesomeIcon icon={faArrowLeft} /> {t('back')}
       </Link>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          form.handleSubmit().catch(console.error);
-        }}
-      >
-        <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">{t('add-folder')}</legend>
-
-          <form.Field
-            name="name"
-            children={field => (
-              <>
-                <label htmlFor={field.name} className="label">
-                  {t('name')}
-                </label>
-                <input
-                  type="text"
-                  className="input"
-                  required
-                  name={field.name}
-                  value={field.state.value}
-                  onChange={e => field.handleChange(e.target.value)}
-                  onBlur={field.handleBlur}
-                />
-              </>
-            )}
-          />
-
-          <form.Field
-            name="parent"
-            children={field => (
-              <>
-                <label htmlFor={field.name} className="label">
-                  {t('parent-folder')}
-                </label>
-                <select
-                  className="select"
-                  name={field.name}
-                  value={field.state.value}
-                  onChange={e => field.handleChange(e.target.value)}
-                  onBlur={field.handleBlur}
-                >
-                  {folderNames.map(({ value, label }) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </>
-            )}
-          />
-
-          <form.Field
-            name="description"
-            children={field => (
-              <>
-                <label htmlFor={field.name} className="label">
-                  {t('description')}
-                </label>
-                <MDXEditor
-                  markdown={field.state.value}
-                  onChange={field.handleChange}
-                  plugins={PLUGINS}
-                  onBlur={field.handleBlur}
-                  contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64"
-                />
-              </>
-            )}
-          />
-
-          <form.Subscribe
-            selector={state => [state.canSubmit, state.isSubmitting]}
-            children={([canSubmit, isSubmitting]) => (
-              <button className="btn btn-neutral mt-4" type="submit" disabled={!canSubmit}>
-                {isSubmitting ? t('loading') : t('submit')}
-              </button>
-            )}
-          />
-        </fieldset>
-      </form>
+      <Form
+        schema={schema}
+        uiSchema={FOLDER_SCHEMA_UI}
+        validator={validator}
+        widgets={widgets}
+        formData={DEFAULT_FORM_DATA}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }

@@ -63,6 +63,11 @@ export const LAYER_SCHEMA: RJSFSchema = {
       type: 'string',
       default: '',
     },
+    download_url: {
+      type: 'string',
+      format: 'uri',
+      title: 'Download URL',
+    },
     layer: {
       title: 'Source type',
       oneOf: [

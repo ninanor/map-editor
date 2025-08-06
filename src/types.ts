@@ -14,6 +14,7 @@ export interface Folder {
   name: string;
   description?: string;
   children: string[];
+  download_url?: string;
 }
 
 export interface Layer {
@@ -22,6 +23,7 @@ export interface Layer {
   name: string;
   description?: string;
   layer: LayerConfig;
+  download_url?: string;
 }
 
 export type LayerWithId = Layer & { id: string };

@@ -91,10 +91,16 @@ export function ItemRender({ item, editable, className }: ItemRenderProps) {
                     <FontAwesomeIcon icon={faInfoCircle} />
                   </Link>
                 ))}
-          {!editable && !item.isFolder() && (
-            <button type="button" className="btn btn-ghost btn-sm" onClick={noPropagate}>
+          {!editable && data.download_url && (
+            <a 
+              href={data.download_url} 
+              className="btn btn-ghost btn-sm" 
+              onClick={noPropagate}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FontAwesomeIcon icon={faDownload} />
-            </button>
+            </a>
           )}
         </div>
       </div>
