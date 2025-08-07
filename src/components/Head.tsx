@@ -1,7 +1,5 @@
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { useAppStore } from '../hooks/app';
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { DEFAULT_LANG, DEFAULT_THEME } from '../config';
 
 export function Head() {
@@ -9,15 +7,10 @@ export function Head() {
   const language = useAppStore(state => state.config?.language ?? DEFAULT_LANG);
   const title = useAppStore(state => state.title);
   const icon = useAppStore(state => state.icon);
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    void i18n.changeLanguage(language);
-  }, [language, i18n]);
 
   return (
     <Helmet>
-      <html data-theme={theme} lang={language}></html>
+      <html lang={language} data-theme={theme}></html>
       <title>{title}</title>
       <link rel="icon" type="image/x-icon" href={icon} />
     </Helmet>

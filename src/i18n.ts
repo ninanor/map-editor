@@ -9,6 +9,12 @@ void i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
   },
+  debug: true,
+  react: {
+    bindI18n: 'loaded languageChanged',
+    bindI18nStore: 'added',
+    useSuspense: true,
+  },
 });
 
 export default i18n;
