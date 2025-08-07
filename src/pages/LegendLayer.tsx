@@ -6,8 +6,6 @@ export function LegendLayers() {
   const layers = useLayers();
   const { t } = useTranslation();
 
-  console.log(layers);
-
   return (
     <div className="p-5 shadow-2xl bg-base-100 flex flex-col gap-8">
       {layers.length === 0 && t('no-layer-found')}

@@ -50,11 +50,11 @@ function RouteComponent() {
       const reader = new FileReader();
 
       // TODO: improve logging and error management
-      reader.onabort = () => console.log('file reading was aborted');
-      reader.onerror = () => console.log('file reading has failed');
+      reader.onabort = () => console.warn('file reading was aborted');
+      reader.onerror = () => console.error('file reading has failed');
       reader.onload = () => {
         const config = JSON.parse(reader.result as string) as MapConfig;
-        console.log(config);
+        console.debug(config);
 
         // TODO: set configurations in a safer way!
         useAppStore.setState(() => config);

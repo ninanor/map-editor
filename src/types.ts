@@ -4,7 +4,7 @@ import { Source } from 'maplibre-gl';
 
 declare global {
   interface Window {
-    MAP_EDITOR_DISABLE_EDIT: boolean;
+    DEFAULT_CONFIGURATION: string;
   }
 }
 

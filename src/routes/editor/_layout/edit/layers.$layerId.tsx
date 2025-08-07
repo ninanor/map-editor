@@ -36,8 +36,6 @@ function RouteComponent() {
     navigate({ to: '/editor/edit' }).catch(console.error);
   }, [layerId, actions, navigate]);
 
-  console.log(layer);
-
   return (
     <>
       <Link to="/editor/edit">

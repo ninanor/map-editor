@@ -19,7 +19,6 @@ export function ColormapField(props: WidgetProps) {
   const titiler_uri = useAppStore(store => store.config.titiler_api_url);
 
   const { data, isLoading } = useQuery(colormapsQueryOptions(titiler_uri));
-  console.log(data, isLoading, titiler_uri);
 
   return (
     <>

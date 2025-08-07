@@ -29,11 +29,10 @@ declare module '@tanstack/react-router' {
 }
 
 export interface AppProps {
-  editable?: boolean;
   defaultConfig?: string;
 }
 
-function App({ defaultConfig }: AppProps) {
+function App({ defaultConfig = window.DEFAULT_CONFIGURATION }: AppProps) {
   const actions = useUIActions();
 
   useMemo(() => {
