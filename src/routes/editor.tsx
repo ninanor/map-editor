@@ -56,10 +56,14 @@ function RootComponent() {
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
-    i18n
-      .changeLanguage(config.data.config.language ?? DEFAULT_LANG)
-      .then(() => uiActions.setReady(true))
-      .catch(console.error);
+    if (i18n?.changeLanguage) {
+      i18n
+        .changeLanguage(config.data.config.language ?? DEFAULT_LANG)
+        .then(() => uiActions.setReady(true))
+        .catch(console.error);
+    } else {
+      uiActions.setReady(true);
+    }
 
     return () => {
       uiActions.setReady(false);

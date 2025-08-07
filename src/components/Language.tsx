@@ -8,7 +8,9 @@ export function Language() {
   const language = useAppStore(state => state.config?.language ?? DEFAULT_LANG);
 
   useEffect(() => {
-    i18n.changeLanguage(language).catch(console.error);
+    if (i18n?.changeLanguage) {
+      i18n.changeLanguage(language).catch(console.error);
+    }
   }, [language, i18n]);
 
   return null;

@@ -51,16 +51,23 @@ function ConfigErrorComponent({ error }: ErrorComponentProps) {
 function RootComponent() {
   const defaultConfigPath = useUIStore(state => state.defaultConfig);
   const ready = useUIStore(state => state.ready);
-  const { isLoading, data: config } = useSuspenseQuery(mapConfigQueryOptions(defaultConfigPath));
+  const { mapId } = Route.useParams();
+  const { isLoading, data: config } = useSuspenseQuery(
+    mapConfigQueryOptions(`${defaultConfigPath}/${mapId}/config.json`),
+  );
   const uiActions = useUIActions();
   const { i18n } = useTranslation();
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
-    i18n
-      .changeLanguage(config.data.config.language ?? DEFAULT_LANG)
-      .then(() => uiActions.setReady(true))
-      .catch(console.error);
+    if (i18n?.changeLanguage) {
+      i18n
+        .changeLanguage(config.data.config.language ?? DEFAULT_LANG)
+        .then(() => uiActions.setReady(true))
+        .catch(console.error);
+    } else {
+      uiActions.setReady(true);
+    }
 
     return () => {
       uiActions.setReady(false);
