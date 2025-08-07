@@ -9,451 +9,735 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LayoutRouteImport } from './routes/_layout'
-import { Route as LayoutEditRouteImport } from './routes/_layout/edit'
-import { Route as LayoutViewRouteImport } from './routes/_layout/_view'
-import { Route as LayoutEditIndexRouteImport } from './routes/_layout/edit/index'
-import { Route as LayoutViewIndexRouteImport } from './routes/_layout/_view/index'
-import { Route as LayoutEditSettingsRouteImport } from './routes/_layout/edit/settings'
-import { Route as LayoutEditManageRouteImport } from './routes/_layout/edit/manage'
-import { Route as LayoutEditDescriptionRouteImport } from './routes/_layout/edit/description'
-import { Route as LayoutEditBasemapRouteImport } from './routes/_layout/edit/basemap'
-import { Route as LayoutViewManageRouteImport } from './routes/_layout/_view/manage'
-import { Route as LayoutViewLegendRouteImport } from './routes/_layout/_view/legend'
-import { Route as LayoutViewDescriptionRouteImport } from './routes/_layout/_view/description'
-import { Route as LayoutViewBasemapRouteImport } from './routes/_layout/_view/basemap'
-import { Route as LayoutEditLayersAddRouteImport } from './routes/_layout/edit/layers.add'
-import { Route as LayoutEditLayersLayerIdRouteImport } from './routes/_layout/edit/layers.$layerId'
-import { Route as LayoutEditFoldersAddRouteImport } from './routes/_layout/edit/folders.add'
-import { Route as LayoutEditFoldersFolderIdRouteImport } from './routes/_layout/edit/folders.$folderId'
-import { Route as LayoutViewLayersLayerIdRouteImport } from './routes/_layout/_view/layers.$layerId'
-import { Route as LayoutViewFoldersFolderIdRouteImport } from './routes/_layout/_view/folders.$folderId'
+import { Route as EditorRouteImport } from './routes/editor'
+import { Route as MapIdRouteImport } from './routes/$mapId'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as EditorLayoutRouteImport } from './routes/editor/_layout'
+import { Route as MapIdLayoutRouteImport } from './routes/$mapId/_layout'
+import { Route as EditorLayoutEditRouteImport } from './routes/editor/_layout/edit'
+import { Route as EditorLayoutViewRouteImport } from './routes/editor/_layout/_view'
+import { Route as MapIdLayoutViewRouteImport } from './routes/$mapId/_layout/_view'
+import { Route as EditorLayoutEditIndexRouteImport } from './routes/editor/_layout/edit/index'
+import { Route as EditorLayoutViewIndexRouteImport } from './routes/editor/_layout/_view/index'
+import { Route as MapIdLayoutViewIndexRouteImport } from './routes/$mapId/_layout/_view/index'
+import { Route as EditorLayoutEditSettingsRouteImport } from './routes/editor/_layout/edit/settings'
+import { Route as EditorLayoutEditManageRouteImport } from './routes/editor/_layout/edit/manage'
+import { Route as EditorLayoutEditDescriptionRouteImport } from './routes/editor/_layout/edit/description'
+import { Route as EditorLayoutEditBasemapRouteImport } from './routes/editor/_layout/edit/basemap'
+import { Route as EditorLayoutViewManageRouteImport } from './routes/editor/_layout/_view/manage'
+import { Route as EditorLayoutViewLegendRouteImport } from './routes/editor/_layout/_view/legend'
+import { Route as EditorLayoutViewDescriptionRouteImport } from './routes/editor/_layout/_view/description'
+import { Route as EditorLayoutViewBasemapRouteImport } from './routes/editor/_layout/_view/basemap'
+import { Route as MapIdLayoutViewManageRouteImport } from './routes/$mapId/_layout/_view/manage'
+import { Route as MapIdLayoutViewLegendRouteImport } from './routes/$mapId/_layout/_view/legend'
+import { Route as MapIdLayoutViewDescriptionRouteImport } from './routes/$mapId/_layout/_view/description'
+import { Route as MapIdLayoutViewBasemapRouteImport } from './routes/$mapId/_layout/_view/basemap'
+import { Route as EditorLayoutEditLayersAddRouteImport } from './routes/editor/_layout/edit/layers.add'
+import { Route as EditorLayoutEditLayersLayerIdRouteImport } from './routes/editor/_layout/edit/layers.$layerId'
+import { Route as EditorLayoutEditFoldersAddRouteImport } from './routes/editor/_layout/edit/folders.add'
+import { Route as EditorLayoutEditFoldersFolderIdRouteImport } from './routes/editor/_layout/edit/folders.$folderId'
+import { Route as EditorLayoutViewLayersLayerIdRouteImport } from './routes/editor/_layout/_view/layers.$layerId'
+import { Route as EditorLayoutViewFoldersFolderIdRouteImport } from './routes/editor/_layout/_view/folders.$folderId'
+import { Route as MapIdLayoutViewLayersLayerIdRouteImport } from './routes/$mapId/_layout/_view/layers.$layerId'
+import { Route as MapIdLayoutViewFoldersFolderIdRouteImport } from './routes/$mapId/_layout/_view/folders.$folderId'
 
-const LayoutRoute = LayoutRouteImport.update({
-  id: '/_layout',
+const EditorRoute = EditorRouteImport.update({
+  id: '/editor',
+  path: '/editor',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LayoutEditRoute = LayoutEditRouteImport.update({
+const MapIdRoute = MapIdRouteImport.update({
+  id: '/$mapId',
+  path: '/$mapId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EditorLayoutRoute = EditorLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => EditorRoute,
+} as any)
+const MapIdLayoutRoute = MapIdLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => MapIdRoute,
+} as any)
+const EditorLayoutEditRoute = EditorLayoutEditRouteImport.update({
   id: '/edit',
   path: '/edit',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => EditorLayoutRoute,
 } as any)
-const LayoutViewRoute = LayoutViewRouteImport.update({
+const EditorLayoutViewRoute = EditorLayoutViewRouteImport.update({
   id: '/_view',
-  getParentRoute: () => LayoutRoute,
+  getParentRoute: () => EditorLayoutRoute,
 } as any)
-const LayoutEditIndexRoute = LayoutEditIndexRouteImport.update({
+const MapIdLayoutViewRoute = MapIdLayoutViewRouteImport.update({
+  id: '/_view',
+  getParentRoute: () => MapIdLayoutRoute,
+} as any)
+const EditorLayoutEditIndexRoute = EditorLayoutEditIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => LayoutEditRoute,
+  getParentRoute: () => EditorLayoutEditRoute,
 } as any)
-const LayoutViewIndexRoute = LayoutViewIndexRouteImport.update({
+const EditorLayoutViewIndexRoute = EditorLayoutViewIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => LayoutViewRoute,
+  getParentRoute: () => EditorLayoutViewRoute,
 } as any)
-const LayoutEditSettingsRoute = LayoutEditSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => LayoutEditRoute,
+const MapIdLayoutViewIndexRoute = MapIdLayoutViewIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MapIdLayoutViewRoute,
 } as any)
-const LayoutEditManageRoute = LayoutEditManageRouteImport.update({
+const EditorLayoutEditSettingsRoute =
+  EditorLayoutEditSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => EditorLayoutEditRoute,
+  } as any)
+const EditorLayoutEditManageRoute = EditorLayoutEditManageRouteImport.update({
   id: '/manage',
   path: '/manage',
-  getParentRoute: () => LayoutEditRoute,
+  getParentRoute: () => EditorLayoutEditRoute,
 } as any)
-const LayoutEditDescriptionRoute = LayoutEditDescriptionRouteImport.update({
-  id: '/description',
-  path: '/description',
-  getParentRoute: () => LayoutEditRoute,
-} as any)
-const LayoutEditBasemapRoute = LayoutEditBasemapRouteImport.update({
+const EditorLayoutEditDescriptionRoute =
+  EditorLayoutEditDescriptionRouteImport.update({
+    id: '/description',
+    path: '/description',
+    getParentRoute: () => EditorLayoutEditRoute,
+  } as any)
+const EditorLayoutEditBasemapRoute = EditorLayoutEditBasemapRouteImport.update({
   id: '/basemap',
   path: '/basemap',
-  getParentRoute: () => LayoutEditRoute,
+  getParentRoute: () => EditorLayoutEditRoute,
 } as any)
-const LayoutViewManageRoute = LayoutViewManageRouteImport.update({
+const EditorLayoutViewManageRoute = EditorLayoutViewManageRouteImport.update({
   id: '/manage',
   path: '/manage',
-  getParentRoute: () => LayoutViewRoute,
+  getParentRoute: () => EditorLayoutViewRoute,
 } as any)
-const LayoutViewLegendRoute = LayoutViewLegendRouteImport.update({
+const EditorLayoutViewLegendRoute = EditorLayoutViewLegendRouteImport.update({
   id: '/legend',
   path: '/legend',
-  getParentRoute: () => LayoutViewRoute,
+  getParentRoute: () => EditorLayoutViewRoute,
 } as any)
-const LayoutViewDescriptionRoute = LayoutViewDescriptionRouteImport.update({
-  id: '/description',
-  path: '/description',
-  getParentRoute: () => LayoutViewRoute,
-} as any)
-const LayoutViewBasemapRoute = LayoutViewBasemapRouteImport.update({
+const EditorLayoutViewDescriptionRoute =
+  EditorLayoutViewDescriptionRouteImport.update({
+    id: '/description',
+    path: '/description',
+    getParentRoute: () => EditorLayoutViewRoute,
+  } as any)
+const EditorLayoutViewBasemapRoute = EditorLayoutViewBasemapRouteImport.update({
   id: '/basemap',
   path: '/basemap',
-  getParentRoute: () => LayoutViewRoute,
+  getParentRoute: () => EditorLayoutViewRoute,
 } as any)
-const LayoutEditLayersAddRoute = LayoutEditLayersAddRouteImport.update({
-  id: '/layers/add',
-  path: '/layers/add',
-  getParentRoute: () => LayoutEditRoute,
+const MapIdLayoutViewManageRoute = MapIdLayoutViewManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
+  getParentRoute: () => MapIdLayoutViewRoute,
 } as any)
-const LayoutEditLayersLayerIdRoute = LayoutEditLayersLayerIdRouteImport.update({
-  id: '/layers/$layerId',
-  path: '/layers/$layerId',
-  getParentRoute: () => LayoutEditRoute,
+const MapIdLayoutViewLegendRoute = MapIdLayoutViewLegendRouteImport.update({
+  id: '/legend',
+  path: '/legend',
+  getParentRoute: () => MapIdLayoutViewRoute,
 } as any)
-const LayoutEditFoldersAddRoute = LayoutEditFoldersAddRouteImport.update({
-  id: '/folders/add',
-  path: '/folders/add',
-  getParentRoute: () => LayoutEditRoute,
-} as any)
-const LayoutEditFoldersFolderIdRoute =
-  LayoutEditFoldersFolderIdRouteImport.update({
-    id: '/folders/$folderId',
-    path: '/folders/$folderId',
-    getParentRoute: () => LayoutEditRoute,
+const MapIdLayoutViewDescriptionRoute =
+  MapIdLayoutViewDescriptionRouteImport.update({
+    id: '/description',
+    path: '/description',
+    getParentRoute: () => MapIdLayoutViewRoute,
   } as any)
-const LayoutViewLayersLayerIdRoute = LayoutViewLayersLayerIdRouteImport.update({
-  id: '/layers/$layerId',
-  path: '/layers/$layerId',
-  getParentRoute: () => LayoutViewRoute,
+const MapIdLayoutViewBasemapRoute = MapIdLayoutViewBasemapRouteImport.update({
+  id: '/basemap',
+  path: '/basemap',
+  getParentRoute: () => MapIdLayoutViewRoute,
 } as any)
-const LayoutViewFoldersFolderIdRoute =
-  LayoutViewFoldersFolderIdRouteImport.update({
+const EditorLayoutEditLayersAddRoute =
+  EditorLayoutEditLayersAddRouteImport.update({
+    id: '/layers/add',
+    path: '/layers/add',
+    getParentRoute: () => EditorLayoutEditRoute,
+  } as any)
+const EditorLayoutEditLayersLayerIdRoute =
+  EditorLayoutEditLayersLayerIdRouteImport.update({
+    id: '/layers/$layerId',
+    path: '/layers/$layerId',
+    getParentRoute: () => EditorLayoutEditRoute,
+  } as any)
+const EditorLayoutEditFoldersAddRoute =
+  EditorLayoutEditFoldersAddRouteImport.update({
+    id: '/folders/add',
+    path: '/folders/add',
+    getParentRoute: () => EditorLayoutEditRoute,
+  } as any)
+const EditorLayoutEditFoldersFolderIdRoute =
+  EditorLayoutEditFoldersFolderIdRouteImport.update({
     id: '/folders/$folderId',
     path: '/folders/$folderId',
-    getParentRoute: () => LayoutViewRoute,
+    getParentRoute: () => EditorLayoutEditRoute,
+  } as any)
+const EditorLayoutViewLayersLayerIdRoute =
+  EditorLayoutViewLayersLayerIdRouteImport.update({
+    id: '/layers/$layerId',
+    path: '/layers/$layerId',
+    getParentRoute: () => EditorLayoutViewRoute,
+  } as any)
+const EditorLayoutViewFoldersFolderIdRoute =
+  EditorLayoutViewFoldersFolderIdRouteImport.update({
+    id: '/folders/$folderId',
+    path: '/folders/$folderId',
+    getParentRoute: () => EditorLayoutViewRoute,
+  } as any)
+const MapIdLayoutViewLayersLayerIdRoute =
+  MapIdLayoutViewLayersLayerIdRouteImport.update({
+    id: '/layers/$layerId',
+    path: '/layers/$layerId',
+    getParentRoute: () => MapIdLayoutViewRoute,
+  } as any)
+const MapIdLayoutViewFoldersFolderIdRoute =
+  MapIdLayoutViewFoldersFolderIdRouteImport.update({
+    id: '/folders/$folderId',
+    path: '/folders/$folderId',
+    getParentRoute: () => MapIdLayoutViewRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/edit': typeof LayoutEditRouteWithChildren
-  '/basemap': typeof LayoutViewBasemapRoute
-  '/description': typeof LayoutViewDescriptionRoute
-  '/legend': typeof LayoutViewLegendRoute
-  '/manage': typeof LayoutViewManageRoute
-  '/edit/basemap': typeof LayoutEditBasemapRoute
-  '/edit/description': typeof LayoutEditDescriptionRoute
-  '/edit/manage': typeof LayoutEditManageRoute
-  '/edit/settings': typeof LayoutEditSettingsRoute
-  '/': typeof LayoutViewIndexRoute
-  '/edit/': typeof LayoutEditIndexRoute
-  '/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
-  '/layers/$layerId': typeof LayoutViewLayersLayerIdRoute
-  '/edit/folders/$folderId': typeof LayoutEditFoldersFolderIdRoute
-  '/edit/folders/add': typeof LayoutEditFoldersAddRoute
-  '/edit/layers/$layerId': typeof LayoutEditLayersLayerIdRoute
-  '/edit/layers/add': typeof LayoutEditLayersAddRoute
+  '/': typeof IndexRoute
+  '/$mapId': typeof MapIdLayoutViewRouteWithChildren
+  '/editor': typeof EditorLayoutViewRouteWithChildren
+  '/editor/edit': typeof EditorLayoutEditRouteWithChildren
+  '/$mapId/basemap': typeof MapIdLayoutViewBasemapRoute
+  '/$mapId/description': typeof MapIdLayoutViewDescriptionRoute
+  '/$mapId/legend': typeof MapIdLayoutViewLegendRoute
+  '/$mapId/manage': typeof MapIdLayoutViewManageRoute
+  '/editor/basemap': typeof EditorLayoutViewBasemapRoute
+  '/editor/description': typeof EditorLayoutViewDescriptionRoute
+  '/editor/legend': typeof EditorLayoutViewLegendRoute
+  '/editor/manage': typeof EditorLayoutViewManageRoute
+  '/editor/edit/basemap': typeof EditorLayoutEditBasemapRoute
+  '/editor/edit/description': typeof EditorLayoutEditDescriptionRoute
+  '/editor/edit/manage': typeof EditorLayoutEditManageRoute
+  '/editor/edit/settings': typeof EditorLayoutEditSettingsRoute
+  '/$mapId/': typeof MapIdLayoutViewIndexRoute
+  '/editor/': typeof EditorLayoutViewIndexRoute
+  '/editor/edit/': typeof EditorLayoutEditIndexRoute
+  '/$mapId/folders/$folderId': typeof MapIdLayoutViewFoldersFolderIdRoute
+  '/$mapId/layers/$layerId': typeof MapIdLayoutViewLayersLayerIdRoute
+  '/editor/folders/$folderId': typeof EditorLayoutViewFoldersFolderIdRoute
+  '/editor/layers/$layerId': typeof EditorLayoutViewLayersLayerIdRoute
+  '/editor/edit/folders/$folderId': typeof EditorLayoutEditFoldersFolderIdRoute
+  '/editor/edit/folders/add': typeof EditorLayoutEditFoldersAddRoute
+  '/editor/edit/layers/$layerId': typeof EditorLayoutEditLayersLayerIdRoute
+  '/editor/edit/layers/add': typeof EditorLayoutEditLayersAddRoute
 }
 export interface FileRoutesByTo {
-  '/basemap': typeof LayoutViewBasemapRoute
-  '/description': typeof LayoutViewDescriptionRoute
-  '/legend': typeof LayoutViewLegendRoute
-  '/manage': typeof LayoutViewManageRoute
-  '/edit/basemap': typeof LayoutEditBasemapRoute
-  '/edit/description': typeof LayoutEditDescriptionRoute
-  '/edit/manage': typeof LayoutEditManageRoute
-  '/edit/settings': typeof LayoutEditSettingsRoute
-  '/': typeof LayoutViewIndexRoute
-  '/edit': typeof LayoutEditIndexRoute
-  '/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
-  '/layers/$layerId': typeof LayoutViewLayersLayerIdRoute
-  '/edit/folders/$folderId': typeof LayoutEditFoldersFolderIdRoute
-  '/edit/folders/add': typeof LayoutEditFoldersAddRoute
-  '/edit/layers/$layerId': typeof LayoutEditLayersLayerIdRoute
-  '/edit/layers/add': typeof LayoutEditLayersAddRoute
+  '/': typeof IndexRoute
+  '/$mapId': typeof MapIdLayoutViewIndexRoute
+  '/editor': typeof EditorLayoutViewIndexRoute
+  '/$mapId/basemap': typeof MapIdLayoutViewBasemapRoute
+  '/$mapId/description': typeof MapIdLayoutViewDescriptionRoute
+  '/$mapId/legend': typeof MapIdLayoutViewLegendRoute
+  '/$mapId/manage': typeof MapIdLayoutViewManageRoute
+  '/editor/basemap': typeof EditorLayoutViewBasemapRoute
+  '/editor/description': typeof EditorLayoutViewDescriptionRoute
+  '/editor/legend': typeof EditorLayoutViewLegendRoute
+  '/editor/manage': typeof EditorLayoutViewManageRoute
+  '/editor/edit/basemap': typeof EditorLayoutEditBasemapRoute
+  '/editor/edit/description': typeof EditorLayoutEditDescriptionRoute
+  '/editor/edit/manage': typeof EditorLayoutEditManageRoute
+  '/editor/edit/settings': typeof EditorLayoutEditSettingsRoute
+  '/editor/edit': typeof EditorLayoutEditIndexRoute
+  '/$mapId/folders/$folderId': typeof MapIdLayoutViewFoldersFolderIdRoute
+  '/$mapId/layers/$layerId': typeof MapIdLayoutViewLayersLayerIdRoute
+  '/editor/folders/$folderId': typeof EditorLayoutViewFoldersFolderIdRoute
+  '/editor/layers/$layerId': typeof EditorLayoutViewLayersLayerIdRoute
+  '/editor/edit/folders/$folderId': typeof EditorLayoutEditFoldersFolderIdRoute
+  '/editor/edit/folders/add': typeof EditorLayoutEditFoldersAddRoute
+  '/editor/edit/layers/$layerId': typeof EditorLayoutEditLayersLayerIdRoute
+  '/editor/edit/layers/add': typeof EditorLayoutEditLayersAddRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/_view': typeof LayoutViewRouteWithChildren
-  '/_layout/edit': typeof LayoutEditRouteWithChildren
-  '/_layout/_view/basemap': typeof LayoutViewBasemapRoute
-  '/_layout/_view/description': typeof LayoutViewDescriptionRoute
-  '/_layout/_view/legend': typeof LayoutViewLegendRoute
-  '/_layout/_view/manage': typeof LayoutViewManageRoute
-  '/_layout/edit/basemap': typeof LayoutEditBasemapRoute
-  '/_layout/edit/description': typeof LayoutEditDescriptionRoute
-  '/_layout/edit/manage': typeof LayoutEditManageRoute
-  '/_layout/edit/settings': typeof LayoutEditSettingsRoute
-  '/_layout/_view/': typeof LayoutViewIndexRoute
-  '/_layout/edit/': typeof LayoutEditIndexRoute
-  '/_layout/_view/folders/$folderId': typeof LayoutViewFoldersFolderIdRoute
-  '/_layout/_view/layers/$layerId': typeof LayoutViewLayersLayerIdRoute
-  '/_layout/edit/folders/$folderId': typeof LayoutEditFoldersFolderIdRoute
-  '/_layout/edit/folders/add': typeof LayoutEditFoldersAddRoute
-  '/_layout/edit/layers/$layerId': typeof LayoutEditLayersLayerIdRoute
-  '/_layout/edit/layers/add': typeof LayoutEditLayersAddRoute
+  '/': typeof IndexRoute
+  '/$mapId': typeof MapIdRouteWithChildren
+  '/editor': typeof EditorRouteWithChildren
+  '/$mapId/_layout': typeof MapIdLayoutRouteWithChildren
+  '/editor/_layout': typeof EditorLayoutRouteWithChildren
+  '/$mapId/_layout/_view': typeof MapIdLayoutViewRouteWithChildren
+  '/editor/_layout/_view': typeof EditorLayoutViewRouteWithChildren
+  '/editor/_layout/edit': typeof EditorLayoutEditRouteWithChildren
+  '/$mapId/_layout/_view/basemap': typeof MapIdLayoutViewBasemapRoute
+  '/$mapId/_layout/_view/description': typeof MapIdLayoutViewDescriptionRoute
+  '/$mapId/_layout/_view/legend': typeof MapIdLayoutViewLegendRoute
+  '/$mapId/_layout/_view/manage': typeof MapIdLayoutViewManageRoute
+  '/editor/_layout/_view/basemap': typeof EditorLayoutViewBasemapRoute
+  '/editor/_layout/_view/description': typeof EditorLayoutViewDescriptionRoute
+  '/editor/_layout/_view/legend': typeof EditorLayoutViewLegendRoute
+  '/editor/_layout/_view/manage': typeof EditorLayoutViewManageRoute
+  '/editor/_layout/edit/basemap': typeof EditorLayoutEditBasemapRoute
+  '/editor/_layout/edit/description': typeof EditorLayoutEditDescriptionRoute
+  '/editor/_layout/edit/manage': typeof EditorLayoutEditManageRoute
+  '/editor/_layout/edit/settings': typeof EditorLayoutEditSettingsRoute
+  '/$mapId/_layout/_view/': typeof MapIdLayoutViewIndexRoute
+  '/editor/_layout/_view/': typeof EditorLayoutViewIndexRoute
+  '/editor/_layout/edit/': typeof EditorLayoutEditIndexRoute
+  '/$mapId/_layout/_view/folders/$folderId': typeof MapIdLayoutViewFoldersFolderIdRoute
+  '/$mapId/_layout/_view/layers/$layerId': typeof MapIdLayoutViewLayersLayerIdRoute
+  '/editor/_layout/_view/folders/$folderId': typeof EditorLayoutViewFoldersFolderIdRoute
+  '/editor/_layout/_view/layers/$layerId': typeof EditorLayoutViewLayersLayerIdRoute
+  '/editor/_layout/edit/folders/$folderId': typeof EditorLayoutEditFoldersFolderIdRoute
+  '/editor/_layout/edit/folders/add': typeof EditorLayoutEditFoldersAddRoute
+  '/editor/_layout/edit/layers/$layerId': typeof EditorLayoutEditLayersLayerIdRoute
+  '/editor/_layout/edit/layers/add': typeof EditorLayoutEditLayersAddRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/edit'
-    | '/basemap'
-    | '/description'
-    | '/legend'
-    | '/manage'
-    | '/edit/basemap'
-    | '/edit/description'
-    | '/edit/manage'
-    | '/edit/settings'
     | '/'
-    | '/edit/'
-    | '/folders/$folderId'
-    | '/layers/$layerId'
-    | '/edit/folders/$folderId'
-    | '/edit/folders/add'
-    | '/edit/layers/$layerId'
-    | '/edit/layers/add'
+    | '/$mapId'
+    | '/editor'
+    | '/editor/edit'
+    | '/$mapId/basemap'
+    | '/$mapId/description'
+    | '/$mapId/legend'
+    | '/$mapId/manage'
+    | '/editor/basemap'
+    | '/editor/description'
+    | '/editor/legend'
+    | '/editor/manage'
+    | '/editor/edit/basemap'
+    | '/editor/edit/description'
+    | '/editor/edit/manage'
+    | '/editor/edit/settings'
+    | '/$mapId/'
+    | '/editor/'
+    | '/editor/edit/'
+    | '/$mapId/folders/$folderId'
+    | '/$mapId/layers/$layerId'
+    | '/editor/folders/$folderId'
+    | '/editor/layers/$layerId'
+    | '/editor/edit/folders/$folderId'
+    | '/editor/edit/folders/add'
+    | '/editor/edit/layers/$layerId'
+    | '/editor/edit/layers/add'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/basemap'
-    | '/description'
-    | '/legend'
-    | '/manage'
-    | '/edit/basemap'
-    | '/edit/description'
-    | '/edit/manage'
-    | '/edit/settings'
     | '/'
-    | '/edit'
-    | '/folders/$folderId'
-    | '/layers/$layerId'
-    | '/edit/folders/$folderId'
-    | '/edit/folders/add'
-    | '/edit/layers/$layerId'
-    | '/edit/layers/add'
+    | '/$mapId'
+    | '/editor'
+    | '/$mapId/basemap'
+    | '/$mapId/description'
+    | '/$mapId/legend'
+    | '/$mapId/manage'
+    | '/editor/basemap'
+    | '/editor/description'
+    | '/editor/legend'
+    | '/editor/manage'
+    | '/editor/edit/basemap'
+    | '/editor/edit/description'
+    | '/editor/edit/manage'
+    | '/editor/edit/settings'
+    | '/editor/edit'
+    | '/$mapId/folders/$folderId'
+    | '/$mapId/layers/$layerId'
+    | '/editor/folders/$folderId'
+    | '/editor/layers/$layerId'
+    | '/editor/edit/folders/$folderId'
+    | '/editor/edit/folders/add'
+    | '/editor/edit/layers/$layerId'
+    | '/editor/edit/layers/add'
   id:
     | '__root__'
-    | '/_layout'
-    | '/_layout/_view'
-    | '/_layout/edit'
-    | '/_layout/_view/basemap'
-    | '/_layout/_view/description'
-    | '/_layout/_view/legend'
-    | '/_layout/_view/manage'
-    | '/_layout/edit/basemap'
-    | '/_layout/edit/description'
-    | '/_layout/edit/manage'
-    | '/_layout/edit/settings'
-    | '/_layout/_view/'
-    | '/_layout/edit/'
-    | '/_layout/_view/folders/$folderId'
-    | '/_layout/_view/layers/$layerId'
-    | '/_layout/edit/folders/$folderId'
-    | '/_layout/edit/folders/add'
-    | '/_layout/edit/layers/$layerId'
-    | '/_layout/edit/layers/add'
+    | '/'
+    | '/$mapId'
+    | '/editor'
+    | '/$mapId/_layout'
+    | '/editor/_layout'
+    | '/$mapId/_layout/_view'
+    | '/editor/_layout/_view'
+    | '/editor/_layout/edit'
+    | '/$mapId/_layout/_view/basemap'
+    | '/$mapId/_layout/_view/description'
+    | '/$mapId/_layout/_view/legend'
+    | '/$mapId/_layout/_view/manage'
+    | '/editor/_layout/_view/basemap'
+    | '/editor/_layout/_view/description'
+    | '/editor/_layout/_view/legend'
+    | '/editor/_layout/_view/manage'
+    | '/editor/_layout/edit/basemap'
+    | '/editor/_layout/edit/description'
+    | '/editor/_layout/edit/manage'
+    | '/editor/_layout/edit/settings'
+    | '/$mapId/_layout/_view/'
+    | '/editor/_layout/_view/'
+    | '/editor/_layout/edit/'
+    | '/$mapId/_layout/_view/folders/$folderId'
+    | '/$mapId/_layout/_view/layers/$layerId'
+    | '/editor/_layout/_view/folders/$folderId'
+    | '/editor/_layout/_view/layers/$layerId'
+    | '/editor/_layout/edit/folders/$folderId'
+    | '/editor/_layout/edit/folders/add'
+    | '/editor/_layout/edit/layers/$layerId'
+    | '/editor/_layout/edit/layers/add'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  LayoutRoute: typeof LayoutRouteWithChildren
+  IndexRoute: typeof IndexRoute
+  MapIdRoute: typeof MapIdRouteWithChildren
+  EditorRoute: typeof EditorRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_layout': {
-      id: '/_layout'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutRouteImport
+    '/editor': {
+      id: '/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_layout/edit': {
-      id: '/_layout/edit'
-      path: '/edit'
-      fullPath: '/edit'
-      preLoaderRoute: typeof LayoutEditRouteImport
-      parentRoute: typeof LayoutRoute
+    '/$mapId': {
+      id: '/$mapId'
+      path: '/$mapId'
+      fullPath: '/$mapId'
+      preLoaderRoute: typeof MapIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_layout/_view': {
-      id: '/_layout/_view'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof LayoutViewRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/edit/': {
-      id: '/_layout/edit/'
-      path: '/'
-      fullPath: '/edit/'
-      preLoaderRoute: typeof LayoutEditIndexRouteImport
-      parentRoute: typeof LayoutEditRoute
-    }
-    '/_layout/_view/': {
-      id: '/_layout/_view/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof LayoutViewIndexRouteImport
-      parentRoute: typeof LayoutViewRoute
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_layout/edit/settings': {
-      id: '/_layout/edit/settings'
+    '/editor/_layout': {
+      id: '/editor/_layout'
+      path: ''
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorLayoutRouteImport
+      parentRoute: typeof EditorRoute
+    }
+    '/$mapId/_layout': {
+      id: '/$mapId/_layout'
+      path: ''
+      fullPath: '/$mapId'
+      preLoaderRoute: typeof MapIdLayoutRouteImport
+      parentRoute: typeof MapIdRoute
+    }
+    '/editor/_layout/edit': {
+      id: '/editor/_layout/edit'
+      path: '/edit'
+      fullPath: '/editor/edit'
+      preLoaderRoute: typeof EditorLayoutEditRouteImport
+      parentRoute: typeof EditorLayoutRoute
+    }
+    '/editor/_layout/_view': {
+      id: '/editor/_layout/_view'
+      path: ''
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorLayoutViewRouteImport
+      parentRoute: typeof EditorLayoutRoute
+    }
+    '/$mapId/_layout/_view': {
+      id: '/$mapId/_layout/_view'
+      path: ''
+      fullPath: '/$mapId'
+      preLoaderRoute: typeof MapIdLayoutViewRouteImport
+      parentRoute: typeof MapIdLayoutRoute
+    }
+    '/editor/_layout/edit/': {
+      id: '/editor/_layout/edit/'
+      path: '/'
+      fullPath: '/editor/edit/'
+      preLoaderRoute: typeof EditorLayoutEditIndexRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
+    }
+    '/editor/_layout/_view/': {
+      id: '/editor/_layout/_view/'
+      path: '/'
+      fullPath: '/editor/'
+      preLoaderRoute: typeof EditorLayoutViewIndexRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
+    }
+    '/$mapId/_layout/_view/': {
+      id: '/$mapId/_layout/_view/'
+      path: '/'
+      fullPath: '/$mapId/'
+      preLoaderRoute: typeof MapIdLayoutViewIndexRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
+    }
+    '/editor/_layout/edit/settings': {
+      id: '/editor/_layout/edit/settings'
       path: '/settings'
-      fullPath: '/edit/settings'
-      preLoaderRoute: typeof LayoutEditSettingsRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/settings'
+      preLoaderRoute: typeof EditorLayoutEditSettingsRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/edit/manage': {
-      id: '/_layout/edit/manage'
+    '/editor/_layout/edit/manage': {
+      id: '/editor/_layout/edit/manage'
       path: '/manage'
-      fullPath: '/edit/manage'
-      preLoaderRoute: typeof LayoutEditManageRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/manage'
+      preLoaderRoute: typeof EditorLayoutEditManageRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/edit/description': {
-      id: '/_layout/edit/description'
+    '/editor/_layout/edit/description': {
+      id: '/editor/_layout/edit/description'
       path: '/description'
-      fullPath: '/edit/description'
-      preLoaderRoute: typeof LayoutEditDescriptionRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/description'
+      preLoaderRoute: typeof EditorLayoutEditDescriptionRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/edit/basemap': {
-      id: '/_layout/edit/basemap'
+    '/editor/_layout/edit/basemap': {
+      id: '/editor/_layout/edit/basemap'
       path: '/basemap'
-      fullPath: '/edit/basemap'
-      preLoaderRoute: typeof LayoutEditBasemapRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/basemap'
+      preLoaderRoute: typeof EditorLayoutEditBasemapRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/_view/manage': {
-      id: '/_layout/_view/manage'
+    '/editor/_layout/_view/manage': {
+      id: '/editor/_layout/_view/manage'
       path: '/manage'
-      fullPath: '/manage'
-      preLoaderRoute: typeof LayoutViewManageRouteImport
-      parentRoute: typeof LayoutViewRoute
+      fullPath: '/editor/manage'
+      preLoaderRoute: typeof EditorLayoutViewManageRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
     }
-    '/_layout/_view/legend': {
-      id: '/_layout/_view/legend'
+    '/editor/_layout/_view/legend': {
+      id: '/editor/_layout/_view/legend'
       path: '/legend'
-      fullPath: '/legend'
-      preLoaderRoute: typeof LayoutViewLegendRouteImport
-      parentRoute: typeof LayoutViewRoute
+      fullPath: '/editor/legend'
+      preLoaderRoute: typeof EditorLayoutViewLegendRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
     }
-    '/_layout/_view/description': {
-      id: '/_layout/_view/description'
+    '/editor/_layout/_view/description': {
+      id: '/editor/_layout/_view/description'
       path: '/description'
-      fullPath: '/description'
-      preLoaderRoute: typeof LayoutViewDescriptionRouteImport
-      parentRoute: typeof LayoutViewRoute
+      fullPath: '/editor/description'
+      preLoaderRoute: typeof EditorLayoutViewDescriptionRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
     }
-    '/_layout/_view/basemap': {
-      id: '/_layout/_view/basemap'
+    '/editor/_layout/_view/basemap': {
+      id: '/editor/_layout/_view/basemap'
       path: '/basemap'
-      fullPath: '/basemap'
-      preLoaderRoute: typeof LayoutViewBasemapRouteImport
-      parentRoute: typeof LayoutViewRoute
+      fullPath: '/editor/basemap'
+      preLoaderRoute: typeof EditorLayoutViewBasemapRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
     }
-    '/_layout/edit/layers/add': {
-      id: '/_layout/edit/layers/add'
+    '/$mapId/_layout/_view/manage': {
+      id: '/$mapId/_layout/_view/manage'
+      path: '/manage'
+      fullPath: '/$mapId/manage'
+      preLoaderRoute: typeof MapIdLayoutViewManageRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
+    }
+    '/$mapId/_layout/_view/legend': {
+      id: '/$mapId/_layout/_view/legend'
+      path: '/legend'
+      fullPath: '/$mapId/legend'
+      preLoaderRoute: typeof MapIdLayoutViewLegendRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
+    }
+    '/$mapId/_layout/_view/description': {
+      id: '/$mapId/_layout/_view/description'
+      path: '/description'
+      fullPath: '/$mapId/description'
+      preLoaderRoute: typeof MapIdLayoutViewDescriptionRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
+    }
+    '/$mapId/_layout/_view/basemap': {
+      id: '/$mapId/_layout/_view/basemap'
+      path: '/basemap'
+      fullPath: '/$mapId/basemap'
+      preLoaderRoute: typeof MapIdLayoutViewBasemapRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
+    }
+    '/editor/_layout/edit/layers/add': {
+      id: '/editor/_layout/edit/layers/add'
       path: '/layers/add'
-      fullPath: '/edit/layers/add'
-      preLoaderRoute: typeof LayoutEditLayersAddRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/layers/add'
+      preLoaderRoute: typeof EditorLayoutEditLayersAddRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/edit/layers/$layerId': {
-      id: '/_layout/edit/layers/$layerId'
+    '/editor/_layout/edit/layers/$layerId': {
+      id: '/editor/_layout/edit/layers/$layerId'
       path: '/layers/$layerId'
-      fullPath: '/edit/layers/$layerId'
-      preLoaderRoute: typeof LayoutEditLayersLayerIdRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/layers/$layerId'
+      preLoaderRoute: typeof EditorLayoutEditLayersLayerIdRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/edit/folders/add': {
-      id: '/_layout/edit/folders/add'
+    '/editor/_layout/edit/folders/add': {
+      id: '/editor/_layout/edit/folders/add'
       path: '/folders/add'
-      fullPath: '/edit/folders/add'
-      preLoaderRoute: typeof LayoutEditFoldersAddRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/folders/add'
+      preLoaderRoute: typeof EditorLayoutEditFoldersAddRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/edit/folders/$folderId': {
-      id: '/_layout/edit/folders/$folderId'
+    '/editor/_layout/edit/folders/$folderId': {
+      id: '/editor/_layout/edit/folders/$folderId'
       path: '/folders/$folderId'
-      fullPath: '/edit/folders/$folderId'
-      preLoaderRoute: typeof LayoutEditFoldersFolderIdRouteImport
-      parentRoute: typeof LayoutEditRoute
+      fullPath: '/editor/edit/folders/$folderId'
+      preLoaderRoute: typeof EditorLayoutEditFoldersFolderIdRouteImport
+      parentRoute: typeof EditorLayoutEditRoute
     }
-    '/_layout/_view/layers/$layerId': {
-      id: '/_layout/_view/layers/$layerId'
+    '/editor/_layout/_view/layers/$layerId': {
+      id: '/editor/_layout/_view/layers/$layerId'
       path: '/layers/$layerId'
-      fullPath: '/layers/$layerId'
-      preLoaderRoute: typeof LayoutViewLayersLayerIdRouteImport
-      parentRoute: typeof LayoutViewRoute
+      fullPath: '/editor/layers/$layerId'
+      preLoaderRoute: typeof EditorLayoutViewLayersLayerIdRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
     }
-    '/_layout/_view/folders/$folderId': {
-      id: '/_layout/_view/folders/$folderId'
+    '/editor/_layout/_view/folders/$folderId': {
+      id: '/editor/_layout/_view/folders/$folderId'
       path: '/folders/$folderId'
-      fullPath: '/folders/$folderId'
-      preLoaderRoute: typeof LayoutViewFoldersFolderIdRouteImport
-      parentRoute: typeof LayoutViewRoute
+      fullPath: '/editor/folders/$folderId'
+      preLoaderRoute: typeof EditorLayoutViewFoldersFolderIdRouteImport
+      parentRoute: typeof EditorLayoutViewRoute
+    }
+    '/$mapId/_layout/_view/layers/$layerId': {
+      id: '/$mapId/_layout/_view/layers/$layerId'
+      path: '/layers/$layerId'
+      fullPath: '/$mapId/layers/$layerId'
+      preLoaderRoute: typeof MapIdLayoutViewLayersLayerIdRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
+    }
+    '/$mapId/_layout/_view/folders/$folderId': {
+      id: '/$mapId/_layout/_view/folders/$folderId'
+      path: '/folders/$folderId'
+      fullPath: '/$mapId/folders/$folderId'
+      preLoaderRoute: typeof MapIdLayoutViewFoldersFolderIdRouteImport
+      parentRoute: typeof MapIdLayoutViewRoute
     }
   }
 }
 
-interface LayoutViewRouteChildren {
-  LayoutViewBasemapRoute: typeof LayoutViewBasemapRoute
-  LayoutViewDescriptionRoute: typeof LayoutViewDescriptionRoute
-  LayoutViewLegendRoute: typeof LayoutViewLegendRoute
-  LayoutViewManageRoute: typeof LayoutViewManageRoute
-  LayoutViewIndexRoute: typeof LayoutViewIndexRoute
-  LayoutViewFoldersFolderIdRoute: typeof LayoutViewFoldersFolderIdRoute
-  LayoutViewLayersLayerIdRoute: typeof LayoutViewLayersLayerIdRoute
+interface MapIdLayoutViewRouteChildren {
+  MapIdLayoutViewBasemapRoute: typeof MapIdLayoutViewBasemapRoute
+  MapIdLayoutViewDescriptionRoute: typeof MapIdLayoutViewDescriptionRoute
+  MapIdLayoutViewLegendRoute: typeof MapIdLayoutViewLegendRoute
+  MapIdLayoutViewManageRoute: typeof MapIdLayoutViewManageRoute
+  MapIdLayoutViewIndexRoute: typeof MapIdLayoutViewIndexRoute
+  MapIdLayoutViewFoldersFolderIdRoute: typeof MapIdLayoutViewFoldersFolderIdRoute
+  MapIdLayoutViewLayersLayerIdRoute: typeof MapIdLayoutViewLayersLayerIdRoute
 }
 
-const LayoutViewRouteChildren: LayoutViewRouteChildren = {
-  LayoutViewBasemapRoute: LayoutViewBasemapRoute,
-  LayoutViewDescriptionRoute: LayoutViewDescriptionRoute,
-  LayoutViewLegendRoute: LayoutViewLegendRoute,
-  LayoutViewManageRoute: LayoutViewManageRoute,
-  LayoutViewIndexRoute: LayoutViewIndexRoute,
-  LayoutViewFoldersFolderIdRoute: LayoutViewFoldersFolderIdRoute,
-  LayoutViewLayersLayerIdRoute: LayoutViewLayersLayerIdRoute,
+const MapIdLayoutViewRouteChildren: MapIdLayoutViewRouteChildren = {
+  MapIdLayoutViewBasemapRoute: MapIdLayoutViewBasemapRoute,
+  MapIdLayoutViewDescriptionRoute: MapIdLayoutViewDescriptionRoute,
+  MapIdLayoutViewLegendRoute: MapIdLayoutViewLegendRoute,
+  MapIdLayoutViewManageRoute: MapIdLayoutViewManageRoute,
+  MapIdLayoutViewIndexRoute: MapIdLayoutViewIndexRoute,
+  MapIdLayoutViewFoldersFolderIdRoute: MapIdLayoutViewFoldersFolderIdRoute,
+  MapIdLayoutViewLayersLayerIdRoute: MapIdLayoutViewLayersLayerIdRoute,
 }
 
-const LayoutViewRouteWithChildren = LayoutViewRoute._addFileChildren(
-  LayoutViewRouteChildren,
+const MapIdLayoutViewRouteWithChildren = MapIdLayoutViewRoute._addFileChildren(
+  MapIdLayoutViewRouteChildren,
 )
 
-interface LayoutEditRouteChildren {
-  LayoutEditBasemapRoute: typeof LayoutEditBasemapRoute
-  LayoutEditDescriptionRoute: typeof LayoutEditDescriptionRoute
-  LayoutEditManageRoute: typeof LayoutEditManageRoute
-  LayoutEditSettingsRoute: typeof LayoutEditSettingsRoute
-  LayoutEditIndexRoute: typeof LayoutEditIndexRoute
-  LayoutEditFoldersFolderIdRoute: typeof LayoutEditFoldersFolderIdRoute
-  LayoutEditFoldersAddRoute: typeof LayoutEditFoldersAddRoute
-  LayoutEditLayersLayerIdRoute: typeof LayoutEditLayersLayerIdRoute
-  LayoutEditLayersAddRoute: typeof LayoutEditLayersAddRoute
+interface MapIdLayoutRouteChildren {
+  MapIdLayoutViewRoute: typeof MapIdLayoutViewRouteWithChildren
 }
 
-const LayoutEditRouteChildren: LayoutEditRouteChildren = {
-  LayoutEditBasemapRoute: LayoutEditBasemapRoute,
-  LayoutEditDescriptionRoute: LayoutEditDescriptionRoute,
-  LayoutEditManageRoute: LayoutEditManageRoute,
-  LayoutEditSettingsRoute: LayoutEditSettingsRoute,
-  LayoutEditIndexRoute: LayoutEditIndexRoute,
-  LayoutEditFoldersFolderIdRoute: LayoutEditFoldersFolderIdRoute,
-  LayoutEditFoldersAddRoute: LayoutEditFoldersAddRoute,
-  LayoutEditLayersLayerIdRoute: LayoutEditLayersLayerIdRoute,
-  LayoutEditLayersAddRoute: LayoutEditLayersAddRoute,
+const MapIdLayoutRouteChildren: MapIdLayoutRouteChildren = {
+  MapIdLayoutViewRoute: MapIdLayoutViewRouteWithChildren,
 }
 
-const LayoutEditRouteWithChildren = LayoutEditRoute._addFileChildren(
-  LayoutEditRouteChildren,
+const MapIdLayoutRouteWithChildren = MapIdLayoutRoute._addFileChildren(
+  MapIdLayoutRouteChildren,
 )
 
-interface LayoutRouteChildren {
-  LayoutViewRoute: typeof LayoutViewRouteWithChildren
-  LayoutEditRoute: typeof LayoutEditRouteWithChildren
+interface MapIdRouteChildren {
+  MapIdLayoutRoute: typeof MapIdLayoutRouteWithChildren
 }
 
-const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutViewRoute: LayoutViewRouteWithChildren,
-  LayoutEditRoute: LayoutEditRouteWithChildren,
+const MapIdRouteChildren: MapIdRouteChildren = {
+  MapIdLayoutRoute: MapIdLayoutRouteWithChildren,
 }
 
-const LayoutRouteWithChildren =
-  LayoutRoute._addFileChildren(LayoutRouteChildren)
+const MapIdRouteWithChildren = MapIdRoute._addFileChildren(MapIdRouteChildren)
+
+interface EditorLayoutViewRouteChildren {
+  EditorLayoutViewBasemapRoute: typeof EditorLayoutViewBasemapRoute
+  EditorLayoutViewDescriptionRoute: typeof EditorLayoutViewDescriptionRoute
+  EditorLayoutViewLegendRoute: typeof EditorLayoutViewLegendRoute
+  EditorLayoutViewManageRoute: typeof EditorLayoutViewManageRoute
+  EditorLayoutViewIndexRoute: typeof EditorLayoutViewIndexRoute
+  EditorLayoutViewFoldersFolderIdRoute: typeof EditorLayoutViewFoldersFolderIdRoute
+  EditorLayoutViewLayersLayerIdRoute: typeof EditorLayoutViewLayersLayerIdRoute
+}
+
+const EditorLayoutViewRouteChildren: EditorLayoutViewRouteChildren = {
+  EditorLayoutViewBasemapRoute: EditorLayoutViewBasemapRoute,
+  EditorLayoutViewDescriptionRoute: EditorLayoutViewDescriptionRoute,
+  EditorLayoutViewLegendRoute: EditorLayoutViewLegendRoute,
+  EditorLayoutViewManageRoute: EditorLayoutViewManageRoute,
+  EditorLayoutViewIndexRoute: EditorLayoutViewIndexRoute,
+  EditorLayoutViewFoldersFolderIdRoute: EditorLayoutViewFoldersFolderIdRoute,
+  EditorLayoutViewLayersLayerIdRoute: EditorLayoutViewLayersLayerIdRoute,
+}
+
+const EditorLayoutViewRouteWithChildren =
+  EditorLayoutViewRoute._addFileChildren(EditorLayoutViewRouteChildren)
+
+interface EditorLayoutEditRouteChildren {
+  EditorLayoutEditBasemapRoute: typeof EditorLayoutEditBasemapRoute
+  EditorLayoutEditDescriptionRoute: typeof EditorLayoutEditDescriptionRoute
+  EditorLayoutEditManageRoute: typeof EditorLayoutEditManageRoute
+  EditorLayoutEditSettingsRoute: typeof EditorLayoutEditSettingsRoute
+  EditorLayoutEditIndexRoute: typeof EditorLayoutEditIndexRoute
+  EditorLayoutEditFoldersFolderIdRoute: typeof EditorLayoutEditFoldersFolderIdRoute
+  EditorLayoutEditFoldersAddRoute: typeof EditorLayoutEditFoldersAddRoute
+  EditorLayoutEditLayersLayerIdRoute: typeof EditorLayoutEditLayersLayerIdRoute
+  EditorLayoutEditLayersAddRoute: typeof EditorLayoutEditLayersAddRoute
+}
+
+const EditorLayoutEditRouteChildren: EditorLayoutEditRouteChildren = {
+  EditorLayoutEditBasemapRoute: EditorLayoutEditBasemapRoute,
+  EditorLayoutEditDescriptionRoute: EditorLayoutEditDescriptionRoute,
+  EditorLayoutEditManageRoute: EditorLayoutEditManageRoute,
+  EditorLayoutEditSettingsRoute: EditorLayoutEditSettingsRoute,
+  EditorLayoutEditIndexRoute: EditorLayoutEditIndexRoute,
+  EditorLayoutEditFoldersFolderIdRoute: EditorLayoutEditFoldersFolderIdRoute,
+  EditorLayoutEditFoldersAddRoute: EditorLayoutEditFoldersAddRoute,
+  EditorLayoutEditLayersLayerIdRoute: EditorLayoutEditLayersLayerIdRoute,
+  EditorLayoutEditLayersAddRoute: EditorLayoutEditLayersAddRoute,
+}
+
+const EditorLayoutEditRouteWithChildren =
+  EditorLayoutEditRoute._addFileChildren(EditorLayoutEditRouteChildren)
+
+interface EditorLayoutRouteChildren {
+  EditorLayoutViewRoute: typeof EditorLayoutViewRouteWithChildren
+  EditorLayoutEditRoute: typeof EditorLayoutEditRouteWithChildren
+}
+
+const EditorLayoutRouteChildren: EditorLayoutRouteChildren = {
+  EditorLayoutViewRoute: EditorLayoutViewRouteWithChildren,
+  EditorLayoutEditRoute: EditorLayoutEditRouteWithChildren,
+}
+
+const EditorLayoutRouteWithChildren = EditorLayoutRoute._addFileChildren(
+  EditorLayoutRouteChildren,
+)
+
+interface EditorRouteChildren {
+  EditorLayoutRoute: typeof EditorLayoutRouteWithChildren
+}
+
+const EditorRouteChildren: EditorRouteChildren = {
+  EditorLayoutRoute: EditorLayoutRouteWithChildren,
+}
+
+const EditorRouteWithChildren =
+  EditorRoute._addFileChildren(EditorRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  LayoutRoute: LayoutRouteWithChildren,
+  IndexRoute: IndexRoute,
+  MapIdRoute: MapIdRouteWithChildren,
+  EditorRoute: EditorRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

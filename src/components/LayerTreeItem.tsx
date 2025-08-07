@@ -15,17 +15,20 @@ import { useAppActions, useAppStore } from '../hooks/app';
 import { MouseEventHandler, useCallback } from 'react';
 import { Link } from '@tanstack/react-router';
 
+export type TREE_BASE_PATH = '/editor/edit/' | '/$mapId/' | '/editor/';
+
 interface ItemRenderProps {
   item: ItemInstance<Item>;
   editable?: boolean;
   className?: string;
+  routePath: TREE_BASE_PATH;
 }
 
 const noPropagate = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
-export function ItemRender({ item, editable, className }: ItemRenderProps) {
+export function ItemRender({ item, editable, className, routePath }: ItemRenderProps) {
   const layerOrder = useAppStore(state => state.layerOrder);
   const isVisible = layerOrder.includes(item.getId());
   const { toggleLayer } = useAppActions();
@@ -69,32 +72,32 @@ export function ItemRender({ item, editable, className }: ItemRenderProps) {
           {editable && (
             <>
               {isFolder ? (
-                <Link to={`/edit/folders/$folderId`} params={{ folderId: id }} onClick={noPropagate}>
+                <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               ) : (
-                <Link to={`/edit/layers/$layerId`} params={{ layerId: id }} onClick={noPropagate}>
+                <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               )}
             </>
           )}
           {!editable &&
-            (isFolder
-              ? data.description && (
-                  <Link to={`/folders/$folderId`} params={{ folderId: id }} onClick={noPropagate}>
-                    <FontAwesomeIcon icon={faInfoCircle} />
-                  </Link>
-                )
-              : (
-                  <Link to={`/layers/$layerId`} params={{ layerId: id }} onClick={noPropagate}>
-                    <FontAwesomeIcon icon={faInfoCircle} />
-                  </Link>
-                ))}
+            (isFolder ? (
+              data.description && (
+                <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
+                  <FontAwesomeIcon icon={faInfoCircle} />
+                </Link>
+              )
+            ) : (
+              <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
+                <FontAwesomeIcon icon={faInfoCircle} />
+              </Link>
+            ))}
           {!editable && data.download_url && (
-            <a 
-              href={data.download_url} 
-              className="btn btn-ghost btn-sm" 
+            <a
+              href={data.download_url}
+              className="btn btn-ghost btn-sm"
               onClick={noPropagate}
               target="_blank"
               rel="noopener noreferrer"

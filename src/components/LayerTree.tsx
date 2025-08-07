@@ -13,7 +13,7 @@ import { useTree } from '@headless-tree/react';
 import { TREE_ROOT_ID } from '../config';
 import { Folder, Layer, Tree } from '../types';
 import { useMemo } from 'react';
-import { ItemRender } from './LayerTreeItem';
+import { ItemRender, TREE_BASE_PATH } from './LayerTreeItem';
 
 interface LayerTreeProps {
   items: Tree;
@@ -22,6 +22,7 @@ interface LayerTreeProps {
   expandedItems: string[];
   setExpandedItems: SetStateFn<string[]>;
   className?: string;
+  routePath: TREE_BASE_PATH;
 }
 
 const FEATURES = [
@@ -40,6 +41,7 @@ export function LayerTree({
   expandedItems,
   setExpandedItems,
   className,
+  routePath,
 }: LayerTreeProps) {
   const onDrop = useMemo(() => {
     if (!editable || !updateChildren) {
@@ -73,7 +75,7 @@ export function LayerTree({
     <>
       <div {...tree.getContainerProps()} className="tree">
         {tree.getItems().map(item => (
-          <ItemRender key={item.getId()} item={item} editable={editable} className={className} />
+          <ItemRender key={item.getId()} item={item} editable={editable} className={className} routePath={routePath} />
         ))}
         <div style={tree.getDragLineStyle()} className="dragline" />
       </div>

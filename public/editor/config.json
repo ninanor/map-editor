@@ -1,0 +1,34 @@
+{
+    "id": "default",
+    "title": "Title",
+    "icon": "https://maps.nina.no/assets/logosmall-BFfoJdyr.png",
+    "subtitle": "",
+    "layerOrder": [],
+    "baseMap": "positron",
+    "viewState": {
+        "longitude": 10,
+        "latitude": 63,
+        "zoom": 4
+    },
+    "expandedItems": [],
+    "items": {
+        "root": {
+            "name": "Layers",
+            "type": "folder",
+            "children": []
+        }
+    },
+    "config": {
+        "titiler_api_url": "/titiler",
+        "theme": "nina",
+        "language": "no",
+        "footer": {
+            "items": [
+                "![](https://maps.nina.no/assets/logowhite-6HSLYLYZ.png)",
+                "Norsk institutt for naturforskning - [www.nina.no](https://www.nina.no)"
+            ],
+            "justify": "justify-between",
+            "align": "items-baseline"
+        }
+    }
+}

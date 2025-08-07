@@ -6,53 +6,59 @@ import BASEMAP from './libs/basemaps';
 
 export const TABS = [
   {
-    id: '/',
+    id: '',
     label: 'layers',
   },
   {
-    id: '/description',
+    id: 'description',
     label: 'description',
   },
   {
-    id: '/manage',
+    id: 'manage',
     label: 'active-layers',
   },
   {
-    id: '/legend',
+    id: 'legend',
     label: 'legend',
   },
   {
-    id: '/basemap',
+    id: 'basemap',
     label: 'basemap',
   },
 ];
 
 export const EDIT_TABS = [
   {
-    id: '/edit',
+    id: '/editor/edit',
     label: 'layers',
   },
   {
-    id: '/edit/description',
+    id: '/editor/edit/description',
     label: 'description',
   },
   {
-    id: '/edit/manage',
+    id: '/editor/edit/manage',
     label: 'active-layers',
   },
   {
-    id: '/edit/basemap',
+    id: '/editor/edit/basemap',
     label: 'basemap',
   },
   {
-    id: '/edit/settings',
+    id: '/editor/edit/settings',
     label: 'settings',
   },
 ];
 
 export const TREE_ROOT_ID = 'root';
 
-export const fetchConfig = async (url: string) => axios.get<MapConfig>(url);
+export const fetchConfig = async (url: string) => {
+  const response = await axios.get<MapConfig>(url);
+  if (response.headers['content-type'] !== 'application/json') {
+    throw Error('Unexpected response');
+  }
+  return response;
+};
 
 export const configQueryOptions = (url: string) =>
   queryOptions({
