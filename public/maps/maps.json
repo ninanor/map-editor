@@ -4,6 +4,11 @@
             "title": "Offices",
             "id": "nina-offices",
             "description": ""
+        },
+        {
+            "title": "Example",
+            "id": "example",
+            "description": "just an example map with some random data"
         }
     ],
     "icon": "/maps/logo.png"
