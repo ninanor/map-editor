@@ -6,7 +6,6 @@ import { HelmetProvider } from '@dr.pogodin/react-helmet';
 
 import './index.css';
 import '@mdxeditor/editor/style.css';
-import './i18n';
 import { useMemo } from 'react';
 import { useUIActions } from './hooks/ui';
 import { Language } from './components/Language';
