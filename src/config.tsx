@@ -62,7 +62,7 @@ export const fetchConfig = async (url: string) => {
 
 export const mapConfigQueryOptions = (url: string) =>
   queryOptions({
-    queryKey: ['map-config'],
+    queryKey: ['map-config', url],
     queryFn: () => fetchConfig(url),
   });
 
@@ -76,7 +76,7 @@ export const fetchStoreConfig = async (url: string) => {
 
 export const storeConfigQueryOptions = (url: string) =>
   queryOptions({
-    queryKey: ['map-store'],
+    queryKey: ['map-store', url],
     queryFn: () => fetchStoreConfig(url),
   });
 
@@ -132,6 +132,7 @@ export const LANGUAGES = [
 
 export const DEFAULT_THEME = THEMES[0];
 export const DEFAULT_LANG = LANGUAGES[0].value;
+export const DEFAULT_STORE_CONFIG = '/maps';
 
 export const defaultConfigBase = {
   id: '',

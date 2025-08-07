@@ -29,16 +29,12 @@ declare module '@tanstack/react-router' {
   }
 }
 
-export interface AppProps {
-  defaultConfig?: string;
-}
-
-function App({ defaultConfig = window.DEFAULT_CONFIGURATION }: AppProps) {
+function App() {
   const actions = useUIActions();
 
   useMemo(() => {
-    if (defaultConfig) actions.setDefaultConfig(defaultConfig);
-  }, [defaultConfig, actions]);
+    if (window.DEFAULT_CONFIGURATION) actions.setDefaultConfig(window.DEFAULT_CONFIGURATION);
+  }, [actions]);
 
   return (
     <>
