@@ -1,5 +1,5 @@
 import { ErrorComponentProps, Outlet, useRouter, ErrorComponent, createFileRoute } from '@tanstack/react-router';
-import { configQueryOptions } from '../config';
+import { mapConfigQueryOptions } from '../config';
 import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
@@ -14,7 +14,7 @@ const EDITOR_CONFIG_URL = '/editor/config.json';
 export const Route = createFileRoute('/editor')({
   component: RootComponent,
   loader: ({ context: { queryClient } }) => {
-    return queryClient.ensureQueryData(configQueryOptions(EDITOR_CONFIG_URL));
+    return queryClient.ensureQueryData(mapConfigQueryOptions(EDITOR_CONFIG_URL));
   },
   errorComponent: ConfigErrorComponent,
 });
@@ -49,7 +49,7 @@ function ConfigErrorComponent({ error }: ErrorComponentProps) {
 
 function RootComponent() {
   const ready = useUIStore(state => state.ready);
-  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(EDITOR_CONFIG_URL));
+  const { isLoading, data: config } = useSuspenseQuery(mapConfigQueryOptions(EDITOR_CONFIG_URL));
   const uiActions = useUIActions();
 
   useEffect(() => {

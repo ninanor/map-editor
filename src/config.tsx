@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { MapConfig } from './types';
+import { MapConfig, StoreConfig } from './types';
 import BASEMAP from './libs/basemaps';
 
 export const TABS = [
@@ -60,10 +60,24 @@ export const fetchConfig = async (url: string) => {
   return response;
 };
 
-export const configQueryOptions = (url: string) =>
+export const mapConfigQueryOptions = (url: string) =>
   queryOptions({
-    queryKey: ['config'],
+    queryKey: ['map-config'],
     queryFn: () => fetchConfig(url),
+  });
+
+export const fetchStoreConfig = async (url: string) => {
+  const response = await axios.get<StoreConfig>(url);
+  if (response.headers['content-type'] !== 'application/json') {
+    throw Error('Unexpected response');
+  }
+  return response;
+};
+
+export const storeConfigQueryOptions = (url: string) =>
+  queryOptions({
+    queryKey: ['map-store'],
+    queryFn: () => fetchStoreConfig(url),
   });
 
 export const THEMES = [

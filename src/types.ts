@@ -140,3 +140,12 @@ export interface PMTileSource extends Partial<Source> {
 }
 
 export type LayerConfig = TitilerSource | PMTileSource | Partial<Source>;
+
+export interface StoreConfig {
+  icon: string;
+  maps: {
+    title: string;
+    description?: string;
+    id: string;
+  }[];
+}

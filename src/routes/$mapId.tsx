@@ -1,5 +1,5 @@
 import { ErrorComponentProps, Outlet, useRouter, ErrorComponent, createFileRoute } from '@tanstack/react-router';
-import { configQueryOptions } from '../config';
+import { mapConfigQueryOptions } from '../config';
 import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
@@ -13,7 +13,7 @@ export const Route = createFileRoute('/$mapId')({
   component: RootComponent,
   loader: ({ params: { mapId }, context: { queryClient } }) => {
     return queryClient.ensureQueryData(
-      configQueryOptions(`${useUIStore.getState().defaultConfig}/${mapId}/config.json`),
+      mapConfigQueryOptions(`${useUIStore.getState().defaultConfig}/${mapId}/config.json`),
     );
   },
   errorComponent: ConfigErrorComponent,
@@ -50,7 +50,7 @@ function ConfigErrorComponent({ error }: ErrorComponentProps) {
 function RootComponent() {
   const defaultConfigPath = useUIStore(state => state.defaultConfig);
   const ready = useUIStore(state => state.ready);
-  const { isLoading, data: config } = useSuspenseQuery(configQueryOptions(defaultConfigPath));
+  const { isLoading, data: config } = useSuspenseQuery(mapConfigQueryOptions(defaultConfigPath));
   const uiActions = useUIActions();
 
   useEffect(() => {
