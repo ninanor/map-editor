@@ -11,9 +11,7 @@ void i18n.use(initReactI18next).init({
   },
   debug: true,
   react: {
-    // bindI18n: 'loaded languageChanged',
-    // bindI18nStore: 'added',
-    // useSuspense: true,
+    useSuspense: true,
   },
 });
 
