@@ -16,10 +16,13 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
     onSubmit,
   });
 
-  const menuOrientationOptions = useMemo(() => [
-    { value: 'horizontal', label: t('horizontal') },
-    { value: 'vertical', label: t('vertical') }
-  ], [t]);
+  const menuOrientationOptions = useMemo(
+    () => [
+      { value: 'horizontal', label: t('horizontal') },
+      { value: 'vertical', label: t('vertical') },
+    ],
+    [t],
+  );
   return (
     <form.AppForm>
       <form
@@ -40,12 +43,7 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
           />
           <form.AppField
             name="menuOrientation"
-            children={field => (
-              <field.SelectField
-                label={t('menu-orientation')}
-                options={menuOrientationOptions}
-              />
-            )}
+            children={field => <field.SelectField label={t('menu-orientation')} options={menuOrientationOptions} />}
           />
 
           <form.SubscribeButton />

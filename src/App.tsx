@@ -9,6 +9,7 @@ import '@mdxeditor/editor/style.css';
 import './i18n';
 import { useMemo } from 'react';
 import { useUIActions } from './hooks/ui';
+import { Language } from './components/Language';
 
 const router = createRouter({
   routeTree,
@@ -40,11 +41,14 @@ function App({ defaultConfig = window.DEFAULT_CONFIGURATION }: AppProps) {
   }, [defaultConfig, actions]);
 
   return (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </HelmetProvider>
+    <>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </HelmetProvider>
+      <Language />
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import { ErrorComponentProps, Outlet, useRouter, ErrorComponent, createFileRoute } from '@tanstack/react-router';
-import { mapConfigQueryOptions } from '../config';
+import { DEFAULT_LANG, mapConfigQueryOptions } from '../config';
 import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
@@ -8,6 +8,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
 import { useUIActions, useUIStore } from '../hooks/ui';
 import { Head } from '../components/Head';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/$mapId')({
   component: RootComponent,
@@ -52,15 +53,19 @@ function RootComponent() {
   const ready = useUIStore(state => state.ready);
   const { isLoading, data: config } = useSuspenseQuery(mapConfigQueryOptions(defaultConfigPath));
   const uiActions = useUIActions();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     useAppStore.setState(() => config.data);
-    uiActions.setReady(true);
+    i18n
+      .changeLanguage(config.data.config.language ?? DEFAULT_LANG)
+      .then(() => uiActions.setReady(true))
+      .catch(console.error);
 
     return () => {
       uiActions.setReady(false);
     };
-  }, [uiActions, config.data]);
+  }, [uiActions, config.data, i18n]);
 
   if (isLoading || !ready) {
     return (
