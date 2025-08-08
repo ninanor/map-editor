@@ -153,7 +153,11 @@ export const useAppStore = create<AppState>()(
             if (state.layerOrder.includes(id)) {
               state.layerOrder = state.layerOrder.filter(lid => id != lid);
             } else {
-              state.layerOrder.push(id);
+              if (state.config.exclusiveLayers) {
+                state.layerOrder = [id];
+              } else {
+                state.layerOrder.push(id);
+              }
             }
           }),
         setBaseMap: id =>

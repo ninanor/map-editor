@@ -45,6 +45,10 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
             name="menuOrientation"
             children={field => <field.SelectField label={t('menu-orientation')} options={menuOrientationOptions} />}
           />
+          <form.AppField
+            name="exclusiveLayers"
+            children={field => <field.CheckboxField label={t('exclusive-layers')} />}
+          />
 
           <form.SubscribeButton />
         </fieldset>

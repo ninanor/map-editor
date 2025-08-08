@@ -5,6 +5,7 @@ import { MDXField } from '../components/fields/MDXField';
 import { SubscribeButton } from '../components/fields/SubscribeButton';
 import { ColormapField } from '../components/fields/ColormapField';
 import { ColorPickerField } from '../components/fields/ColorPickerField';
+import { CheckboxField } from '../components/fields/CheckboxField';
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } = createFormHookContexts();
 
@@ -17,6 +18,7 @@ export const { useAppForm } = createFormHook({
     MDXField,
     ColormapField,
     ColorPickerField,
+    CheckboxField,
   },
   formComponents: {
     SubscribeButton,
