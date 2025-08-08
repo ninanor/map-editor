@@ -14,6 +14,7 @@ export function TitleTabs({
   };
 }) {
   const title = useAppStore(state => state.title);
+  const subtitle = useAppStore(state => state.subtitle);
   const icon = useAppStore(state => state.icon);
   const menuOrientation = useAppStore(state => state.config?.menuOrientation ?? 'horizontal');
   const { t } = useTranslation();
@@ -21,9 +22,9 @@ export function TitleTabs({
   const isVertical = menuOrientation === 'vertical';
 
   return (
-    <div className={classNames('bg-base-100 shadow-2xs h-screen w-md p-2')}>
+    <div className={classNames('bg-base-100 shadow-2xs h-screen w-md p-2 ')}>
       <div
-        className={classNames('flex', {
+        className={classNames('flex gap-4', {
           'flex-col items-center': isVertical,
           'flex-row': !isVertical,
         })}
@@ -32,18 +33,18 @@ export function TitleTabs({
           <img
             src={icon}
             className={classNames({
-              'w-full max-w-20 mb-2': isVertical,
-              'w-20': !isVertical,
+              'max-w-full mb-2': isVertical,
+              'max-w-20': !isVertical,
             })}
           />
         )}
         <div
           className={classNames({
-            'text-center': isVertical,
             grow: !isVertical,
           })}
         >
-          <h1 className="text-2xl font-bold">{title}</h1>
+          <h1 className="text-2xl text-primary font-bold">{title}</h1>
+          {subtitle && <p>{subtitle}</p>}
         </div>
       </div>
 
