@@ -1,121 +1,190 @@
-import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue, VectorLineLegend, VectorLineValue, VectorCircleLegend, VectorCircleValue } from '../types';
+import {
+  LayerWithId,
+  TitilerSource,
+  PMTileSource,
+  VectorFillLegend,
+  VectorFillValue,
+  VectorLineLegend,
+  VectorLineValue,
+  VectorCircleLegend,
+  VectorCircleValue,
+} from '../types';
 import { SourceProps } from 'react-map-gl/maplibre';
 import hexRgb from 'hex-rgb';
 
-type ValueGetter = (value: VectorFillValue) => [string, unknown];
-type LineValueGetter = (value: VectorLineValue) => [string, unknown];
-type CircleValueGetter = (value: VectorCircleValue) => [string, unknown];
+/**
+ * Generic type for extracting specific values from vector legend value objects
+ */
+type ValueExtractor<T> = (value: T) => [string, unknown];
 
-function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
-  const l = layer.layer as TitilerSource;
-  const { bidx = 'single', rescale, ...other } = l.titiler;
-  const search = new URLSearchParams();
+/**
+ * Union type for all vector legend value types
+ */
+type VectorValue = VectorFillValue | VectorLineValue | VectorCircleValue;
 
-  // Convert bidx string format to array
-  let bidxArray: number[];
-  if (bidx === 'rgb') {
-    bidxArray = [1, 2, 3, 4];
-  } else {
-    bidxArray = [1]; // default single band
-  }
+/**
+ * Union type for all vector legend types
+ */
+type VectorLegend = VectorFillLegend | VectorLineLegend | VectorCircleLegend;
 
-  bidxArray.forEach(index => {
-    search.append('bidx', index.toString());
-  });
-  if (rescale) {
-    rescale.forEach(v => {
-      search.append('rescale', v);
-    });
-  }
-  Object.entries(other).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
-      // eslint-disable-next-line @typescript-eslint/no-base-to-string
-      search.append(key, String(value));
+/**
+ * Band selection constants for raster layers
+ */
+const BAND_TYPES = {
+  SINGLE: 'single',
+  RGB: 'rgb',
+} as const;
+
+/**
+ * Builds a MapLibre raster layer configuration for TiTiler sources
+ * @param layer - Layer configuration with TiTiler source
+ * @param titiler_api_url - Base URL for the TiTiler API
+ * @returns MapLibre raster source configuration
+ */
+function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourceProps {
+  try {
+    const l = layer.layer as TitilerSource;
+    const { bidx = BAND_TYPES.SINGLE, rescale, ...other } = l.titiler;
+    const search = new URLSearchParams();
+
+    // Validate required parameters
+    if (!l.titiler?.url) {
+      throw new Error(`Missing required 'url' parameter for raster layer ${layer.id}`);
     }
-  });
 
-  let colormap = '';
+    // Convert bidx string format to array
+    const bidxArray = bidx === BAND_TYPES.RGB ? [1, 2, 3, 4] : [1];
 
-  if (l.legend.type === 'linear') {
-    search.append('colormap_name', l.legend.colormap_name);
-  } else if (l.legend.type === 'interval') {
-    const cmap = l.legend.intervals.map(i => [[i.min, i.max], hexRgb(i.color, { format: 'array' })]);
-    colormap = `&colormap=${JSON.stringify(cmap)}`;
+    // Add band indices to query parameters
+    bidxArray.forEach(index => {
+      search.append('bidx', index.toString());
+    });
+
+    // Add rescale values if provided
+    if (rescale?.length) {
+      rescale.forEach(v => {
+        if (typeof v === 'string' && v.includes(',')) {
+          search.append('rescale', v);
+        } else {
+          console.warn(`Invalid rescale value format: ${v}. Expected format: "min,max"`);
+        }
+      });
+    }
+
+    // Add other titiler parameters
+    Object.entries(other).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
+        search.append(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
+      }
+    });
+
+    // Handle colormap configuration
+    let colormap = '';
+    if (l.legend.type === 'linear') {
+      if (l.legend.colormap_name) {
+        search.append('colormap_name', l.legend.colormap_name);
+      } else {
+        console.warn(`Linear legend missing colormap_name for layer ${layer.id}`);
+      }
+    } else if (l.legend.type === 'interval') {
+      if (l.legend.intervals?.length) {
+        try {
+          const cmap = l.legend.intervals.map(interval => [
+            [interval.min, interval.max],
+            hexRgb(interval.color, { format: 'array' }),
+          ]);
+          colormap = `&colormap=${JSON.stringify(cmap)}`;
+        } catch (error) {
+          console.error(`Failed to process interval colormap for layer ${layer.id}:`, error);
+        }
+      } else {
+        console.warn(`Interval legend missing intervals for layer ${layer.id}`);
+      }
+    }
+
+    const tileUrl = `${titiler_api_url}/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?${search.toString()}${colormap}`;
+
+    return {
+      type: LAYER_TYPES.RASTER,
+      id: layer.id,
+      tiles: [tileUrl],
+      children: {
+        id: layer.id,
+        type: LAYER_TYPES.RASTER,
+      },
+    } as SourceProps;
+  } catch (error) {
+    console.error(`Failed to build raster layer ${layer.id}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Creates a MapLibre match expression for conditional styling based on field values
+ * @param field - The feature property field name to match against
+ * @param values - Array of value objects containing the conditions and styles
+ * @param defaultValue - Default value to use when no conditions match
+ * @param extractor - Function to extract the [key, value] pair from each value object
+ * @returns MapLibre match expression array
+ */
+function createMatchExpression<T extends VectorValue>(
+  field: string,
+  values: T[],
+  defaultValue: string | number,
+  extractor: ValueExtractor<T>,
+): unknown[] | string | number {
+  if (!field || !values.length) {
+    return defaultValue;
   }
 
-  return {
-    type: 'raster',
-    id: layer.id,
-    tiles: [`${titiler_api_url}/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?${search.toString()}${colormap}`],
-    children: {
-      id: layer.id,
-      type: 'raster',
-    },
-  };
-}
+  const expr: unknown[] = ['match', ['get', field]];
 
-function maplibreMatchExpression(field: string, values: VectorFillValue[], defaultValue: unknown, getter: ValueGetter) {
-  let expr: unknown[] = ['match', ['get', field]];
-
-  values.map(getter).forEach(colorValue => {
-    expr = expr.concat(colorValue);
+  // Add all condition-value pairs
+  values.forEach(value => {
+    const [condition, result] = extractor(value);
+    expr.push(condition, result);
   });
 
+  // Add default value
   expr.push(defaultValue);
 
   return expr;
 }
 
-function maplibreLineMatchExpression(field: string, values: VectorLineValue[], defaultValue: unknown, getter: LineValueGetter) {
-  let expr: unknown[] = ['match', ['get', field]];
-
-  values.map(getter).forEach(colorValue => {
-    expr = expr.concat(colorValue);
-  });
-
-  expr.push(defaultValue);
-
-  return expr;
-}
-
-function maplibreCircleMatchExpression(field: string, values: VectorCircleValue[], defaultValue: unknown, getter: CircleValueGetter) {
-  let expr: unknown[] = ['match', ['get', field]];
-
-  values.map(getter).forEach(colorValue => {
-    expr = expr.concat(colorValue);
-  });
-
-  expr.push(defaultValue);
-
-  return expr;
-}
-
+/**
+ * Creates MapLibre paint properties for fill layers based on vector legend configuration
+ */
 function vectorLegendFill(legend: VectorFillLegend) {
-  if (legend.field) {
+  if (legend.field && legend.values?.length) {
     return {
       paint: {
-        'fill-color': maplibreMatchExpression(legend.field, legend.values ?? [], legend.default?.color ?? '#000', o => [
-          o.value,
-          o.color,
-        ]),
-        'fill-outline-color': maplibreMatchExpression(
+        'fill-color': createMatchExpression(
           legend.field,
-          legend.values ?? [],
-          legend.default?.borderColor ?? legend.default?.color ?? '#000',
-          o => [o.value, o.borderColor ?? o.color],
+          legend.values,
+          legend.default?.color ?? '#000',
+          (value: VectorFillValue) => [value.value, value.color],
         ),
-        'fill-opacity': maplibreMatchExpression(legend.field, legend.values ?? [], legend.default?.opacity ?? 1, o => [
-          o.value,
-          o.opacity ?? 1,
-        ]),
+        'fill-outline-color': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.borderColor ?? legend.default?.color ?? '#000',
+          (value: VectorFillValue) => [value.value, value.borderColor ?? value.color],
+        ),
+        'fill-opacity': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.opacity ?? 1,
+          (value: VectorFillValue) => [value.value, value.opacity ?? 1],
+        ),
       },
       type: 'fill',
     };
   } else {
     return {
       paint: {
-        'fill-color': legend.default?.color,
-        'fill-outline-color': legend.default?.borderColor ?? legend.default?.color,
+        'fill-color': legend.default?.color ?? '#000',
+        'fill-outline-color': legend.default?.borderColor ?? legend.default?.color ?? '#000',
         'fill-opacity': legend.default?.opacity ?? 1,
       },
       type: 'fill',
@@ -123,22 +192,31 @@ function vectorLegendFill(legend: VectorFillLegend) {
   }
 }
 
+/**
+ * Creates MapLibre paint properties for line layers based on vector legend configuration
+ */
 function vectorLegendLine(legend: VectorLineLegend) {
-  if (legend.field) {
+  if (legend.field && legend.values?.length) {
     return {
       paint: {
-        'line-color': maplibreLineMatchExpression(legend.field, legend.values ?? [], legend.default?.color ?? '#000', o => [
-          o.value,
-          o.color,
-        ]),
-        'line-opacity': maplibreLineMatchExpression(legend.field, legend.values ?? [], legend.default?.opacity ?? 1, o => [
-          o.value,
-          o.opacity ?? 1,
-        ]),
-        'line-width': maplibreLineMatchExpression(legend.field, legend.values ?? [], legend.default?.width ?? 1, o => [
-          o.value,
-          o.width ?? 1,
-        ]),
+        'line-color': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.color ?? '#000',
+          (value: VectorLineValue) => [value.value, value.color],
+        ),
+        'line-opacity': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.opacity ?? 1,
+          (value: VectorLineValue) => [value.value, value.opacity ?? 1],
+        ),
+        'line-width': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.width ?? 1,
+          (value: VectorLineValue) => [value.value, value.width ?? 1],
+        ),
       },
       type: 'line',
     };
@@ -154,30 +232,43 @@ function vectorLegendLine(legend: VectorLineLegend) {
   }
 }
 
+/**
+ * Creates MapLibre paint properties for circle layers based on vector legend configuration
+ */
 function vectorLegendCircle(legend: VectorCircleLegend) {
-  if (legend.field) {
+  if (legend.field && legend.values?.length) {
     return {
       paint: {
-        'circle-color': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.color ?? '#000', o => [
-          o.value,
-          o.color,
-        ]),
-        'circle-opacity': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.opacity ?? 1, o => [
-          o.value,
-          o.opacity ?? 1,
-        ]),
-        'circle-radius': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.radius ?? 5, o => [
-          o.value,
-          o.radius ?? 5,
-        ]),
-        'circle-stroke-color': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.strokeColor ?? '#000', o => [
-          o.value,
-          o.strokeColor ?? '#000',
-        ]),
-        'circle-stroke-width': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.strokeWidth ?? 0, o => [
-          o.value,
-          o.strokeWidth ?? 0,
-        ]),
+        'circle-color': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.color ?? '#000',
+          (value: VectorCircleValue) => [value.value, value.color],
+        ),
+        'circle-opacity': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.opacity ?? 1,
+          (value: VectorCircleValue) => [value.value, value.opacity ?? 1],
+        ),
+        'circle-radius': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.radius ?? 5,
+          (value: VectorCircleValue) => [value.value, value.radius ?? 5],
+        ),
+        'circle-stroke-color': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.strokeColor ?? '#000',
+          (value: VectorCircleValue) => [value.value, value.strokeColor ?? '#000'],
+        ),
+        'circle-stroke-width': createMatchExpression(
+          legend.field,
+          legend.values,
+          legend.default?.strokeWidth ?? 0,
+          (value: VectorCircleValue) => [value.value, value.strokeWidth ?? 0],
+        ),
       },
       type: 'circle',
     };
@@ -195,57 +286,173 @@ function vectorLegendCircle(legend: VectorCircleLegend) {
   }
 }
 
-function vectorLegendToPaint(type: string, legend: VectorFillLegend | VectorLineLegend | VectorCircleLegend | undefined) {
-  if (legend) {
-    switch (type) {
-      case 'fill':
-        return vectorLegendFill(legend as VectorFillLegend);
-      case 'line':
-        return vectorLegendLine(legend as VectorLineLegend);
-      case 'circle':
-        return vectorLegendCircle(legend as VectorCircleLegend);
-    }
+/**
+ * Layer type constants for better type safety
+ */
+const LAYER_TYPES = {
+  FILL: 'fill',
+  LINE: 'line',
+  CIRCLE: 'circle',
+  RASTER: 'raster',
+} as const;
+
+type LayerType = (typeof LAYER_TYPES)[keyof typeof LAYER_TYPES];
+
+/**
+ * Creates appropriate MapLibre paint properties based on layer type and legend configuration
+ * @param type - The layer type (fill, line, circle)
+ * @param legend - The legend configuration object
+ * @returns Layer configuration with paint properties and type
+ */
+function vectorLegendToPaint(type: string, legend: VectorLegend | undefined) {
+  if (!legend) {
+    return createDefaultLayerStyle(type);
   }
-  const defaultPaint = type === 'line' ? { 'line-color': '#000' } : 
-                      type === 'circle' ? { 'circle-color': '#000' } : 
-                      { 'fill-color': '#000' };
+
+  switch (type) {
+    case LAYER_TYPES.FILL:
+      return vectorLegendFill(legend as VectorFillLegend);
+    case LAYER_TYPES.LINE:
+      return vectorLegendLine(legend as VectorLineLegend);
+    case LAYER_TYPES.CIRCLE:
+      return vectorLegendCircle(legend as VectorCircleLegend);
+    default:
+      console.warn(`Unknown layer type: ${type}. Falling back to fill layer.`);
+      return createDefaultLayerStyle(LAYER_TYPES.FILL);
+  }
+}
+
+/**
+ * Creates default layer style when no legend is provided
+ */
+function createDefaultLayerStyle(type: string) {
+  const paintConfigs = {
+    [LAYER_TYPES.LINE]: { 'line-color': '#000000', 'line-width': 1, 'line-opacity': 1 },
+    [LAYER_TYPES.CIRCLE]: { 'circle-color': '#000000', 'circle-radius': 5, 'circle-opacity': 1 },
+    [LAYER_TYPES.FILL]: { 'fill-color': '#000000', 'fill-opacity': 1 },
+  };
+
   return {
-    paint: defaultPaint,
+    paint: paintConfigs[type as keyof typeof paintConfigs] || paintConfigs[LAYER_TYPES.FILL],
     type: type,
   };
 }
 
-function buildPMTilesLayer(layer: LayerWithId) {
-  const l = layer.layer as PMTileSource;
+/**
+ * Builds a MapLibre vector layer configuration for PMTiles sources
+ * @param layer - Layer configuration with PMTiles source
+ * @returns MapLibre vector source configuration
+ */
+function buildPMTilesLayer(layer: LayerWithId): SourceProps {
+  try {
+    const l = layer.layer as PMTileSource;
 
-  const { legend, type, ...children } = l.children;
-  const layerStyle = vectorLegendToPaint(type, legend);
+    // Validate required parameters
+    if (!l.pmtiles?.url) {
+      throw new Error(`Missing required 'url' parameter for PMTiles layer ${layer.id}`);
+    }
 
-  const result = {
-    type: 'vector',
-    id: layer.id,
-    url: `pmtiles://${l.pmtiles.url}`,
-    children: {
-      ...layerStyle,
-      ...children,
+    if (!l.children) {
+      throw new Error(`Missing 'children' configuration for PMTiles layer ${layer.id}`);
+    }
+
+    const { legend, type, ...children } = l.children;
+
+    // Validate layer type
+    if (!type || !Object.values(LAYER_TYPES).includes(type as LayerType)) {
+      console.warn(`Invalid or missing layer type '${type}' for layer ${layer.id}. Using fill as default.`);
+    }
+
+    const layerStyle = vectorLegendToPaint(type, legend);
+
+    const result = {
+      type: 'vector' as const,
       id: layer.id,
-    },
-  };
+      url: `pmtiles://${l.pmtiles.url}`,
+      children: {
+        ...layerStyle,
+        ...children,
+        id: layer.id,
+      },
+    };
 
-  result.children.key = layer.id + result.children.type;
-  return result;
+    // Generate unique key for the layer
+    result.children.key = `${layer.id}_${result.children.type}`;
+    return result as SourceProps;
+  } catch (error) {
+    console.error(`Failed to build PMTiles layer ${layer.id}:`, error);
+    throw error;
+  }
 }
 
-function layerToSource(value: LayerWithId, _index: number, _array: LayerWithId[], titiler_api_url: string) {
-  if ('titiler' in value.layer) {
-    return buildRasterLayer(value, titiler_api_url);
+/**
+ * Converts a layer configuration to MapLibre source format
+ * @param layer - The layer to convert
+ * @param _index - Array index (unused)
+ * @param _array - Full array (unused)
+ * @param titiler_api_url - TiTiler API base URL
+ * @returns MapLibre source configuration or null if unsupported
+ */
+function layerToSource(
+  layer: LayerWithId,
+  _index: number,
+  _array: LayerWithId[],
+  titiler_api_url: string,
+): SourceProps | null {
+  try {
+    // Validate input
+    if (!layer?.id) {
+      console.warn('Layer missing required id property');
+      return null;
+    }
+
+    if (!layer.layer) {
+      console.warn(`Layer ${layer.id} missing layer configuration`);
+      return null;
+    }
+
+    // Handle TiTiler raster sources
+    if ('titiler' in layer.layer) {
+      if (!titiler_api_url) {
+        throw new Error(`TiTiler API URL required for raster layer ${layer.id}`);
+      }
+      return buildRasterLayer(layer, titiler_api_url);
+    }
+
+    // Handle PMTiles vector sources
+    if ('pmtiles' in layer.layer) {
+      return buildPMTilesLayer(layer);
+    }
+
+    // Log unsupported layer types for debugging
+    console.warn(`Unsupported layer type for layer ${layer.id}:`, Object.keys(layer.layer));
+    return null;
+  } catch (error) {
+    console.error(`Failed to convert layer ${layer.id} to MapLibre source:`, error);
+    return null; // Return null to filter out failed layers
   }
-  if ('pmtiles' in value.layer) {
-    return buildPMTilesLayer(value);
-  }
-  return null;
 }
 
+/**
+ * Converts an array of layer configurations to MapLibre source format
+ * @param layers - Array of layer configurations to convert
+ * @param titiler_api_url - Base URL for TiTiler API (required for raster layers)
+ * @returns Array of MapLibre source configurations
+ */
 export function toMaplibreSources(layers: LayerWithId[], titiler_api_url: string): SourceProps[] {
-  return layers.map((...args) => layerToSource(...args, titiler_api_url)).filter(_ => _) as SourceProps[];
+  if (!Array.isArray(layers)) {
+    console.warn('toMaplibreSources: Expected array of layers, received:', typeof layers);
+    return [];
+  }
+
+  if (!titiler_api_url) {
+    console.warn('toMaplibreSources: TiTiler API URL not provided - raster layers will fail');
+  }
+
+  const sources = layers
+    .map((layer, index, array) => layerToSource(layer, index, array, titiler_api_url))
+    .filter((source): source is SourceProps => source !== null);
+
+  console.debug(`Converted ${sources.length}/${layers.length} layers to MapLibre sources`);
+  return sources;
 }
