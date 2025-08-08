@@ -1,9 +1,10 @@
-import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue, VectorLineLegend, VectorLineValue } from '../types';
+import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue, VectorLineLegend, VectorLineValue, VectorCircleLegend, VectorCircleValue } from '../types';
 import { SourceProps } from 'react-map-gl/maplibre';
 import hexRgb from 'hex-rgb';
 
 type ValueGetter = (value: VectorFillValue) => [string, unknown];
 type LineValueGetter = (value: VectorLineValue) => [string, unknown];
+type CircleValueGetter = (value: VectorCircleValue) => [string, unknown];
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
   const l = layer.layer as TitilerSource;
@@ -66,6 +67,18 @@ function maplibreMatchExpression(field: string, values: VectorFillValue[], defau
 }
 
 function maplibreLineMatchExpression(field: string, values: VectorLineValue[], defaultValue: unknown, getter: LineValueGetter) {
+  let expr: unknown[] = ['match', ['get', field]];
+
+  values.map(getter).forEach(colorValue => {
+    expr = expr.concat(colorValue);
+  });
+
+  expr.push(defaultValue);
+
+  return expr;
+}
+
+function maplibreCircleMatchExpression(field: string, values: VectorCircleValue[], defaultValue: unknown, getter: CircleValueGetter) {
   let expr: unknown[] = ['match', ['get', field]];
 
   values.map(getter).forEach(colorValue => {
@@ -141,17 +154,63 @@ function vectorLegendLine(legend: VectorLineLegend) {
   }
 }
 
-function vectorLegendToPaint(type: string, legend: VectorFillLegend | VectorLineLegend | undefined) {
+function vectorLegendCircle(legend: VectorCircleLegend) {
+  if (legend.field) {
+    return {
+      paint: {
+        'circle-color': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.color ?? '#000', o => [
+          o.value,
+          o.color,
+        ]),
+        'circle-opacity': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.opacity ?? 1, o => [
+          o.value,
+          o.opacity ?? 1,
+        ]),
+        'circle-radius': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.radius ?? 5, o => [
+          o.value,
+          o.radius ?? 5,
+        ]),
+        'circle-stroke-color': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.strokeColor ?? '#000', o => [
+          o.value,
+          o.strokeColor ?? '#000',
+        ]),
+        'circle-stroke-width': maplibreCircleMatchExpression(legend.field, legend.values ?? [], legend.default?.strokeWidth ?? 0, o => [
+          o.value,
+          o.strokeWidth ?? 0,
+        ]),
+      },
+      type: 'circle',
+    };
+  } else {
+    return {
+      paint: {
+        'circle-color': legend.default?.color ?? '#000',
+        'circle-opacity': legend.default?.opacity ?? 1,
+        'circle-radius': legend.default?.radius ?? 5,
+        'circle-stroke-color': legend.default?.strokeColor ?? '#000',
+        'circle-stroke-width': legend.default?.strokeWidth ?? 0,
+      },
+      type: 'circle',
+    };
+  }
+}
+
+function vectorLegendToPaint(type: string, legend: VectorFillLegend | VectorLineLegend | VectorCircleLegend | undefined) {
   if (legend) {
     switch (type) {
       case 'fill':
         return vectorLegendFill(legend as VectorFillLegend);
       case 'line':
         return vectorLegendLine(legend as VectorLineLegend);
+      case 'circle':
+        return vectorLegendCircle(legend as VectorCircleLegend);
     }
   }
+  const defaultPaint = type === 'line' ? { 'line-color': '#000' } : 
+                      type === 'circle' ? { 'circle-color': '#000' } : 
+                      { 'fill-color': '#000' };
   return {
-    paint: type === 'line' ? { 'line-color': '#000' } : { 'fill-color': '#000' },
+    paint: defaultPaint,
     type: type,
   };
 }

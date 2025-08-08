@@ -139,6 +139,22 @@ export interface VectorLineLegend {
   values?: VectorLineValue[];
 }
 
+export interface VectorCircleValue {
+  value: string;
+  description?: string;
+  color: string;
+  opacity?: number;
+  radius?: number;
+  strokeColor?: string;
+  strokeWidth?: number;
+}
+
+export interface VectorCircleLegend {
+  default?: Omit<VectorCircleValue, 'value'>;
+  field?: string;
+  values?: VectorCircleValue[];
+}
+
 export interface PMTileFillChild {
   id?: string;
   key?: string;
@@ -155,12 +171,20 @@ export interface PMTileLineChild {
   legend?: VectorLineLegend;
 }
 
+export interface PMTileCircleChild {
+  id?: string;
+  key?: string;
+  type: 'circle';
+  'source-layer': string;
+  legend?: VectorCircleLegend;
+}
+
 export interface PMTileSource extends Partial<Source> {
   type: 'vector';
   pmtiles: {
     url: string;
   };
-  children: PMTileFillChild | PMTileLineChild;
+  children: PMTileFillChild | PMTileLineChild | PMTileCircleChild;
 }
 
 export type LayerConfig = TitilerSource | PMTileSource | Partial<Source>;

@@ -44,6 +44,15 @@ export const LAYER_SCHEMA_UI: UiSchema = {
           width: {
             'ui:widget': 'range',
           },
+          radius: {
+            'ui:widget': 'range',
+          },
+          strokeColor: {
+            'ui:widget': 'ColorPickerWidget',
+          },
+          strokeWidth: {
+            'ui:widget': 'range',
+          },
         },
         values: {
           items: {
@@ -57,6 +66,15 @@ export const LAYER_SCHEMA_UI: UiSchema = {
               'ui:widget': 'range',
             },
             width: {
+              'ui:widget': 'range',
+            },
+            radius: {
+              'ui:widget': 'range',
+            },
+            strokeColor: {
+              'ui:widget': 'ColorPickerWidget',
+            },
+            strokeWidth: {
               'ui:widget': 'range',
             },
           },
@@ -163,7 +181,8 @@ export const LAYER_SCHEMA: RJSFSchema = {
               enum: [
                 'fill',
                 'line',
-                // 'circle', 'symbol'
+                'circle',
+                // 'symbol'
               ],
             },
           },
@@ -270,6 +289,71 @@ export const LAYER_SCHEMA: RJSFSchema = {
                         type: 'array',
                         title: 'Conditional values',
                         items: { $ref: '#/$defs/LegendLineValue' },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            {
+              if: {
+                properties: {
+                  type: {
+                    const: 'circle',
+                  },
+                },
+              },
+              then: {
+                properties: {
+                  legend: {
+                    title: 'Legend settings',
+                    type: 'object',
+                    properties: {
+                      default: {
+                        title: 'Default style',
+                        properties: {
+                          color: {
+                            type: 'string',
+                            default: '#000',
+                          },
+                          description: {
+                            type: 'string',
+                            title: 'Description text for the legend',
+                          },
+                          opacity: {
+                            type: 'number',
+                            minimum: 0,
+                            maximum: 1,
+                            default: 1,
+                            multipleOf: 0.1,
+                          },
+                          radius: {
+                            type: 'number',
+                            minimum: 1,
+                            default: 5,
+                            title: 'Circle radius',
+                          },
+                          strokeColor: {
+                            type: 'string',
+                            title: 'Stroke color',
+                          },
+                          strokeWidth: {
+                            type: 'number',
+                            minimum: 0,
+                            default: 0,
+                            title: 'Stroke width',
+                          },
+                        },
+                      },
+                      field: {
+                        title: 'Conditional rendering based on field',
+                        type: 'string',
+                        description: 'Which dataset field should be used for conditional rendering',
+                      },
+                      values: {
+                        type: 'array',
+                        title: 'Conditional values',
+                        items: { $ref: '#/$defs/LegendCircleValue' },
                       },
                     },
                   },
@@ -402,6 +486,46 @@ export const LAYER_SCHEMA: RJSFSchema = {
           minimum: 1,
           default: 1,
           title: 'Line width',
+        },
+      },
+    },
+    LegendCircleValue: {
+      type: 'object',
+      title: 'Conditional Value',
+      properties: {
+        value: {
+          type: 'string',
+          title: 'Expected value of the field',
+        },
+        color: {
+          type: 'string',
+        },
+        description: {
+          type: 'string',
+          title: 'Description text for the legend',
+        },
+        opacity: {
+          type: 'number',
+          minimum: 0,
+          maximum: 1,
+          multipleOf: 0.1,
+          default: 1,
+        },
+        radius: {
+          type: 'number',
+          minimum: 1,
+          default: 5,
+          title: 'Circle radius',
+        },
+        strokeColor: {
+          type: 'string',
+          title: 'Stroke color',
+        },
+        strokeWidth: {
+          type: 'number',
+          minimum: 0,
+          default: 0,
+          title: 'Stroke width',
         },
       },
     },

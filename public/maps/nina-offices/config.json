@@ -32,7 +32,7 @@
                 },
                 "children": {
                     "source-layer": "data",
-                    "type": "fill",
+                    "type": "circle",
                     "legend": {
                         "default": {
                             "opacity": 1,

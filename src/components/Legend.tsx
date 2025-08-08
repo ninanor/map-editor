@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useAppStore } from '../hooks/app';
-import { LayerConfig, PMTileSource, TitilerSource, VectorFillValue, VectorLineValue } from '../types';
+import { LayerConfig, PMTileSource, TitilerSource, VectorFillValue, VectorLineValue, VectorCircleValue } from '../types';
 
 function LegendRow({ description, color, borderColor, opacity }: Omit<VectorFillValue, 'value'>) {
   return (
@@ -18,6 +18,25 @@ function LegendLineRow({ description, color, opacity, width }: Omit<VectorLineVa
     <div className="flex gap-8">
       <svg viewBox="0 0 150 100" className="h-7">
         <line x1="0" y1="50" x2="150" y2="50" stroke={color} strokeOpacity={opacity} strokeWidth={(width ?? 1) * 4} />
+      </svg>
+      <div>{description}</div>
+    </div>
+  );
+}
+
+function LegendCircleRow({ description, color, opacity, radius, strokeColor, strokeWidth }: Omit<VectorCircleValue, 'value'>) {
+  return (
+    <div className="flex gap-8">
+      <svg viewBox="0 0 150 100" className="h-7">
+        <circle 
+          cx="75" 
+          cy="50" 
+          r={(radius ?? 5) * 2} 
+          fill={color} 
+          fillOpacity={opacity} 
+          stroke={strokeColor} 
+          strokeWidth={strokeWidth ?? 0}
+        />
       </svg>
       <div>{description}</div>
     </div>
@@ -80,6 +99,38 @@ export function Legend(props: LayerConfig) {
           color={defaultLegendItem?.color ?? '#000'}
           opacity={defaultLegendItem?.opacity}
           width={defaultLegendItem?.width}
+          description={defaultLegendItem?.description}
+        />,
+      );
+
+      return <div className="flex flex-col gap-2">{rows}</div>;
+    } else if (l.children.type === 'circle') {
+      const defaultLegendItem = l.children.legend?.default;
+      let rows: ReactNode[] = [];
+
+      if (l.children.legend?.field) {
+        rows =
+          l.children.legend?.values?.map(l => (
+            <LegendCircleRow
+              key={l.value}
+              color={l.color}
+              description={l.description}
+              opacity={l.opacity}
+              radius={l.radius}
+              strokeColor={l.strokeColor}
+              strokeWidth={l.strokeWidth}
+            />
+          )) ?? [];
+      }
+
+      rows.push(
+        <LegendCircleRow
+          key="default"
+          color={defaultLegendItem?.color ?? '#000'}
+          opacity={defaultLegendItem?.opacity}
+          radius={defaultLegendItem?.radius}
+          strokeColor={defaultLegendItem?.strokeColor}
+          strokeWidth={defaultLegendItem?.strokeWidth}
           description={defaultLegendItem?.description}
         />,
       );
