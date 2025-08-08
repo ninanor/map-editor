@@ -28,10 +28,6 @@ export const FOLDER_SCHEMA: RJSFSchema = {
       type: 'string',
       title: 'Download URL',
     },
-    parent: {
-      type: 'string',
-      title: 'Parent Folder',
-    },
     type: {
       const: 'folder',
     },
