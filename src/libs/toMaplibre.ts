@@ -1,8 +1,9 @@
-import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue } from '../types';
+import { LayerWithId, TitilerSource, PMTileSource, VectorFillLegend, VectorFillValue, VectorLineLegend, VectorLineValue } from '../types';
 import { SourceProps } from 'react-map-gl/maplibre';
 import hexRgb from 'hex-rgb';
 
 type ValueGetter = (value: VectorFillValue) => [string, unknown];
+type LineValueGetter = (value: VectorLineValue) => [string, unknown];
 
 function buildRasterLayer(layer: LayerWithId, titiler_api_url: string) {
   const l = layer.layer as TitilerSource;
@@ -64,6 +65,18 @@ function maplibreMatchExpression(field: string, values: VectorFillValue[], defau
   return expr;
 }
 
+function maplibreLineMatchExpression(field: string, values: VectorLineValue[], defaultValue: unknown, getter: LineValueGetter) {
+  let expr: unknown[] = ['match', ['get', field]];
+
+  values.map(getter).forEach(colorValue => {
+    expr = expr.concat(colorValue);
+  });
+
+  expr.push(defaultValue);
+
+  return expr;
+}
+
 function vectorLegendFill(legend: VectorFillLegend) {
   if (legend.field) {
     return {
@@ -97,18 +110,49 @@ function vectorLegendFill(legend: VectorFillLegend) {
   }
 }
 
-function vectorLegendToPaint(type: string, legend: VectorFillLegend | undefined) {
+function vectorLegendLine(legend: VectorLineLegend) {
+  if (legend.field) {
+    return {
+      paint: {
+        'line-color': maplibreLineMatchExpression(legend.field, legend.values ?? [], legend.default?.color ?? '#000', o => [
+          o.value,
+          o.color,
+        ]),
+        'line-opacity': maplibreLineMatchExpression(legend.field, legend.values ?? [], legend.default?.opacity ?? 1, o => [
+          o.value,
+          o.opacity ?? 1,
+        ]),
+        'line-width': maplibreLineMatchExpression(legend.field, legend.values ?? [], legend.default?.width ?? 1, o => [
+          o.value,
+          o.width ?? 1,
+        ]),
+      },
+      type: 'line',
+    };
+  } else {
+    return {
+      paint: {
+        'line-color': legend.default?.color ?? '#000',
+        'line-opacity': legend.default?.opacity ?? 1,
+        'line-width': legend.default?.width ?? 1,
+      },
+      type: 'line',
+    };
+  }
+}
+
+function vectorLegendToPaint(type: string, legend: VectorFillLegend | VectorLineLegend | undefined) {
   if (legend) {
     switch (type) {
       case 'fill':
-        return vectorLegendFill(legend);
+        return vectorLegendFill(legend as VectorFillLegend);
+      case 'line':
+        return vectorLegendLine(legend as VectorLineLegend);
     }
   }
   return {
-    paint: {
-      'fill-color': '#000',
-    },
-    type: 'fill',
+    paint: type === 'line' ? { 'line-color': '#000' } : { 'fill-color': '#000' },
+    type: type,
   };
 }
 

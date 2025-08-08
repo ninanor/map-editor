@@ -41,6 +41,9 @@ export const LAYER_SCHEMA_UI: UiSchema = {
           opacity: {
             'ui:widget': 'range',
           },
+          width: {
+            'ui:widget': 'range',
+          },
         },
         values: {
           items: {
@@ -51,6 +54,9 @@ export const LAYER_SCHEMA_UI: UiSchema = {
               'ui:widget': 'ColorPickerWidget',
             },
             opacity: {
+              'ui:widget': 'range',
+            },
+            width: {
               'ui:widget': 'range',
             },
           },
@@ -215,22 +221,61 @@ export const LAYER_SCHEMA: RJSFSchema = {
                 },
               },
             },
-            // {
-            //   if: {
-            //     properties: {
-            //       type: {
-            //         const: 'line',
-            //       },
-            //     },
-            //   },
-            //   then: {
-            //     properties: {
-            //       legend: {
-            //         $ref: '#/$defs/LegendLine',
-            //       },
-            //     },
-            //   },
-            // },
+            {
+              if: {
+                properties: {
+                  type: {
+                    const: 'line',
+                  },
+                },
+              },
+              then: {
+                properties: {
+                  legend: {
+                    title: 'Legend settings',
+                    type: 'object',
+                    properties: {
+                      default: {
+                        title: 'Default style',
+                        properties: {
+                          color: {
+                            type: 'string',
+                            default: '#000',
+                          },
+                          description: {
+                            type: 'string',
+                            title: 'Description text for the legend',
+                          },
+                          opacity: {
+                            type: 'number',
+                            minimum: 0,
+                            maximum: 1,
+                            default: 1,
+                            multipleOf: 0.1,
+                          },
+                          width: {
+                            type: 'number',
+                            minimum: 1,
+                            default: 1,
+                            title: 'Line width',
+                          },
+                        },
+                      },
+                      field: {
+                        title: 'Conditional rendering based on field',
+                        type: 'string',
+                        description: 'Which dataset field should be used for conditional rendering',
+                      },
+                      values: {
+                        type: 'array',
+                        title: 'Conditional values',
+                        items: { $ref: '#/$defs/LegendLineValue' },
+                      },
+                    },
+                  },
+                },
+              },
+            },
           ],
         },
       },
@@ -327,6 +372,36 @@ export const LAYER_SCHEMA: RJSFSchema = {
         },
         borderColor: {
           type: 'string',
+        },
+      },
+    },
+    LegendLineValue: {
+      type: 'object',
+      title: 'Conditional Value',
+      properties: {
+        value: {
+          type: 'string',
+          title: 'Expected value of the field',
+        },
+        color: {
+          type: 'string',
+        },
+        description: {
+          type: 'string',
+          title: 'Description text for the legend',
+        },
+        opacity: {
+          type: 'number',
+          minimum: 0,
+          maximum: 1,
+          multipleOf: 0.1,
+          default: 1,
+        },
+        width: {
+          type: 'number',
+          minimum: 1,
+          default: 1,
+          title: 'Line width',
         },
       },
     },

@@ -125,18 +125,42 @@ export interface VectorFillLegend {
   values?: VectorFillValue[];
 }
 
+export interface VectorLineValue {
+  value: string;
+  description?: string;
+  color: string;
+  opacity?: number;
+  width?: number;
+}
+
+export interface VectorLineLegend {
+  default?: Omit<VectorLineValue, 'value'>;
+  field?: string;
+  values?: VectorLineValue[];
+}
+
+export interface PMTileFillChild {
+  id?: string;
+  key?: string;
+  type: 'fill';
+  'source-layer': string;
+  legend?: VectorFillLegend;
+}
+
+export interface PMTileLineChild {
+  id?: string;
+  key?: string;
+  type: 'line';
+  'source-layer': string;
+  legend?: VectorLineLegend;
+}
+
 export interface PMTileSource extends Partial<Source> {
   type: 'vector';
   pmtiles: {
     url: string;
   };
-  children: {
-    id?: string;
-    key?: string;
-    type: 'fill' | 'line';
-    'source-layer': string;
-    legend?: VectorFillLegend;
-  };
+  children: PMTileFillChild | PMTileLineChild;
 }
 
 export type LayerConfig = TitilerSource | PMTileSource | Partial<Source>;
