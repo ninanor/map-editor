@@ -101,7 +101,7 @@ export interface RasterImageLegend {
 }
 
 export interface TitilerSource extends Partial<Source> {
-  type: 'raster';
+  type: 'titiler';
   titiler: {
     url: string;
     // colormap_name?: string;

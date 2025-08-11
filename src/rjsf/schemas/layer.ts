@@ -145,7 +145,7 @@ export const LAYER_SCHEMA: RJSFSchema = {
           },
         },
         type: {
-          const: 'raster',
+          const: 'titiler',
         },
         legend: {
           $ref: '#/$defs/RasterLinearLegend',

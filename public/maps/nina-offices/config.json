@@ -26,7 +26,7 @@
             "type": "layer",
             "description": "",
             "layer": {
-                "type": "vector",
+                "type": "pmtiles",
                 "pmtiles": {
                     "url": "https://pycsw.nina.no/media/maps/sources/1/data.pmtiles"
                 },

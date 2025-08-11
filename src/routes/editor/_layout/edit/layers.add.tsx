@@ -69,11 +69,17 @@ function RouteComponent() {
       } as PMTileSource;
     }
 
-    if (value.layer.type === 'raster') {
+    if (value.layer.type === 'titiler') {
       layer = {
-        type: 'raster',
+        type: 'titiler',
         titiler: {
           url: '',
+        },
+        legend: {
+          type: 'linear',
+          colormap_name: 'viridis',
+          min: '0',
+          max: '1',
         },
       } as TitilerSource;
     }

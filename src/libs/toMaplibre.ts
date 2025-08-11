@@ -412,7 +412,7 @@ function layerToSource(
     }
 
     // Handle TiTiler raster sources
-    if ('titiler' in layer.layer) {
+    if ('titiler' === layer.layer.type) {
       if (!titiler_api_url) {
         throw new Error(`TiTiler API URL required for raster layer ${layer.id}`);
       }

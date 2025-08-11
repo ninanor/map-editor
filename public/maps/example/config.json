@@ -39,7 +39,7 @@
             "name": "Azores fishing",
             "type": "layer",
             "layer": {
-                "type": "raster",
+                "type": "titiler",
                 "titiler": {
                     "url": "https://github.com/GeoTIFF/test-data/raw/refs/heads/main/files/gfw-azores.tif",
                     "rescale": [
