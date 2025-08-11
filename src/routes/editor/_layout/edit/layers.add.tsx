@@ -4,7 +4,7 @@ import { TREE_ROOT_ID } from '../../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { nanoid } from 'nanoid';
-import { Layer, LayerConfig, PMTileSource, TitilerSource } from '../../../../types';
+import { Layer, LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../types';
 import { useTranslation } from 'react-i18next';
 import Form from '@rjsf/daisyui';
 import { LAYER_ADD_SCHEMA, LAYER_ADD_SCHEMA_UI } from '../../../../rjsf/schemas/layer-add';
@@ -82,6 +82,14 @@ function RouteComponent() {
           max: '1',
         },
       } as TitilerSource;
+    }
+
+    if (value.layer.type === 'raster') {
+      layer = {
+        type: 'raster',
+        tiles: [''],
+        tileSize: 256,
+      } as RasterSource;
     }
 
     if (!layer) {

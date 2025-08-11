@@ -2,6 +2,7 @@ import {
   LayerWithId,
   TitilerSource,
   PMTileSource,
+  RasterSource,
   VectorFillLegend,
   VectorFillValue,
   VectorLineLegend,
@@ -386,6 +387,43 @@ function buildPMTilesLayer(layer: LayerWithId): SourceProps {
 }
 
 /**
+ * Builds a MapLibre raster layer configuration for standard raster sources
+ * @param layer - Layer configuration with raster source
+ * @returns MapLibre raster source configuration
+ */
+function buildStandardRasterLayer(layer: LayerWithId): SourceProps {
+  try {
+    const l = layer.layer as RasterSource;
+
+    // Validate required parameters
+    if (!l.tiles?.length) {
+      throw new Error(`Missing required 'tiles' parameter for raster layer ${layer.id}`);
+    }
+
+    const result = {
+      type: LAYER_TYPES.RASTER,
+      id: layer.id,
+      tiles: l.tiles,
+      ...(l.tileSize && { tileSize: l.tileSize }),
+      ...(l.minzoom !== undefined && { minzoom: l.minzoom }),
+      ...(l.maxzoom !== undefined && { maxzoom: l.maxzoom }),
+      ...(l.bounds && { bounds: l.bounds }),
+      ...(l.attribution && { attribution: l.attribution }),
+      ...(l.scheme && { scheme: l.scheme }),
+      children: {
+        id: layer.id,
+        type: LAYER_TYPES.RASTER,
+      },
+    } as SourceProps;
+
+    return result;
+  } catch (error) {
+    console.error(`Failed to build raster layer ${layer.id}:`, error);
+    throw error;
+  }
+}
+
+/**
  * Converts a layer configuration to MapLibre source format
  * @param layer - The layer to convert
  * @param _index - Array index (unused)
@@ -422,6 +460,11 @@ function layerToSource(
     // Handle PMTiles vector sources
     if ('pmtiles' === layer.layer.type) {
       return buildPMTilesLayer(layer);
+    }
+
+    // Handle standard raster sources
+    if ('raster' === layer.layer.type) {
+      return buildStandardRasterLayer(layer);
     }
 
     // Log unsupported layer types for debugging

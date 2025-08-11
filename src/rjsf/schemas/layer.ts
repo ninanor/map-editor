@@ -104,6 +104,7 @@ export const LAYER_SCHEMA: RJSFSchema = {
       title: 'Source type',
       oneOf: [
         { $ref: '#/$defs/TitilerSource', title: 'Titiler Source (Raster)' },
+        { $ref: '#/$defs/RasterSource', title: 'Raster Source (Tiles)' },
         { $ref: '#/$defs/PMTilesSource', title: 'PMTiles Source (Vector)' },
       ],
     },
@@ -152,6 +153,71 @@ export const LAYER_SCHEMA: RJSFSchema = {
           title: 'Legend Configuration',
         },
       },
+    },
+    RasterSource: {
+      type: 'object',
+      title: '',
+      properties: {
+        tiles: {
+          type: 'array',
+          title: 'Tile URLs',
+          description: 'Array of tile URL templates',
+          items: {
+            type: 'string',
+            title: 'Tile URL template',
+          },
+          minItems: 1,
+        },
+        type: {
+          const: 'raster',
+        },
+        tileSize: {
+          type: 'number',
+          title: 'Tile Size',
+          default: 256,
+          enum: [256, 512],
+        },
+        minzoom: {
+          type: 'number',
+          title: 'Minimum Zoom',
+          minimum: 0,
+          maximum: 24,
+        },
+        maxzoom: {
+          type: 'number',
+          title: 'Maximum Zoom',
+          minimum: 0,
+          maximum: 24,
+        },
+        bounds: {
+          type: 'array',
+          title: 'Bounds [west, south, east, north]',
+          items: {
+            type: 'number',
+          },
+          minItems: 4,
+          maxItems: 4,
+        },
+        attribution: {
+          type: 'string',
+          title: 'Attribution',
+        },
+        scheme: {
+          type: 'string',
+          title: 'Tile Scheme',
+          default: 'xyz',
+          enum: ['xyz', 'tms'],
+        },
+        legend: {
+          title: 'Legend Configuration',
+          oneOf: [
+            { $ref: '#/$defs/RasterLinearLegend' },
+            { $ref: '#/$defs/RasterIntervalLegend' },
+            { $ref: '#/$defs/RasterImageLegend' },
+          ],
+        },
+      },
+      required: ['tiles', 'type'],
     },
     PMTilesSource: {
       type: 'object',
@@ -431,6 +497,21 @@ export const LAYER_SCHEMA: RJSFSchema = {
         },
       },
       required: ['type', 'intervals'],
+    },
+    RasterImageLegend: {
+      type: 'object',
+      title: 'Image Legend',
+      properties: {
+        type: {
+          const: 'image',
+        },
+        url: {
+          type: 'string',
+          title: 'Legend Image URL',
+          format: 'uri',
+        },
+      },
+      required: ['type', 'url'],
     },
     LegendFillValue: {
       type: 'object',

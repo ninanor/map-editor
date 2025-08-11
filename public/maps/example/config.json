@@ -32,6 +32,9 @@
             "type": "folder",
             "children": [
                 "test",
+                "raster-example",
+                "raster-linear",
+                "raster-interval",
                 "pmtiles"
             ]
         },
@@ -49,6 +52,68 @@
                 "legend": {
                     "type": "linear",
                     "colormap_name": "ylorbr_r"
+                }
+            }
+        },
+        "raster-example": {
+            "name": "OpenStreetMap Raster Example",
+            "type": "layer",
+            "layer": {
+                "type": "raster",
+                "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+                "tileSize": 256,
+                "attribution": "© OpenStreetMap contributors",
+                "legend": {
+                    "type": "image",
+                    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/OpenStreetMap_logo.svg/256px-OpenStreetMap_logo.svg.png"
+                }
+            }
+        },
+        "raster-linear": {
+            "name": "Raster with Linear Legend",
+            "type": "layer",
+            "layer": {
+                "type": "raster",
+                "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+                "tileSize": 256,
+                "legend": {
+                    "type": "linear",
+                    "colormap_name": "viridis",
+                    "min": "Low",
+                    "max": "High",
+                    "orientation": "horizontal"
+                }
+            }
+        },
+        "raster-interval": {
+            "name": "Raster with Interval Legend",
+            "type": "layer",
+            "layer": {
+                "type": "raster",
+                "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+                "tileSize": 256,
+                "legend": {
+                    "type": "interval",
+                    "intervals": [
+                        {
+                            "min": 0,
+                            "max": 25,
+                            "color": "#green",
+                            "description": "Low values"
+                        },
+                        {
+                            "min": 25,
+                            "max": 75,
+                            "color": "#yellow",
+                            "description": "Medium values"
+                        },
+                        {
+                            "min": 75,
+                            "max": 100,
+                            "color": "#red",
+                            "description": "High values"
+                        }
+                    ]
                 }
             }
         },

@@ -42,6 +42,7 @@ export const LAYER_ADD_SCHEMA: RJSFSchema = {
           default: 'pmtiles',
           oneOf: [
             { const: 'titiler', title: 'Raster (COGTiff)' },
+            { const: 'raster', title: 'Raster (Tiles)' },
             { const: 'pmtiles', title: 'Vector (PMTiles)' },
           ],
         },

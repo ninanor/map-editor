@@ -112,6 +112,18 @@ export interface TitilerSource extends Partial<Source> {
   legend: RasterSequentialLegend | RasterIntervalLegend;
 }
 
+export interface RasterSource extends Partial<Source> {
+  type: 'raster';
+  tiles: string[];
+  tileSize?: number;
+  minzoom?: number;
+  maxzoom?: number;
+  bounds?: [number, number, number, number];
+  attribution?: string;
+  scheme?: 'xyz' | 'tms';
+  legend?: RasterSequentialLegend | RasterIntervalLegend | RasterImageLegend;
+}
+
 export interface VectorFillValue {
   value: string;
   description?: string;
@@ -188,7 +200,7 @@ export interface PMTileSource extends Partial<Source> {
   children: PMTileFillChild | PMTileLineChild | PMTileCircleChild;
 }
 
-export type LayerConfig = TitilerSource | PMTileSource | Partial<Source>;
+export type LayerConfig = TitilerSource | PMTileSource | RasterSource | Partial<Source>;
 
 export interface StoreConfig {
   icon: string;

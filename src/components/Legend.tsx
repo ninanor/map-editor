@@ -4,6 +4,7 @@ import {
   LayerConfig,
   PMTileSource,
   TitilerSource,
+  RasterSource,
   VectorFillValue,
   VectorLineValue,
   VectorCircleValue,
@@ -152,7 +153,7 @@ export function Legend(props: LayerConfig) {
       return <div className="flex flex-col gap-2">{rows}</div>;
     }
     return null;
-  } else if (props.type === 'raster') {
+  } else if (props.type === 'titiler') {
     const { legend } = props as TitilerSource;
 
     if (legend.type === 'interval') {
@@ -191,6 +192,76 @@ export function Legend(props: LayerConfig) {
         );
       }
     }
+    return null;
+  } else if (props.type === 'raster') {
+    const { legend } = props as RasterSource;
+    
+    if (!legend) {
+      return null;
+    }
+    
+    if (legend.type === 'image') {
+      return (
+        <div className="flex justify-center">
+          <img 
+            src={legend.url} 
+            alt="Legend" 
+            className="max-w-full h-auto"
+            onError={(e) => {
+              console.error('Failed to load legend image:', legend.url);
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
+          />
+        </div>
+      );
+    }
+    
+    if (legend.type === 'linear') {
+      const isVertical = legend.orientation === 'vertical';
+      
+      if (isVertical) {
+        return (
+          <div className="flex gap-2">
+            <div className="flex-shrink-0">
+              <div className="h-32 w-8 bg-gradient-to-t from-gray-200 to-gray-800"></div>
+            </div>
+            <div className="flex flex-col justify-between text-sm">
+              <span>{legend.max}</span>
+              <span>{legend.min}</span>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="flex flex-col gap-2">
+            <div className="h-8 bg-gradient-to-r from-gray-200 to-gray-800"></div>
+            <div className="flex justify-between text-sm">
+              <span>{legend.min}</span>
+              <span>{legend.max}</span>
+            </div>
+          </div>
+        );
+      }
+    }
+    
+    if (legend.type === 'interval') {
+      return (
+        <div className="flex flex-col gap-2">
+          {legend.intervals.map((interval) => (
+            <div key={`${interval.min}-${interval.max}`} className="flex gap-2 items-center">
+              <div 
+                className="w-6 h-6 flex-shrink-0" 
+                style={{ backgroundColor: interval.color }}
+              ></div>
+              <span className="text-sm">
+                {interval.min} - {interval.max}: {interval.description}
+              </span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    
     return null;
   }
   return null;
