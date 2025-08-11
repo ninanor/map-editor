@@ -181,7 +181,7 @@ export interface PMTileCircleChild {
 }
 
 export interface PMTileSource extends Partial<Source> {
-  type: 'vector';
+  type: 'pmtiles';
   pmtiles: {
     url: string;
   };

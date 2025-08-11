@@ -1,6 +1,13 @@
 import { ReactNode } from 'react';
 import { useAppStore } from '../hooks/app';
-import { LayerConfig, PMTileSource, TitilerSource, VectorFillValue, VectorLineValue, VectorCircleValue } from '../types';
+import {
+  LayerConfig,
+  PMTileSource,
+  TitilerSource,
+  VectorFillValue,
+  VectorLineValue,
+  VectorCircleValue,
+} from '../types';
 
 function LegendRow({ description, color, borderColor, opacity }: Omit<VectorFillValue, 'value'>) {
   return (
@@ -24,17 +31,24 @@ function LegendLineRow({ description, color, opacity, width }: Omit<VectorLineVa
   );
 }
 
-function LegendCircleRow({ description, color, opacity, radius, strokeColor, strokeWidth }: Omit<VectorCircleValue, 'value'>) {
+function LegendCircleRow({
+  description,
+  color,
+  opacity,
+  radius,
+  strokeColor,
+  strokeWidth,
+}: Omit<VectorCircleValue, 'value'>) {
   return (
     <div className="flex gap-8">
       <svg viewBox="0 0 150 100" className="h-7">
-        <circle 
-          cx="75" 
-          cy="50" 
-          r={(radius ?? 5) * 2} 
-          fill={color} 
-          fillOpacity={opacity} 
-          stroke={strokeColor} 
+        <circle
+          cx="75"
+          cy="50"
+          r={(radius ?? 5) * 2}
+          fill={color}
+          fillOpacity={opacity}
+          stroke={strokeColor}
           strokeWidth={strokeWidth ?? 0}
         />
       </svg>
@@ -46,7 +60,7 @@ function LegendCircleRow({ description, color, opacity, radius, strokeColor, str
 export function Legend(props: LayerConfig) {
   const titiler_uri = useAppStore(store => store.config.titiler_api_url);
 
-  if (props.type === 'vector') {
+  if (props.type === 'pmtiles') {
     const l = props as PMTileSource;
     if (l.children.type === 'fill') {
       const defaultLegendItem = l.children.legend?.default;

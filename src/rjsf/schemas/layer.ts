@@ -165,7 +165,7 @@ export const LAYER_SCHEMA: RJSFSchema = {
           },
         },
         type: {
-          const: 'vector',
+          const: 'pmtiles',
         },
         children: {
           type: 'object',

@@ -57,7 +57,7 @@
             "type": "layer",
             "description": "test",
             "layer": {
-                "type": "vector",
+                "type": "pmtiles",
                 "pmtiles": {
                     "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles"
                 },

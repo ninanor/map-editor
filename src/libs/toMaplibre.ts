@@ -420,7 +420,7 @@ function layerToSource(
     }
 
     // Handle PMTiles vector sources
-    if ('pmtiles' in layer.layer) {
+    if ('pmtiles' === layer.layer.type) {
       return buildPMTilesLayer(layer);
     }
 

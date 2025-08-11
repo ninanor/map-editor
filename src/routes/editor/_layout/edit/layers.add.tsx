@@ -27,7 +27,7 @@ const DEFAULT_FORM_DATA = {
   parent: TREE_ROOT_ID,
   download_url: '',
   layer: {
-    type: 'vector',
+    type: 'pmtiles',
   },
   type: 'layer',
 };
@@ -56,13 +56,14 @@ function RouteComponent() {
 
     let layer: LayerConfig | null = null;
 
-    if (value.layer.type === 'vector') {
+    if (value.layer.type === 'pmtiles') {
       layer = {
-        type: 'vector',
+        type: 'pmtiles',
         pmtiles: {
           url: '',
         },
         children: {
+          type: 'fill',
           'source-layer': '',
         },
       } as PMTileSource;

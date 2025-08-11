@@ -39,10 +39,10 @@ export const LAYER_ADD_SCHEMA: RJSFSchema = {
         type: {
           type: 'string',
           title: 'Layer type',
-          default: 'vector',
+          default: 'pmtiles',
           oneOf: [
             { const: 'raster', title: 'Raster (COGTiff)' },
-            { const: 'vector', title: 'Vector (PMTiles)' },
+            { const: 'pmtiles', title: 'Vector (PMTiles)' },
           ],
         },
       },
