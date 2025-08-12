@@ -10,17 +10,17 @@ COPY package.json pnpm-lock.yaml ./
 
 
 FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --no-frozen-lockfile
 
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
 COPY src src/
 COPY public public/
 COPY vite.config.ts index.html tsconfig.app.json tsconfig.json tsconfig.node.json eslint.config.js ./
 RUN pnpm run build
 
 FROM base AS frontend
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
 COPY src src/
 COPY public public/
 COPY vite.config.ts index.html tsconfig.app.json tsconfig.json tsconfig.node.json eslint.config.js ./
