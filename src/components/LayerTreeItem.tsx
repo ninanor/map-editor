@@ -1,8 +1,8 @@
 import {
-  faCaretDown,
-  faCaretRight,
   faDownload,
   faEdit,
+  faFolderClosed,
+  faFolderOpen,
   faInfoCircle,
   faSquare,
   faSquareCheck,
@@ -63,8 +63,8 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
           folder: isFolder,
         })}
       >
-        <div className="w-10">
-          {isFolder && <FontAwesomeIcon icon={item.isExpanded() ? faCaretDown : faCaretRight} />}
+        <div className="w-10 text-accent">
+          {isFolder && <FontAwesomeIcon icon={item.isExpanded() ? faFolderOpen : faFolderClosed} />}
           {!isFolder && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
         </div>
         <div>{item.getItemName()}</div>
@@ -86,12 +86,12 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
             (isFolder ? (
               data.description && (
                 <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
-                  <FontAwesomeIcon icon={faInfoCircle} />
+                  <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
                 </Link>
               )
             ) : (
               <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
               </Link>
             ))}
           {!editable && data.download_url && (
@@ -102,7 +102,7 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faDownload} />
+              <FontAwesomeIcon icon={faDownload} className="text-accent" />
             </a>
           )}
         </div>
