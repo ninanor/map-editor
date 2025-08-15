@@ -85,17 +85,17 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
             </>
           )}
           {!editable &&
-            (isFolder ? (
-              data.description && (
-                <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
-                  <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
-                </Link>
-              )
-            ) : (
-              <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
-                <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
-              </Link>
-            ))}
+            (isFolder
+              ? data.description && (
+                  <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
+                    <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
+                  </Link>
+                )
+              : data.description && (
+                  <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
+                    <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
+                  </Link>
+                ))}
           {!editable && data.download_url && (
             <a
               href={data.download_url}
