@@ -135,6 +135,9 @@ importers:
       react-markdown:
         specifier: ^10.1.0
         version: 10.1.0(@types/react@19.1.8)(react@19.1.0)
+      react-markdown-autolink:
+        specifier: ^0.0.2
+        version: 0.0.2
       reselect:
         specifier: ^5.1.1
         version: 5.1.1
@@ -3622,6 +3625,9 @@ packages:
         optional: true
       maplibre-gl:
         optional: true
+
+  react-markdown-autolink@0.0.2:
+    resolution: {integrity: sha512-j73lQij4KvsKq0T+HgGC/dmgqz9k/FbyD/J1x537crtGethGNYKhfQlBCUkRVkR3boB+0p5KcpCXKQs1OLue6A==}
 
   react-markdown@10.1.0:
     resolution: {integrity: sha512-qKxVopLT/TyA6BX3Ue5NwabOsAzm0Q7kAPwq6L+wWDwisYs7R8vZ0nRXqq6rkueboxpkjvLGU9fWifiX/ZZFxQ==}
@@ -8208,6 +8214,8 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
     optionalDependencies:
       maplibre-gl: 5.6.1
+
+  react-markdown-autolink@0.0.2: {}
 
   react-markdown@10.1.0(@types/react@19.1.8)(react@19.1.0):
     dependencies:

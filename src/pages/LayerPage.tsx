@@ -1,11 +1,11 @@
 import { Link } from '@tanstack/react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import Markdown from 'react-markdown';
 import { useItem } from '../hooks/app';
 import { Legend } from '../components/Legend';
 import { Layer } from '../types';
 import { useTranslation } from 'react-i18next';
+import { Description } from '../components/Description';
 
 interface LayerPageProps {
   layerId: string;
@@ -23,7 +23,7 @@ export function LayerPage({ layerId, routePath }: LayerPageProps) {
       </Link>
       <div className="prose prose-slate prose-md">
         <h2 className="text-bold text-2xl">{layer?.name}</h2>
-        <Markdown>{layer?.description}</Markdown>
+        <Description text={layer?.description ?? 'No description available'} className="" />
         {layer?.layer && (
           <div className="mt-6">
             <h3 className="text-lg font-semibold mb-4">{t('legend')}</h3>
