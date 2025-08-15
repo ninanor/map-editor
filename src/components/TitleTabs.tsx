@@ -35,16 +35,16 @@ export function TitleTabs({
     <div className={classNames('bg-base-100 shadow-2xs h-screen w-md p-2 ')}>
       <div ref={setRef} className="pb-3">
         <div
-          className={classNames('flex gap-4', {
+          className={classNames('flex', {
             'flex-col items-center': isVertical,
-            'flex-row': !isVertical,
+            'flex-row gap-4': !isVertical,
           })}
         >
           {icon && (
             <img
               src={icon}
               className={classNames({
-                'max-w-full mb-2': isVertical,
+                'max-w-full max-h-24': isVertical,
                 'max-w-20': !isVertical,
               })}
             />
