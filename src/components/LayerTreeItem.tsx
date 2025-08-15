@@ -9,11 +9,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ItemInstance } from '@headless-tree/core';
 import cx from 'classnames';
-import { Item } from '../types';
+import { Item, Layer } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppActions, useAppStore } from '../hooks/app';
 import { MouseEventHandler, useCallback } from 'react';
 import { Link } from '@tanstack/react-router';
+import { LayerIcon } from './LayerIcon';
 
 export type TREE_BASE_PATH = '/editor/edit/' | '/$mapId/' | '/editor/';
 
@@ -57,16 +58,17 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
       }}
     >
       <div
-        className={cx('treeitem flex items-center', className, {
+        className={cx('treeitem flex items-center gap-2', className, {
           focused: item.isFocused(),
           expanded: item.isExpanded(),
           folder: isFolder,
         })}
       >
-        <div className="w-10 text-accent">
+        <div className="text-accent">
           {isFolder && <FontAwesomeIcon icon={item.isExpanded() ? faFolderOpen : faFolderClosed} />}
           {!isFolder && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
         </div>
+        {!isFolder && <LayerIcon layer={(data as Layer).layer} />}
         <div>{item.getItemName()}</div>
         <div className="ml-2 flex">
           {editable && (
