@@ -21,7 +21,7 @@ function RouteComponent() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img src={data.data.icon} className="h-12 w-auto" />
+              <img src={defaultConfigPath + data.data.icon} className="h-12 w-auto" />
               <div>
                 <div className="text-3xl font-bold">NINA</div>
                 <div className="text-sm opacity-90">Norsk institutt for naturforskning</div>
