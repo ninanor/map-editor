@@ -45,7 +45,7 @@ export function TitleTabs({
               src={icon}
               className={classNames({
                 'max-w-full max-h-24': isVertical,
-                'max-w-20': !isVertical,
+                'max-w-20 max-h-20': !isVertical,
               })}
             />
           )}
