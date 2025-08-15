@@ -54,7 +54,10 @@ export const TREE_ROOT_ID = 'root';
 
 export const fetchConfig = async (url: string) => {
   const response = await axios.get<MapConfig>(url);
-  if (response.headers['content-type'] !== 'application/json') {
+  if (
+    response.headers['content-type'] !== 'application/json' &&
+    response.headers['content-type'] !== 'text/plain; charset=utf-8'
+  ) {
     throw Error('Unexpected response');
   }
   return response;
@@ -68,7 +71,10 @@ export const mapConfigQueryOptions = (url: string) =>
 
 export const fetchStoreConfig = async (url: string) => {
   const response = await axios.get<StoreConfig>(url);
-  if (response.headers['content-type'] !== 'application/json') {
+  if (
+    response.headers['content-type'] !== 'application/json' &&
+    response.headers['content-type'] !== 'text/plain; charset=utf-8'
+  ) {
     throw Error('Unexpected response');
   }
   return response;
