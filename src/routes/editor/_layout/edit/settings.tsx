@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
 
 import { useAppActions, useAppStore } from '../../../../hooks/app';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { MapConfig } from '../../../../types';
 import { SettingsForm } from '../../../../components/forms/SettingsForm';
 
@@ -44,6 +45,28 @@ const style = {
 function RouteComponent() {
   const { t } = useTranslation();
   const actions = useAppActions();
+  const [configUrl, setConfigUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadConfigFromUrl = useCallback(async () => {
+    if (!configUrl.trim()) return;
+    
+    setIsLoading(true);
+    try {
+      const response = await axios.get<MapConfig>(configUrl);
+      const config = response.data;
+      console.debug('Loaded config from URL:', config);
+      
+      // TODO: set configurations in a safer way!
+      useAppStore.setState(() => config);
+      setConfigUrl('');
+    } catch (error) {
+      console.error('Failed to load config from URL:', error);
+      alert('Failed to load configuration from URL. Please check the URL and try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [configUrl]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach(file => {
@@ -83,6 +106,28 @@ function RouteComponent() {
       <div {...getRootProps(style)}>
         <input {...getInputProps()} />
         <p>{t('drag-drop-config')}</p>
+      </div>
+      
+      <div className="mt-4">
+        <h5 className="font-semibold mb-2">Or load from URL:</h5>
+        <div className="flex gap-2">
+          <input
+            type="url"
+            value={configUrl}
+            onChange={e => setConfigUrl(e.target.value)}
+            placeholder="https://example.com/config.json"
+            className="input input-bordered flex-1"
+            disabled={isLoading}
+          />
+          <button
+            type="button"
+            onClick={() => void loadConfigFromUrl()}
+            disabled={!configUrl.trim() || isLoading}
+            className="btn btn-primary"
+          >
+            {isLoading ? 'Loading...' : 'Load'}
+          </button>
+        </div>
       </div>
 
       <SettingsForm defaultValues={settings} onSubmit={({ value }) => actions.setSettings(value)} />
