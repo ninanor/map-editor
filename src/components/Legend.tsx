@@ -13,7 +13,7 @@ import {
 function LegendRow({ description, color, borderColor, opacity }: Omit<VectorFillValue, 'value'>) {
   return (
     <div className="flex gap-8">
-      <svg viewBox="0 0 150 100" className="h-7">
+      <svg viewBox="0 0 150 100" className="h-7 flex-none">
         <rect width="150" height="100" fill={color} stroke={borderColor} fillOpacity={opacity} />
       </svg>
       <div>{description}</div>
@@ -24,7 +24,7 @@ function LegendRow({ description, color, borderColor, opacity }: Omit<VectorFill
 function LegendLineRow({ description, color, opacity, width }: Omit<VectorLineValue, 'value'>) {
   return (
     <div className="flex gap-8">
-      <svg viewBox="0 0 150 100" className="h-7">
+      <svg viewBox="0 0 150 100" className="h-7 flex-none">
         <line x1="0" y1="50" x2="150" y2="50" stroke={color} strokeOpacity={opacity} strokeWidth={(width ?? 1) * 4} />
       </svg>
       <div>{description}</div>
@@ -42,7 +42,7 @@ function LegendCircleRow({
 }: Omit<VectorCircleValue, 'value'>) {
   return (
     <div className="flex gap-8">
-      <svg viewBox="0 0 150 100" className="h-7">
+      <svg viewBox="0 0 150 100" className="h-7 flex-none">
         <circle
           cx="75"
           cy="50"
@@ -195,19 +195,19 @@ export function Legend(props: LayerConfig) {
     return null;
   } else if (props.type === 'raster') {
     const { legend } = props as RasterSource;
-    
+
     if (!legend) {
       return null;
     }
-    
+
     if (legend.type === 'image') {
       return (
         <div className="flex justify-center">
-          <img 
-            src={legend.url} 
-            alt="Legend" 
+          <img
+            src={legend.url}
+            alt="Legend"
             className="max-w-full h-auto"
-            onError={(e) => {
+            onError={e => {
               console.error('Failed to load legend image:', legend.url);
               (e.target as HTMLImageElement).style.display = 'none';
             }}
@@ -215,10 +215,10 @@ export function Legend(props: LayerConfig) {
         </div>
       );
     }
-    
+
     if (legend.type === 'linear') {
       const isVertical = legend.orientation === 'vertical';
-      
+
       if (isVertical) {
         return (
           <div className="flex gap-2">
@@ -243,16 +243,13 @@ export function Legend(props: LayerConfig) {
         );
       }
     }
-    
+
     if (legend.type === 'interval') {
       return (
         <div className="flex flex-col gap-2">
-          {legend.intervals.map((interval) => (
+          {legend.intervals.map(interval => (
             <div key={`${interval.min}-${interval.max}`} className="flex gap-2 items-center">
-              <div 
-                className="w-6 h-6 flex-shrink-0" 
-                style={{ backgroundColor: interval.color }}
-              ></div>
+              <div className="w-6 h-6 flex-shrink-0" style={{ backgroundColor: interval.color }}></div>
               <span className="text-sm">
                 {interval.min} - {interval.max}: {interval.description}
               </span>
@@ -261,7 +258,7 @@ export function Legend(props: LayerConfig) {
         </div>
       );
     }
-    
+
     return null;
   }
   return null;
