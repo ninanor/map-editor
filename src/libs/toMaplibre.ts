@@ -158,26 +158,36 @@ function createMatchExpression<T extends VectorValue>(
  */
 function vectorLegendFill(legend: VectorFillLegend) {
   if (legend.field && legend.values?.length) {
+    const hasColor = legend.values.some(v => v.color !== undefined);
+    const hasBorderColor = legend.values.some(v => v.borderColor !== undefined);
+    const hasOpacity = legend.values.some(v => v.opacity !== undefined);
+
     return {
       paint: {
-        'fill-color': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.color ?? '#000',
-          (value: VectorFillValue) => [value.value, value.color],
-        ),
-        'fill-outline-color': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.borderColor ?? legend.default?.color ?? '#000',
-          (value: VectorFillValue) => [value.value, value.borderColor ?? value.color],
-        ),
-        'fill-opacity': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.opacity ?? 1,
-          (value: VectorFillValue) => [value.value, value.opacity ?? 1],
-        ),
+        'fill-color': hasColor
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.color !== undefined),
+              legend.default?.color ?? '#000',
+              (value: VectorFillValue) => [value.value, value.color],
+            )
+          : (legend.default?.color ?? '#000'),
+        'fill-outline-color': hasBorderColor
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.borderColor !== undefined),
+              legend.default?.borderColor ?? legend.default?.color ?? '#000',
+              (value: VectorFillValue) => [value.value, value.borderColor!],
+            )
+          : (legend.default?.borderColor ?? legend.default?.color ?? '#000'),
+        'fill-opacity': hasOpacity
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.opacity !== undefined),
+              legend.default?.opacity ?? 1,
+              (value: VectorFillValue) => [value.value, value.opacity!],
+            )
+          : (legend.default?.opacity ?? 1),
       },
       type: 'fill',
     };
@@ -198,26 +208,36 @@ function vectorLegendFill(legend: VectorFillLegend) {
  */
 function vectorLegendLine(legend: VectorLineLegend) {
   if (legend.field && legend.values?.length) {
+    const hasColor = legend.values.some(v => v.color !== undefined);
+    const hasOpacity = legend.values.some(v => v.opacity !== undefined);
+    const hasWidth = legend.values.some(v => v.width !== undefined);
+
     return {
       paint: {
-        'line-color': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.color ?? '#000',
-          (value: VectorLineValue) => [value.value, value.color],
-        ),
-        'line-opacity': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.opacity ?? 1,
-          (value: VectorLineValue) => [value.value, value.opacity ?? 1],
-        ),
-        'line-width': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.width ?? 1,
-          (value: VectorLineValue) => [value.value, value.width ?? 1],
-        ),
+        'line-color': hasColor
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.color !== undefined),
+              legend.default?.color ?? '#000',
+              (value: VectorLineValue) => [value.value, value.color],
+            )
+          : (legend.default?.color ?? '#000'),
+        'line-opacity': hasOpacity
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.opacity !== undefined),
+              legend.default?.opacity ?? 1,
+              (value: VectorLineValue) => [value.value, value.opacity!],
+            )
+          : (legend.default?.opacity ?? 1),
+        'line-width': hasWidth
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.width !== undefined),
+              legend.default?.width ?? 1,
+              (value: VectorLineValue) => [value.value, value.width!],
+            )
+          : (legend.default?.width ?? 1),
       },
       type: 'line',
     };
@@ -238,38 +258,54 @@ function vectorLegendLine(legend: VectorLineLegend) {
  */
 function vectorLegendCircle(legend: VectorCircleLegend) {
   if (legend.field && legend.values?.length) {
+    const hasColor = legend.values.some(v => v.color !== undefined);
+    const hasOpacity = legend.values.some(v => v.opacity !== undefined);
+    const hasRadius = legend.values.some(v => v.radius !== undefined);
+    const hasStrokeColor = legend.values.some(v => v.strokeColor !== undefined);
+    const hasStrokeWidth = legend.values.some(v => v.strokeWidth !== undefined);
+
     return {
       paint: {
-        'circle-color': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.color ?? '#000',
-          (value: VectorCircleValue) => [value.value, value.color],
-        ),
-        'circle-opacity': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.opacity ?? 1,
-          (value: VectorCircleValue) => [value.value, value.opacity ?? 1],
-        ),
-        'circle-radius': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.radius ?? 5,
-          (value: VectorCircleValue) => [value.value, value.radius ?? 5],
-        ),
-        'circle-stroke-color': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.strokeColor ?? '#000',
-          (value: VectorCircleValue) => [value.value, value.strokeColor ?? '#000'],
-        ),
-        'circle-stroke-width': createMatchExpression(
-          legend.field,
-          legend.values,
-          legend.default?.strokeWidth ?? 0,
-          (value: VectorCircleValue) => [value.value, value.strokeWidth ?? 0],
-        ),
+        'circle-color': hasColor
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.color !== undefined),
+              legend.default?.color ?? '#000',
+              (value: VectorCircleValue) => [value.value, value.color],
+            )
+          : (legend.default?.color ?? '#000'),
+        'circle-opacity': hasOpacity
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.opacity !== undefined),
+              legend.default?.opacity ?? 1,
+              (value: VectorCircleValue) => [value.value, value.opacity!],
+            )
+          : (legend.default?.opacity ?? 1),
+        'circle-radius': hasRadius
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.radius !== undefined),
+              legend.default?.radius ?? 5,
+              (value: VectorCircleValue) => [value.value, value.radius!],
+            )
+          : (legend.default?.radius ?? 5),
+        'circle-stroke-color': hasStrokeColor
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.strokeColor !== undefined),
+              legend.default?.strokeColor ?? '#000',
+              (value: VectorCircleValue) => [value.value, value.strokeColor!],
+            )
+          : (legend.default?.strokeColor ?? '#000'),
+        'circle-stroke-width': hasStrokeWidth
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.strokeWidth !== undefined),
+              legend.default?.strokeWidth ?? 0,
+              (value: VectorCircleValue) => [value.value, value.strokeWidth!],
+            )
+          : (legend.default?.strokeWidth ?? 0),
       },
       type: 'circle',
     };
