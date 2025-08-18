@@ -285,3 +285,7 @@ button:focus-visible .treeitem.focused,
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.label {
+  white-space: break-spaces !important;
+}
