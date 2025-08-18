@@ -4,6 +4,8 @@ import {
   CreateLink,
   UndoRedo,
   headingsPlugin,
+  linkDialogPlugin,
+  linkPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   quotePlugin,
@@ -15,6 +17,8 @@ export const PLUGINS = [
   headingsPlugin(),
   listsPlugin(),
   quotePlugin(),
+  linkPlugin(),
+  linkDialogPlugin(),
   thematicBreakPlugin(),
   markdownShortcutPlugin(),
   toolbarPlugin({
