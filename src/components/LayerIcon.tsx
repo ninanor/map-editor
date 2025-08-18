@@ -82,10 +82,20 @@ export function LayerIcon({ layer, size = 'md', className = '' }: LayerIconProps
       const color = defaultLegend?.color ?? '#3b82f6';
       const opacity = defaultLegend?.opacity ?? 1;
       const width = defaultLegend?.width ?? 2;
+      const dasharray = defaultLegend?.dasharray;
 
       return (
         <svg className={`${sizeClass} ${className}`} viewBox="0 0 24 24">
-          <line x1="2" y1="12" x2="22" y2="12" stroke={color} strokeWidth={width} strokeOpacity={opacity} />
+          <line 
+            x1="2" 
+            y1="12" 
+            x2="22" 
+            y2="12" 
+            stroke={color} 
+            strokeWidth={width} 
+            strokeOpacity={opacity}
+            strokeDasharray={dasharray ? dasharray.join(',') : undefined}
+          />
         </svg>
       );
     }

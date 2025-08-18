@@ -144,6 +144,7 @@ export interface VectorLineValue {
   color: string;
   opacity?: number;
   width?: number;
+  dasharray?: number[];
 }
 
 export interface VectorLineLegend {

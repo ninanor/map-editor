@@ -44,6 +44,9 @@ export const LAYER_SCHEMA_UI: UiSchema = {
           width: {
             'ui:widget': 'range',
           },
+          dasharray: {
+            'ui:widget': 'DasharrayWidget',
+          },
           radius: {
             'ui:widget': 'range',
           },
@@ -67,6 +70,9 @@ export const LAYER_SCHEMA_UI: UiSchema = {
             },
             width: {
               'ui:widget': 'range',
+            },
+            dasharray: {
+              'ui:widget': 'DasharrayWidget',
             },
             radius: {
               'ui:widget': 'range',
@@ -344,6 +350,16 @@ export const LAYER_SCHEMA: RJSFSchema = {
                             default: 1,
                             title: 'Line width',
                           },
+                          dasharray: {
+                            type: 'array',
+                            title: 'Dash pattern',
+                            description: 'Array of numbers defining dash and gap lengths (e.g., [5, 5] for dashed, [10, 5, 2, 5] for dash-dot)',
+                            items: {
+                              type: 'number',
+                              minimum: 0,
+                            },
+                            minItems: 2,
+                          },
                         },
                       },
                       field: {
@@ -567,6 +583,16 @@ export const LAYER_SCHEMA: RJSFSchema = {
           minimum: 1,
           default: 1,
           title: 'Line width',
+        },
+        dasharray: {
+          type: 'array',
+          title: 'Dash pattern',
+          description: 'Array of numbers defining dash and gap lengths (e.g., [5, 5] for dashed, [10, 5, 2, 5] for dash-dot)',
+          items: {
+            type: 'number',
+            minimum: 0,
+          },
+          minItems: 2,
         },
       },
     },

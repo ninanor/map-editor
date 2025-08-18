@@ -21,11 +21,20 @@ function LegendRow({ description, color, borderColor, opacity }: Omit<VectorFill
   );
 }
 
-function LegendLineRow({ description, color, opacity, width }: Omit<VectorLineValue, 'value'>) {
+function LegendLineRow({ description, color, opacity, width, dasharray }: Omit<VectorLineValue, 'value'>) {
   return (
     <div className="flex gap-8">
       <svg viewBox="0 0 150 100" className="h-7 flex-none">
-        <line x1="0" y1="50" x2="150" y2="50" stroke={color} strokeOpacity={opacity} strokeWidth={(width ?? 1) * 4} />
+        <line 
+          x1="0" 
+          y1="50" 
+          x2="150" 
+          y2="50" 
+          stroke={color} 
+          strokeOpacity={opacity} 
+          strokeWidth={(width ?? 1) * 4}
+          strokeDasharray={dasharray ? dasharray.map(d => d * 4).join(',') : undefined}
+        />
       </svg>
       <div>{description}</div>
     </div>
@@ -104,6 +113,7 @@ export function Legend(props: LayerConfig) {
               description={l.description}
               opacity={l.opacity}
               width={l.width}
+              dasharray={l.dasharray}
             />
           )) ?? [];
       }
@@ -114,6 +124,7 @@ export function Legend(props: LayerConfig) {
           color={defaultLegendItem?.color ?? '#000'}
           opacity={defaultLegendItem?.opacity}
           width={defaultLegendItem?.width}
+          dasharray={defaultLegendItem?.dasharray}
           description={defaultLegendItem?.description}
         />,
       );

@@ -132,9 +132,9 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourcePr
 function createMatchExpression<T extends VectorValue>(
   field: string,
   values: T[],
-  defaultValue: string | number,
+  defaultValue: string | number | number[],
   extractor: ValueExtractor<T>,
-): unknown[] | string | number {
+): unknown[] | string | number | number[] {
   if (!field || !values.length) {
     return defaultValue;
   }
@@ -211,6 +211,7 @@ function vectorLegendLine(legend: VectorLineLegend) {
     const hasColor = legend.values.some(v => v.color !== undefined);
     const hasOpacity = legend.values.some(v => v.opacity !== undefined);
     const hasWidth = legend.values.some(v => v.width !== undefined);
+    const hasDasharray = legend.values.some(v => v.dasharray !== undefined);
 
     return {
       paint: {
@@ -238,6 +239,14 @@ function vectorLegendLine(legend: VectorLineLegend) {
               (value: VectorLineValue) => [value.value, value.width!],
             )
           : (legend.default?.width ?? 1),
+        'line-dasharray': hasDasharray
+          ? createMatchExpression(
+              legend.field,
+              legend.values.filter(v => v.dasharray !== undefined),
+              legend.default?.dasharray ?? [1, 0],
+              (value: VectorLineValue) => [value.value, value.dasharray!],
+            )
+          : (legend.default?.dasharray ?? [1, 0]),
       },
       type: 'line',
     };
@@ -247,6 +256,7 @@ function vectorLegendLine(legend: VectorLineLegend) {
         'line-color': legend.default?.color ?? '#000',
         'line-opacity': legend.default?.opacity ?? 1,
         'line-width': legend.default?.width ?? 1,
+        'line-dasharray': legend.default?.dasharray ?? [1, 0],
       },
       type: 'line',
     };
