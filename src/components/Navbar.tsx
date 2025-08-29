@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../hooks/app';
 import { Link, useMatch } from '@tanstack/react-router';
+import { DownloadConfigButton } from './DownloadConfigButton';
 
 export function Navbar() {
   const title = useAppStore(state => state.subtitle);
@@ -14,6 +15,9 @@ export function Navbar() {
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
+          <li>
+            <DownloadConfigButton className="btn btn-ghost" />
+          </li>
           <li>
             <Link to={isEditing ? '/editor' : '/editor/edit'} className="btn btn-ghost">
               {t(isEditing ? 'preview' : 'edit')}

@@ -7,23 +7,12 @@ import { useAppActions, useAppStore } from '../../../../hooks/app';
 import { useCallback, useState } from 'react';
 import { MapConfig } from '../../../../types';
 import { SettingsForm } from '../../../../components/forms/SettingsForm';
+import { DownloadConfigButton } from '../../../../components/DownloadConfigButton';
 
 export const Route = createFileRoute('/editor/_layout/edit/settings')({
   component: RouteComponent,
 });
 
-const download = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { actions, ...state } = useAppStore.getState();
-  const url = URL.createObjectURL(new Blob([JSON.stringify(state)], { type: 'application/json' }));
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${state.id}.style.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(a.href);
-};
 
 const style = {
   style: {
@@ -99,9 +88,7 @@ function RouteComponent() {
   return (
     <div>
       <h4 className="font-bold">{t('download-configuration')}</h4>
-      <a className="btn btn-accent" onClick={download}>
-        {t('download-configuration')}
-      </a>
+      <DownloadConfigButton />
       <h4 className="font-bold mt-5">{t('upload-configuration')}</h4>
       <div {...getRootProps(style)}>
         <input {...getInputProps()} />
