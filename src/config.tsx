@@ -140,6 +140,10 @@ export const DEFAULT_THEME = THEMES[0];
 export const DEFAULT_LANG = LANGUAGES[0].value;
 export const DEFAULT_STORE_CONFIG = '/maps';
 
+export const editorSearchSchema = (search: Record<string, unknown>): { config?: string } => ({
+  config: search.config as string | undefined,
+});
+
 export const defaultConfigBase = {
   id: '',
   title: '',
