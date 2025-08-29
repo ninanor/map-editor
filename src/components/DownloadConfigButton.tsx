@@ -6,7 +6,10 @@ interface DownloadConfigButtonProps {
   children?: React.ReactNode;
 }
 
-export function DownloadConfigButton({ className = 'btn btn-accent', children }: DownloadConfigButtonProps) {
+export function DownloadConfigButton({
+  className = 'btn btn-accent text-accent-content',
+  children,
+}: DownloadConfigButtonProps) {
   const { t } = useTranslation();
 
   const download = () => {
