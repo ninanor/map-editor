@@ -69,7 +69,7 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
           {!isFolder && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
         </div>
         {!isFolder && <LayerIcon className="shrink-0" layer={(data as Layer).layer} />}
-        <div>{item.getItemName()}</div>
+        <div className="grow-1">{item.getItemName()}</div>
         <div className="ml-2 flex">
           {editable && (
             <>
