@@ -27,9 +27,11 @@ function RouteComponent() {
                 <div className="text-sm opacity-90">Norsk institutt for naturforskning</div>
               </div>
             </div>
-            <Link to="/editor" className="btn btn-accent">
-              Map Editor
-            </Link>
+{import.meta.env.VITE_HIDE_EDIT_BUTTON !== 'true' && (
+              <Link to="/editor" className="btn btn-accent">
+                Map Editor
+              </Link>
+            )}
           </div>
         </div>
       </div>

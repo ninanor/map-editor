@@ -16,6 +16,18 @@ jobs:
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        variant:
+          - name: public
+            config_branch: main
+            suffix: '-readonly'
+            edit: 'false'
+          - name: internal
+            config_branch: devel
+            suffix: ''
+            edit: 'true'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,8 +44,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
-            type=sha
+            type=ref,event=branch,suffix=${{ matrix.variant.suffix }}
+            type=sha,suffix=${{ matrix.variant.suffix }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
@@ -42,4 +54,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            VITE_DEFAULT_CONFIGURATION=https://raw.githubusercontent.com/NINAnor/published-maps/refs/heads/main
+            VITE_DEFAULT_CONFIGURATION=https://raw.githubusercontent.com/NINAnor/published-maps/refs/heads/${{ matrix.variant.config_branch }}
+            VITE_HIDE_EDIT_BUTTON=${{ matrix.variant.edit }}

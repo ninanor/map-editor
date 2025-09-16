@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useLocation } from '@tanstack/react-router';
+import { createFileRoute, Link, Outlet, useLocation, redirect } from '@tanstack/react-router';
 import classNames from 'classnames';
 import { EDIT_TABS } from '../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,12 @@ import { useMemo } from 'react';
 
 export const Route = createFileRoute('/editor/_layout/edit')({
   component: RouteComponent,
+  beforeLoad: () => {
+    if (import.meta.env.VITE_HIDE_EDIT_BUTTON === 'true') {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({ to: '/' });
+    }
+  },
 });
 
 function RouteComponent() {

@@ -1,4 +1,11 @@
-import { ErrorComponentProps, Outlet, useRouter, ErrorComponent, createFileRoute } from '@tanstack/react-router';
+import {
+  ErrorComponentProps,
+  Outlet,
+  useRouter,
+  ErrorComponent,
+  createFileRoute,
+  redirect,
+} from '@tanstack/react-router';
 import { DEFAULT_LANG, mapConfigQueryOptions, editorSearchSchema } from '../config';
 import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
@@ -15,6 +22,12 @@ const EDITOR_CONFIG_URL = '/editor/config.json';
 export const Route = createFileRoute('/editor')({
   component: RootComponent,
   validateSearch: editorSearchSchema,
+  beforeLoad: () => {
+    if (import.meta.env.VITE_HIDE_EDIT_BUTTON === 'true') {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw redirect({ to: '/' });
+    }
+  },
   loader: async ({ context: { queryClient }, location }) => {
     const searchParams = new URLSearchParams(location.search);
     const configUrl = searchParams.get('config') ?? EDITOR_CONFIG_URL;

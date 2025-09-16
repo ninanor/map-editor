@@ -1,8 +1,9 @@
-FROM node:24-slim AS base
+FROM node:24-alpine AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ARG VITE_DEFAULT_CONFIGURATION="/maps"
+ARG VITE_HIDE_EDIT_BUTTON="false"
 RUN corepack enable
 
 WORKDIR /app
