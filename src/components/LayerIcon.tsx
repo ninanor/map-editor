@@ -86,13 +86,13 @@ export function LayerIcon({ layer, size = 'md', className = '' }: LayerIconProps
 
       return (
         <svg className={`${sizeClass} ${className}`} viewBox="0 0 24 24">
-          <line 
-            x1="2" 
-            y1="12" 
-            x2="22" 
-            y2="12" 
-            stroke={color} 
-            strokeWidth={width} 
+          <line
+            x1="2"
+            y1="22"
+            x2="22"
+            y2="2"
+            stroke={color}
+            strokeWidth={width}
             strokeOpacity={opacity}
             strokeDasharray={dasharray ? dasharray.join(',') : undefined}
           />
