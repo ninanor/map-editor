@@ -69,16 +69,28 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
           {!isFolder && <FontAwesomeIcon className="text-slate" icon={isVisible ? faSquareCheck : faSquare} />}
         </div>
         {!isFolder && <LayerIcon className="shrink-0" layer={(data as Layer).layer} />}
-        <div className="grow-1">{item.getItemName()}</div>
-        <div className="ml-2 flex">
+        <div className="break-all">{item.getItemName()}</div>
+        <div className="flex shrink-0 items-center">
           {editable && (
             <>
               {isFolder ? (
-                <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
+                <Link
+                  className="btn btn-ghost btn-sm"
+                  to={`folders/$folderId`}
+                  from={routePath}
+                  params={{ folderId: id }}
+                  onClick={noPropagate}
+                >
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               ) : (
-                <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
+                <Link
+                  className="btn btn-ghost btn-sm"
+                  to={`layers/$layerId`}
+                  from={routePath}
+                  params={{ layerId: id }}
+                  onClick={noPropagate}
+                >
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
               )}
@@ -87,12 +99,24 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
           {!editable &&
             (isFolder
               ? data.description && (
-                  <Link to={`folders/$folderId`} from={routePath} params={{ folderId: id }} onClick={noPropagate}>
+                  <Link
+                    className="btn btn-ghost btn-sm"
+                    to={`folders/$folderId`}
+                    from={routePath}
+                    params={{ folderId: id }}
+                    onClick={noPropagate}
+                  >
                     <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
                   </Link>
                 )
               : data.description && (
-                  <Link to={`layers/$layerId`} from={routePath} params={{ layerId: id }} onClick={noPropagate}>
+                  <Link
+                    to={`layers/$layerId`}
+                    className="btn btn-ghost btn-sm"
+                    from={routePath}
+                    params={{ layerId: id }}
+                    onClick={noPropagate}
+                  >
                     <FontAwesomeIcon icon={faInfoCircle} className="text-accent" />
                   </Link>
                 ))}
