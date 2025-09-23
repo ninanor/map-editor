@@ -22,11 +22,11 @@ jobs:
           - name: public
             config_branch: main
             suffix: '-readonly'
-            edit: 'false'
+            edit: 'true'
           - name: internal
             config_branch: devel
             suffix: ''
-            edit: 'true'
+            edit: 'false'
 
     steps:
       - name: Checkout repository
