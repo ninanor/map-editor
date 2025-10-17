@@ -25,13 +25,13 @@ function LegendLineRow({ description, color, opacity, width, dasharray }: Omit<V
   return (
     <div className="flex gap-8">
       <svg viewBox="0 0 150 100" className="h-7 flex-none">
-        <line 
-          x1="0" 
-          y1="50" 
-          x2="150" 
-          y2="50" 
-          stroke={color} 
-          strokeOpacity={opacity} 
+        <line
+          x1="0"
+          y1="50"
+          x2="150"
+          y2="50"
+          stroke={color}
+          strokeOpacity={opacity}
           strokeWidth={(width ?? 1) * 4}
           strokeDasharray={dasharray ? dasharray.map(d => d * 4).join(',') : undefined}
         />
@@ -77,16 +77,23 @@ export function Legend(props: LayerConfig) {
       let rows: ReactNode[] = [];
 
       if (l.children.legend?.field) {
-        rows =
-          l.children.legend?.values?.map(l => (
-            <LegendRow
-              key={l.value}
-              color={l.color}
-              borderColor={l.borderColor}
-              description={l.description}
-              opacity={l.opacity}
-            />
-          )) ?? [];
+        let index = new Set();
+        rows = [];
+        l.children.legend?.values?.forEach((l: VectorFillValue) => {
+          let key = [l.color, l.borderColor, l.opacity, l.description].join('_');
+          if (!index.has(key)) {
+            rows.push(
+              <LegendRow
+                key={l.value}
+                color={l.color}
+                borderColor={l.borderColor}
+                description={l.description}
+                opacity={l.opacity}
+              />,
+            );
+            index.add(key);
+          }
+        });
       }
 
       rows.push(
