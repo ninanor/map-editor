@@ -5,6 +5,8 @@ import { Source } from 'maplibre-gl';
 declare global {
   interface Window {
     DEFAULT_CONFIGURATION: string;
+    SENTRY_DSN?: string;
+    SENTRY_ENV?: string;
   }
 }
 
