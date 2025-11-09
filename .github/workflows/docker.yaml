@@ -2,9 +2,9 @@ name: Docker
 on:
   push:
     branches:
-      - '*'
+      - "*"
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 
 env:
   REGISTRY: ghcr.io
@@ -21,12 +21,12 @@ jobs:
         variant:
           - name: public
             config_branch: main
-            suffix: '-readonly'
-            edit: 'true'
+            suffix: "-readonly"
+            edit: "true"
           - name: internal
-            config_branch: devel
-            suffix: ''
-            edit: 'false'
+            config_branch: main
+            suffix: ""
+            edit: "false"
 
     steps:
       - name: Checkout repository
@@ -54,5 +54,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            VITE_DEFAULT_CONFIGURATION=https://raw.githubusercontent.com/NINAnor/published-maps/refs/heads/${{ matrix.variant.config_branch }}
+            VITE_DEFAULT_CONFIGURATION=https://s3-ext-1.nina.no/miljodata-maps/${{ matrix.variant.config_branch }}
             VITE_HIDE_EDIT_BUTTON=${{ matrix.variant.edit }}
