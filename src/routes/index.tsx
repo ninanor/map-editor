@@ -3,6 +3,8 @@ import { storeConfigQueryOptions } from '../config';
 import { useUIStore } from '../hooks/ui';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
+import { Header } from '../components/Header';
+import { Footer } from '../components/HomeFooter';
 
 function ConfigErrorComponent({ error }: ErrorComponentProps) {
   if (error instanceof AxiosError) {
@@ -38,46 +40,6 @@ export const Route = createFileRoute('/')({
   },
   errorComponent: ConfigErrorComponent,
 });
-
-function Header({ icon }: { icon: string }) {
-  return (
-    <div className="bg-primary text-primary-content">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <img src={icon} className="h-12 w-auto" />
-            <div>
-              <div className="text-3xl font-bold">NINA</div>
-              <div className="text-sm opacity-90">Norsk institutt for naturforskning</div>
-            </div>
-          </div>
-          {import.meta.env.VITE_HIDE_EDIT_BUTTON !== 'true' && (
-            <Link to="/editor" className="btn btn-accent">
-              Map Editor
-            </Link>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="bg-base-300 mt-16">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center text-base-content/60 text-sm">
-          <p>Norwegian Institute for Nature Research (NINA)</p>
-          <p className="mt-2">
-            <a href="https://www.nina.no" className="link link-hover">
-              www.nina.no
-            </a>
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 function RouteComponent() {
   const defaultConfigPath = useUIStore(state => state.defaultConfig);
