@@ -127,7 +127,12 @@ export const useAppStore = create<AppState>()(
           }),
         addTreeItemFolder: item =>
           set(state => {
-            const id = nanoid();
+            if (item.id && state.items?.[item.id]) {
+              toast.error(`An item with the same id is already present`);
+              return;
+            }
+
+            const id = item.id ?? nanoid();
             const parent = state.items ? state.items[item.parent] : null;
             if (state.items && parent?.type === 'folder') {
               state.items[id] = {

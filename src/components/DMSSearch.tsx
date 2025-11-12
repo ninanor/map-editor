@@ -23,6 +23,7 @@ function DatasetsResult({
               onAddFolder({
                 name: r.title,
                 parent,
+                id: 'dataset__' + r.id,
               })
             }
           >

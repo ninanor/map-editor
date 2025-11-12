@@ -21,7 +21,7 @@ export interface Folder {
 }
 
 export type UpdateFolder = Omit<Folder, 'children' | 'type'>;
-export type CreateFolder = UpdateFolder & { parent: string };
+export type CreateFolder = UpdateFolder & { parent: string; id?: string };
 
 export interface Layer {
   type: 'layer';
