@@ -7,6 +7,7 @@ declare global {
     DEFAULT_CONFIGURATION: string;
     SENTRY_DSN?: string;
     SENTRY_ENV?: string;
+    DMS_API_ENDPOINT?: string;
   }
 }
 
@@ -18,6 +19,9 @@ export interface Folder {
   children: string[];
   download_url?: string;
 }
+
+export type UpdateFolder = Omit<Folder, 'children' | 'type'>;
+export type CreateFolder = UpdateFolder & { parent: string };
 
 export interface Layer {
   type: 'layer';

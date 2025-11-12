@@ -48,5 +48,6 @@
   "rgb-bands": "RGB bands (1,2,3,4)",
   "rescale-values": "Rescale values",
   "rescale-description": "Array of min,max values for each band (e.g., \"0,255\")",
-  "exclusive-layers": "Exclusive Layers"
+  "exclusive-layers": "Exclusive Layers",
+  "from-DMS": "From DMS"
 }

@@ -8,7 +8,7 @@ import Form from '@rjsf/daisyui';
 import { FOLDER_SCHEMA, FOLDER_SCHEMA_UI } from '../../../../rjsf/schemas/folder';
 import { widgets } from '../../../../rjsf/widgets';
 import AJV8Validator from '@rjsf/validator-ajv8/lib/validator';
-import { Folder } from '../../../../types';
+import { CreateFolder } from '../../../../types';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/add')({
   component: RouteComponent,
@@ -47,7 +47,7 @@ function RouteComponent() {
   };
 
   const handleSubmit = ({ formData }: { formData?: unknown }) => {
-    actions.addTreeItemFolder(formData as Omit<Folder, 'children'> & { parent: string });
+    actions.addTreeItemFolder(formData as CreateFolder);
     navigate({ to: '/editor/edit' }).catch(console.error);
   };
 

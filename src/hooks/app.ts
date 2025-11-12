@@ -1,13 +1,25 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import { BaseMapStyle, Folder, Layer, LayerWithId, MapConfig, MapMeta, MapSettings, Tree } from '../types';
+import {
+  BaseMapStyle,
+  CreateFolder,
+  Folder,
+  Layer,
+  LayerWithId,
+  MapConfig,
+  MapMeta,
+  MapSettings,
+  Tree,
+  UpdateFolder,
+} from '../types';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
 import { ViewState } from 'react-map-gl/maplibre';
 import { arrayMove } from '@dnd-kit/sortable';
 import { toMaplibreSources } from '../libs/toMaplibre';
 import { defaultConfigBase } from '../config';
+import { toast } from 'react-toastify';
 
 interface AppActions {
   actions: {
@@ -15,11 +27,11 @@ interface AppActions {
     setSubtitle: (subtitle: string) => void;
     setDescription: (description: string) => void;
     updateTreeItemChildren: (id: string, newChildren: string[]) => void;
-    updateTreeItemFolder: (id: string, item: Omit<Folder, 'children' | 'type'>) => void;
+    updateTreeItemFolder: (id: string, item: UpdateFolder) => void;
     removeTreeItemFolder: (id: string) => void;
     removeTreeItemLayer: (id: string) => void;
     updateTreeItemLayer: (id: string, item: Omit<Layer, 'type'>) => void;
-    addTreeItemFolder: (item: Omit<Folder & { parent: string }, 'children' | 'type'>) => void;
+    addTreeItemFolder: (item: CreateFolder) => void;
     addTreeItemLayer: (item: Omit<Layer & { parent: string; id: string }, 'type'>) => void;
     toggleLayer: (id: string) => void;
     setExpandedItems: (expand: string[]) => void;
@@ -125,6 +137,7 @@ export const useAppStore = create<AppState>()(
                 children: [],
               };
               parent.children.push(id);
+              toast.success(`${item.name} added`);
             }
           }),
         moveToIndex: (source, target) =>
