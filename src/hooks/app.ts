@@ -4,6 +4,7 @@ import { devtools } from 'zustand/middleware';
 import {
   BaseMapStyle,
   CreateFolder,
+  CreateLayer,
   Folder,
   Layer,
   LayerWithId,
@@ -12,6 +13,7 @@ import {
   MapSettings,
   Tree,
   UpdateFolder,
+  UpdateLayer,
 } from '../types';
 import { nanoid } from 'nanoid';
 import { createSelector } from 'reselect';
@@ -30,9 +32,9 @@ interface AppActions {
     updateTreeItemFolder: (id: string, item: UpdateFolder) => void;
     removeTreeItemFolder: (id: string) => void;
     removeTreeItemLayer: (id: string) => void;
-    updateTreeItemLayer: (id: string, item: Omit<Layer, 'type'>) => void;
+    updateTreeItemLayer: (id: string, item: UpdateLayer) => void;
     addTreeItemFolder: (item: CreateFolder) => void;
-    addTreeItemLayer: (item: Omit<Layer & { parent: string; id: string }, 'type'>) => void;
+    addTreeItemLayer: (item: CreateLayer) => void;
     toggleLayer: (id: string) => void;
     setExpandedItems: (expand: string[]) => void;
     moveToIndex: (source: string, target: string) => void;

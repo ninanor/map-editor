@@ -32,6 +32,9 @@ export interface Layer {
   download_url?: string;
 }
 
+export type UpdateLayer = Omit<Layer, 'type'>;
+export type CreateLayer = UpdateLayer & { parent: string; id: string };
+
 export type LayerWithId = Layer & { id: string };
 
 export type Item = Folder | Layer;

@@ -60,8 +60,8 @@ function RouteComponent() {
               >
                 <option disabled>Select what to import</option>
                 <option value="folder">Dataset as Folder</option>
-                <option value="raster">Raster Resource as Layer</option>
-                <option value="vector">Data Table as Layer</option>
+                <option value="raster">Raster Resource as Raster Layer</option>
+                <option value="vector">Data Table as Vector Layer</option>
               </select>
             </div>
             <div className="flex flex-col">
@@ -73,7 +73,13 @@ function RouteComponent() {
                 value={search}
               />
             </div>
-            <DMSSearch search={search} type={layerType} parent={parent} onAddFolder={actions.addTreeItemFolder} />
+            <DMSSearch
+              search={search}
+              type={layerType}
+              parent={parent}
+              onAddFolder={actions.addTreeItemFolder}
+              onAddLayer={actions.addTreeItemLayer}
+            />
           </div>
         </div>
       </div>
