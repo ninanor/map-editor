@@ -34,7 +34,7 @@ interface AppActions {
     removeTreeItemLayer: (id: string) => void;
     updateTreeItemLayer: (id: string, item: UpdateLayer) => void;
     addTreeItemFolder: (item: CreateFolder) => void;
-    addTreeItemLayer: (item: CreateLayer) => void;
+    addTreeItemLayer: (item: CreateLayer, load?: boolean) => void;
     toggleLayer: (id: string) => void;
     setExpandedItems: (expand: string[]) => void;
     moveToIndex: (source: string, target: string) => void;
@@ -155,7 +155,7 @@ export const useAppStore = create<AppState>()(
               state.layerOrder.indexOf(target),
             );
           }),
-        addTreeItemLayer: item =>
+        addTreeItemLayer: (item, load = false) =>
           set(state => {
             const parent = state.items ? state.items[item.parent] : null;
             if (state.items && parent?.type === 'folder') {
@@ -166,6 +166,10 @@ export const useAppStore = create<AppState>()(
                 layer: item.layer,
               };
               parent.children.push(item.id);
+              if (load) {
+                state.layerOrder.push(item.id);
+              }
+              toast.success(`${item.name} added`);
             }
           }),
         toggleLayer: (id: string) =>

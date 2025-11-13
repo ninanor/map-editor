@@ -60,8 +60,8 @@ function RouteComponent() {
               >
                 <option disabled>Select what to import</option>
                 <option value="folder">Dataset as Folder</option>
-                <option value="raster">Raster Resource as Raster Layer</option>
-                <option value="vector">Data Table as Vector Layer</option>
+                <option value="raster">Raster Resource as Raster Layer (COGTiff)</option>
+                <option value="vector">Data Table as Vector Layer (PMTiles)</option>
               </select>
             </div>
             <div className="flex flex-col">
