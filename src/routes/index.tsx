@@ -1,10 +1,10 @@
 import { createFileRoute, ErrorComponent, ErrorComponentProps, Link } from '@tanstack/react-router';
-import { storeConfigQueryOptions } from '../config';
 import { useUIStore } from '../hooks/ui';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import { Header } from '../components/Header';
 import { Footer } from '../components/HomeFooter';
+import { AxiosError } from 'axios';
+import { storeConfigQueryOptions } from '../config';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 function ConfigErrorComponent({ error }: ErrorComponentProps) {
   if (error instanceof AxiosError) {
@@ -36,18 +36,18 @@ function ConfigErrorComponent({ error }: ErrorComponentProps) {
 export const Route = createFileRoute('/')({
   component: RouteComponent,
   loader: ({ context: { queryClient } }) => {
-    return queryClient.ensureQueryData(storeConfigQueryOptions(`${useUIStore.getState().defaultConfig}/maps.json`));
+    return queryClient.ensureQueryData(storeConfigQueryOptions(useUIStore.getState().defaultConfig));
   },
   errorComponent: ConfigErrorComponent,
 });
 
 function RouteComponent() {
   const defaultConfigPath = useUIStore(state => state.defaultConfig);
-  const { isLoading, data, isError } = useSuspenseQuery(storeConfigQueryOptions(`${defaultConfigPath}/maps.json`));
+  const { data, isLoading, isError } = useSuspenseQuery(storeConfigQueryOptions(defaultConfigPath));
 
   return (
     <div className="min-h-screen bg-base-100 flex flex-col">
-      <Header icon={defaultConfigPath + data.data.icon} />
+      <Header icon={data.data.icon} />
 
       <main className="container mx-auto px-4 py-8 grow">
         <div className="mb-8">

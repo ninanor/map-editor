@@ -212,11 +212,14 @@ export interface PMTileSource extends Partial<Source> {
 
 export type LayerConfig = TitilerSource | PMTileSource | RasterSource | Partial<Source>;
 
+export interface StoreMap {
+  title: string;
+  description?: string;
+  id: string;
+  url: string;
+}
+
 export interface StoreConfig {
   icon: string;
-  maps: {
-    title: string;
-    description?: string;
-    id: string;
-  }[];
+  maps: StoreMap[];
 }
