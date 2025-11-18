@@ -8,4 +8,5 @@ if (!isLocalhost) {
   init({
     domain: location.origin.replace(/^https?:\/\//, ''),
   });
+  console.debug('enabled plausible');
 }
