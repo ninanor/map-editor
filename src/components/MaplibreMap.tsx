@@ -15,6 +15,8 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { useCallback, useEffect, useState } from 'react';
 import GeocoderControl from './GeocoderControl';
 import { Popup, PopupInfo } from './popup';
+import SidebarWidget from './SidebarWidget';
+import MediaQuery from 'react-responsive';
 
 export default function Map() {
   const basemap = useBaseMap();
@@ -53,6 +55,9 @@ export default function Map() {
       <NavigationControl position="top-right" />
       <GeolocateControl position="top-right" />
       <FullscreenControl position="top-right" />
+      <MediaQuery maxWidth={700}>
+        <SidebarWidget position="top-right" />
+      </MediaQuery>
       <ScaleControl />
       {sources.map(({ id, children: { key, ...children }, ...props }) => (
         <Source key={id} {...props}>
