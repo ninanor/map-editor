@@ -128,6 +128,7 @@ export const LAYER_SCHEMA: RJSFSchema = {
           additionalProperties: {
             type: 'string',
           },
+          required: ['url', 'bidx'],
           properties: {
             url: { type: 'string' },
             bidx: {
@@ -154,11 +155,30 @@ export const LAYER_SCHEMA: RJSFSchema = {
         type: {
           const: 'titiler',
         },
-        legend: {
-          $ref: '#/$defs/RasterLinearLegend',
-          title: 'Legend Configuration',
-        },
       },
+      allOf: [
+        {
+          if: {
+            properties: {
+              titiler: {
+                properties: {
+                  bidx: {
+                    const: 'single',
+                  },
+                },
+              },
+            },
+          },
+          then: {
+            properties: {
+              legend: {
+                title: 'Legend Configuration',
+                $ref: '#/$defs/RasterLinearLegend',
+              },
+            },
+          },
+        },
+      ],
     },
     RasterSource: {
       type: 'object',
@@ -353,7 +373,8 @@ export const LAYER_SCHEMA: RJSFSchema = {
                           dasharray: {
                             type: 'array',
                             title: 'Dash pattern',
-                            description: 'Array of numbers defining dash and gap lengths (e.g., [5, 5] for dashed, [10, 5, 2, 5] for dash-dot)',
+                            description:
+                              'Array of numbers defining dash and gap lengths (e.g., [5, 5] for dashed, [10, 5, 2, 5] for dash-dot)',
                             items: {
                               type: 'number',
                               minimum: 0,
@@ -587,7 +608,8 @@ export const LAYER_SCHEMA: RJSFSchema = {
         dasharray: {
           type: 'array',
           title: 'Dash pattern',
-          description: 'Array of numbers defining dash and gap lengths (e.g., [5, 5] for dashed, [10, 5, 2, 5] for dash-dot)',
+          description:
+            'Array of numbers defining dash and gap lengths (e.g., [5, 5] for dashed, [10, 5, 2, 5] for dash-dot)',
           items: {
             type: 'number',
             minimum: 0,

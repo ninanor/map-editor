@@ -53,23 +53,52 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourcePr
       throw new Error(`Missing required 'url' parameter for raster layer ${layer.id}`);
     }
 
-    // Convert bidx string format to array
-    const bidxArray = bidx === BAND_TYPES.RGB ? [1, 2, 3, 4] : [1];
+    let tileUrl = `${titiler_api_url}/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?`;
+    let extra = '';
 
-    // Add band indices to query parameters
-    bidxArray.forEach(index => {
-      search.append('bidx', index.toString());
-    });
+    if (bidx === BAND_TYPES.SINGLE) {
+      if (!l.legend) {
+        throw Error('Legend should be provided for a single band raster!');
+      }
+      search.append('bidx', '1');
 
-    // Add rescale values if provided
-    if (rescale?.length) {
-      rescale.forEach(v => {
-        if (typeof v === 'string' && v.includes(',')) {
-          search.append('rescale', v);
+      // Add rescale values if provided
+      if (rescale?.length) {
+        rescale.forEach(v => {
+          if (typeof v === 'string' && v.includes(',')) {
+            search.append('rescale', v);
+          } else {
+            console.warn(`Invalid rescale value format: ${v}. Expected format: "min,max"`);
+          }
+        });
+      }
+
+      // Handle colormap configuration
+      if (l.legend.type === 'linear') {
+        if (l.legend.colormap_name) {
+          search.append('colormap_name', l.legend.colormap_name);
         } else {
-          console.warn(`Invalid rescale value format: ${v}. Expected format: "min,max"`);
+          console.warn(`Linear legend missing colormap_name for layer ${layer.id}`);
         }
-      });
+      } else if (l.legend.type === 'interval') {
+        if (l.legend.intervals?.length) {
+          try {
+            const cmap = l.legend.intervals.map(interval => [
+              [interval.min, interval.max],
+              hexRgb(interval.color, { format: 'array' }),
+            ]);
+            extra = `&colormap=${JSON.stringify(cmap)}`;
+          } catch (error) {
+            console.error(`Failed to process interval colormap for layer ${layer.id}:`, error);
+          }
+        } else {
+          console.warn(`Interval legend missing intervals for layer ${layer.id}`);
+        }
+      }
+    } else if (bidx === BAND_TYPES.RGB) {
+      search.append('bidx', '1');
+      search.append('bidx', '2');
+      search.append('bidx', '3');
     }
 
     // Add other titiler parameters
@@ -80,31 +109,7 @@ function buildRasterLayer(layer: LayerWithId, titiler_api_url: string): SourcePr
       }
     });
 
-    // Handle colormap configuration
-    let colormap = '';
-    if (l.legend.type === 'linear') {
-      if (l.legend.colormap_name) {
-        search.append('colormap_name', l.legend.colormap_name);
-      } else {
-        console.warn(`Linear legend missing colormap_name for layer ${layer.id}`);
-      }
-    } else if (l.legend.type === 'interval') {
-      if (l.legend.intervals?.length) {
-        try {
-          const cmap = l.legend.intervals.map(interval => [
-            [interval.min, interval.max],
-            hexRgb(interval.color, { format: 'array' }),
-          ]);
-          colormap = `&colormap=${JSON.stringify(cmap)}`;
-        } catch (error) {
-          console.error(`Failed to process interval colormap for layer ${layer.id}:`, error);
-        }
-      } else {
-        console.warn(`Interval legend missing intervals for layer ${layer.id}`);
-      }
-    }
-
-    const tileUrl = `${titiler_api_url}/cog/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?${search.toString()}${colormap}`;
+    tileUrl += `${search.toString()}${extra}`;
 
     return {
       type: LAYER_TYPES.RASTER,

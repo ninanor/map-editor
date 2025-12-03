@@ -30,7 +30,7 @@ export function LayerIcon({ layer, size = 'md', className = '' }: LayerIconProps
 
   if (layer.type === 'titiler') {
     const titilerLayer = layer as TitilerSource;
-    if (titilerLayer.legend?.type === 'linear') {
+    if (titilerLayer.titiler.bidx === 'single' && titilerLayer.legend?.type === 'linear') {
       const colorMapUrl = `${titiler_uri}/colorMaps/${titilerLayer.legend.colormap_name}?format=png&width=32&height=32`;
       return (
         <img

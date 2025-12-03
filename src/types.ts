@@ -118,7 +118,7 @@ export interface TitilerSource extends Partial<Source> {
     bidx?: string;
     [key: string]: unknown; // Allow additional properties
   };
-  legend: RasterSequentialLegend | RasterIntervalLegend;
+  legend?: RasterSequentialLegend | RasterIntervalLegend;
 }
 
 export interface RasterSource extends Partial<Source> {

@@ -77,10 +77,10 @@ export function Legend(props: LayerConfig) {
       let rows: ReactNode[] = [];
 
       if (l.children.legend?.field) {
-        let index = new Set();
+        const index = new Set();
         rows = [];
         l.children.legend?.values?.forEach((l: VectorFillValue) => {
-          let key = [l.color, l.borderColor, l.opacity, l.description].join('_');
+          const key = [l.color, l.borderColor, l.opacity, l.description].join('_');
           if (!index.has(key)) {
             rows.push(
               <LegendRow
@@ -172,7 +172,11 @@ export function Legend(props: LayerConfig) {
     }
     return null;
   } else if (props.type === 'titiler') {
-    const { legend } = props as TitilerSource;
+    const { legend, titiler } = props as TitilerSource;
+
+    if (!legend || titiler.bidx === 'rgb') {
+      return null;
+    }
 
     if (legend.type === 'interval') {
       return [];
