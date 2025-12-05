@@ -1,7 +1,7 @@
 {
     "id": "default",
     "title": "Title",
-    "icon": "https://maps.nina.no/assets/logosmall-BFfoJdyr.png",
+    "icon": "https://s3-ext-1.nina.no/dms/maps/logosmall-BFfoJdyr.png",
     "subtitle": "",
     "layerOrder": [],
     "baseMap": "positron",
@@ -24,7 +24,7 @@
         "language": "no",
         "footer": {
             "items": [
-                "![](https://maps.nina.no/assets/logowhite-6HSLYLYZ.png)",
+                "![](https://s3-ext-1.nina.no/dms/maps/logowhite-6HSLYLYZ.png)",
                 "Norsk institutt for naturforskning - [www.nina.no](https://www.nina.no)"
             ],
             "justify": "justify-between",
