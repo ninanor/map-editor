@@ -61,24 +61,26 @@ function ConfigErrorComponent({ error }: ErrorComponentProps) {
 
 function RootComponent() {
   const config = Route.useLoaderData();
+  const { ready } = useUIStore();
   const uiActions = useUIActions();
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    useAppStore.setState(() => config);
     if (i18n?.changeLanguage) {
       i18n
         .changeLanguage(config.config.language ?? DEFAULT_LANG)
-        .then(() => uiActions.setReady(true))
+        .then(() => {
+          uiActions.setReady(true);
+        })
         .catch(console.error);
     } else {
       uiActions.setReady(true);
     }
 
-    return () => {
-      uiActions.setReady(false);
-    };
-  }, [uiActions, config, i18n]);
+    if (!ready) {
+      useAppStore.setState(() => config);
+    }
+  }, [uiActions, config, i18n, ready]);
 
   return (
     <Fragment>
