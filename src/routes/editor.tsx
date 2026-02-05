@@ -7,11 +7,9 @@ import {
   redirect,
 } from '@tanstack/react-router';
 import { DEFAULT_LANG, mapConfigQueryOptions, editorSearchSchema } from '../config';
-import { useQueryErrorResetBoundary, useSuspenseQuery } from '@tanstack/react-query';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 import { Fragment, useEffect } from 'react';
 import { AxiosError } from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useAppStore } from '../hooks/app';
 import { useUIActions, useUIStore } from '../hooks/ui';
 import { Head } from '../components/Head';
@@ -31,7 +29,8 @@ export const Route = createFileRoute('/editor')({
   loader: async ({ context: { queryClient }, location }) => {
     const searchParams = new URLSearchParams(location.search);
     const configUrl = searchParams.get('config') ?? EDITOR_CONFIG_URL;
-    return queryClient.ensureQueryData(mapConfigQueryOptions(configUrl));
+    const response = await queryClient.fetchQuery(mapConfigQueryOptions(configUrl));
+    return response.data;
   },
   errorComponent: ConfigErrorComponent,
 });
@@ -65,36 +64,28 @@ function ConfigErrorComponent({ error }: ErrorComponentProps) {
 }
 
 function RootComponent() {
+  const config = Route.useLoaderData();
+
   const ready = useUIStore(state => state.ready);
-  const search = Route.useSearch();
-  const configUrl = search.config ?? EDITOR_CONFIG_URL;
-  const { isLoading, data: config } = useSuspenseQuery(mapConfigQueryOptions(configUrl));
   const uiActions = useUIActions();
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    useAppStore.setState(() => config.data);
     if (i18n?.changeLanguage) {
       i18n
-        .changeLanguage(config.data.config.language ?? DEFAULT_LANG)
-        .then(() => uiActions.setReady(true))
+        .changeLanguage(config.config.language ?? DEFAULT_LANG)
+        .then(() => {
+          uiActions.setReady(true);
+        })
         .catch(console.error);
     } else {
       uiActions.setReady(true);
     }
 
-    return () => {
-      uiActions.setReady(false);
-    };
-  }, [uiActions, config.data, i18n]);
-
-  if (isLoading || !ready) {
-    return (
-      <div className="flex justify-center items-center w-screen h-screen bg-primary/20">
-        <FontAwesomeIcon icon={faSpinner} spin />
-      </div>
-    );
-  }
+    if (!ready) {
+      useAppStore.setState(() => config);
+    }
+  }, [uiActions, config, i18n, ready]);
 
   return (
     <Fragment>
