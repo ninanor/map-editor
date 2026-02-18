@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
 
-import { MapConfig, StoreConfig } from './types';
+import { MapConfig, StoreConfig, MapConfigSchema, StoreConfigSchema } from './types';
 import BASEMAP from './libs/basemaps';
 
 export const TABS = [
@@ -60,7 +60,14 @@ export const fetchConfig = async (url: string) => {
   ) {
     throw Error('Unexpected response');
   }
-  return response;
+
+  // Validate the response data with Zod
+  const validatedData = MapConfigSchema.parse(response.data);
+
+  return {
+    ...response,
+    data: validatedData,
+  };
 };
 
 export const mapConfigQueryOptions = (url: string) =>
@@ -77,7 +84,14 @@ export const fetchStoreConfig = async (url: string) => {
   ) {
     throw Error('Unexpected response');
   }
-  return response;
+
+  // Validate the response data with Zod
+  const validatedData = StoreConfigSchema.parse(response.data);
+
+  return {
+    ...response,
+    data: validatedData,
+  };
 };
 
 export const storeConfigQueryOptions = (url: string) =>
