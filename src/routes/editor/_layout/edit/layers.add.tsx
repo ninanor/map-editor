@@ -1,15 +1,15 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
-import { useAppActions, useFolderNames } from '../../../../hooks/app';
-import { TREE_ROOT_ID } from '../../../../config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { nanoid } from 'nanoid';
-import { LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../schemas';
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, SelectInput, MDXInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { nanoid } from 'nanoid';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
+import { TREE_ROOT_ID } from '../../../../config';
+import { useAppActions, useFolderNames } from '../../../../hooks/app';
+import { MDXInput, SelectInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
+import type { LayerConfig, PMTileSource, RasterSource, TitilerSource } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/add')({
   component: RouteComponent,

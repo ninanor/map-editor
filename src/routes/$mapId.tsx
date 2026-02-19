@@ -1,13 +1,13 @@
-import { ErrorComponentProps, Outlet, ErrorComponent, createFileRoute, Link } from '@tanstack/react-router';
-import { DEFAULT_LANG, mapConfigQueryOptions, storeConfigQueryOptions } from '../config';
-import { Fragment, useEffect } from 'react';
+import { createFileRoute, ErrorComponent, type ErrorComponentProps, Link, Outlet } from '@tanstack/react-router';
 import { AxiosError } from 'axios';
-import { useAppStore } from '../hooks/app';
-import { useUIActions, useUIStore } from '../hooks/ui';
-import { Head } from '../components/Head';
+import { Fragment, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Head } from '../components/Head';
 import { Header } from '../components/Header';
 import { Footer } from '../components/HomeFooter';
+import { DEFAULT_LANG, mapConfigQueryOptions, storeConfigQueryOptions } from '../config';
+import { useAppStore } from '../hooks/app';
+import { useUIActions, useUIStore } from '../hooks/ui';
 
 class MapNotFoundError extends Error {}
 

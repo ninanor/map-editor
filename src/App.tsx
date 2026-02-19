@@ -1,14 +1,14 @@
-import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './query';
 import { HelmetProvider } from '@dr.pogodin/react-helmet';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { queryClient } from './query';
+import { routeTree } from './routeTree.gen';
 
 import './index.css';
 import '@mdxeditor/editor/style.css';
 import { useMemo } from 'react';
-import { useUIActions } from './hooks/ui';
 import { Language } from './components/Language';
+import { useUIActions } from './hooks/ui';
 
 const router = createRouter({
   routeTree,

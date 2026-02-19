@@ -1,7 +1,7 @@
-import { LayerConfig, TitilerSource, PMTileSource } from '../types';
-import { useAppStore } from '../hooks/app';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppStore } from '../hooks/app';
+import type { LayerConfig, PMTileSource, TitilerSource } from '../types';
 
 interface LayerIconProps {
   layer: LayerConfig;

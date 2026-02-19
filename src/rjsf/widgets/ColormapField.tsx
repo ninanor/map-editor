@@ -1,7 +1,7 @@
-import axios from 'axios';
+import type { WidgetProps } from '@rjsf/utils';
 import { queryOptions, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useAppStore } from '../../hooks/app';
-import { WidgetProps } from '@rjsf/utils';
 
 interface ColorMapResponse {
   colorMaps: string[];
@@ -12,7 +12,7 @@ const fetchColormaps = async (url: string) => axios.get<ColorMapResponse>(url);
 const colormapsQueryOptions = (titiler: string) =>
   queryOptions({
     queryKey: [titiler, 'colormaps'],
-    queryFn: () => fetchColormaps(titiler + '/colorMaps'),
+    queryFn: () => fetchColormaps(`${titiler}/colorMaps`),
   });
 
 export function ColormapField(props: WidgetProps) {

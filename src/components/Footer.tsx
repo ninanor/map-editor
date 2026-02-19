@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import Markdown from 'react-markdown';
 import { useAppStore } from '../hooks/app';
-import classNames from 'classnames';
 
 export function Footer() {
   const footer = useAppStore(state => state.config?.footer);

@@ -1,17 +1,17 @@
-import {
+import hexRgb from 'hex-rgb';
+import type { SourceProps } from 'react-map-gl/maplibre';
+import type {
   LayerWithId,
-  TitilerSource,
   PMTileSource,
   RasterSource,
+  TitilerSource,
+  VectorCircleLegend,
+  VectorCircleValue,
   VectorFillLegend,
   VectorFillValue,
   VectorLineLegend,
   VectorLineValue,
-  VectorCircleLegend,
-  VectorCircleValue,
 } from '../types';
-import { SourceProps } from 'react-map-gl/maplibre';
-import hexRgb from 'hex-rgb';
 
 /**
  * Generic type for extracting specific values from vector legend value objects

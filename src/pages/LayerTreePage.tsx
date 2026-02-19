@@ -1,7 +1,7 @@
-import { SetStateFn } from '@headless-tree/core';
-import { useAppActions, useAppStore, useExpandedItems } from '../hooks/app';
+import type { SetStateFn } from '@headless-tree/core';
 import { LayerTree } from '../components/LayerTree';
-import { TREE_BASE_PATH } from '../components/LayerTreeItem';
+import type { TREE_BASE_PATH } from '../components/LayerTreeItem';
+import { useAppActions, useAppStore, useExpandedItems } from '../hooks/app';
 
 export function LayerTreePage({ routePath }: { routePath: TREE_BASE_PATH }) {
   const items = useAppStore(state => state.items);

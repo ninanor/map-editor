@@ -1,10 +1,10 @@
-import { LANGUAGES, THEMES } from '../../config';
-import { MapSettings, MapSettingsSchema } from '../../schemas';
-import { useTranslation } from 'react-i18next';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, SelectInput, CheckboxInput, SubmitButton } from '../../hooks/rhf-form';
+import { useTranslation } from 'react-i18next';
+import { LANGUAGES, THEMES } from '../../config';
+import { CheckboxInput, SelectInput, SubmitButton, TextInput } from '../../hooks/rhf-form';
+import { type MapSettings, MapSettingsSchema } from '../../schemas';
 
 interface SettingsFormProps {
   defaultValues: MapSettings;

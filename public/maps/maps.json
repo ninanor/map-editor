@@ -1,15 +1,15 @@
 {
-    "maps": [
-        {
-            "title": "Offices",
-            "id": "nina-offices",
-            "description": ""
-        },
-        {
-            "title": "Example",
-            "id": "example",
-            "description": "just an example map with some random data"
-        }
-    ],
-    "icon": "/logo.png"
+  "maps": [
+    {
+      "title": "Offices",
+      "id": "nina-offices",
+      "description": ""
+    },
+    {
+      "title": "Example",
+      "id": "example",
+      "description": "just an example map with some random data"
+    }
+  ],
+  "icon": "/logo.png"
 }

@@ -1,7 +1,14 @@
+import { arrayMove } from '@dnd-kit/sortable';
+import { nanoid } from 'nanoid';
+import type { ViewState } from 'react-map-gl/maplibre';
+import { toast } from 'react-toastify';
+import { createSelector } from 'reselect';
 import { create } from 'zustand';
-import { immer } from 'zustand/middleware/immer';
 import { devtools } from 'zustand/middleware';
-import {
+import { immer } from 'zustand/middleware/immer';
+import { defaultConfigBase } from '../config';
+import { toMaplibreSources } from '../libs/toMaplibre';
+import type {
   BaseMapStyle,
   CreateFolder,
   CreateLayer,
@@ -15,13 +22,6 @@ import {
   UpdateFolder,
   UpdateLayer,
 } from '../types';
-import { nanoid } from 'nanoid';
-import { createSelector } from 'reselect';
-import { ViewState } from 'react-map-gl/maplibre';
-import { arrayMove } from '@dnd-kit/sortable';
-import { toMaplibreSources } from '../libs/toMaplibre';
-import { defaultConfigBase } from '../config';
-import { toast } from 'react-toastify';
 
 interface AppActions {
   actions: {
@@ -80,7 +80,7 @@ export const useAppStore = create<AppState>()(
           }),
         updateTreeItemChildren: (id: string, newChildren: string[]) =>
           set(state => {
-            if (state.items && state.items[id].type == 'folder') {
+            if (state.items && state.items[id].type === 'folder') {
               state.items[id].children = newChildren;
             }
           }),
@@ -175,7 +175,7 @@ export const useAppStore = create<AppState>()(
         toggleLayer: (id: string) =>
           set(state => {
             if (state.layerOrder.includes(id)) {
-              state.layerOrder = state.layerOrder.filter(lid => id != lid);
+              state.layerOrder = state.layerOrder.filter(lid => id !== lid);
             } else {
               if (state.config.exclusiveLayers) {
                 state.layerOrder = [id];

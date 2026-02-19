@@ -1,11 +1,11 @@
-import { Outlet } from '@tanstack/react-router';
-import { Footer } from './Footer';
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Navbar } from './Navbar';
-import { useUIStore } from '../hooks/ui';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Outlet } from '@tanstack/react-router';
+import React from 'react';
 import MediaQuery from 'react-responsive';
+import { useUIStore } from '../hooks/ui';
+import { Footer } from './Footer';
+import { Navbar } from './Navbar';
 
 const LazyMaplibreMap = React.lazy(() => import('./MaplibreMap'));
 

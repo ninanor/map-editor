@@ -1,7 +1,7 @@
 import {
   closestCenter,
   DndContext,
-  DragEndEvent,
+  type DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -14,15 +14,14 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { LayerWithId } from '../types';
-import { useAppActions, useLayers } from '../hooks/app';
 import { useTranslation } from 'react-i18next';
+import { useAppActions, useLayers } from '../hooks/app';
+import type { LayerWithId } from '../types';
 
 function SortableItem({ id, name }: LayerWithId) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {
-     
     transform: CSS.Transform.toString(transform),
     transition,
   };

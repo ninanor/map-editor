@@ -1,19 +1,19 @@
-import {
-  ErrorComponentProps,
-  Outlet,
-  useRouter,
-  ErrorComponent,
-  createFileRoute,
-  redirect,
-} from '@tanstack/react-router';
-import { DEFAULT_LANG, mapConfigQueryOptions, editorSearchSchema } from '../config';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
-import { Fragment, useEffect } from 'react';
+import {
+  createFileRoute,
+  ErrorComponent,
+  type ErrorComponentProps,
+  Outlet,
+  redirect,
+  useRouter,
+} from '@tanstack/react-router';
 import { AxiosError } from 'axios';
+import { Fragment, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Head } from '../components/Head';
+import { DEFAULT_LANG, editorSearchSchema, mapConfigQueryOptions } from '../config';
 import { useAppStore } from '../hooks/app';
 import { useUIActions, useUIStore } from '../hooks/ui';
-import { Head } from '../components/Head';
-import { useTranslation } from 'react-i18next';
 
 const EDITOR_CONFIG_URL = '/editor/config.json';
 

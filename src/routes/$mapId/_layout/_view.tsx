@@ -1,4 +1,4 @@
-import { createFileRoute, ErrorComponent, ErrorComponentProps } from '@tanstack/react-router';
+import { createFileRoute, ErrorComponent, type ErrorComponentProps } from '@tanstack/react-router';
 import { TitleTabs } from '../../../components/TitleTabs';
 
 export const Route = createFileRoute('/$mapId/_layout/_view')({

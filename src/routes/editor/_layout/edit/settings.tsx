@@ -1,12 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
-import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
-
-import { useAppActions, useAppStore } from '../../../../hooks/app';
 import { useCallback, useState } from 'react';
-import { MapConfig } from '../../../../types';
+import { useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 import { SettingsForm } from '../../../../components/forms/SettingsForm';
+import { useAppActions, useAppStore } from '../../../../hooks/app';
+import type { MapConfig } from '../../../../types';
 
 export const Route = createFileRoute('/editor/_layout/edit/settings')({
   component: RouteComponent,

@@ -1,11 +1,11 @@
-import { createFormHookContexts, createFormHook } from '@tanstack/react-form';
-import { TextField } from '../components/fields/TextField';
-import { SelectField } from '../components/fields/SelectField';
-import { MDXField } from '../components/fields/MDXField';
-import { SubscribeButton } from '../components/fields/SubscribeButton';
+import { createFormHook, createFormHookContexts } from '@tanstack/react-form';
+import { CheckboxField } from '../components/fields/CheckboxField';
 import { ColormapField } from '../components/fields/ColormapField';
 import { ColorPickerField } from '../components/fields/ColorPickerField';
-import { CheckboxField } from '../components/fields/CheckboxField';
+import { MDXField } from '../components/fields/MDXField';
+import { SelectField } from '../components/fields/SelectField';
+import { SubscribeButton } from '../components/fields/SubscribeButton';
+import { TextField } from '../components/fields/TextField';
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } = createFormHookContexts();
 

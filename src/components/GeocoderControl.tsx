@@ -1,11 +1,12 @@
 /* global fetch */
-import { useState } from 'react';
-import { useControl, Marker, MarkerProps, ControlPosition } from 'react-map-gl/maplibre';
+
 import MaplibreGeocoder, {
-  CarmenGeojsonFeature,
-  MaplibreGeocoderApi,
-  MaplibreGeocoderOptions,
+  type CarmenGeojsonFeature,
+  type MaplibreGeocoderApi,
+  type MaplibreGeocoderOptions,
 } from '@maplibre/maplibre-gl-geocoder';
+import { useState } from 'react';
+import { type ControlPosition, Marker, type MarkerProps, useControl } from 'react-map-gl/maplibre';
 
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
 

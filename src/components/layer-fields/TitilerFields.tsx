@@ -1,6 +1,6 @@
-import { useTranslation } from 'react-i18next';
-import axios from 'axios';
 import { queryOptions, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../../hooks/app';
 
 interface ColorMapResponse {
@@ -12,7 +12,7 @@ const fetchColormaps = async (url: string) => axios.get<ColorMapResponse>(url);
 const colormapsQueryOptions = (titiler: string) =>
   queryOptions({
     queryKey: [titiler, 'colormaps'],
-    queryFn: () => fetchColormaps(titiler + '/colorMaps'),
+    queryFn: () => fetchColormaps(`${titiler}/colorMaps`),
   });
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */

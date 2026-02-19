@@ -1,13 +1,13 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
-import { useAppActions, useFolderNames } from '../../../../hooks/app';
-import { TREE_ROOT_ID } from '../../../../config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
-import { CreateFolder, CreateFolderSchema } from '../../../../schemas';
-import { useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, SelectInput, MDXInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { TREE_ROOT_ID } from '../../../../config';
+import { useAppActions, useFolderNames } from '../../../../hooks/app';
+import { MDXInput, SelectInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
+import { type CreateFolder, CreateFolderSchema } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/add')({
   component: RouteComponent,

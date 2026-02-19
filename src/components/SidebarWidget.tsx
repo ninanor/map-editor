@@ -1,6 +1,6 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ControlPosition, IControl, Map } from 'maplibre-gl';
+import type { ControlPosition, IControl, Map } from 'maplibre-gl';
 import { memo } from 'react';
 import { createRoot } from 'react-dom/client';
 import { useControl } from 'react-map-gl/maplibre';

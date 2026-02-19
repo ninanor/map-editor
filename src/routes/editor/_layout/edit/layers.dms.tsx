@@ -1,12 +1,12 @@
-import { createFileRoute, Link, redirect } from '@tanstack/react-router';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { createFileRoute, Link, redirect } from '@tanstack/react-router';
+import { type ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChangeEvent, useState } from 'react';
-import { useAppActions, useFolderNames } from '../../../../hooks/app';
 import { DMSSearch } from '../../../../components/DMSSearch';
 import { TREE_ROOT_ID } from '../../../../config';
+import { useAppActions, useFolderNames } from '../../../../hooks/app';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/dms')({
   component: RouteComponent,

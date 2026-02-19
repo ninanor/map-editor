@@ -1,8 +1,8 @@
-import { Link } from '@tanstack/react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useItem } from '../hooks/app';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from '@tanstack/react-router';
 import { Description } from '../components/Description';
+import { useItem } from '../hooks/app';
 
 interface FolderPageProps {
   folderId: string;

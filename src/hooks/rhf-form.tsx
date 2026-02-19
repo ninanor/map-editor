@@ -1,6 +1,6 @@
-import { UseFormReturn, FieldValues, Path } from 'react-hook-form';
-import { ReactNode } from 'react';
 import { MDXEditor } from '@mdxeditor/editor';
+import type { ReactNode } from 'react';
+import type { FieldValues, Path, UseFormReturn } from 'react-hook-form';
 import { PLUGINS } from '../mdxPlugins';
 
 /**

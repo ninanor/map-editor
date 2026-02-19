@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { MapConfigSchema, StoreConfigSchema, LayerSchema, FolderSchema, MapSettingsSchema } from './schemas';
+import type { z } from 'zod';
+import { FolderSchema, LayerSchema, MapConfigSchema, MapSettingsSchema, StoreConfigSchema } from './schemas';
 
 /**
  * Validation result type

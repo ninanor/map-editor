@@ -1,5 +1,5 @@
-import { useAppActions, useAppStore, useBaseMapStyles } from '../hooks/app';
 import BaseMap from '../components/BaseMap';
+import { useAppActions, useAppStore, useBaseMapStyles } from '../hooks/app';
 
 export function BaseMaps() {
   const styles = useBaseMapStyles();
