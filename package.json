@@ -78,6 +78,7 @@
     "@vitejs/plugin-react-swc": "^3.10.2",
     "daisyui": "^5.0.46",
     "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "tsx": "^4.21.0",
     "typescript": "~5.7.3",
     "vite": "^7.1.11",
@@ -93,5 +94,8 @@
   ],
   "sideEffects": [
     "**/*.css"
-  ]
+  ],
+  "lint-staged": {
+    "*": "biome check --write --no-errors-on-unmatched"
+  }
 }
