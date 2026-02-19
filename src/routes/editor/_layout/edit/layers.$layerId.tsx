@@ -60,7 +60,7 @@ function RouteComponent() {
     } else if (newType === 'titiler') {
       form.setValue('layer', {
         type: 'titiler',
-        titiler: { url: '' },
+        titiler: { url: '', bidx: 'single' },
         legend: { type: 'linear', colormap_name: 'viridis', min: '0', max: '1' },
       } as TitilerSource);
     } else if (newType === 'raster') {
@@ -68,6 +68,7 @@ function RouteComponent() {
         type: 'raster',
         tiles: [''],
         tileSize: 256,
+        scheme: 'xyz',
       } as RasterSource);
     }
   };

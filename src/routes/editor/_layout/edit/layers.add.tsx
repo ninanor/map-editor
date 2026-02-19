@@ -66,6 +66,7 @@ function RouteComponent() {
         type: 'titiler',
         titiler: {
           url: '',
+          bidx: 'single',
         },
         legend: {
           type: 'linear',
@@ -79,6 +80,7 @@ function RouteComponent() {
         type: 'raster',
         tiles: [''],
         tileSize: 256,
+        scheme: 'xyz',
       } as RasterSource;
     }
 
