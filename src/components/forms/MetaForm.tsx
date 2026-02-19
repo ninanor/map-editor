@@ -1,47 +1,57 @@
-import { useAppForm } from '../../hooks/form';
-import { MapMeta } from '../../types';
+import { useForm } from 'react-hook-form';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
+import { MapMeta, MapMetaSchema } from '../../schemas';
 import { useTranslation } from 'react-i18next';
+import { TextInput, SubmitButton, TextareaInput } from '../../hooks/rhf-form';
 
 interface MapMetadataFormProps {
   defaultValues: MapMeta;
-  onSubmit: (props: { value: MapMeta }) => void | Promise<void>;
+  onSubmit: (value: MapMeta) => void | Promise<void>;
 }
 
 export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProps) {
   const { t } = useTranslation();
-  const form = useAppForm({
+
+  const form = useForm({
+    resolver: standardSchemaResolver(MapMetaSchema),
     defaultValues,
-    onSubmit,
   });
+
+  const handleSubmit = form.handleSubmit(async data => {
+    await onSubmit(data as MapMeta);
+  });
+
+  const iconValue = form.watch('icon');
+
   return (
-    <form.AppForm>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          form.handleSubmit().catch(console.error);
-        }}
-      >
-        <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">{t('map-metadata')}</legend>
+    <form
+      onSubmit={e => {
+        void handleSubmit(e);
+      }}
+      className="text-base-content bg-base-200 border-base-300 rounded-box border p-4"
+    >
+      <fieldset className="fieldset">
+        <legend className="fieldset-legend">{t('map-metadata')}</legend>
 
-          <form.AppField name="title" children={field => <field.TextField label={t('title')} required />} />
-          <form.AppField name="subtitle" children={field => <field.TextField label={t('subtitle')} />} />
-          <form.AppField
-            name="icon"
-            children={field => (
-              <>
-                <field.TextField label={t('icon')} required />
-                <label>{t('preview')}</label>
-                <img src={field.state.value} className="w-25" />
-              </>
-            )}
-          />
-          <form.AppField name="description" children={field => <field.MDXField label={t('description')} />} />
+        <TextInput form={form} name="title" label={t('title')} required />
+        <TextInput form={form} name="subtitle" label={t('subtitle')} />
+        <div>
+          <TextInput form={form} name="icon" label={t('icon')} />
+          {iconValue && (
+            <>
+              <label className="label">
+                <span className="label-text">{t('preview')}</span>
+              </label>
+              <img src={iconValue} className="w-25" alt="icon preview" />
+            </>
+          )}
+        </div>
+        <TextareaInput form={form} name="description" label={t('description')} />
 
-          <form.SubscribeButton />
-        </fieldset>
-      </form>
-    </form.AppForm>
+        <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
+          {t('save')}
+        </SubmitButton>
+      </fieldset>
+    </form>
   );
 }

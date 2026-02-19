@@ -11,7 +11,7 @@ function RouteComponent() {
   const defaultValues = useAppMeta();
   const actions = useAppActions();
 
-  const onSubmit = ({ value }: { value: MapMeta }) => {
+  const onSubmit = (value: MapMeta) => {
     actions.updateMeta(value);
   };
 

@@ -7,12 +7,10 @@ import { useAppActions, useAppStore } from '../../../../hooks/app';
 import { useCallback, useState } from 'react';
 import { MapConfig } from '../../../../types';
 import { SettingsForm } from '../../../../components/forms/SettingsForm';
-import { DownloadConfigButton } from '../../../../components/DownloadConfigButton';
 
 export const Route = createFileRoute('/editor/_layout/edit/settings')({
   component: RouteComponent,
 });
-
 
 const style = {
   style: {
@@ -39,13 +37,13 @@ function RouteComponent() {
 
   const loadConfigFromUrl = useCallback(async () => {
     if (!configUrl.trim()) return;
-    
+
     setIsLoading(true);
     try {
       const response = await axios.get<MapConfig>(configUrl);
       const config = response.data;
       console.debug('Loaded config from URL:', config);
-      
+
       // TODO: set configurations in a safer way!
       useAppStore.setState(() => config);
       setConfigUrl('');
@@ -86,15 +84,13 @@ function RouteComponent() {
   });
 
   return (
-    <div>
-      <h4 className="font-bold">{t('download-configuration')}</h4>
-      <DownloadConfigButton />
-      <h4 className="font-bold mt-5">{t('upload-configuration')}</h4>
+    <div className="text-base-content bg-base-200 border-base-300 rounded-box border p-4">
+      <h4 className="font-bold">{t('upload-configuration')}</h4>
       <div {...getRootProps(style)}>
         <input {...getInputProps()} />
         <p>{t('drag-drop-config')}</p>
       </div>
-      
+
       <div className="mt-4">
         <h5 className="font-semibold mb-2">Or load from URL:</h5>
         <div className="flex gap-2">
@@ -117,7 +113,7 @@ function RouteComponent() {
         </div>
       </div>
 
-      <SettingsForm defaultValues={settings} onSubmit={({ value }) => actions.setSettings(value)} />
+      <SettingsForm defaultValues={settings} onSubmit={value => actions.setSettings(value)} />
     </div>
   );
 }

@@ -1,19 +1,26 @@
 import { LANGUAGES, THEMES } from '../../config';
-import { useAppForm } from '../../hooks/form';
-import { MapSettings } from '../../types';
+import { MapSettings, MapSettingsSchema } from '../../schemas';
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
+import { TextInput, SelectInput, CheckboxInput, SubmitButton } from '../../hooks/rhf-form';
 
 interface SettingsFormProps {
   defaultValues: MapSettings;
-  onSubmit: (props: { value: MapSettings }) => void | Promise<void>;
+  onSubmit: (value: MapSettings) => void | Promise<void>;
 }
 
 export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
   const { t } = useTranslation();
-  const form = useAppForm({
+
+  const form = useForm({
+    resolver: standardSchemaResolver(MapSettingsSchema),
     defaultValues,
-    onSubmit,
+  });
+
+  const handleSubmit = form.handleSubmit(async data => {
+    await onSubmit(data as MapSettings);
   });
 
   const menuOrientationOptions = useMemo(
@@ -23,36 +30,49 @@ export function SettingsForm({ defaultValues, onSubmit }: SettingsFormProps) {
     ],
     [t],
   );
+
   return (
-    <form.AppForm>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          form.handleSubmit().catch(console.error);
-        }}
-      >
-        <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          <legend className="fieldset-legend">{t('settings')}</legend>
+    <form
+      onSubmit={e => {
+        void handleSubmit(e);
+      }}
+      className="text-base-content bg-base-200 border-base-300"
+    >
+      <fieldset className="fieldset">
+        <legend className="fieldset-legend">{t('settings')}</legend>
 
-          <form.AppField name="titiler_api_url" children={field => <field.TextField label={t('titiler-url')} />} />
-          <form.AppField name="theme" children={field => <field.SelectField label={t('theme')} options={THEMES} />} />
-          <form.AppField
-            name="language"
-            children={field => <field.SelectField label={t('language')} options={LANGUAGES} />}
-          />
-          <form.AppField
-            name="menuOrientation"
-            children={field => <field.SelectField label={t('menu-orientation')} options={menuOrientationOptions} />}
-          />
-          <form.AppField
-            name="exclusiveLayers"
-            children={field => <field.CheckboxField label={t('exclusive-layers')} />}
-          />
+        <TextInput form={form} name="titiler_api_url" label={t('titiler-url')} />
 
-          <form.SubscribeButton />
-        </fieldset>
-      </form>
-    </form.AppForm>
+        <SelectInput form={form} name="theme" label={t('theme')}>
+          {THEMES.map(theme => (
+            <option key={theme} value={theme}>
+              {theme}
+            </option>
+          ))}
+        </SelectInput>
+
+        <SelectInput form={form} name="language" label={t('language')}>
+          {LANGUAGES.map(lang => (
+            <option key={lang.value} value={lang.value}>
+              {lang.label}
+            </option>
+          ))}
+        </SelectInput>
+
+        <SelectInput form={form} name="menuOrientation" label={t('menu-orientation')}>
+          {menuOrientationOptions.map(opt => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </SelectInput>
+
+        <CheckboxInput form={form} name="exclusiveLayers" label={t('exclusive-layers')} />
+
+        <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
+          {t('save')}
+        </SubmitButton>
+      </fieldset>
+    </form>
   );
 }
