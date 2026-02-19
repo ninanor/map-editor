@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { UpdateLayerSchema, LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../schemas';
 import { useForm, useWatch } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, TextareaInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { TextInput, MDXInput, SubmitButton } from '../../../../hooks/rhf-form';
 import { useTranslation } from 'react-i18next';
 import { PMTilesFields, TitilerFields, RasterFields } from '../../../../components/layer-fields';
 
@@ -90,7 +90,7 @@ function RouteComponent() {
 
           <TextInput form={form} name="name" label={t('name')} required />
 
-          <TextareaInput form={form} name="description" label={t('description')} />
+          <MDXInput form={form} name="description" label={t('description')} />
 
           <TextInput form={form} name="download_url" label={t('download-url')} />
 

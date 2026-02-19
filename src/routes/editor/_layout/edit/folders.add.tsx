@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { CreateFolder, CreateFolderSchema } from '../../../../schemas';
 import { useForm } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, SelectInput, TextareaInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { TextInput, SelectInput, MDXInput, SubmitButton } from '../../../../hooks/rhf-form';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/add')({
   component: RouteComponent,
@@ -53,7 +53,7 @@ function RouteComponent() {
 
           <TextInput form={form} name="name" label={t('name')} required />
 
-          <TextareaInput form={form} name="description" label={t('description')} />
+          <MDXInput form={form} name="description" label={t('description')} />
 
           <SelectInput form={form} name="parent" label={t('parent-folder')} required>
             {folderNames.map(f => (
