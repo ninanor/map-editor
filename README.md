@@ -5,24 +5,28 @@ A powerful, React-based map viewer and editor built with MapLibre GL. This appli
 ## 🌟 Key Features
 
 ### Core Functionality
+
 - **Interactive Map Editor**: Create and edit maps with an intuitive drag-and-drop interface
 - **Layer Management**: Organize map layers in a hierarchical folder structure
 - **Real-time Preview**: See changes instantly as you build your maps
 - **Configuration-driven**: Define entire map configurations using JSON files
 
 ### Data Support
+
 - **PMTiles**: Native support for cloud-optimized vector tiles
 - **Cloud Optimized GeoTIFF (COG)**: Efficient raster data handling
 - **TiTiler Integration**: Advanced raster processing and styling
 - **Vector Data**: Full MapLibre GL vector layer support
 
 ### Customization & Styling
+
 - **Multiple Themes**: Built-in theme support with customizable styling
 - **Layer Styling**: Visual styling controls for vector and raster layers
 - **Color Management**: Advanced color picker and colormap support
 - **Legend Generation**: Automatic legend creation for all layer types
 
 ### User Experience
+
 - **Multi-language Support**: Built-in internationalization (i18n)
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 - **Basemap Selection**: Choose from various basemap providers
@@ -30,12 +34,13 @@ A powerful, React-based map viewer and editor built with MapLibre GL. This appli
 - **Markdown Support**: Rich text descriptions using MDX
 
 ### Technical Features
+
 - **Docker Support**: Easy deployment with included Docker configuration
 - **Modern Stack**: Built with React 19, TypeScript, and Vite
 
 ## 📋 Requirements
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 - Modern web browser with WebGL support
 
@@ -55,6 +60,7 @@ A powerful, React-based map viewer and editor built with MapLibre GL. This appli
 ### Prerequisites
 
 Install `pnpm` (recommended for faster installs):
+
 ```bash
 npm install -g pnpm
 ```
@@ -62,17 +68,20 @@ npm install -g pnpm
 ### Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd nina-maps
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Start development server**
+
    ```bash
    pnpm run dev
    ```
@@ -86,6 +95,25 @@ npm install -g pnpm
 - **Preview production build**: `pnpm run preview`
 - **Format code**: `pnpm run format`
 - **Lint code**: `pnpm run lint`
+
+### Development Guidelines
+
+#### Import Aliases
+
+The project uses path aliases to simplify imports. You can use `@/` to reference the `src/` directory:
+
+```typescript
+// Instead of relative imports
+import { useAppStore } from "../../../hooks/app";
+
+// Use the @ alias
+import { useAppStore } from "@/hooks/app";
+```
+
+This makes imports cleaner and easier to refactor. The alias is configured in:
+
+- `tsconfig.app.json` - For TypeScript path resolution
+- `vite.config.ts` - For Vite bundler resolution
 
 ## ⚙️ Configuration
 
@@ -148,6 +176,7 @@ public/
 ### Layer Types
 
 #### Vector Layers (PMTiles)
+
 ```json
 {
   "type": "vector",
@@ -173,6 +202,7 @@ public/
 ```
 
 #### Raster Layers (COG with TiTiler)
+
 ```json
 {
   "type": "raster",
@@ -252,6 +282,7 @@ src/
 ## 🤝 Support
 
 For issues and questions:
+
 - Create an issue on GitHub
 - Check the existing documentation
 - Review the example configurations in `public/maps/`
