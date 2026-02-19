@@ -1,5 +1,5 @@
-import { WidgetProps } from '@rjsf/utils';
-import { useState, useEffect } from 'react';
+import type { WidgetProps } from '@rjsf/utils';
+import { useEffect, useState } from 'react';
 
 export function DasharrayWidget(props: WidgetProps) {
   const [inputValue, setInputValue] = useState<string>('');
@@ -29,7 +29,7 @@ export function DasharrayWidget(props: WidgetProps) {
         .filter(s => s !== '')
         .map(s => {
           const num = parseFloat(s);
-          if (isNaN(num) || num < 0) {
+          if (Number.isNaN(num) || num < 0) {
             throw new Error('Invalid number');
           }
           return num;

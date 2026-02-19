@@ -2,18 +2,18 @@ import {
   createOnDropHandler,
   dragAndDropFeature,
   hotkeysCoreFeature,
-  ItemInstance,
+  type ItemInstance,
   keyboardDragAndDropFeature,
+  propMemoizationFeature,
+  type SetStateFn,
   selectionFeature,
   syncDataLoaderFeature,
-  propMemoizationFeature,
-  SetStateFn,
 } from '@headless-tree/core';
 import { useTree } from '@headless-tree/react';
-import { TREE_ROOT_ID } from '../config';
-import { Folder, Layer, Tree } from '../types';
 import { useMemo } from 'react';
-import { ItemRender, TREE_BASE_PATH } from './LayerTreeItem';
+import { TREE_ROOT_ID } from '../config';
+import type { Folder, Layer, Tree } from '../types';
+import { ItemRender, type TREE_BASE_PATH } from './LayerTreeItem';
 
 interface LayerTreeProps {
   items: Tree;
@@ -72,13 +72,11 @@ export function LayerTree({
   });
 
   return (
-    <>
-      <div {...tree.getContainerProps()} className="tree">
-        {tree.getItems().map(item => (
-          <ItemRender key={item.getId()} item={item} editable={editable} className={className} routePath={routePath} />
-        ))}
-        <div style={tree.getDragLineStyle()} className="dragline" />
-      </div>
-    </>
+    <div {...tree.getContainerProps()} className="tree">
+      {tree.getItems().map(item => (
+        <ItemRender key={item.getId()} item={item} editable={editable} className={className} routePath={routePath} />
+      ))}
+      <div style={tree.getDragLineStyle()} className="dragline" />
+    </div>
   );
 }

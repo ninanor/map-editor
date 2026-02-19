@@ -1,10 +1,10 @@
-import { createFileRoute, ErrorComponent, ErrorComponentProps, Link } from '@tanstack/react-router';
-import { useUIStore } from '../hooks/ui';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { createFileRoute, ErrorComponent, type ErrorComponentProps, Link } from '@tanstack/react-router';
+import { AxiosError } from 'axios';
 import { Header } from '../components/Header';
 import { Footer } from '../components/HomeFooter';
-import { AxiosError } from 'axios';
 import { storeConfigQueryOptions } from '../config';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useUIStore } from '../hooks/ui';
 
 function ConfigErrorComponent({ error }: ErrorComponentProps) {
   if (error instanceof AxiosError) {

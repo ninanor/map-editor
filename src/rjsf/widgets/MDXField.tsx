@@ -1,6 +1,6 @@
 import { MDXEditor } from '@mdxeditor/editor';
+import type { WidgetProps } from '@rjsf/utils';
 import { PLUGINS } from '../../mdxPlugins';
-import { WidgetProps } from '@rjsf/utils';
 
 export function MDXField(props: WidgetProps) {
   return (

@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @source "../node_modules/@rjsf/daisyui";
 @plugin "@tailwindcss/typography";
 
@@ -13,21 +13,21 @@
   color-scheme: "light";
   --color-base-100: oklch(100% 0 0);
   --color-base-200: oklch(98% 0 0);
-  --color-base-300: rgba(0, 0, 0, .06);
+  --color-base-300: rgba(0, 0, 0, 0.06);
   --color-base-content: oklch(21% 0.006 285.885);
   --color-primary: #425563;
   --color-primary-content: oklch(98% 0.003 247.858);
-  --color-secondary: #004F71;
+  --color-secondary: #004f71;
   --color-secondary-content: oklch(98% 0.003 247.858);
   --color-accent: #00a4b0;
   --color-accent-content: oklch(12% 0.042 264.695);
   --color-neutral: oklch(14% 0.005 285.823);
   --color-neutral-content: oklch(92% 0.004 286.32);
-  --color-info: #2DCCD3;
+  --color-info: #2dccd3;
   --color-info-content: oklch(29% 0.066 243.157);
-  --color-success: #7A9A01;
+  --color-success: #7a9a01;
   --color-success-content: oklch(26% 0.051 172.552);
-  --color-warning: #FFB25B;
+  --color-warning: #ffb25b;
   --color-warning-content: oklch(41% 0.112 45.904);
   --color-error: oklch(71% 0.194 13.428);
   --color-error-content: oklch(27% 0.105 12.094);
@@ -45,7 +45,7 @@
   max-width: 100%;
 }
 
-.tree button[role='treeitem'] {
+.tree button[role="treeitem"] {
   display: flex;
   background: transparent;
   border: none;
@@ -90,7 +90,7 @@ button:focus-visible .treeitem.focused,
 }
 
 .treeitem.selected:after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 5px;
   left: -2px;
@@ -117,7 +117,7 @@ button:focus-visible .treeitem.focused,
 }
 
 .dragline::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: -3px;
@@ -134,7 +134,7 @@ button:focus-visible .treeitem.focused,
   gap: 2px;
 }
 
-.outeritem button:not([role='treeitem']) {
+.outeritem button:not([role="treeitem"]) {
   padding: 2px 4px;
   height: 80%;
 }
@@ -199,7 +199,7 @@ button:focus-visible .treeitem.focused,
 }
 
 .searchbox:before {
-  content: 'Navigate between search results with ArrowUp and ArrowDown. Press Escape to close search.';
+  content: "Navigate between search results with ArrowUp and ArrowDown. Press Escape to close search.";
   display: block;
   width: 100%;
 }
@@ -215,15 +215,15 @@ button:focus-visible .treeitem.focused,
 }
 
 .visible-assistive-text {
-  position: unset !important;
-  width: unset !important;
-  height: 60px !important;
-  margin: unset !important;
-  overflow: auto !important;
-  clip: unset !important;
+  position: unset;
+  width: unset;
+  height: 60px;
+  margin: unset;
+  overflow: auto;
+  clip: unset;
 
   display: block;
-  margin-bottom: 1rem !important;
+  margin-bottom: 1rem;
   background-color: #e1f1f8;
 }
 
@@ -236,7 +236,7 @@ button:focus-visible .treeitem.focused,
   @apply max-h-7/12 overflow-auto;
 } */
 
-.rjsf>.field-template>.form-control {
+.rjsf > .field-template > .form-control {
   @apply overflow-auto text-base-content;
   max-height: calc(100vh * 0.75);
 }
@@ -268,7 +268,6 @@ button:focus-visible .treeitem.focused,
 }
 
 .dont-break-out {
-
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -287,5 +286,5 @@ button:focus-visible .treeitem.focused,
 }
 
 .label {
-  white-space: break-spaces !important;
+  white-space: break-spaces;
 }

@@ -1,5 +1,5 @@
-import { HexColorPicker, HexColorInput } from 'react-colorful';
-import { WidgetProps } from '@rjsf/utils';
+import type { WidgetProps } from '@rjsf/utils';
+import { HexColorInput, HexColorPicker } from 'react-colorful';
 
 export function ColorPickerWidget(props: WidgetProps) {
   return (

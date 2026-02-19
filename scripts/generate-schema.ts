@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
-import { writeFileSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { MapConfigSchema } from '../src/schemas/map';
 
 /**

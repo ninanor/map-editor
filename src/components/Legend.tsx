@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useAppStore } from '../hooks/app';
-import {
+import type {
   LayerConfig,
   PMTileSource,
-  TitilerSource,
   RasterSource,
+  TitilerSource,
+  VectorCircleValue,
   VectorFillValue,
   VectorLineValue,
-  VectorCircleValue,
 } from '../types';
 
 function LegendRow({ description, color, borderColor, opacity }: Omit<VectorFillValue, 'value'>) {

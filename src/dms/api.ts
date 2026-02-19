@@ -1,6 +1,6 @@
-import { QueryOptions } from '@tanstack/react-query';
+import type { QueryOptions } from '@tanstack/react-query';
 import axios from 'axios';
-import { DatasetQuery, DataTableQuery, ResourceQuery } from './types';
+import type { DatasetQuery, DataTableQuery, ResourceQuery } from './types';
 
 async function queryDatasets(input: string) {
   return axios.get<DatasetQuery>(`${window.DMS_API_ENDPOINT}v1/datasets/?search=${input}`).then(r => r.data);

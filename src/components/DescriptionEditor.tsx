@@ -8,13 +8,11 @@ export function DescriptionEditor() {
   const { setDescription } = useAppActions();
 
   return (
-    <>
-      <MDXEditor
-        contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64 bg-base-100"
-        markdown={description || ''}
-        onChange={setDescription}
-        plugins={PLUGINS}
-      />
-    </>
+    <MDXEditor
+      contentEditableClassName="prose prose-slate prose-md border-neutral-content border rounded min-h-64 bg-base-100"
+      markdown={description || ''}
+      onChange={setDescription}
+      plugins={PLUGINS}
+    />
   );
 }

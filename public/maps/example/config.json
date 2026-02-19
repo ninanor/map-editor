@@ -1,171 +1,158 @@
 {
-    "id": "default",
-    "title": "Title",
-    "icon": "https://maps.nina.no/assets/logosmall-BFfoJdyr.png",
-    "subtitle": "",
-    "layerOrder": [],
-    "baseMap": "positron",
-    "viewState": {
-        "longitude": 10,
-        "latitude": 63,
-        "zoom": 4
+  "id": "default",
+  "title": "Title",
+  "icon": "https://maps.nina.no/assets/logosmall-BFfoJdyr.png",
+  "subtitle": "",
+  "layerOrder": [],
+  "baseMap": "positron",
+  "viewState": {
+    "longitude": 10,
+    "latitude": 63,
+    "zoom": 4
+  },
+  "expandedItems": ["folder2"],
+  "items": {
+    "root": {
+      "name": "Layers",
+      "type": "folder",
+      "children": ["folder1", "folder2"]
     },
-    "expandedItems": [
-        "folder2"
-    ],
-    "items": {
-        "root": {
-            "name": "Layers",
-            "type": "folder",
-            "children": [
-                "folder1",
-                "folder2"
-            ]
+    "folder1": {
+      "name": "Folder 1",
+      "type": "folder",
+      "children": []
+    },
+    "folder2": {
+      "name": "Folder 2",
+      "type": "folder",
+      "children": ["test", "raster-example", "raster-linear", "raster-interval", "pmtiles"]
+    },
+    "test": {
+      "name": "Azores fishing",
+      "type": "layer",
+      "layer": {
+        "type": "titiler",
+        "titiler": {
+          "url": "https://github.com/GeoTIFF/test-data/raw/refs/heads/main/files/gfw-azores.tif",
+          "rescale": ["0,573"]
         },
-        "folder1": {
-            "name": "Folder 1",
-            "type": "folder",
-            "children": []
-        },
-        "folder2": {
-            "name": "Folder 2",
-            "type": "folder",
-            "children": [
-                "test",
-                "raster-example",
-                "raster-linear",
-                "raster-interval",
-                "pmtiles"
-            ]
-        },
-        "test": {
-            "name": "Azores fishing",
-            "type": "layer",
-            "layer": {
-                "type": "titiler",
-                "titiler": {
-                    "url": "https://github.com/GeoTIFF/test-data/raw/refs/heads/main/files/gfw-azores.tif",
-                    "rescale": [
-                        "0,573"
-                    ]
-                },
-                "legend": {
-                    "type": "linear",
-                    "colormap_name": "ylorbr_r"
-                }
+        "legend": {
+          "type": "linear",
+          "colormap_name": "ylorbr_r"
+        }
+      }
+    },
+    "raster-example": {
+      "name": "OpenStreetMap Raster Example",
+      "type": "layer",
+      "layer": {
+        "type": "raster",
+        "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        "tileSize": 256,
+        "attribution": "© OpenStreetMap contributors",
+        "legend": {
+          "type": "image",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/OpenStreetMap_logo.svg/256px-OpenStreetMap_logo.svg.png"
+        }
+      }
+    },
+    "raster-linear": {
+      "name": "Raster with Linear Legend",
+      "type": "layer",
+      "layer": {
+        "type": "raster",
+        "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        "tileSize": 256,
+        "legend": {
+          "type": "linear",
+          "colormap_name": "viridis",
+          "min": "Low",
+          "max": "High",
+          "orientation": "horizontal"
+        }
+      }
+    },
+    "raster-interval": {
+      "name": "Raster with Interval Legend",
+      "type": "layer",
+      "layer": {
+        "type": "raster",
+        "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        "tileSize": 256,
+        "legend": {
+          "type": "interval",
+          "intervals": [
+            {
+              "min": 0,
+              "max": 25,
+              "color": "#green",
+              "description": "Low values"
+            },
+            {
+              "min": 25,
+              "max": 75,
+              "color": "#yellow",
+              "description": "Medium values"
+            },
+            {
+              "min": 75,
+              "max": 100,
+              "color": "#red",
+              "description": "High values"
             }
-        },
-        "raster-example": {
-            "name": "OpenStreetMap Raster Example",
-            "type": "layer",
-            "layer": {
-                "type": "raster",
-                "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-                "tileSize": 256,
-                "attribution": "© OpenStreetMap contributors",
-                "legend": {
-                    "type": "image",
-                    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/OpenStreetMap_logo.svg/256px-OpenStreetMap_logo.svg.png"
-                }
-            }
-        },
-        "raster-linear": {
-            "name": "Raster with Linear Legend",
-            "type": "layer",
-            "layer": {
-                "type": "raster",
-                "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-                "tileSize": 256,
-                "legend": {
-                    "type": "linear",
-                    "colormap_name": "viridis",
-                    "min": "Low",
-                    "max": "High",
-                    "orientation": "horizontal"
-                }
-            }
-        },
-        "raster-interval": {
-            "name": "Raster with Interval Legend",
-            "type": "layer",
-            "layer": {
-                "type": "raster",
-                "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-                "tileSize": 256,
-                "legend": {
-                    "type": "interval",
-                    "intervals": [
-                        {
-                            "min": 0,
-                            "max": 25,
-                            "color": "#green",
-                            "description": "Low values"
-                        },
-                        {
-                            "min": 25,
-                            "max": 75,
-                            "color": "#yellow",
-                            "description": "Medium values"
-                        },
-                        {
-                            "min": 75,
-                            "max": 100,
-                            "color": "#red",
-                            "description": "High values"
-                        }
-                    ]
-                }
-            }
-        },
+          ]
+        }
+      }
+    },
+    "pmtiles": {
+      "name": "pmtiles",
+      "type": "layer",
+      "description": "test",
+      "layer": {
+        "type": "pmtiles",
         "pmtiles": {
-            "name": "pmtiles",
-            "type": "layer",
-            "description": "test",
-            "layer": {
-                "type": "pmtiles",
-                "pmtiles": {
-                    "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles"
-                },
-                "children": {
-                    "source-layer": "ch",
-                    "type": "fill",
-                    "legend": {
-                        "default": {
-                            "opacity": 0.5,
-                            "color": "#de2828",
-                            "description": "Something"
-                        },
-                        "field": "crop_name",
-                        "values": [
-                            {
-                                "value": "Extensiv genutzte Wiesen (ohne Weiden)",
-                                "color": "#00ffff",
-                                "opacity": 1,
-                                "description": "Extensiv genutzte Wiesen (ohne Weiden)"
-                            },
-                            {
-                                "opacity": 1,
-                                "value": "Übrige Dauerwiesen (ohne Weiden)",
-                                "color": "#00da0f",
-                                "description": "Übrige Dauerwiesen (ohne Weiden)"
-                            }
-                        ]
-                    }
-                }
-            }
+          "url": "https://data.source.coop/fiboa/switzerland/switzerland.pmtiles"
+        },
+        "children": {
+          "source-layer": "ch",
+          "type": "fill",
+          "legend": {
+            "default": {
+              "opacity": 0.5,
+              "color": "#de2828",
+              "description": "Something"
+            },
+            "field": "crop_name",
+            "values": [
+              {
+                "value": "Extensiv genutzte Wiesen (ohne Weiden)",
+                "color": "#00ffff",
+                "opacity": 1,
+                "description": "Extensiv genutzte Wiesen (ohne Weiden)"
+              },
+              {
+                "opacity": 1,
+                "value": "Übrige Dauerwiesen (ohne Weiden)",
+                "color": "#00da0f",
+                "description": "Übrige Dauerwiesen (ohne Weiden)"
+              }
+            ]
+          }
         }
-    },
-    "config": {
-        "titiler_api_url": "/titiler",
-        "theme": "nina",
-        "language": "no",
-        "footer": {
-            "items": [
-                "![](https://maps.nina.no/assets/logowhite-6HSLYLYZ.png)",
-                "Norsk institutt for naturforskning - [www.nina.no](https://www.nina.no)"
-            ],
-            "justify": "justify-between",
-            "align": "items-baseline"
-        }
+      }
     }
+  },
+  "config": {
+    "titiler_api_url": "/titiler",
+    "theme": "nina",
+    "language": "no",
+    "footer": {
+      "items": [
+        "![](https://maps.nina.no/assets/logowhite-6HSLYLYZ.png)",
+        "Norsk institutt for naturforskning - [www.nina.no](https://www.nina.no)"
+      ],
+      "justify": "justify-between",
+      "align": "items-baseline"
+    }
+  }
 }

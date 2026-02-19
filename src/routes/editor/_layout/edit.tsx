@@ -1,11 +1,11 @@
-import { createFileRoute, Link, Outlet, useLocation, redirect } from '@tanstack/react-router';
-import classNames from 'classnames';
-import { EDIT_TABS } from '../../../config';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
 import { useElementSize } from '@custom-react-hooks/use-element-size';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { createFileRoute, Link, Outlet, redirect, useLocation } from '@tanstack/react-router';
+import classNames from 'classnames';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { EDIT_TABS } from '../../../config';
 
 export const Route = createFileRoute('/editor/_layout/edit')({
   component: RouteComponent,

@@ -1,6 +1,6 @@
-import { Map, ViewState } from 'react-map-gl/maplibre';
-import { useCallback } from 'react';
 import classNames from 'classnames';
+import { useCallback } from 'react';
+import { Map, type ViewState } from 'react-map-gl/maplibre';
 
 interface BaseMapProps {
   initialViewState: Partial<ViewState>;

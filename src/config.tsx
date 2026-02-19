@@ -1,8 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import axios from 'axios';
-
-import { MapConfig, StoreConfig, MapConfigSchema, StoreConfigSchema } from './types';
 import BASEMAP from './libs/basemaps';
+import { type MapConfig, MapConfigSchema, type StoreConfig, StoreConfigSchema } from './types';
 
 export const TABS = [
   {

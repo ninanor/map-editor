@@ -1,14 +1,20 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
-import { useAppActions, useLayer } from '../../../../hooks/app';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useCallback } from 'react';
-import { UpdateLayerSchema, LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../schemas';
-import { useForm, useWatch } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, MDXInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { useCallback } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { PMTilesFields, TitilerFields, RasterFields } from '../../../../components/layer-fields';
+import { PMTilesFields, RasterFields, TitilerFields } from '../../../../components/layer-fields';
+import { useAppActions, useLayer } from '../../../../hooks/app';
+import { MDXInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
+import {
+  type LayerConfig,
+  type PMTileSource,
+  type RasterSource,
+  type TitilerSource,
+  UpdateLayerSchema,
+} from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/$layerId')({
   component: RouteComponent,

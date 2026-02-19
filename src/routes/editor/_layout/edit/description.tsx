@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useAppActions, useAppMeta } from '../../../../hooks/app';
 import { MapMetadataForm } from '../../../../components/forms/MetaForm';
-import { MapMeta } from '../../../../types';
+import { useAppActions, useAppMeta } from '../../../../hooks/app';
+import type { MapMeta } from '../../../../types';
 
 export const Route = createFileRoute('/editor/_layout/edit/description')({
   component: RouteComponent,

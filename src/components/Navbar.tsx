@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { Link, useMatch } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import { DownloadConfigButton } from './DownloadConfigButton';
 
 export function Navbar() {

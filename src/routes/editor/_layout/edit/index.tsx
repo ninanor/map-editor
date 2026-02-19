@@ -1,11 +1,11 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { LayerTree } from '../../../../components/LayerTree';
-import { useAppActions, useAppStore, useExpandedItems } from '../../../../hooks/app';
-import { PageErrorComponent } from '../../../../components/PageErrorComponent';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { SetStateFn } from '@headless-tree/core';
+import type { SetStateFn } from '@headless-tree/core';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+import { LayerTree } from '../../../../components/LayerTree';
+import { PageErrorComponent } from '../../../../components/PageErrorComponent';
+import { useAppActions, useAppStore, useExpandedItems } from '../../../../hooks/app';
 
 export const Route = createFileRoute('/editor/_layout/edit/')({
   component: RouteComponent,

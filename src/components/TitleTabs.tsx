@@ -1,13 +1,13 @@
-import { Link, Outlet } from '@tanstack/react-router';
-import { TABS } from '../config';
-import classNames from 'classnames';
-import { useAppStore } from '../hooks/app';
-import { useTranslation } from 'react-i18next';
 import { useElementSize } from '@custom-react-hooks/use-element-size';
-import { useMemo } from 'react';
-import MediaQuery from 'react-responsive';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, Outlet } from '@tanstack/react-router';
+import classNames from 'classnames';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import MediaQuery from 'react-responsive';
+import { TABS } from '../config';
+import { useAppStore } from '../hooks/app';
 import { useUIActions } from '../hooks/ui';
 
 export function TitleTabs({

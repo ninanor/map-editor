@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { type RgbaColor, RgbaColorPicker } from 'react-colorful';
 import { useFieldContext } from '../../hooks/form';
-import { RgbaColor, RgbaColorPicker } from 'react-colorful';
 
 export function ColorPickerField({ label }: { label: string; required?: boolean }) {
   const field = useFieldContext<number[] | undefined>();

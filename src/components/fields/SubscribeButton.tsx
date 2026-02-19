@@ -1,5 +1,5 @@
-import { useFormContext } from '../../hooks/form';
 import { useTranslation } from 'react-i18next';
+import { useFormContext } from '../../hooks/form';
 
 export function SubscribeButton({ label }: { label?: string }) {
   const { t } = useTranslation();

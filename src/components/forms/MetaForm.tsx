@@ -1,8 +1,8 @@
-import { useForm } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { MapMeta, MapMetaSchema } from '../../schemas';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { TextInput, SubmitButton, TextareaInput } from '../../hooks/rhf-form';
+import { SubmitButton, TextareaInput, TextInput } from '../../hooks/rhf-form';
+import { type MapMeta, MapMetaSchema } from '../../schemas';
 
 interface MapMetadataFormProps {
   defaultValues: MapMeta;

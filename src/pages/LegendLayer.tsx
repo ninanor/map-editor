@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { useLayers } from '../hooks/app';
 import { Legend } from '../components/Legend';
+import { useLayers } from '../hooks/app';
 
 export function LegendLayers() {
   const layers = useLayers();

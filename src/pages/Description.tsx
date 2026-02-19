@@ -1,5 +1,5 @@
-import { useAppStore } from '../hooks/app';
 import { Description } from '../components/Description';
+import { useAppStore } from '../hooks/app';
 
 export function DescriptionPage() {
   const description = useAppStore(state => state.description);

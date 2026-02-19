@@ -1,6 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet';
-import { useAppStore } from '../hooks/app';
 import { DEFAULT_LANG, DEFAULT_THEME } from '../config';
+import { useAppStore } from '../hooks/app';
 
 export function Head() {
   const theme = useAppStore(state => state.config?.theme ?? DEFAULT_THEME);

@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useFieldContext } from '../../hooks/form';
 import { queryOptions, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useAppStore } from '../../hooks/app';
+import { useFieldContext } from '../../hooks/form';
 
 interface ColorMapResponse {
   colorMaps: string[];
@@ -19,7 +19,7 @@ export function ColormapField({ label }: { label: string }) {
   const field = useFieldContext<string>();
   const titiler_uri = useAppStore(store => store.config.titiler_api_url);
 
-  const { data } = useQuery(colormapsQueryOptions(titiler_uri + '/colorMaps'));
+  const { data } = useQuery(colormapsQueryOptions(`${titiler_uri}/colorMaps`));
 
   return (
     <>

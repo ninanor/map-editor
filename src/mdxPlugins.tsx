@@ -2,7 +2,6 @@ import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
   CreateLink,
-  UndoRedo,
   headingsPlugin,
   linkDialogPlugin,
   linkPlugin,
@@ -11,6 +10,7 @@ import {
   quotePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
+  UndoRedo,
 } from '@mdxeditor/editor';
 
 export const PLUGINS = [

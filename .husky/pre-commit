@@ -1,2 +1,3 @@
+pnpm lint:fix
 pnpm generate-schema
 git add schemas/map-config.schema.json

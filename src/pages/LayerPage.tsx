@@ -1,11 +1,11 @@
-import { Link } from '@tanstack/react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useItem } from '../hooks/app';
-import { Legend } from '../components/Legend';
-import { Layer } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { Description } from '../components/Description';
+import { Legend } from '../components/Legend';
+import { useItem } from '../hooks/app';
+import type { Layer } from '../types';
 
 interface LayerPageProps {
   layerId: string;

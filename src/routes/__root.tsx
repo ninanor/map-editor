@@ -1,5 +1,5 @@
-import { QueryClient } from '@tanstack/react-query';
-import { Outlet, createRootRouteWithContext, retainSearchParams } from '@tanstack/react-router';
+import type { QueryClient } from '@tanstack/react-query';
+import { createRootRouteWithContext, Outlet, retainSearchParams } from '@tanstack/react-router';
 import { Fragment } from 'react';
 import { ToastContainer } from 'react-toastify';
 

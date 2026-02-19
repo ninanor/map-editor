@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { useFieldArray } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 export function PMTilesFields({ form }: { form: any }) {
@@ -125,19 +125,17 @@ export function PMTilesFields({ form }: { form: any }) {
         )}
 
         {childrenType === 'line' && (
-          <>
-            <div className="mt-3">
-              <label className="label">
-                <span className="label-text">{t('line-width', 'Line Width')}</span>
-              </label>
-              <input
-                type="number"
-                className="input input-bordered w-full"
-                min="1"
-                {...register('layer.children.legend.default.width', { valueAsNumber: true })}
-              />
-            </div>
-          </>
+          <div className="mt-3">
+            <label className="label">
+              <span className="label-text">{t('line-width', 'Line Width')}</span>
+            </label>
+            <input
+              type="number"
+              className="input input-bordered w-full"
+              min="1"
+              {...register('layer.children.legend.default.width', { valueAsNumber: true })}
+            />
+          </div>
         )}
 
         {childrenType === 'circle' && (
@@ -264,19 +262,17 @@ export function PMTilesFields({ form }: { form: any }) {
             )}
 
             {childrenType === 'line' && (
-              <>
-                <div className="mt-3">
-                  <label className="label">
-                    <span className="label-text">{t('line-width', 'Line Width')}</span>
-                  </label>
-                  <input
-                    type="number"
-                    className="input input-bordered w-full"
-                    min="1"
-                    {...register(`layer.children.legend.values.${index}.width`, { valueAsNumber: true })}
-                  />
-                </div>
-              </>
+              <div className="mt-3">
+                <label className="label">
+                  <span className="label-text">{t('line-width', 'Line Width')}</span>
+                </label>
+                <input
+                  type="number"
+                  className="input input-bordered w-full"
+                  min="1"
+                  {...register(`layer.children.legend.values.${index}.width`, { valueAsNumber: true })}
+                />
+              </div>
             )}
 
             {childrenType === 'circle' && (

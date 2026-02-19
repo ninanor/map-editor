@@ -1,13 +1,13 @@
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
-import { useAppActions, useItem } from '../../../../hooks/app';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useCallback } from 'react';
-import { Folder, UpdateFolder, UpdateFolderSchema } from '../../../../schemas';
-import { useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
-import { TextInput, MDXInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useAppActions, useItem } from '../../../../hooks/app';
+import { MDXInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
+import { type Folder, type UpdateFolder, UpdateFolderSchema } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/$folderId')({
   component: RouteComponent,

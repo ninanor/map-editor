@@ -7,13 +7,13 @@ import {
   faSquare,
   faSquareCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import { ItemInstance } from '@headless-tree/core';
-import cx from 'classnames';
-import { Item, Layer } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppActions, useAppStore } from '../hooks/app';
-import { MouseEventHandler, useCallback } from 'react';
+import type { ItemInstance } from '@headless-tree/core';
 import { Link } from '@tanstack/react-router';
+import cx from 'classnames';
+import { type MouseEventHandler, useCallback } from 'react';
+import { useAppActions, useAppStore } from '../hooks/app';
+import type { Item, Layer } from '../types';
 import { LayerIcon } from './LayerIcon';
 
 export type TREE_BASE_PATH = '/editor/edit/' | '/$mapId/' | '/editor/';
@@ -71,31 +71,28 @@ export function ItemRender({ item, editable, className, routePath }: ItemRenderP
         {!isFolder && <LayerIcon className="shrink-0" layer={(data as Layer).layer} />}
         <div className="break-all">{item.getItemName()}</div>
         <div className="flex shrink-0 items-center">
-          {editable && (
-            <>
-              {isFolder ? (
-                <Link
-                  className="btn btn-ghost btn-sm"
-                  to={`folders/$folderId`}
-                  from={routePath}
-                  params={{ folderId: id }}
-                  onClick={noPropagate}
-                >
-                  <FontAwesomeIcon icon={faEdit} />
-                </Link>
-              ) : (
-                <Link
-                  className="btn btn-ghost btn-sm"
-                  to={`layers/$layerId`}
-                  from={routePath}
-                  params={{ layerId: id }}
-                  onClick={noPropagate}
-                >
-                  <FontAwesomeIcon icon={faEdit} />
-                </Link>
-              )}
-            </>
-          )}
+          {editable &&
+            (isFolder ? (
+              <Link
+                className="btn btn-ghost btn-sm"
+                to={`folders/$folderId`}
+                from={routePath}
+                params={{ folderId: id }}
+                onClick={noPropagate}
+              >
+                <FontAwesomeIcon icon={faEdit} />
+              </Link>
+            ) : (
+              <Link
+                className="btn btn-ghost btn-sm"
+                to={`layers/$layerId`}
+                from={routePath}
+                params={{ layerId: id }}
+                onClick={noPropagate}
+              >
+                <FontAwesomeIcon icon={faEdit} />
+              </Link>
+            ))}
           {!editable &&
             (isFolder
               ? data.description && (

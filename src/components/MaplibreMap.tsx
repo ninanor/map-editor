@@ -1,22 +1,22 @@
+import maplibregl from 'maplibre-gl';
+import { Protocol } from 'pmtiles';
 import {
   FullscreenControl,
   GeolocateControl,
   Layer,
+  type MapLayerMouseEvent,
   Map as MaplibreMap,
   NavigationControl,
   ScaleControl,
   Source,
-  MapLayerMouseEvent,
 } from 'react-map-gl/maplibre';
 import { useBaseMap, useMaplibreMapConf } from '../hooks/app';
-import maplibregl from 'maplibre-gl';
-import { Protocol } from 'pmtiles';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useCallback, useEffect, useState } from 'react';
-import GeocoderControl from './GeocoderControl';
-import { Popup, PopupInfo } from './popup';
-import SidebarWidget from './SidebarWidget';
 import MediaQuery from 'react-responsive';
+import GeocoderControl from './GeocoderControl';
+import { Popup, type PopupInfo } from './popup';
+import SidebarWidget from './SidebarWidget';
 
 export default function Map() {
   const basemap = useBaseMap();

@@ -1,11 +1,11 @@
+import { faPlusCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useQuery } from '@tanstack/react-query';
+import { nanoid } from 'nanoid';
 import { useMemo } from 'react';
 import { queryByType } from '../dms/api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { DatasetQuery, DataTableQuery, ResourceQuery } from '../dms/types';
-import { CreateFolder, CreateLayer } from '../types';
-import { nanoid } from 'nanoid';
+import type { DatasetQuery, DataTableQuery, ResourceQuery } from '../dms/types';
+import type { CreateFolder, CreateLayer } from '../types';
 
 function DatasetsResult({
   results,
@@ -24,7 +24,7 @@ function DatasetsResult({
               onAddFolder({
                 name: r.title,
                 parent,
-                id: 'dataset__' + r.id,
+                id: `dataset__${r.id}`,
               })
             }
           >
@@ -54,7 +54,7 @@ function RasterResult({
                 {
                   name: r.title,
                   parent,
-                  id: 'resource__' + r.id + '__' + nanoid(),
+                  id: `resource__${r.id}__${nanoid()}`,
                   layer: {
                     type: 'titiler',
                     titiler: {
@@ -99,7 +99,7 @@ function PMTilesResult({
                 {
                   name: r.name,
                   parent,
-                  id: 'datatable__' + r.id + '__' + nanoid(),
+                  id: `datatable__${r.id}__${nanoid()}`,
                   layer: {
                     type: 'pmtiles',
                     pmtiles: {
@@ -145,20 +145,18 @@ export function DMSSearch({
   const { data, isLoading, isFetching } = useQuery<unknown>(options);
   if (isLoading || isFetching) {
     return <FontAwesomeIcon icon={faSpinner} spin />;
-  } else {
-    if (type === 'folder' && data) {
-      const results = (data as DatasetQuery).results;
-      return <DatasetsResult results={results} onAddFolder={onAddFolder} parent={parent} />;
-    }
-    if (type === 'raster' && data) {
-      const results = (data as ResourceQuery).results;
-      return <RasterResult results={results} onAddLayer={onAddLayer} parent={parent} />;
-    }
-    if (type === 'vector' && data) {
-      const results = (data as DataTableQuery).results;
-      return <PMTilesResult results={results} onAddLayer={onAddLayer} parent={parent} />;
-    }
-    return;
   }
-  return <div></div>;
+  if (type === 'folder' && data) {
+    const results = (data as DatasetQuery).results;
+    return <DatasetsResult results={results} onAddFolder={onAddFolder} parent={parent} />;
+  }
+  if (type === 'raster' && data) {
+    const results = (data as ResourceQuery).results;
+    return <RasterResult results={results} onAddLayer={onAddLayer} parent={parent} />;
+  }
+  if (type === 'vector' && data) {
+    const results = (data as DataTableQuery).results;
+    return <PMTilesResult results={results} onAddLayer={onAddLayer} parent={parent} />;
+  }
+  return <div />;
 }
