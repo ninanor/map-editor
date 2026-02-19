@@ -1,10 +1,29 @@
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { queryOptions, useQuery } from '@tanstack/react-query';
+import { useAppStore } from '../../hooks/app';
+
+interface ColorMapResponse {
+  colorMaps: string[];
+}
+
+const fetchColormaps = async (url: string) => axios.get<ColorMapResponse>(url);
+
+const colormapsQueryOptions = (titiler: string) =>
+  queryOptions({
+    queryKey: [titiler, 'colormaps'],
+    queryFn: () => fetchColormaps(titiler + '/colorMaps'),
+  });
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 export function TitilerFields({ form }: { form: any }) {
   const { t } = useTranslation();
   const { register, watch } = form;
   const bidx = watch('layer.titiler.bidx');
+  const colormapName = watch('layer.legend.colormap_name');
+  const titiler_uri = useAppStore(store => store.config.titiler_api_url);
+
+  const { data: colormapsData, isLoading: isLoadingColormaps } = useQuery(colormapsQueryOptions(titiler_uri));
 
   return (
     <div className="space-y-4">
@@ -52,12 +71,29 @@ export function TitilerFields({ form }: { form: any }) {
             <label className="label">
               <span className="label-text">{t('colormap-name', 'Colormap Name')}</span>
             </label>
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              placeholder="viridis"
-              {...register('layer.legend.colormap_name')}
-            />
+            <select className="select select-bordered w-full" {...register('layer.legend.colormap_name')}>
+              {isLoadingColormaps && (
+                <option value="" disabled>
+                  {t('loading', 'Loading...')}
+                </option>
+              )}
+              {!isLoadingColormaps &&
+                colormapsData?.data.colorMaps?.map(value => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+            </select>
+            {colormapName && (
+              <>
+                <p className="text-sm font-semibold mt-3 mb-1">{t('preview', 'Preview:')}</p>
+                <img
+                  className="w-full border border-base-300 rounded"
+                  src={`${titiler_uri}/colorMaps/${colormapName}?format=png`}
+                  alt={`${colormapName} colormap preview`}
+                />
+              </>
+            )}
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-3">
