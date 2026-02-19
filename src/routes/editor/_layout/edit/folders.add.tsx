@@ -4,28 +4,20 @@ import { TREE_ROOT_ID } from '../../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import Form from '@rjsf/daisyui';
-import { FOLDER_SCHEMA, FOLDER_SCHEMA_UI } from '../../../../rjsf/schemas/folder';
-import { widgets } from '../../../../rjsf/widgets';
-import AJV8Validator from '@rjsf/validator-ajv8/lib/validator';
-import { CreateFolder } from '../../../../types';
+import { CreateFolder, CreateFolderSchema } from '../../../../schemas';
+import { useForm } from 'react-hook-form';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
+import { TextInput, SelectInput, TextareaInput, SubmitButton } from '../../../../hooks/rhf-form';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/add')({
   component: RouteComponent,
 });
 
-const validator = new AJV8Validator({
-  ajvOptionsOverrides: {
-    removeAdditional: true,
-  },
-});
-
-const DEFAULT_FORM_DATA = {
+const DEFAULT_FORM_DATA: CreateFolder = {
   name: '',
   description: '',
   parent: TREE_ROOT_ID,
   download_url: '',
-  type: 'folder',
 };
 
 function RouteComponent() {
@@ -34,36 +26,50 @@ function RouteComponent() {
   const navigate = useNavigate();
   const folderNames = useFolderNames();
 
-  const schema = {
-    ...FOLDER_SCHEMA,
-    properties: {
-      ...FOLDER_SCHEMA.properties,
-      parent: {
-        type: 'string' as const,
-        title: 'Parent Folder',
-        oneOf: folderNames.map(f => ({ const: f.value, title: f.label })),
-      },
-    },
-  };
+  const form = useForm({
+    resolver: standardSchemaResolver(CreateFolderSchema),
+    defaultValues: DEFAULT_FORM_DATA,
+  });
 
-  const handleSubmit = ({ formData }: { formData?: unknown }) => {
-    actions.addTreeItemFolder(formData as CreateFolder);
+  const handleSubmit = form.handleSubmit(data => {
+    actions.addTreeItemFolder(data as CreateFolder);
     navigate({ to: '/editor/edit' }).catch(console.error);
-  };
+  });
 
   return (
     <>
       <Link to="/editor/edit">
         <FontAwesomeIcon icon={faArrowLeft} /> {t('back')}
       </Link>
-      <Form
-        schema={schema}
-        uiSchema={FOLDER_SCHEMA_UI}
-        validator={validator}
-        widgets={widgets}
-        formData={DEFAULT_FORM_DATA}
-        onSubmit={handleSubmit}
-      />
+
+      <form
+        onSubmit={e => {
+          void handleSubmit(e);
+        }}
+        className="mt-4 text-base-content bg-base-200 border-base-300 rounded-box border p-4"
+      >
+        <fieldset className="fieldset">
+          <legend className="fieldset-legend">{t('add-folder')}</legend>
+
+          <TextInput form={form} name="name" label={t('name')} required />
+
+          <TextareaInput form={form} name="description" label={t('description')} />
+
+          <SelectInput form={form} name="parent" label={t('parent-folder')} required>
+            {folderNames.map(f => (
+              <option key={f.value} value={f.value}>
+                {f.label}
+              </option>
+            ))}
+          </SelectInput>
+
+          <TextInput form={form} name="download_url" label={t('download-url')} />
+
+          <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
+            {t('create')}
+          </SubmitButton>
+        </fieldset>
+      </form>
     </>
   );
 }

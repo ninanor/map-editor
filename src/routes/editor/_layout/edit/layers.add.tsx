@@ -4,32 +4,34 @@ import { TREE_ROOT_ID } from '../../../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { nanoid } from 'nanoid';
-import { Layer, LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../types';
+import { LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../schemas';
 import { useTranslation } from 'react-i18next';
-import Form from '@rjsf/daisyui';
-import { LAYER_ADD_SCHEMA, LAYER_ADD_SCHEMA_UI } from '../../../../rjsf/schemas/layer-add';
-import { widgets } from '../../../../rjsf/widgets';
-import AJV8Validator from '@rjsf/validator-ajv8/lib/validator';
+import { useForm } from 'react-hook-form';
+import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
+import { TextInput, SelectInput, TextareaInput, SubmitButton } from '../../../../hooks/rhf-form';
+import { z } from 'zod';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/add')({
   component: RouteComponent,
 });
 
-const validator = new AJV8Validator({
-  ajvOptionsOverrides: {
-    removeAdditional: true,
-  },
+// Extended schema for the add form with layer type selection
+const AddLayerFormSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  description: z.string().optional(),
+  parent: z.string(),
+  download_url: z.string().optional(),
+  layerType: z.enum(['pmtiles', 'titiler', 'raster']),
 });
 
-const DEFAULT_FORM_DATA = {
+type AddLayerForm = z.infer<typeof AddLayerFormSchema>;
+
+const DEFAULT_FORM_DATA: AddLayerForm = {
   name: '',
   description: '',
   parent: TREE_ROOT_ID,
   download_url: '',
-  layer: {
-    type: 'pmtiles',
-  },
-  type: 'layer',
+  layerType: 'pmtiles',
 };
 
 function RouteComponent() {
@@ -38,25 +40,17 @@ function RouteComponent() {
   const navigate = useNavigate();
   const folderNames = useFolderNames();
 
-  const schema = {
-    ...LAYER_ADD_SCHEMA,
-    properties: {
-      ...LAYER_ADD_SCHEMA.properties,
-      parent: {
-        type: 'string' as const,
-        title: 'Parent Folder',
-        oneOf: folderNames.map(f => ({ const: f.value, title: f.label })),
-      },
-    },
-  };
+  const form = useForm({
+    resolver: standardSchemaResolver(AddLayerFormSchema),
+    defaultValues: DEFAULT_FORM_DATA,
+  });
 
-  const handleSubmit = ({ formData }: { formData?: unknown }) => {
-    const value = formData as Layer & { parent: string };
+  const handleSubmit = form.handleSubmit(data => {
+    const typedData = data as AddLayerForm;
     const id = nanoid();
+    let layer: LayerConfig;
 
-    let layer: LayerConfig | null = null;
-
-    if (value.layer.type === 'pmtiles') {
+    if (typedData.layerType === 'pmtiles') {
       layer = {
         type: 'pmtiles',
         pmtiles: {
@@ -67,9 +61,7 @@ function RouteComponent() {
           'source-layer': '',
         },
       } as PMTileSource;
-    }
-
-    if (value.layer.type === 'titiler') {
+    } else if (typedData.layerType === 'titiler') {
       layer = {
         type: 'titiler',
         titiler: {
@@ -82,9 +74,7 @@ function RouteComponent() {
           max: '1',
         },
       } as TitilerSource;
-    }
-
-    if (value.layer.type === 'raster') {
+    } else {
       layer = {
         type: 'raster',
         tiles: [''],
@@ -92,31 +82,58 @@ function RouteComponent() {
       } as RasterSource;
     }
 
-    if (!layer) {
-      throw Error('Layer type not supported');
-    }
-
     actions.addTreeItemLayer({
-      ...value,
+      name: typedData.name,
+      description: typedData.description,
+      download_url: typedData.download_url,
+      parent: typedData.parent,
       id,
       layer,
     });
+
     navigate({ to: '/editor/edit/layers/$layerId', params: { layerId: id } }).catch(console.error);
-  };
+  });
 
   return (
     <>
       <Link to="/editor/edit">
         <FontAwesomeIcon icon={faArrowLeft} /> {t('back')}
       </Link>
-      <Form
-        schema={schema}
-        uiSchema={LAYER_ADD_SCHEMA_UI}
-        validator={validator}
-        widgets={widgets}
-        formData={DEFAULT_FORM_DATA}
-        onSubmit={handleSubmit}
-      />
+
+      <form
+        onSubmit={e => {
+          void handleSubmit(e);
+        }}
+        className="mt-4 text-base-content bg-base-200 border-base-300 rounded-box border p-4"
+      >
+        <fieldset className="fieldset ">
+          <legend className="fieldset-legend">{t('add-layer')}</legend>
+
+          <TextInput form={form} name="name" label={t('name')} required />
+
+          <TextareaInput form={form} name="description" label={t('description')} />
+
+          <SelectInput form={form} name="parent" label={t('parent-folder')} required>
+            {folderNames.map(f => (
+              <option key={f.value} value={f.value}>
+                {f.label}
+              </option>
+            ))}
+          </SelectInput>
+
+          <SelectInput form={form} name="layerType" label={t('layer-type')} required>
+            <option value="pmtiles">PMTiles</option>
+            <option value="titiler">TiTiler (COG)</option>
+            <option value="raster">Raster</option>
+          </SelectInput>
+
+          <TextInput form={form} name="download_url" label={t('download-url')} />
+
+          <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
+            {t('create')}
+          </SubmitButton>
+        </fieldset>
+      </form>
     </>
   );
 }
