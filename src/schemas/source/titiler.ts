@@ -1,8 +1,9 @@
 import { z } from 'zod';
-import { RasterSequentialLegendSchema, RasterIntervalLegendSchema } from '../legend/raster';
+import { RasterSequentialLegendSchema } from '../legend/raster';
 
 /**
  * Titiler source schema for Cloud Optimized GeoTIFF (COG)
+ * Matches rjsf/schemas/layer.ts TitilerSource definition
  */
 
 export const TitilerSourceSchema = z
@@ -11,11 +12,11 @@ export const TitilerSourceSchema = z
     titiler: z
       .object({
         url: z.string(),
-        rescale: z.array(z.string()).optional(),
-        bidx: z.string().optional(),
+        bidx: z.enum(['single', 'rgb']),
+        rescale: z.array(z.string().regex(/^[0-9.-]+,[0-9.-]+$/)).optional(),
       })
       .catchall(z.unknown()), // Allow additional properties
-    legend: z.union([RasterSequentialLegendSchema, RasterIntervalLegendSchema]).optional(),
+    legend: RasterSequentialLegendSchema.optional(), // Only linear legend for single band
   })
   .catchall(z.unknown()); // Allow partial Source properties
 
