@@ -7,7 +7,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\"",
+    "generate-schema": "tsx scripts/generate-schema.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@custom-react-hooks/use-element-size": "^1.5.1",
@@ -67,6 +69,7 @@
     "@eslint/js": "^9.30.1",
     "@tanstack/react-query-devtools": "^5.82.0",
     "@tanstack/router-plugin": "^1.125.6",
+    "@types/node": "^25.3.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-helmet": "^6.1.11",
@@ -80,7 +83,9 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-react-x": "^1.52.2",
     "globals": "^15.15.0",
+    "husky": "^9.1.7",
     "prettier": "^3.6.2",
+    "tsx": "^4.21.0",
     "typescript": "~5.7.3",
     "typescript-eslint": "^8.36.0",
     "vite": "^7.1.11",

@@ -1,0 +1,2 @@
+pnpm generate-schema
+git add schemas/map-config.schema.json
