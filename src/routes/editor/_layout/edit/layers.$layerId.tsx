@@ -2,12 +2,13 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useAppActions, useLayer } from '../../../../hooks/app';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useCallback, useState } from 'react';
-import { UpdateLayerSchema, LayerConfig } from '../../../../schemas';
-import { useForm } from 'react-hook-form';
+import { useCallback } from 'react';
+import { UpdateLayerSchema, LayerConfig, PMTileSource, TitilerSource, RasterSource } from '../../../../schemas';
+import { useForm, useWatch } from 'react-hook-form';
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { TextInput, TextareaInput, SubmitButton } from '../../../../hooks/rhf-form';
 import { useTranslation } from 'react-i18next';
+import { PMTilesFields, TitilerFields, RasterFields } from '../../../../components/layer-fields';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/$layerId')({
   component: RouteComponent,
@@ -21,9 +22,6 @@ function RouteComponent() {
   const { layerId } = Route.useParams();
   const layer = useLayer(layerId);
 
-  const [layerConfigJson, setLayerConfigJson] = useState(() => JSON.stringify(layer?.layer ?? {}, null, 2));
-  const [jsonError, setJsonError] = useState<string | null>(null);
-
   const form = useForm({
     resolver: standardSchemaResolver(UpdateLayerSchema),
     values: layer
@@ -36,18 +34,14 @@ function RouteComponent() {
       : undefined,
   });
 
+  const watchedLayer = useWatch({ control: form.control, name: 'layer' });
+  const layerType =
+    watchedLayer && typeof watchedLayer === 'object' && 'type' in watchedLayer ? String(watchedLayer.type) : null;
+
   const handleSubmit = form.handleSubmit(data => {
     const typedData = data as { name: string; description?: string; layer: LayerConfig; download_url?: string };
-    try {
-      const layerConfig = JSON.parse(layerConfigJson) as LayerConfig;
-      actions.updateTreeItemLayer(layerId, {
-        ...typedData,
-        layer: layerConfig,
-      });
-      navigate({ to: '/editor/edit' }).catch(console.error);
-    } catch {
-      setJsonError('Invalid JSON configuration');
-    }
+    actions.updateTreeItemLayer(layerId, typedData);
+    navigate({ to: '/editor/edit' }).catch(console.error);
   });
 
   const handleDelete = useCallback(() => {
@@ -55,14 +49,26 @@ function RouteComponent() {
     navigate({ to: '/editor/edit' }).catch(console.error);
   }, [layerId, actions, navigate]);
 
-  const handleJsonChange = (value: string) => {
-    setLayerConfigJson(value);
-    setJsonError(null);
-    try {
-      const parsed = JSON.parse(value) as LayerConfig;
-      form.setValue('layer', parsed);
-    } catch {
-      // Invalid JSON, don't update form
+  // Handle layer type change
+  const handleLayerTypeChange = (newType: string) => {
+    if (newType === 'pmtiles') {
+      form.setValue('layer', {
+        type: 'pmtiles',
+        pmtiles: { url: '' },
+        children: { type: 'fill', 'source-layer': '' },
+      } as PMTileSource);
+    } else if (newType === 'titiler') {
+      form.setValue('layer', {
+        type: 'titiler',
+        titiler: { url: '' },
+        legend: { type: 'linear', colormap_name: 'viridis', min: '0', max: '1' },
+      } as TitilerSource);
+    } else if (newType === 'raster') {
+      form.setValue('layer', {
+        type: 'raster',
+        tiles: [''],
+        tileSize: 256,
+      } as RasterSource);
     }
   };
 
@@ -76,9 +82,9 @@ function RouteComponent() {
         onSubmit={e => {
           void handleSubmit(e);
         }}
-        className="mt-4 text-base-content bg-base-200 border-base-300 rounded-box  border p-4"
+        className="mt-4 text-base-content bg-base-200 border-base-300 rounded-box border p-4"
       >
-        <fieldset className="fieldset ">
+        <fieldset className="fieldset">
           <legend className="fieldset-legend">{t('edit-layer')}</legend>
 
           <TextInput form={form} name="name" label={t('name')} required />
@@ -87,21 +93,26 @@ function RouteComponent() {
 
           <TextInput form={form} name="download_url" label={t('download-url')} />
 
-          <div className="mt-4">
+          <div className="divider">{t('layer-configuration', 'Layer Configuration')}</div>
+
+          <div className="mb-4">
             <label className="label">
-              <span className="label-text">{t('layer-configuration')}</span>
+              <span className="label-text">{t('layer-type')}</span>
             </label>
-            <textarea
-              className={`textarea textarea-bordered w-full font-mono text-sm ${jsonError ? 'textarea-error' : ''}`}
-              rows={15}
-              value={layerConfigJson}
-              onChange={e => handleJsonChange(e.target.value)}
-            />
-            {jsonError && <span className="text-error text-sm mt-1">{jsonError}</span>}
-            <p className="text-sm text-base-content/60 mt-1">
-              {t('layer-config-help', "Edit the layer configuration as JSON. Make sure it's valid JSON.")}
-            </p>
+            <select
+              className="select select-bordered w-full"
+              value={layerType ?? ''}
+              onChange={e => handleLayerTypeChange(e.target.value)}
+            >
+              <option value="pmtiles">PMTiles</option>
+              <option value="titiler">Titiler (COG)</option>
+              <option value="raster">Raster</option>
+            </select>
           </div>
+
+          {layerType === 'pmtiles' && <PMTilesFields form={form} />}
+          {layerType === 'titiler' && <TitilerFields form={form} />}
+          {layerType === 'raster' && <RasterFields form={form} />}
 
           <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
             {t('save')}
