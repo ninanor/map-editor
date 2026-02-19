@@ -202,12 +202,12 @@ const appMetaSelector = createAppSelector(
   state => state.subtitle,
   state => state.description,
   state => state.icon,
-  (title: string, subtitle: string, description: string, icon?: string) => {
+  (title: string, subtitle: string, description?: string, icon?: string) => {
     return {
       title,
       subtitle,
       icon,
-      description,
+      description: description ?? '',
     };
   },
 );
@@ -274,12 +274,13 @@ export const useFolder = (id: string): Folder | null => {
 };
 
 export const useExpandedItems = () => useAppStore(state => state.expandedItems);
-export const useBaseMap = () => useAppStore(state => state.styles[state.baseMap] ?? '');
+export const useBaseMap = () => useAppStore(state => state.styles?.[state.baseMap] ?? '');
 
 const baseMapStylesSelector = createAppSelector(
   state => state.baseMap,
   state => state.styles,
-  (activeId, styles: Record<string, string>) => {
+  (activeId, styles?: Record<string, string>) => {
+    if (!styles) return [];
     return Object.keys(styles).map(id => ({
       style: styles[id],
       id,

@@ -32,7 +32,7 @@ export const MapSettingsSchema = z.object({
 export const MapMetaSchema = z.object({
   title: z.string(),
   subtitle: z.string(),
-  description: z.string(),
+  description: z.string().optional(),
   icon: z.string().optional(),
 });
 
@@ -63,7 +63,7 @@ export const ViewStateSchema = z
 export const MapConfigSchema = MapMetaSchema.extend({
   id: z.string(),
   baseMap: z.string(),
-  styles: z.record(z.string(), z.string()),
+  styles: z.record(z.string(), z.string()).optional(),
   layerOrder: z.array(z.string()),
   viewState: ViewStateSchema,
   items: TreeSchema.nullable(),
