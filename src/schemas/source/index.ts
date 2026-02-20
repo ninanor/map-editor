@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 /**
  * Source schemas for different layer types
@@ -6,13 +6,15 @@ import { z } from 'zod';
  * Combines all source types into a unified schema
  */
 
-export * from './titiler';
-export * from './raster';
-export * from './pmtiles';
+export * from "./titiler";
+export * from "./raster";
+export * from "./pmtiles";
+export * from "./parquet";
 
-import { TitilerSourceSchema } from './titiler';
-import { RasterSourceSchema } from './raster';
-import { PMTileSourceSchema } from './pmtiles';
+import { TitilerSourceSchema } from "./titiler";
+import { RasterSourceSchema } from "./raster";
+import { PMTileSourceSchema } from "./pmtiles";
+import { ParquetSourceSchema } from "./parquet";
 
 /**
  * Combined layer configuration schema
@@ -23,6 +25,7 @@ export const LayerConfigSchema = z.union([
   TitilerSourceSchema,
   PMTileSourceSchema,
   RasterSourceSchema,
+  ParquetSourceSchema,
   z.record(z.string(), z.unknown()), // For generic Partial<Source>
 ]);
 
