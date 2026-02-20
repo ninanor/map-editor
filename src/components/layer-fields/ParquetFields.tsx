@@ -37,6 +37,21 @@ export function ParquetFields({ form }: { form: any }) {
             {t('encoding-help', 'Geometry encoding format. WKB is most common for GeoParquet 1.0 files.')}
           </p>
         </div>
+
+        <div className="mt-3">
+          <label className="label">
+            <span className="label-text">{t('layer-type', 'Layer Type')}</span>
+          </label>
+          <select className="select select-bordered w-full" {...register('layer.parquet.layerType')}>
+            <option value="scatterplot">{t('scatterplot-layer', 'Scatterplot')}</option>
+            <option value="polygon">{t('polygon-layer', 'Polygon (Outline)')}</option>
+            <option value="solidPolygon">{t('solid-polygon-layer', 'Solid Polygon')}</option>
+            <option value="path">{t('path-layer', 'Path')}</option>
+          </select>
+          <p className="text-sm text-base-content/60 mt-1">
+            {t('layer-type-help', 'Visualization type for geometry features.')}
+          </p>
+        </div>
       </div>
 
       <div className="bg-base-300 p-4 rounded-lg">

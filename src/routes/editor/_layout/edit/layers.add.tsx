@@ -88,6 +88,7 @@ function RouteComponent() {
         parquet: {
           url: '',
           encoding: 'wkb',
+          layerType: 'scatterplot',
         },
         style: {
           fillColor: '#0080ff',

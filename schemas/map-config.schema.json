@@ -676,6 +676,15 @@
                                   "wkb",
                                   "geoarrow"
                                 ]
+                              },
+                              "layerType": {
+                                "type": "string",
+                                "enum": [
+                                  "scatterplot",
+                                  "polygon",
+                                  "solidPolygon",
+                                  "path"
+                                ]
                               }
                             },
                             "required": [

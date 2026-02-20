@@ -1,8 +1,13 @@
 import type { Layer } from '@deck.gl/core';
-import { GeoArrowScatterplotLayer } from '@geoarrow/deck.gl-layers';
+import {
+  GeoArrowPathLayer,
+  GeoArrowPolygonLayer,
+  GeoArrowScatterplotLayer,
+  GeoArrowSolidPolygonLayer,
+} from '@geoarrow/deck.gl-layers';
 import { readGeoParquet } from '@geoarrow/geoparquet-wasm';
 import { tableFromIPC } from 'apache-arrow';
-import { readParquet } from 'parquet-wasm';
+import wasmInit, { readParquet } from 'parquet-wasm';
 import type { LayerWithId, ParquetSource } from '../types';
 
 /**
@@ -48,11 +53,13 @@ async function loadGeoParquet(url: string, encoding: 'wkb' | 'geoarrow' = 'wkb')
       console.debug(`Loaded GeoParquet with WKB encoding from ${url}`);
       return jsTable;
     } else {
+      await wasmInit();
       // Use native GeoArrow encoding
       const wasmTable = readParquet(uint8Array);
       const ipcStream = wasmTable.intoIPCStream();
       const jsTable = tableFromIPC(ipcStream);
       console.debug(`Loaded GeoParquet with native GeoArrow encoding from ${url}`);
+      console.log(jsTable.schema.toString());
       return jsTable;
     }
   } catch (error) {
@@ -73,25 +80,64 @@ export function createDeckGLParquetLayers(layers: LayerWithId[]): Layer[] {
     const parquetSource = layer.layer as ParquetSource;
     const style = parquetSource.style || {};
     const encoding = parquetSource.parquet.encoding || 'wkb';
+    const layerType = parquetSource.parquet.layerType || 'scatterplot';
 
     const fillColor = hexToRgb(style.fillColor, style.opacity ?? 0.8);
     const lineColor = hexToRgb(style.lineColor, 1);
 
-    return new GeoArrowScatterplotLayer({
+    const commonProps = {
       id: `parquet-${layer.id}`,
-      // @ts-expect-error - GeoArrowScatterplotLayer accepts Promise<Table>, type definition is incomplete
       data: loadGeoParquet(parquetSource.parquet.url, encoding),
-      getFillColor: fillColor,
-      getLineColor: lineColor,
-      getRadius: style.pointRadius ?? 5,
-      radiusUnits: 'pixels',
-      lineWidthUnits: 'pixels',
-      getLineWidth: style.lineWidth ?? 1,
-      filled: true,
-      stroked: true,
       pickable: true,
       autoHighlight: true,
       highlightColor: [255, 255, 0, 100],
-    });
+    };
+
+    switch (layerType) {
+      case 'polygon':
+        // @ts-expect-error - GeoArrow layers accept Promise<Table>, type definition is incomplete
+        return new GeoArrowPolygonLayer({
+          ...commonProps,
+          getLineColor: lineColor,
+          getLineWidth: style.lineWidth ?? 1,
+          lineWidthUnits: 'pixels',
+          stroked: true,
+        });
+
+      case 'solidPolygon':
+        // @ts-expect-error - GeoArrow layers accept Promise<Table>, type definition is incomplete
+        return new GeoArrowSolidPolygonLayer({
+          ...commonProps,
+          getFillColor: fillColor,
+          getLineColor: lineColor,
+          getLineWidth: style.lineWidth ?? 1,
+          lineWidthUnits: 'pixels',
+          filled: true,
+          stroked: true,
+        });
+
+      case 'path':
+        // @ts-expect-error - GeoArrow layers accept Promise<Table>, type definition is incomplete
+        return new GeoArrowPathLayer({
+          ...commonProps,
+          getColor: lineColor,
+          getWidth: style.lineWidth ?? 1,
+          widthUnits: 'pixels',
+        });
+
+      default:
+        // @ts-expect-error - GeoArrow layers accept Promise<Table>, type definition is incomplete
+        return new GeoArrowScatterplotLayer({
+          ...commonProps,
+          getFillColor: fillColor,
+          getLineColor: lineColor,
+          getRadius: style.pointRadius ?? 5,
+          radiusUnits: 'pixels',
+          lineWidthUnits: 'pixels',
+          getLineWidth: style.lineWidth ?? 1,
+          filled: true,
+          stroked: true,
+        });
+    }
   });
 }

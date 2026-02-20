@@ -80,7 +80,7 @@ function RouteComponent() {
     } else if (newType === 'parquet') {
       form.setValue('layer', {
         type: 'parquet',
-        parquet: { url: '', encoding: 'wkb' },
+        parquet: { url: '', encoding: 'wkb', layerType: 'scatterplot' },
         style: {
           fillColor: '#0080ff',
           lineColor: '#004080',
