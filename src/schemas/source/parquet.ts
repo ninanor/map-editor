@@ -11,6 +11,7 @@ export const ParquetSourceSchema = z
     parquet: z.object({
       url: z.string(),
       encoding: z.enum(["wkb", "geoarrow"]).optional(),
+      layerType: z.enum(["scatterplot", "polygon", "solidPolygon", "path"]).optional(),
     }),
     style: z
       .object({
