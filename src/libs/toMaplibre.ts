@@ -518,6 +518,12 @@ function layerToSource(
       return buildStandardRasterLayer(layer);
     }
 
+    // Skip parquet layers - they are handled by DeckGL overlay
+    if ('parquet' === layer.layer.type) {
+      console.debug(`Skipping parquet layer ${layer.id} - handled by DeckGL overlay`);
+      return null;
+    }
+
     // Log unsupported layer types for debugging
     console.warn(`Unsupported layer type for layer ${layer.id}:`, Object.keys(layer.layer));
     return null;

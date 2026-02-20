@@ -5,11 +5,12 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useCallback } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { PMTilesFields, RasterFields, TitilerFields } from '../../../../components/layer-fields';
+import { ParquetFields, PMTilesFields, RasterFields, TitilerFields } from '../../../../components/layer-fields';
 import { useAppActions, useLayer } from '../../../../hooks/app';
 import { MDXInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
 import {
   type LayerConfig,
+  type ParquetSource,
   type PMTileSource,
   type RasterSource,
   type TitilerSource,
@@ -76,6 +77,18 @@ function RouteComponent() {
         tileSize: 256,
         scheme: 'xyz',
       } as RasterSource);
+    } else if (newType === 'parquet') {
+      form.setValue('layer', {
+        type: 'parquet',
+        parquet: { url: '', encoding: 'wkb' },
+        style: {
+          fillColor: '#0080ff',
+          lineColor: '#004080',
+          opacity: 0.8,
+          lineWidth: 1,
+          pointRadius: 5,
+        },
+      } as ParquetSource);
     }
   };
 
@@ -114,12 +127,14 @@ function RouteComponent() {
               <option value="pmtiles">PMTiles</option>
               <option value="titiler">Titiler (COG)</option>
               <option value="raster">Raster</option>
+              <option value="parquet">Parquet (GeoParquet)</option>
             </select>
           </div>
 
           {layerType === 'pmtiles' && <PMTilesFields form={form} />}
           {layerType === 'titiler' && <TitilerFields form={form} />}
           {layerType === 'raster' && <RasterFields form={form} />}
+          {layerType === 'parquet' && <ParquetFields form={form} />}
 
           <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
             {t('save')}

@@ -9,7 +9,7 @@ import { z } from 'zod';
 import { TREE_ROOT_ID } from '../../../../config';
 import { useAppActions, useFolderNames } from '../../../../hooks/app';
 import { MDXInput, SelectInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
-import type { LayerConfig, PMTileSource, RasterSource, TitilerSource } from '../../../../schemas';
+import type { LayerConfig, ParquetSource, PMTileSource, RasterSource, TitilerSource } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/add')({
   component: RouteComponent,
@@ -21,7 +21,7 @@ const AddLayerFormSchema = z.object({
   description: z.string().optional(),
   parent: z.string(),
   download_url: z.string().optional(),
-  layerType: z.enum(['pmtiles', 'titiler', 'raster']),
+  layerType: z.enum(['pmtiles', 'titiler', 'raster', 'parquet']),
 });
 
 type AddLayerForm = z.infer<typeof AddLayerFormSchema>;
@@ -75,13 +75,28 @@ function RouteComponent() {
           max: '1',
         },
       } as TitilerSource;
-    } else {
+    } else if (typedData.layerType === 'raster') {
       layer = {
         type: 'raster',
         tiles: [''],
         tileSize: 256,
         scheme: 'xyz',
       } as RasterSource;
+    } else {
+      layer = {
+        type: 'parquet',
+        parquet: {
+          url: '',
+          encoding: 'wkb',
+        },
+        style: {
+          fillColor: '#0080ff',
+          lineColor: '#004080',
+          opacity: 0.8,
+          lineWidth: 1,
+          pointRadius: 5,
+        },
+      } as ParquetSource;
     }
 
     actions.addTreeItemLayer({
@@ -127,6 +142,7 @@ function RouteComponent() {
             <option value="pmtiles">PMTiles</option>
             <option value="titiler">TiTiler (COG)</option>
             <option value="raster">Raster</option>
+            <option value="parquet">Parquet (GeoParquet)</option>
           </SelectInput>
 
           <TextInput form={form} name="download_url" label={t('download-url')} />

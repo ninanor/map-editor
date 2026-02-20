@@ -659,6 +659,62 @@
                       },
                       {
                         "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "parquet"
+                          },
+                          "parquet": {
+                            "type": "object",
+                            "properties": {
+                              "url": {
+                                "type": "string"
+                              },
+                              "encoding": {
+                                "type": "string",
+                                "enum": [
+                                  "wkb",
+                                  "geoarrow"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "url"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "style": {
+                            "type": "object",
+                            "properties": {
+                              "fillColor": {
+                                "type": "string"
+                              },
+                              "lineColor": {
+                                "type": "string"
+                              },
+                              "opacity": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              },
+                              "lineWidth": {
+                                "type": "number"
+                              },
+                              "pointRadius": {
+                                "type": "number"
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "parquet"
+                        ],
+                        "additionalProperties": {}
+                      },
+                      {
+                        "type": "object",
                         "propertyNames": {
                           "type": "string"
                         },

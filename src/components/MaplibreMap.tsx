@@ -10,10 +10,11 @@ import {
   ScaleControl,
   Source,
 } from 'react-map-gl/maplibre';
-import { useBaseMap, useMaplibreMapConf } from '../hooks/app';
+import { useBaseMap, useLayers, useMaplibreMapConf } from '../hooks/app';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useCallback, useEffect, useState } from 'react';
 import MediaQuery from 'react-responsive';
+import DeckGLOverlay from './DeckGLOverlay';
 import GeocoderControl from './GeocoderControl';
 import { Popup, type PopupInfo } from './popup';
 import SidebarWidget from './SidebarWidget';
@@ -21,7 +22,10 @@ import SidebarWidget from './SidebarWidget';
 export default function Map() {
   const basemap = useBaseMap();
   const { initialViewState, sources, interactiveLayerIds } = useMaplibreMapConf();
+  const layers = useLayers();
   const [popup, setInfoPopup] = useState<PopupInfo | null>(null);
+
+  console.log(layers);
 
   useEffect(() => {
     const protocol = new Protocol();
@@ -64,6 +68,7 @@ export default function Map() {
           <Layer key={key as string} {...children} />
         </Source>
       ))}
+      <DeckGLOverlay layers={layers} />
       {popup && <Popup {...popup} />}
     </MaplibreMap>
   );
