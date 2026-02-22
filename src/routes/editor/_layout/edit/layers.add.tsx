@@ -6,10 +6,18 @@ import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
+import { th } from 'zod/v4/locales';
 import { MDXInput, SelectInput, SubmitButton, TextInput } from '@/components/form-items';
 import { TREE_ROOT_ID } from '../../../../config';
 import { useAppActions, useFolderNames } from '../../../../hooks/app';
-import type { LayerConfig, ParquetSource, PMTileSource, RasterSource, TitilerSource } from '../../../../schemas';
+import type {
+  LayerConfig,
+  ParquetSource,
+  PMTileSource,
+  RasterSource,
+  TitilerSource,
+  WMTSSource,
+} from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/add')({
   component: RouteComponent,
@@ -21,7 +29,7 @@ const AddLayerFormSchema = z.object({
   description: z.string().optional(),
   parent: z.string(),
   download_url: z.string().optional(),
-  layerType: z.enum(['pmtiles', 'titiler', 'raster', 'parquet']),
+  layerType: z.enum(['pmtiles', 'titiler', 'raster', 'parquet', 'wmts']),
 });
 
 type AddLayerForm = z.infer<typeof AddLayerFormSchema>;
@@ -82,7 +90,7 @@ function RouteComponent() {
         tileSize: 256,
         scheme: 'xyz',
       } as RasterSource;
-    } else {
+    } else if (typedData.layerType === 'parquet') {
       layer = {
         type: 'parquet',
         parquet: {
@@ -98,6 +106,14 @@ function RouteComponent() {
           pointRadius: 5,
         },
       } as ParquetSource;
+    } else if (typedData.layerType === 'wmts') {
+      layer = {
+        type: 'wmts',
+        url: '',
+        tileSize: 256,
+      } as WMTSSource;
+    } else {
+      throw new Error('Unsupported layer type');
     }
 
     actions.addTreeItemLayer({
@@ -142,8 +158,9 @@ function RouteComponent() {
           <SelectInput form={form} name="layerType" label={t('layer-type')} required>
             <option value="pmtiles">PMTiles</option>
             <option value="titiler">TiTiler (COG)</option>
+            <option value="wmts">OGC WMTS</option>
             <option value="raster">Raster</option>
-            <option value="parquet">Parquet (GeoParquet)</option>
+            <option value="parquet">Parquet (GeoParquet) - Experimental</option>
           </SelectInput>
 
           <TextInput form={form} name="download_url" label={t('download-url')} />

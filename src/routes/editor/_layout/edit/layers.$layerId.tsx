@@ -6,7 +6,13 @@ import { useCallback } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { MDXInput, SubmitButton, TextInput } from '@/components/form-items';
-import { ParquetFields, PMTilesFields, RasterFields, TitilerFields } from '../../../../components/layer-fields';
+import {
+  ParquetFields,
+  PMTilesFields,
+  RasterFields,
+  TitilerFields,
+  WMTSFields,
+} from '../../../../components/layer-fields';
 import { useAppActions, useLayer } from '../../../../hooks/app';
 import {
   type LayerConfig,
@@ -15,6 +21,7 @@ import {
   type RasterSource,
   type TitilerSource,
   UpdateLayerSchema,
+  type WMTSSource,
 } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/$layerId')({
@@ -77,6 +84,12 @@ function RouteComponent() {
         tileSize: 256,
         scheme: 'xyz',
       } as RasterSource);
+    } else if (newType === 'wmts') {
+      form.setValue('layer', {
+        type: 'wmts',
+        url: '',
+        tileSize: 256,
+      } as WMTSSource);
     } else if (newType === 'parquet') {
       form.setValue('layer', {
         type: 'parquet',
@@ -126,14 +139,16 @@ function RouteComponent() {
             >
               <option value="pmtiles">PMTiles</option>
               <option value="titiler">Titiler (COG)</option>
+              <option value="wmts">OGC WMTS</option>
               <option value="raster">Raster</option>
-              <option value="parquet">Parquet (GeoParquet)</option>
+              <option value="parquet">Parquet (GeoParquet) - Experimental</option>
             </select>
           </div>
 
           {layerType === 'pmtiles' && <PMTilesFields form={form} />}
           {layerType === 'titiler' && <TitilerFields form={form} />}
           {layerType === 'raster' && <RasterFields form={form} />}
+          {layerType === 'wmts' && <WMTSFields form={form} />}
           {layerType === 'parquet' && <ParquetFields form={form} />}
 
           <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">

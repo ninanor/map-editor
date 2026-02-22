@@ -11,6 +11,7 @@ import type {
   VectorFillValue,
   VectorLineLegend,
   VectorLineValue,
+  WMTSSource,
 } from '../types';
 
 /**
@@ -460,7 +461,6 @@ function buildStandardRasterLayer(layer: LayerWithId): SourceProps {
       ...(l.maxzoom !== undefined && { maxzoom: l.maxzoom }),
       ...(l.bounds && { bounds: l.bounds }),
       ...(l.attribution && { attribution: l.attribution }),
-      ...(l.scheme && { scheme: l.scheme }),
       children: {
         id: layer.id,
         type: LAYER_TYPES.RASTER,
@@ -470,6 +470,47 @@ function buildStandardRasterLayer(layer: LayerWithId): SourceProps {
     return result;
   } catch (error) {
     console.error(`Failed to build raster layer ${layer.id}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Builds a MapLibre raster layer configuration for WMTS (Web Map Tile Service) sources
+ * @param layer - Layer configuration with WMTS source
+ * @returns MapLibre raster source configuration
+ */
+function buildWMTSLayer(layer: LayerWithId): SourceProps {
+  try {
+    const l = layer.layer as WMTSSource;
+
+    // Validate required parameters
+    if (!l.url) {
+      throw new Error(`Missing required 'url' parameter for WMTS layer ${layer.id}`);
+    }
+
+    // Validate URL contains required placeholders
+    if (!/{z}.*{x}.*{y}|{x}.*{y}.*{z}|{y}.*{z}.*{x}/.test(l.url)) {
+      throw new Error(`WMTS URL must contain {z}, {x}, and {y} placeholders. Got: ${l.url}`);
+    }
+
+    const result = {
+      type: LAYER_TYPES.RASTER,
+      id: layer.id,
+      tiles: [l.url],
+      ...(l.tileSize && { tileSize: l.tileSize }),
+      ...(l.minzoom !== undefined && { minzoom: l.minzoom }),
+      ...(l.maxzoom !== undefined && { maxzoom: l.maxzoom }),
+      ...(l.bounds && { bounds: l.bounds }),
+      ...(l.attribution && { attribution: l.attribution }),
+      children: {
+        id: layer.id,
+        type: LAYER_TYPES.RASTER,
+      },
+    } as SourceProps;
+
+    return result;
+  } catch (error) {
+    console.error(`Failed to build WMTS layer ${layer.id}:`, error);
     throw error;
   }
 }
@@ -516,6 +557,11 @@ function layerToSource(
     // Handle standard raster sources
     if ('raster' === layer.layer.type) {
       return buildStandardRasterLayer(layer);
+    }
+
+    // Handle WMTS (Web Map Tile Service) sources
+    if ('wmts' === layer.layer.type) {
+      return buildWMTSLayer(layer);
     }
 
     // Skip parquet layers - they are handled by DeckGL overlay

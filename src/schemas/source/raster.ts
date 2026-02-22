@@ -14,7 +14,6 @@ export const RasterSourceSchema = z
     maxzoom: z.number().optional(),
     bounds: z.tuple([z.number(), z.number(), z.number(), z.number()]).optional(),
     attribution: z.string().optional(),
-    scheme: z.enum(['xyz', 'tms']).optional(),
     legend: RasterLegendSchema.optional(),
   })
   .catchall(z.unknown()); // Allow partial Source properties

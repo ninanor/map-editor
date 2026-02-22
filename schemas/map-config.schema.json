@@ -611,13 +611,6 @@
                           "attribution": {
                             "type": "string"
                           },
-                          "scheme": {
-                            "type": "string",
-                            "enum": [
-                              "xyz",
-                              "tms"
-                            ]
-                          },
                           "legend": {
                             "anyOf": [
                               {
@@ -716,6 +709,70 @@
                         "required": [
                           "type",
                           "tiles"
+                        ],
+                        "additionalProperties": {}
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "wmts"
+                          },
+                          "url": {
+                            "type": "string",
+                            "pattern": "{z}.*{x}.*{y}|{x}.*{y}.*{z}|{y}.*{z}.*{x}"
+                          },
+                          "tileSize": {
+                            "type": "number"
+                          },
+                          "minzoom": {
+                            "type": "number"
+                          },
+                          "maxzoom": {
+                            "type": "number"
+                          },
+                          "bounds": {
+                            "type": "array",
+                            "prefixItems": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "attribution": {
+                            "type": "string"
+                          },
+                          "legend": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string",
+                                "const": "image"
+                              },
+                              "url": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "url"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "url"
                         ],
                         "additionalProperties": {}
                       },
