@@ -2,8 +2,8 @@ import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { CheckboxInput, SelectInput, SubmitButton, TextInput } from '@/components/form-items';
 import { LANGUAGES, THEMES } from '../../config';
-import { CheckboxInput, SelectInput, SubmitButton, TextInput } from '../../hooks/rhf-form';
 import { type MapSettings, MapSettingsSchema } from '../../schemas';
 
 interface SettingsFormProps {

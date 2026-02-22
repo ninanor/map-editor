@@ -4,9 +4,9 @@ import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MDXInput, SelectInput, SubmitButton, TextInput } from '@/components/form-items';
 import { TREE_ROOT_ID } from '../../../../config';
 import { useAppActions, useFolderNames } from '../../../../hooks/app';
-import { MDXInput, SelectInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
 import { type CreateFolder, CreateFolderSchema } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/add')({

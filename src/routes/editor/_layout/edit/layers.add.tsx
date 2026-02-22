@@ -6,9 +6,9 @@ import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
+import { MDXInput, SelectInput, SubmitButton, TextInput } from '@/components/form-items';
 import { TREE_ROOT_ID } from '../../../../config';
 import { useAppActions, useFolderNames } from '../../../../hooks/app';
-import { MDXInput, SelectInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
 import type { LayerConfig, ParquetSource, PMTileSource, RasterSource, TitilerSource } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/layers/add')({

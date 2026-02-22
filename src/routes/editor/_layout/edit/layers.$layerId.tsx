@@ -5,9 +5,9 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useCallback } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MDXInput, SubmitButton, TextInput } from '@/components/form-items';
 import { ParquetFields, PMTilesFields, RasterFields, TitilerFields } from '../../../../components/layer-fields';
 import { useAppActions, useLayer } from '../../../../hooks/app';
-import { MDXInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
 import {
   type LayerConfig,
   type ParquetSource,
