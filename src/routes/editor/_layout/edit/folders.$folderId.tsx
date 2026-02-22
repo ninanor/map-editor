@@ -5,8 +5,8 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { MDXInput, SubmitButton, TextInput } from '@/components/form-items';
 import { useAppActions, useItem } from '../../../../hooks/app';
-import { MDXInput, SubmitButton, TextInput } from '../../../../hooks/rhf-form';
 import { type Folder, type UpdateFolder, UpdateFolderSchema } from '../../../../schemas';
 
 export const Route = createFileRoute('/editor/_layout/edit/folders/$folderId')({

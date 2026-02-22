@@ -55,7 +55,7 @@ export function validateMapSettings(data: unknown) {
 /**
  * Format Zod errors into a readable string
  */
-export function formatZodErrors(errors: z.ZodIssue[]): string {
+export function formatZodErrors(errors: z.core.$ZodIssue[]): string {
   return errors
     .map(err => {
       const path = err.path.join('.');
