@@ -11,12 +11,14 @@ export * from "./raster";
 export * from "./pmtiles";
 export * from "./parquet";
 export * from "./wmts";
+export * from "./wms";
 
 import { TitilerSourceSchema } from "./titiler";
 import { RasterSourceSchema } from "./raster";
 import { PMTileSourceSchema } from "./pmtiles";
 import { ParquetSourceSchema } from "./parquet";
 import { WMTSSourceSchema } from "./wmts";
+import { WMSSourceSchema } from "./wms";
 
 /**
  * Combined layer configuration schema
@@ -28,6 +30,7 @@ export const LayerConfigSchema = z.union([
   PMTileSourceSchema,
   RasterSourceSchema,
   WMTSSourceSchema,
+  WMSSourceSchema,
   ParquetSourceSchema,
   z.record(z.string(), z.unknown()), // For generic Partial<Source>
 ]);
