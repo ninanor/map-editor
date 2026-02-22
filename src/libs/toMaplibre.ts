@@ -11,6 +11,7 @@ import type {
   VectorFillValue,
   VectorLineLegend,
   VectorLineValue,
+  WMSSource,
   WMTSSource,
 } from '../types';
 
@@ -516,6 +517,74 @@ function buildWMTSLayer(layer: LayerWithId): SourceProps {
 }
 
 /**
+ * Builds a MapLibre raster layer configuration for WMS (Web Map Service) sources
+ * @param layer - Layer configuration with WMS source
+ * @returns MapLibre raster source configuration
+ */
+function buildWMSLayer(layer: LayerWithId): SourceProps {
+  try {
+    const l = layer.layer as WMSSource;
+
+    // Validate required parameters
+    if (!l.url) {
+      throw new Error(`Missing required 'url' parameter for WMS layer ${layer.id}`);
+    }
+
+    if (!l.wms.layers) {
+      throw new Error(`Missing required 'layers' parameter for WMS layer ${layer.id}`);
+    }
+
+    // Construct WMS tile URL with bbox parameter
+    // MapLibre will replace {bbox-epsg-3857} with the actual bounding box
+    const wmsUrl = new URL(l.url);
+    wmsUrl.searchParams.set('service', 'WMS');
+    wmsUrl.searchParams.set('request', 'GetMap');
+    wmsUrl.searchParams.set('version', l.wms.version);
+    wmsUrl.searchParams.set('layers', l.wms.layers);
+    wmsUrl.searchParams.set('styles', l.wms.styles ?? '');
+    wmsUrl.searchParams.set('format', 'image/png');
+    wmsUrl.searchParams.set('transparent', 'true');
+    wmsUrl.searchParams.set('width', String(256));
+    wmsUrl.searchParams.set('height', String(256));
+    wmsUrl.searchParams.set('info_format', 'text/html');
+    wmsUrl.searchParams.set('tiled', 'false');
+
+    if (l.wms.version === '1.3.0') {
+      wmsUrl.searchParams.set('crs', 'EPSG:3857');
+    } else {
+      wmsUrl.searchParams.set('srs', 'EPSG:3857');
+    }
+
+    // Add any additional WMS parameters
+    if (l.wms.additionalParams) {
+      Object.entries(l.wms.additionalParams).forEach(([key, value]) => {
+        wmsUrl.searchParams.set(key, value);
+      });
+    }
+
+    const result = {
+      type: LAYER_TYPES.RASTER,
+      id: layer.id,
+      tiles: [wmsUrl.toString() + '&bbox={bbox-epsg-3857}'],
+      tileSize: 256,
+      ...(l.minzoom !== undefined && { minzoom: l.minzoom }),
+      ...(l.maxzoom !== undefined && { maxzoom: l.maxzoom }),
+      ...(l.bounds && { bounds: l.bounds }),
+      ...(l.attribution && { attribution: l.attribution }),
+      children: {
+        id: layer.id,
+        type: LAYER_TYPES.RASTER,
+      },
+    } as SourceProps;
+
+    return result;
+  } catch (error) {
+    console.error(`Failed to build WMS layer ${layer.id}:`, error);
+    throw error;
+  }
+}
+
+/**
  * Converts a layer configuration to MapLibre source format
  * @param layer - The layer to convert
  * @param _index - Array index (unused)
@@ -562,6 +631,11 @@ function layerToSource(
     // Handle WMTS (Web Map Tile Service) sources
     if ('wmts' === layer.layer.type) {
       return buildWMTSLayer(layer);
+    }
+
+    // Handle WMS (Web Map Service) sources
+    if ('wms' === layer.layer.type) {
+      return buildWMSLayer(layer);
     }
 
     // Skip parquet layers - they are handled by DeckGL overlay

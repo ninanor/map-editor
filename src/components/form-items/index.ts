@@ -5,6 +5,7 @@
 
 export { CheckboxInput } from './CheckboxInput';
 export { FormError } from './FormError';
+export { KeyValueEditor } from './KeyValueEditor';
 export { MDXInput } from './MDXInput';
 export { SelectInput } from './SelectInput';
 export { SubmitButton } from './SubmitButton';

@@ -6,7 +6,6 @@ import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
-import { th } from 'zod/v4/locales';
 import { MDXInput, SelectInput, SubmitButton, TextInput } from '@/components/form-items';
 import { TREE_ROOT_ID } from '../../../../config';
 import { useAppActions, useFolderNames } from '../../../../hooks/app';
@@ -16,6 +15,7 @@ import type {
   PMTileSource,
   RasterSource,
   TitilerSource,
+  WMSSource,
   WMTSSource,
 } from '../../../../schemas';
 
@@ -29,7 +29,7 @@ const AddLayerFormSchema = z.object({
   description: z.string().optional(),
   parent: z.string(),
   download_url: z.string().optional(),
-  layerType: z.enum(['pmtiles', 'titiler', 'raster', 'parquet', 'wmts']),
+  layerType: z.enum(['pmtiles', 'titiler', 'raster', 'wmts', 'wms', 'parquet']),
 });
 
 type AddLayerForm = z.infer<typeof AddLayerFormSchema>;
@@ -112,6 +112,14 @@ function RouteComponent() {
         url: '',
         tileSize: 256,
       } as WMTSSource;
+    } else if (typedData.layerType === 'wms') {
+      layer = {
+        type: 'wms',
+        url: '',
+        wms: {
+          layers: '',
+        },
+      } as WMSSource;
     } else {
       throw new Error('Unsupported layer type');
     }
@@ -159,6 +167,7 @@ function RouteComponent() {
             <option value="pmtiles">PMTiles</option>
             <option value="titiler">TiTiler (COG)</option>
             <option value="wmts">OGC WMTS</option>
+            <option value="wms">OGC WMS</option>
             <option value="raster">Raster</option>
             <option value="parquet">Parquet (GeoParquet) - Experimental</option>
           </SelectInput>

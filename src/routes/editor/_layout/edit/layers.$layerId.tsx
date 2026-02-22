@@ -11,6 +11,7 @@ import {
   PMTilesFields,
   RasterFields,
   TitilerFields,
+  WMSFields,
   WMTSFields,
 } from '../../../../components/layer-fields';
 import { useAppActions, useLayer } from '../../../../hooks/app';
@@ -21,6 +22,7 @@ import {
   type RasterSource,
   type TitilerSource,
   UpdateLayerSchema,
+  type WMSSource,
   type WMTSSource,
 } from '../../../../schemas';
 
@@ -90,6 +92,14 @@ function RouteComponent() {
         url: '',
         tileSize: 256,
       } as WMTSSource);
+    } else if (newType === 'wms') {
+      form.setValue('layer', {
+        type: 'wms',
+        url: '',
+        wms: {
+          layers: '',
+        },
+      } as WMSSource);
     } else if (newType === 'parquet') {
       form.setValue('layer', {
         type: 'parquet',
@@ -140,6 +150,7 @@ function RouteComponent() {
               <option value="pmtiles">PMTiles</option>
               <option value="titiler">Titiler (COG)</option>
               <option value="wmts">OGC WMTS</option>
+              <option value="wms">OGC WMS</option>
               <option value="raster">Raster</option>
               <option value="parquet">Parquet (GeoParquet) - Experimental</option>
             </select>
@@ -149,6 +160,7 @@ function RouteComponent() {
           {layerType === 'titiler' && <TitilerFields form={form} />}
           {layerType === 'raster' && <RasterFields form={form} />}
           {layerType === 'wmts' && <WMTSFields form={form} />}
+          {layerType === 'wms' && <WMSFields form={form} />}
           {layerType === 'parquet' && <ParquetFields form={form} />}
 
           <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
