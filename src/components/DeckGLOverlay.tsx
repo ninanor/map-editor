@@ -16,5 +16,8 @@ function DeckGLOverlayImpl(props: MapboxOverlayProps & { interleaved?: boolean }
 
 export default function DeckGLOverlay({ layers }: DeckGLOverlayProps) {
   const deckLayers = useMemo(() => createDeckGLParquetLayers(layers), [layers]);
+  if (!deckLayers || deckLayers.length === 0) {
+    return null;
+  }
   return <DeckGLOverlayImpl layers={deckLayers} interleaved />;
 }
