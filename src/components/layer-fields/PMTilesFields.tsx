@@ -1,5 +1,6 @@
 import { useFieldArray } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { ColorPickerField } from '../form-items/ColorPickerField';
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 export function PMTilesFields({ form }: { form: any }) {
@@ -45,20 +46,6 @@ export function PMTilesFields({ form }: { form: any }) {
           </label>
           <input type="text" className="input input-bordered w-full" {...register('layer.children.source-layer')} />
         </div>
-
-        <div className="mt-3">
-          <label className="label">
-            <span className="label-text">{t('layer-id', 'Layer ID')}</span>
-          </label>
-          <input type="text" className="input input-bordered w-full" {...register('layer.children.id')} />
-        </div>
-
-        <div className="mt-3">
-          <label className="label">
-            <span className="label-text">{t('layer-key', 'Layer Key')}</span>
-          </label>
-          <input type="text" className="input input-bordered w-full" {...register('layer.children.key')} />
-        </div>
       </div>
 
       {/* Legend configuration based on children.type */}
@@ -90,11 +77,7 @@ export function PMTilesFields({ form }: { form: any }) {
             <label className="label">
               <span className="label-text">{t('color', 'Color')}</span>
             </label>
-            <input
-              type="color"
-              className="input input-bordered w-full h-10"
-              {...register('layer.children.legend.default.color')}
-            />
+            <ColorPickerField name="layer.children.legend.default.color" control={control} />
           </div>
           <div>
             <label className="label">
@@ -116,11 +99,7 @@ export function PMTilesFields({ form }: { form: any }) {
             <label className="label">
               <span className="label-text">{t('border-color', 'Border Color')}</span>
             </label>
-            <input
-              type="color"
-              className="input input-bordered w-full h-10"
-              {...register('layer.children.legend.default.borderColor')}
-            />
+            <ColorPickerField name="layer.children.legend.default.borderColor" control={control} />
           </div>
         )}
 
@@ -168,11 +147,7 @@ export function PMTilesFields({ form }: { form: any }) {
               <label className="label">
                 <span className="label-text">{t('stroke-color', 'Stroke Color')}</span>
               </label>
-              <input
-                type="color"
-                className="input input-bordered w-full h-10"
-                {...register('layer.children.legend.default.strokeColor')}
-              />
+              <ColorPickerField name="layer.children.legend.default.strokeColor" control={control} />
             </div>
           </>
         )}
@@ -227,11 +202,7 @@ export function PMTilesFields({ form }: { form: any }) {
                 <label className="label">
                   <span className="label-text">{t('color', 'Color')}</span>
                 </label>
-                <input
-                  type="color"
-                  className="input input-bordered w-full h-10"
-                  {...register(`layer.children.legend.values.${index}.color`)}
-                />
+                <ColorPickerField name={`layer.children.legend.values.${index}.color`} control={control} />
               </div>
               <div>
                 <label className="label">
@@ -253,11 +224,7 @@ export function PMTilesFields({ form }: { form: any }) {
                 <label className="label">
                   <span className="label-text">{t('border-color', 'Border Color')}</span>
                 </label>
-                <input
-                  type="color"
-                  className="input input-bordered w-full h-10"
-                  {...register(`layer.children.legend.values.${index}.borderColor`)}
-                />
+                <ColorPickerField name={`layer.children.legend.values.${index}.borderColor`} control={control} />
               </div>
             )}
 
@@ -305,11 +272,7 @@ export function PMTilesFields({ form }: { form: any }) {
                   <label className="label">
                     <span className="label-text">{t('stroke-color', 'Stroke Color')}</span>
                   </label>
-                  <input
-                    type="color"
-                    className="input input-bordered w-full h-10"
-                    {...register(`layer.children.legend.values.${index}.strokeColor`)}
-                  />
+                  <ColorPickerField name={`layer.children.legend.values.${index}.strokeColor`} control={control} />
                 </div>
               </>
             )}

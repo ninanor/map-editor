@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import { ColorPickerField } from '../form-items/ColorPickerField';
 
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment */
 export function ParquetFields({ form }: { form: any }) {
   const { t } = useTranslation();
-  const { register } = form;
+  const { register, control } = form;
 
   return (
     <div className="space-y-4">
@@ -62,14 +63,14 @@ export function ParquetFields({ form }: { form: any }) {
             <label className="label">
               <span className="label-text">{t('fill-color', 'Fill Color')}</span>
             </label>
-            <input type="color" className="input input-bordered w-full h-10" {...register('layer.style.fillColor')} />
+            <ColorPickerField name="layer.style.fillColor" control={control} />
           </div>
 
           <div>
             <label className="label">
               <span className="label-text">{t('line-color', 'Line Color')}</span>
             </label>
-            <input type="color" className="input input-bordered w-full h-10" {...register('layer.style.lineColor')} />
+            <ColorPickerField name="layer.style.lineColor" control={control} />
           </div>
         </div>
 
