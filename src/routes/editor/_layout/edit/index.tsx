@@ -42,6 +42,11 @@ function RouteComponent() {
             </Link>
           </li>
         )}
+        <li>
+          <Link to="layers/ogc" from={Route.fullPath} className="btn btn-sm btn-accent">
+            <FontAwesomeIcon icon={faPlusCircle} /> {t('search-ogc', 'OGC Records')}
+          </Link>
+        </li>
       </ul>
       {items && (
         <LayerTree

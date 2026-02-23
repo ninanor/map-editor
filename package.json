@@ -10,7 +10,11 @@
     "format": "biome format --write .",
     "preview": "vite preview",
     "generate-schema": "tsx scripts/generate-schema.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:editor": "VITE_HIDE_EDIT_BUTTON=false playwright test tests/e2e/ogc-records.spec.ts"
   },
   "dependencies": {
     "@custom-react-hooks/use-element-size": "^1.5.1",
@@ -76,6 +80,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.2",
+    "@playwright/test": "^1.58.2",
     "@tanstack/react-query-devtools": "^5.82.0",
     "@tanstack/router-plugin": "^1.125.6",
     "@types/node": "^25.3.0",
@@ -87,6 +92,7 @@
     "daisyui": "^5.0.46",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "playwright": "^1.58.2",
     "tsx": "^4.21.0",
     "typescript": "~5.7.3",
     "vite": "^7.1.11",

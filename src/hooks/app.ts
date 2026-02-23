@@ -18,6 +18,7 @@ import type {
   MapConfig,
   MapMeta,
   MapSettings,
+  OGCCatalog,
   Tree,
   UpdateFolder,
   UpdateLayer,
@@ -41,6 +42,8 @@ interface AppActions {
     setBaseMap: (baseMapId: string) => void;
     updateMeta: (meta: MapMeta) => void;
     setSettings: (conf: MapSettings) => void;
+    addOGCCatalog: (catalog: Omit<OGCCatalog, 'id'>) => void;
+    removeOGCCatalog: (id: string) => void;
   };
 }
 
@@ -187,6 +190,22 @@ export const useAppStore = create<AppState>()(
         setBaseMap: id =>
           set(state => {
             state.baseMap = id;
+          }),
+        addOGCCatalog: catalog =>
+          set(state => {
+            if (!state.ogcCatalogs) {
+              state.ogcCatalogs = [];
+            }
+            state.ogcCatalogs.push({
+              id: nanoid(),
+              ...catalog,
+            });
+          }),
+        removeOGCCatalog: id =>
+          set(state => {
+            if (state.ogcCatalogs) {
+              state.ogcCatalogs = state.ogcCatalogs.filter(c => c.id !== id);
+            }
           }),
       },
     })),

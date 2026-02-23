@@ -42,6 +42,12 @@ export const BaseMapStyleSchema = z.object({
   active: z.boolean(),
 });
 
+export const OGCCatalogSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  url: z.string(),
+});
+
 export const ViewStateSchema = z
   .object({
     longitude: z.number().optional(),
@@ -69,6 +75,7 @@ export const MapConfigSchema = MapMetaSchema.extend({
   items: TreeSchema.nullable(),
   expandedItems: z.array(z.string()),
   config: MapSettingsSchema,
+  ogcCatalogs: z.array(OGCCatalogSchema).optional(),
 });
 
 /**
@@ -79,4 +86,5 @@ export type Footer = z.infer<typeof FooterSchema>;
 export type MapSettings = z.infer<typeof MapSettingsSchema>;
 export type MapMeta = z.infer<typeof MapMetaSchema>;
 export type BaseMapStyle = z.infer<typeof BaseMapStyleSchema>;
+export type OGCCatalog = z.infer<typeof OGCCatalogSchema>;
 export type MapConfig = z.infer<typeof MapConfigSchema>;

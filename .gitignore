@@ -25,3 +25,8 @@ dist-ssr
 
 .tanstack
 /config.js
+
+playwright-report
+htmlReport
+.playwright
+test-results

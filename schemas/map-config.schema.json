@@ -1039,6 +1039,29 @@
         "language"
       ],
       "additionalProperties": false
+    },
+    "ogcCatalogs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "url"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [
