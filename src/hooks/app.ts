@@ -89,6 +89,7 @@ export const useAppStore = create<AppState>()(
             if (state.items) {
               state.items[id].name = item.name;
               state.items[id].description = item.description;
+              state.items[id].download_url = item.download_url;
             }
           }),
         removeTreeItemFolder: id =>
@@ -125,6 +126,7 @@ export const useAppStore = create<AppState>()(
               state.items[id].name = item.name;
               state.items[id].description = item.description;
               state.items[id].layer = item.layer;
+              state.items[id].download_url = item.download_url;
             }
           }),
         addTreeItemFolder: item =>
@@ -141,6 +143,7 @@ export const useAppStore = create<AppState>()(
                 name: item.name,
                 type: 'folder',
                 description: item.description,
+                download_url: item.download_url,
                 children: [],
               };
               parent.children.push(id);
@@ -164,6 +167,7 @@ export const useAppStore = create<AppState>()(
                 type: 'layer',
                 description: item.description,
                 layer: item.layer,
+                download_url: item.download_url,
               };
               parent.children.push(item.id);
               if (load) {
