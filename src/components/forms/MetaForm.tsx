@@ -1,7 +1,7 @@
 import { standardSchemaResolver } from '@hookform/resolvers/standard-schema';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { SubmitButton, TextareaInput, TextInput } from '@/components/form-items';
+import { MDXInput, SubmitButton, TextInput } from '@/components/form-items';
 import { type MapMeta, MapMetaSchema } from '../../schemas';
 
 interface MapMetadataFormProps {
@@ -46,7 +46,7 @@ export function MapMetadataForm({ defaultValues, onSubmit }: MapMetadataFormProp
             </>
           )}
         </div>
-        <TextareaInput form={form} name="description" label={t('description')} />
+        <MDXInput form={form} name="description" label={t('description')} />
 
         <SubmitButton isSubmitting={form.formState.isSubmitting} className="mt-4">
           {t('save')}
