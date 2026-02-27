@@ -812,6 +812,22 @@
                                 "additionalProperties": {
                                   "type": "string"
                                 }
+                              },
+                              "featureInfo": {
+                                "type": "object",
+                                "properties": {
+                                  "enabled": {
+                                    "default": false,
+                                    "type": "boolean"
+                                  },
+                                  "queryLayers": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "enabled"
+                                ],
+                                "additionalProperties": false
                               }
                             },
                             "required": [

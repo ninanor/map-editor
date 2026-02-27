@@ -38,6 +38,10 @@
   "value": "Value",
   "features-found": "Found {{count}} features",
   "select-feature": "Select the feature to display",
+  "no-properties": "No properties available",
+  "from-layers": "From {{count}} layers",
+  "vector-features": "Vector Features",
+  "wms-features": "WMS Features",
   "download-configuration": "Download configuration",
   "upload-configuration": "Upload configuration",
   "drag-drop-config": "Drag 'n' drop a configuration, or click to select one",
@@ -49,5 +53,11 @@
   "rescale-values": "Rescale values",
   "rescale-description": "Array of min,max values for each band (e.g., \"0,255\")",
   "exclusive-layers": "Exclusive Layers",
-  "from-DMS": "From DMS"
+  "from-DMS": "From DMS",
+  "feature-info": "Feature Info (GetFeatureInfo)",
+  "feature-info-help": "Enable clicking on the map to get information about features from this WMS layer",
+  "enable-feature-info": "Enable GetFeatureInfo",
+  "query-layers": "Query Layers (optional)",
+  "query-layers-help": "Comma-separated list of queryable layers. Defaults to the layer names above if not specified.",
+  "same-as-layers": "Same as Layer Names"
 }

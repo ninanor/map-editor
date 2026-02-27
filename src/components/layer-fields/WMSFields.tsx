@@ -6,6 +6,7 @@ export function WMSFields({ form }: { form: any }) {
   const { t } = useTranslation();
   const { register, watch } = form;
   const legendType = watch('layer.legend.type');
+  const featureInfoEnabled = watch('layer.wms.featureInfo.enabled');
 
   return (
     <div className="space-y-4">
@@ -105,6 +106,42 @@ export function WMSFields({ form }: { form: any }) {
           </label>
           <input type="text" className="input input-bordered w-full" {...register('layer.attribution')} />
         </div>
+      </div>
+
+      <div className="bg-base-300 p-4 rounded-lg">
+        <h3 className="font-semibold mb-3">{t('feature-info', 'Feature Info (GetFeatureInfo)')}</h3>
+        <p className="text-sm text-base-content/60 mb-3">
+          {t('feature-info-help', 'Enable clicking on the map to get information about features from this WMS layer')}
+        </p>
+
+        <div className="form-control">
+          <label className="label cursor-pointer justify-start gap-3">
+            <input type="checkbox" className="checkbox" {...register('layer.wms.featureInfo.enabled')} />
+            <span className="label-text">{t('enable-feature-info', 'Enable GetFeatureInfo')}</span>
+          </label>
+        </div>
+
+        {featureInfoEnabled && (
+          <>
+            <div className="mt-3">
+              <label className="label">
+                <span className="label-text">{t('query-layers', 'Query Layers (optional)')}</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered w-full"
+                placeholder={t('same-as-layers', 'Same as Layer Names')}
+                {...register('layer.wms.featureInfo.queryLayers')}
+              />
+              <p className="text-sm text-base-content/60 mt-1">
+                {t(
+                  'query-layers-help',
+                  'Comma-separated list of queryable layers. Defaults to the layer names above if not specified.',
+                )}
+              </p>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="bg-base-300 p-4 rounded-lg">
