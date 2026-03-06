@@ -11,6 +11,7 @@ export const PMTileFillChildSchema = z.object({
   type: z.literal('fill'),
   'source-layer': z.string(),
   legend: VectorFillLegendSchema.optional(),
+  excludeFields: z.array(z.string()).optional().describe('List of field names to exclude from the info popup'),
 });
 
 export const PMTileLineChildSchema = z.object({
@@ -19,6 +20,7 @@ export const PMTileLineChildSchema = z.object({
   type: z.literal('line'),
   'source-layer': z.string(),
   legend: VectorLineLegendSchema.optional(),
+  excludeFields: z.array(z.string()).optional().describe('List of field names to exclude from the info popup'),
 });
 
 export const PMTileCircleChildSchema = z.object({
@@ -27,6 +29,7 @@ export const PMTileCircleChildSchema = z.object({
   type: z.literal('circle'),
   'source-layer': z.string(),
   legend: VectorCircleLegendSchema.optional(),
+  excludeFields: z.array(z.string()).optional().describe('List of field names to exclude from the info popup'),
 });
 
 export const PMTileSourceSchema = z

@@ -13,6 +13,15 @@ export function PMTilesFields({ form }: { form: any }) {
     name: 'layer.children.legend.values',
   });
 
+  const {
+    fields: excludeFieldsArray,
+    append: appendExcludeField,
+    remove: removeExcludeField,
+  } = useFieldArray({
+    control,
+    name: 'layer.children.excludeFields',
+  });
+
   return (
     <div className="space-y-4">
       <div className="bg-base-300 p-4 rounded-lg">
@@ -46,6 +55,36 @@ export function PMTilesFields({ form }: { form: any }) {
           </label>
           <input type="text" className="input input-bordered w-full" {...register('layer.children.source-layer')} />
         </div>
+      </div>
+
+      {/* Exclude Fields configuration */}
+      <div className="bg-base-300 p-4 rounded-lg">
+        <h3 className="font-semibold mb-3">{t('popup-settings', 'Popup Settings')}</h3>
+        <p className="text-sm text-base-content/60 mb-3">
+          {t('exclude-fields-help', 'Specify field names to hide from the info popup when clicking features.')}
+        </p>
+
+        {excludeFieldsArray.map((field, index) => (
+          <div key={field.id} className="flex gap-2 mb-2">
+            <input
+              type="text"
+              className="input input-bordered flex-1"
+              placeholder={t('field-name-placeholder', 'Field name')}
+              {...register(`layer.children.excludeFields.${index}`)}
+            />
+            <button
+              type="button"
+              onClick={() => removeExcludeField(index)}
+              className="btn btn-sm btn-error btn-outline"
+            >
+              {t('remove', 'Remove')}
+            </button>
+          </div>
+        ))}
+
+        <button type="button" onClick={() => appendExcludeField('')} className="btn btn-outline btn-sm w-full">
+          + {t('add-exclude-field', 'Add Excluded Field')}
+        </button>
       </div>
 
       {/* Legend configuration based on children.type */}

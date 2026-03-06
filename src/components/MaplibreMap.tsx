@@ -10,7 +10,7 @@ import {
   ScaleControl,
   Source,
 } from 'react-map-gl/maplibre';
-import { useBaseMap, useLayers, useMaplibreMapConf } from '../hooks/app';
+import { useBaseMap, useLayerExcludeFields, useLayers, useMaplibreMapConf } from '../hooks/app';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useCallback, useEffect, useState } from 'react';
 import MediaQuery from 'react-responsive';
@@ -23,6 +23,7 @@ export default function Map() {
   const basemap = useBaseMap();
   const { initialViewState, sources, interactiveLayerIds } = useMaplibreMapConf();
   const layers = useLayers();
+  const excludeFields = useLayerExcludeFields();
   const [popup, setInfoPopup] = useState<PopupInfo | null>(null);
 
   console.log(layers);
@@ -69,7 +70,7 @@ export default function Map() {
         </Source>
       ))}
       <DeckGLOverlay layers={layers} />
-      {popup && <Popup {...popup} />}
+      {popup && <Popup {...popup} excludeFields={excludeFields} />}
     </MaplibreMap>
   );
 }

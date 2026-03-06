@@ -365,6 +365,13 @@
                                       }
                                     },
                                     "additionalProperties": false
+                                  },
+                                  "excludeFields": {
+                                    "description": "List of field names to exclude from the info popup",
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   }
                                 },
                                 "required": [
@@ -458,6 +465,13 @@
                                       }
                                     },
                                     "additionalProperties": false
+                                  },
+                                  "excludeFields": {
+                                    "description": "List of field names to exclude from the info popup",
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   }
                                 },
                                 "required": [
@@ -551,6 +565,13 @@
                                       }
                                     },
                                     "additionalProperties": false
+                                  },
+                                  "excludeFields": {
+                                    "description": "List of field names to exclude from the info popup",
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   }
                                 },
                                 "required": [

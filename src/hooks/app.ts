@@ -262,8 +262,35 @@ const maplibreMapSelector = createAppSelector(
   },
 );
 
+/**
+ * Selector for extracting excludeFields configuration from all layers
+ * Returns a map of layerId -> excludeFields array
+ */
+const layerExcludeFieldsSelector = createAppSelector(
+  layerSelector,
+  (layers: LayerWithId[]): Record<string, string[]> => {
+    const result: Record<string, string[]> = {};
+    for (const layer of layers) {
+      const layerConfig = layer.layer;
+      if (
+        layerConfig &&
+        'pmtiles' in layerConfig &&
+        'children' in layerConfig &&
+        layerConfig.children &&
+        typeof layerConfig.children === 'object' &&
+        'excludeFields' in layerConfig.children &&
+        Array.isArray(layerConfig.children.excludeFields)
+      ) {
+        result[layer.id] = layerConfig.children.excludeFields as string[];
+      }
+    }
+    return result;
+  },
+);
+
 export const useLayers = () => useAppStore(layerSelector);
 export const useMaplibreMapConf = () => useAppStore(maplibreMapSelector);
+export const useLayerExcludeFields = () => useAppStore(layerExcludeFieldsSelector);
 export const useFolderNames = () => useAppStore(folderNameSelector);
 export const useItem = (id: string) => {
   return useAppStore(state => (state.items ? state.items[id] : null));
