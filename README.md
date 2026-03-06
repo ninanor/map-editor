@@ -233,10 +233,10 @@ The application includes Docker support for easy deployment:
 
 ```bash
 # Build the Docker image
-docker build -t map-editor .
+docker compose build
 
 # Run with Docker Compose
-docker-compose up -d
+docker compose up -d
 ```
 
 The Docker setup includes nginx configuration for production deployment.
