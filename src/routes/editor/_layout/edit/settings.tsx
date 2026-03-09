@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { SettingsForm } from '../../../../components/forms/SettingsForm';
 import { useAppActions, useAppStore } from '../../../../hooks/app';
 import type { MapConfig } from '../../../../types';
@@ -46,31 +47,36 @@ function RouteComponent() {
       // TODO: set configurations in a safer way!
       useAppStore.setState(() => config);
       setConfigUrl('');
+      toast.success(t('config-loaded-success'));
     } catch (error) {
       console.error('Failed to load config from URL:', error);
-      alert('Failed to load configuration from URL. Please check the URL and try again.');
+      toast.error(t('config-load-error'));
     } finally {
       setIsLoading(false);
     }
-  }, [configUrl]);
+  }, [configUrl, t]);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    acceptedFiles.forEach(file => {
-      const reader = new FileReader();
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      acceptedFiles.forEach(file => {
+        const reader = new FileReader();
 
-      // TODO: improve logging and error management
-      reader.onabort = () => console.warn('file reading was aborted');
-      reader.onerror = () => console.error('file reading has failed');
-      reader.onload = () => {
-        const config = JSON.parse(reader.result as string) as MapConfig;
-        console.debug(config);
+        // TODO: improve logging and error management
+        reader.onabort = () => console.warn('file reading was aborted');
+        reader.onerror = () => console.error('file reading has failed');
+        reader.onload = () => {
+          const config = JSON.parse(reader.result as string) as MapConfig;
+          console.debug(config);
 
-        // TODO: set configurations in a safer way!
-        useAppStore.setState(() => config);
-      };
-      reader.readAsText(file);
-    });
-  }, []);
+          // TODO: set configurations in a safer way!
+          useAppStore.setState(() => config);
+          toast.success(t('config-loaded-success'));
+        };
+        reader.readAsText(file);
+      });
+    },
+    [t],
+  );
 
   const settings = useAppStore(store => store.config);
 

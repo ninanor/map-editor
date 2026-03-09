@@ -41,6 +41,8 @@
   "download-configuration": "Download configuration",
   "upload-configuration": "Upload configuration",
   "drag-drop-config": "Drag 'n' drop a configuration, or click to select one",
+  "config-loaded-success": "Configuration loaded successfully",
+  "config-load-error": "Failed to load configuration. Please check the URL and try again.",
   "raster-cogtiff": "Raster (COGTiff)",
   "vector-pmtiles": "Vector (PMTiles)",
   "bands": "Bands",

@@ -41,6 +41,8 @@
   "download-configuration": "Last ned konfigurasjon",
   "upload-configuration": "Last opp konfigurasjon",
   "drag-drop-config": "Dra og slipp en konfigurasjon, eller klikk for å velge en",
+  "config-loaded-success": "Konfigurasjon lastet inn",
+  "config-load-error": "Kunne ikke laste konfigurasjon. Vennligst sjekk URL-en og prøv igjen.",
   "raster-cogtiff": "Raster (COGTiff)",
   "vector-pmtiles": "Vektor (PMTiles)",
   "bands": "Bånd",
