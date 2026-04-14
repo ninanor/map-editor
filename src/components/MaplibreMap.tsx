@@ -10,9 +10,9 @@ import {
   ScaleControl,
   Source,
 } from 'react-map-gl/maplibre';
-import { useBaseMap, useLayerExcludeFields, useLayers, useMaplibreMapConf } from '../hooks/app';
+import { useAppStore, useBaseMap, useLayerExcludeFields, useLayers, useMaplibreMapConf } from '../hooks/app';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import MediaQuery from 'react-responsive';
 import DeckGLOverlay from './DeckGLOverlay';
 import GeocoderControl from './GeocoderControl';
@@ -25,8 +25,22 @@ export default function Map() {
   const layers = useLayers();
   const excludeFields = useLayerExcludeFields();
   const [popup, setInfoPopup] = useState<PopupInfo | null>(null);
+  const popupRef = useRef(popup);
+  popupRef.current = popup;
 
-  console.log(layers);
+  const layerOrder = useAppStore(state => state.layerOrder);
+
+  // Remove features from hidden layers; close popup if none remain
+  useEffect(() => {
+    if (!popupRef.current) return;
+    const visibleSet = new Set(layerOrder);
+    const visibleFeatures = popupRef.current.features.filter(f => f.layer?.id && visibleSet.has(f.layer.id));
+    if (visibleFeatures.length === 0) {
+      setInfoPopup(null);
+    } else if (visibleFeatures.length !== popupRef.current.features.length) {
+      setInfoPopup({ ...popupRef.current, features: visibleFeatures });
+    }
+  }, [layerOrder]);
 
   useEffect(() => {
     const protocol = new Protocol();
