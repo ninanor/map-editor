@@ -565,7 +565,7 @@ function buildWMSLayer(layer: LayerWithId): SourceProps {
     const result = {
       type: LAYER_TYPES.RASTER,
       id: layer.id,
-      tiles: [wmsUrl.toString() + '&bbox={bbox-epsg-3857}'],
+      tiles: [`${wmsUrl.toString()}&bbox={bbox-epsg-3857}`],
       tileSize: 256,
       ...(l.minzoom !== undefined && { minzoom: l.minzoom }),
       ...(l.maxzoom !== undefined && { maxzoom: l.maxzoom }),
