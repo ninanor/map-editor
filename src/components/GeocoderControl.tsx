@@ -32,9 +32,8 @@ const geocoderApi: MaplibreGeocoderApi = {
         type: string;
       };
       for (const feature of geojson.features) {
-        let center = [];
         if (feature.bbox) {
-          center = [
+          const center: [number, number] = [
             feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
             feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2,
           ];
@@ -75,7 +74,7 @@ export default function GeocoderControl(props: GeocoderControlProps) {
         ...props,
         marker: false,
       });
-      ctrl.on('result', (evt: { result: CarmenGeojsonFeature & { center: number[] } }) => {
+      ctrl.on('result', (evt: { result: CarmenGeojsonFeature }) => {
         const result = evt.result;
         const location =
           result && (result.center ?? (result.geometry?.type === 'Point' && result.geometry.coordinates));
