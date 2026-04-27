@@ -8,10 +8,10 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://ninanor.github.io',
-  baseUrl: '/nina-maps/',
+  baseUrl: '/map-editor/',
 
   organizationName: 'ninanor',
-  projectName: 'nina-maps',
+  projectName: 'map-editor',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
