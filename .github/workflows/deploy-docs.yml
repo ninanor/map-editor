@@ -42,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: website
-        run: pnpm install --frozen-lockfile --ignore-workspace
+        run: pnpm install --no-frozen-lockfile --ignore-workspace
 
       - name: Build Docusaurus site
         working-directory: website
