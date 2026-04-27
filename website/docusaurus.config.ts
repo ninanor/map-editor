@@ -7,11 +7,13 @@ const config: Config = {
   tagline: 'A React-based interactive map viewer and editor for geospatial data',
   favicon: 'img/favicon.ico',
 
-  url: 'https://maps.nina.no',
-  baseUrl: '/docs/',
+  url: 'https://ninanor.github.io',
+  baseUrl: '/nina-maps/',
 
   organizationName: 'ninanor',
-  projectName: 'NINA Maps',
+  projectName: 'nina-maps',
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
 

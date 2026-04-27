@@ -11,7 +11,7 @@ The editor is a browser-based configuration interface that lets you build and mo
 
 From any map view, click the **Edit** button in the top-right header. This opens the editor pre-loaded with the current map's configuration.
 
-The editor uses the same map configuration format described in the [Configuration Reference](../configuration). Every change you make in the editor is stored in the [Zustand](https://zustand-demo.pmnd.rs/) in-memory store and reflected on the preview map immediately.
+The editor uses the same map configuration format described in the [Configuration Reference](/configuration). Every change you make in the editor is stored in the [Zustand](https://zustand-demo.pmnd.rs/) in-memory store and reflected on the preview map immediately.
 
 ## Editor layout
 
