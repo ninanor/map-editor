@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env pnpx vite-node
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { MapConfigSchema } from '../src/schemas/map';

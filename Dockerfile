@@ -7,7 +7,7 @@ ARG VITE_HIDE_EDIT_BUTTON="false"
 RUN corepack enable
 
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 
 FROM base AS prod-deps
@@ -21,7 +21,7 @@ COPY vite.config.ts index.html tsconfig.app.json tsconfig.json tsconfig.node.jso
 RUN pnpm run build
 
 FROM base AS frontend
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm add --allow-build=esbuild esbuild && pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
 COPY src src/
 COPY public public/
 COPY vite.config.ts index.html tsconfig.app.json tsconfig.json tsconfig.node.json ./
