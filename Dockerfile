@@ -21,7 +21,7 @@ COPY vite.config.ts index.html tsconfig.app.json tsconfig.json tsconfig.node.jso
 RUN pnpm run build
 
 FROM base AS frontend
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm add --allow-build=esbuild esbuild && pnpm install --frozen-lockfile
 COPY src src/
 COPY public public/
 COPY vite.config.ts index.html tsconfig.app.json tsconfig.json tsconfig.node.json ./
