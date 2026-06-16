@@ -102,7 +102,7 @@ importers:
         version: 3.3.1(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.6)
       '@geoarrow/deck.gl-layers':
         specifier: ^0.3.2
-        version: 0.3.2(6af0d311225f69f8a2f1ce9062c70aed)
+        version: 0.3.2(5e1308b4c5e1a79a8a15ede73de1294b)
       '@geoarrow/geoparquet-wasm':
         specifier: 0.2.0-beta.5
         version: 0.2.0-beta.5
@@ -138,7 +138,7 @@ importers:
         version: 0.5.19(tailwindcss@4.3.0)
       '@tailwindcss/vite':
         specifier: ^4.3.0
-        version: 4.3.0(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
+        version: 4.3.0(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
       '@tanstack/react-form':
         specifier: ^1.31.0
         version: 1.31.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -238,7 +238,7 @@ importers:
         version: 5.100.9(@tanstack/react-query@5.100.9(react@19.2.6))(react@19.2.6)
       '@tanstack/router-plugin':
         specifier: ^1.167.35
-        version: 1.167.35(@tanstack/react-router@1.169.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
+        version: 1.167.35(@tanstack/react-router@1.169.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
       '@types/node':
         specifier: ^25.6.2
         version: 25.6.2
@@ -256,7 +256,7 @@ importers:
         version: 6.1.8
       '@vitejs/plugin-react':
         specifier: ^6.0.1
-        version: 6.0.1(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
+        version: 6.0.1(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
       daisyui:
         specifier: ^5.5.19
         version: 5.5.19
@@ -270,17 +270,17 @@ importers:
         specifier: ~5.7.3
         version: 5.7.3
       vite:
-        specifier: ^8.0.11
-        version: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+        specifier: ^8.0.16
+        version: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
       vite-plugin-dts:
         specifier: ^4.5.4
-        version: 4.5.4(@types/node@25.6.2)(typescript@5.7.3)(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
+        version: 4.5.4(@types/node@25.6.2)(typescript@5.7.3)(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
       vite-plugin-lib-inject-css:
         specifier: ^2.2.2
-        version: 2.2.2(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
+        version: 2.2.2(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
       vite-plugin-wasm:
         specifier: ^3.6.0
-        version: 3.6.0(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
+        version: 3.6.0(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))
 
 packages:
 
@@ -915,41 +915,41 @@ packages:
   '@lezer/yaml@1.0.4':
     resolution: {integrity: sha512-2lrrHqxalACEbxIbsjhqGpSW8kWpUKuY6RHgnSAFZa6qK62wvnPxA8hGOwOoDbwHcOFs5M4o27mjGu+P7TvBmw==}
 
-  '@loaders.gl/3d-tiles@4.4.2':
-    resolution: {integrity: sha512-rf2R7x/+t41hQpaQ3iKofooE6unZ0+sGlYUXBo7lYFEnoMmalzrOI6jCs+CV96TALMPQcpfPa566XWF74XkaBQ==}
+  '@loaders.gl/3d-tiles@4.4.3':
+    resolution: {integrity: sha512-trKDXRYE7xIyH0g2tvDG0SHo/J5sCUhOec70Ne1a5t64/yY+yifQ4B67n4AnSOnZ+l4sxjUypjxhHUqoAeWieQ==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/compression@4.4.2':
-    resolution: {integrity: sha512-/LzblCXn6wOg7ca2zkUOTO0zhjjaPAOqlLp4/kwd57v7KZU8M8aKUNlU1DAuWKW9p/+TpGsLKwDqOCO+hjrOnQ==}
+  '@loaders.gl/compression@4.4.3':
+    resolution: {integrity: sha512-v3feEE48FblxBPaILwejV48plcLmjvOh2yBQrgvKvLCaQdQ9bVz7PzhrUdLW0VDVlGnoR1NUJtI833627U8Heg==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
   '@loaders.gl/core@4.4.1':
     resolution: {integrity: sha512-/s4IuvCCQUepvhjLnmePwQppGko2d1pxRS+sp7lyExU0uiqo5dVsAKaCZ2VnddBkFWgDVb/wvcZUBmv/dWcj0Q==}
 
-  '@loaders.gl/crypto@4.4.2':
-    resolution: {integrity: sha512-3QQxNFmCeznMIsY/ZD4pYO4SvS4i3nq5aJJ993DEIZVB1i0z19OmyJu4TSovvirXXrNWPQRJFPUUwdPxol9wLA==}
+  '@loaders.gl/crypto@4.4.3':
+    resolution: {integrity: sha512-zratEvtj/Mdbu0NwwwzdbP1oyY4FNxLcOY2JRcYqe3wzw+0kyeK7THdaVPcduZAnQ06HtpwHls61ONZunjMtXA==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/draco@4.4.2':
-    resolution: {integrity: sha512-UByWIt/yhxMFBIlyoqJYaj0rnTz/wwDWbI4CVQc/MzbLZW7NtUkDyYDcjbjE2SBWpu6Ef4ryojGd/NWIA3Yknw==}
+  '@loaders.gl/draco@4.4.3':
+    resolution: {integrity: sha512-YNI1MUDDIbrJBamgU1emLBC2kQUbESNIOZv9bcS8xwxr9SNMfnAMZWgdUJkYcC5xzV2q6ty2I/b2eGhXQkd9EQ==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/geoarrow@4.4.2':
-    resolution: {integrity: sha512-FGCtUsvTwdxiNqS8cEtys1FdM/m6pwMzvNEa32sHfrI4Si465Oa2iJkyu2q/XMgL/vhfE/G3EezpVKZARbCzkw==}
+  '@loaders.gl/geoarrow@4.4.3':
+    resolution: {integrity: sha512-P0TSbtsw1UI1rZnp1tGHuqPVHcH7Yc14q9jZLIcrjhQOzol55YDI0/hYSXpA73794nR6o8ALxNwiy7/4HlBlcA==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/gis@4.4.2':
-    resolution: {integrity: sha512-VMs1XcqUCqLczfySsI9VA/L3WDuuNRPqVoHcXU3FZuSe49x++gtwmxF1TEhJCaQINk0CkCOnxBbKOz3I9M1e3w==}
+  '@loaders.gl/gis@4.4.3':
+    resolution: {integrity: sha512-2dhhzfCT1cXQQLZ1lMtb2Y+pX414qaeLL8Wpx7FJu/ar1HJfKL6Fb3juTR+2WzMybkAOX5zLxYh6+y7LqiPjgA==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/gltf@4.4.2':
-    resolution: {integrity: sha512-aBvI7P/1GxePdHIvuyTM4A8yt3F5ph4dq0mkyJHmEjBl1Cwh3mDZJI1JSlZAFVilTZ6NxJZOiHUYWe1pBloVvw==}
+  '@loaders.gl/gltf@4.4.3':
+    resolution: {integrity: sha512-OYE/0nGLYm3weiCb78+ROwdNVyuLS8IZwN8NvGqctqt0HS4ZD40biu7b9L8xkFbVTZQkQZXDpyZ61n5PSQeU1A==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
@@ -958,24 +958,24 @@ packages:
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/images@4.4.2':
-    resolution: {integrity: sha512-b+1keNvPlyLniWtX4ZaThz2dF2aohi8Q+OEsDF2hJNZYyZJOqP9b/72UhlVk+inxTJfTLRBNARs2TJ2ssBlelg==}
+  '@loaders.gl/images@4.4.3':
+    resolution: {integrity: sha512-a4C6x+4GZUchf+IwpdBOvyGeLGSbGOVob+WSWfGUezEQ4gqu1zS1pn3lCX3ZTL5P+Ch3v6KKwPGdO5YdTd52Ew==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
   '@loaders.gl/loader-utils@4.4.1':
     resolution: {integrity: sha512-waosL7VtVRfXsNOXtAM3rOjZyNQD0lQBlhuB5/oY+E+lNzYNFlzgiGXiDOwBpcs7dK7kW2Vv8+KcxyIGIyXOtg==}
 
-  '@loaders.gl/loader-utils@4.4.2':
-    resolution: {integrity: sha512-kqwBbyRC7rrQVsnJyKeoaig9hxaa5oj91OKqWm27HPuVn4q2dD67SEhiG0ND62eRp0tLY6jTqEcI5kDzHBZ6MA==}
+  '@loaders.gl/loader-utils@4.4.3':
+    resolution: {integrity: sha512-5yt1OqZPYR3d+xFAqtzSKO24Hd7019KqN+iOWp7XBKPQBS+sAEhAnmSTnO1axo45IEi14J3FhMDk+ndqBoSKEQ==}
 
-  '@loaders.gl/math@4.4.2':
-    resolution: {integrity: sha512-Pcm1DKrzH3EqC5PkBxQX0oVjmXM3RIm2Gfj0cXQoqly+8c/NBtQrcBA9tl12h2ozZe8Ednue/kockbGsyKAx5A==}
+  '@loaders.gl/math@4.4.3':
+    resolution: {integrity: sha512-EdEsZGqo1AX3sqgXt8bSBmdo+8ncURXjWucyQ8eeIJ2h0VIqM3bLkOGKk/D1ngeqK4hJXcjiturYHBW1B286lw==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/mvt@4.4.2':
-    resolution: {integrity: sha512-yji3TAUofTA3GXvvyemwfrRwbd1ILpv2qe4mRduHdzjJdy2httH1cCKkesavFuLeRQqEuVyhhxYK+aSAbdt9Kg==}
+  '@loaders.gl/mvt@4.4.3':
+    resolution: {integrity: sha512-s2R8GRlaWDfZ7oKDFiY0c5EJ8elkf2VbPvdC0eoh69DN71y+AKngDSB+7h4veH/oueLEjmV7tNlF0+Snv58CPw==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
@@ -984,34 +984,34 @@ packages:
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/schema-utils@4.4.2':
-    resolution: {integrity: sha512-yYYRD/POBEO72rhIyLASrqKUUhfIOQuFk/fgInN6Td2qvFgsHbo5UaCM4sTqVUWwNxNvXDQi8ezpbnCa/yi+OQ==}
+  '@loaders.gl/schema-utils@4.4.3':
+    resolution: {integrity: sha512-TggzQWkzf9pIYbj8I9RlTk33kwXslvDkY1nnw/OL/hika6qTls1G127qK5m9skiAjElk5ZkvQLQcwhOboZXZeA==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
   '@loaders.gl/schema@4.4.1':
     resolution: {integrity: sha512-s7NjEnyK6jZvJJSWj/mHq+S9mHRHVzIYtFP+C7sMf1gVCQbdkt6OSAMUWRzwPr9+whQNVWjZ9pbLsI/IPW3zvw==}
 
-  '@loaders.gl/schema@4.4.2':
-    resolution: {integrity: sha512-mJTZehTHIFl8ed+03nebuPAMnLP8Yp00DKTzCnKT2HNy/uV4+Sw+GrGIuhPHGU8tdQmtBXRURGM2ZxUAxMfGKg==}
+  '@loaders.gl/schema@4.4.3':
+    resolution: {integrity: sha512-tDb/rOn44nHWvMFSOaAk1/pQcQcusxirGCM1O5BMJR0PQ71UrCHey56rsbcf7/wGhvyRwPtX+oiMzlJ9TmN8vQ==}
 
-  '@loaders.gl/terrain@4.4.2':
-    resolution: {integrity: sha512-ScE90mhUrIOOf+248+G8bxgg5xfLptE94gVxtYsLysyG8b4Ne2WEb6J2gpvQqmaLz3k9OqgPR7M8F1zI5BVO0w==}
+  '@loaders.gl/terrain@4.4.3':
+    resolution: {integrity: sha512-wu7O3FVXE6D1kSm5inRu8M8V1Vv5AYlnlNB0EJIOSSXBLhfNbPL5oHjlD2wIlag0gSxOVlhWjCUcWS3/Nb0P8Q==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/textures@4.4.2':
-    resolution: {integrity: sha512-+GKcHEE0GjpuSJ6qbuRsB0CaOSUhJ1epUvhMP5GVK7I6+bwSvG8nqmRRGXFQNmYsbFANwG+wjwKf16wqJwP6vg==}
+  '@loaders.gl/textures@4.4.3':
+    resolution: {integrity: sha512-QNC+anwJJcHsLsaAzXozJ+IUNxBnqWsZLUMkUZIorVey+XQcp2hcYng5iOmUQnCZdIR9gYe53VJa0j1C0JXRSg==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/tiles@4.4.2':
-    resolution: {integrity: sha512-DHqMC38e6IEzWEDc15GfIKsZT82VZH7ocF79xLRScey0eZfCb3qI5nDLeg5adSBBsHkG3Li0S0PEnwxQmKT3qw==}
+  '@loaders.gl/tiles@4.4.3':
+    resolution: {integrity: sha512-8ZkPMe+daMV5mHKTEU591mJSp6pswdWliI+PcNhSOkpeuvyjecaYKSzuzMFMmaywfgOLpYl+lpfzKUEmCcE5vQ==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/wms@4.4.2':
-    resolution: {integrity: sha512-7uhis6fOTHeqRLIU1EPoC1oqeXVk5p1pM136fSqMw0CbVSNj87b0FFMwlJwzwTfL8Vte8GyKrNcDa47PjaT19Q==}
+  '@loaders.gl/wms@4.4.3':
+    resolution: {integrity: sha512-fKYCdIp6xQcucbm42bztprlfMJ5SZKx5f2ZwWLcj+kwv53U7hjcbIl04uMAk/i/7Xw/I4QEyA/XnPnxquuIFHQ==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
@@ -1020,23 +1020,23 @@ packages:
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/worker-utils@4.4.2':
-    resolution: {integrity: sha512-oiZ0SoC1QKrOkhYPlVZ6Q06CtmuFRyZw2rwzmT08ZyaGtOArIJHDjlhxzwWiv+6fdws47Ub5uIGsdI1Ab1xYsA==}
+  '@loaders.gl/worker-utils@4.4.3':
+    resolution: {integrity: sha512-RZt/NwFXm6Kx3Fn/rqiW3Alse9Z0XtBktH/EFAp8W6LvsKuxpRMjULqGfybTu2waRXRYUNYZ6zGs9aOWbtDRLw==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/xml@4.4.2':
-    resolution: {integrity: sha512-OOPqpYH1PK9szuzXh3Oy7aErMXTXB+aiKi79LPCI93Wsb8pdbQiDiRRW8X/op9qABhxpCAMXF5N89eDJv3XdtQ==}
+  '@loaders.gl/xml@4.4.3':
+    resolution: {integrity: sha512-/CtpIWaPKBs/AaX7MqUGSSE1OAhq78nDrJ5xPExYdIQAw5gl5OSmLZobUSSxV5FGaqkJRVbtC/sj5sUpci7doA==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@loaders.gl/zip@4.4.2':
-    resolution: {integrity: sha512-KdgmJRNra9+9jt2zzHUvFXnBqwzeN7dW4MEgTmH/NtraGy8bz5Tk5NrIUj8JXPxhx+vP2vxUWbeCEUoLGO/m9A==}
+  '@loaders.gl/zip@4.4.3':
+    resolution: {integrity: sha512-HH/JLulJJVyqmbQYp4e/9MPjaTnUFnWfhgza8sMGIBYZ/YuZXOc6Ad2vvmyFQHvNbVr+NLrRZODASEjNZQ5rfQ==}
     peerDependencies:
       '@loaders.gl/core': ~4.4.0
 
-  '@luma.gl/constants@9.3.3':
-    resolution: {integrity: sha512-lzK4YUgppsbCibTxEpvzl3K6QGWNaWWxQ1sXcepl5J8aBzsKEdWT/5mt8cBefhwgMY1aLd8p9ydV1k+GI+K9Rw==}
+  '@luma.gl/constants@9.3.4':
+    resolution: {integrity: sha512-1H3TX4uBrotndfiZcgUImxxT4xGK6p2kyoaAay4brPdaMt6LHNUjoEJ7NwRPIWya3pJCygfkN1j6IDaSBWkLeQ==}
 
   '@luma.gl/core@9.3.3':
     resolution: {integrity: sha512-jCFm2htvrVpcXIy85TBTF1ROgMfknKnfw2OH+Vydr41hiCFd6nqr79gM3f2uhaNkal0BghFNqF3qDioKiUWtew==}
@@ -1047,8 +1047,8 @@ packages:
       '@luma.gl/core': ~9.3.0
       '@luma.gl/shadertools': ~9.3.0
 
-  '@luma.gl/gltf@9.3.3':
-    resolution: {integrity: sha512-/wty4PHYeQelXvDJesyuMdqtAfpL1XcyEQffcEAwKwu9w7JdkygSShdUwTT1iF7no0uGKuWgq824dVC9WBBQcw==}
+  '@luma.gl/gltf@9.3.4':
+    resolution: {integrity: sha512-Z4f5h1VWyPsF4p7Op1DUixK7WGF+/oTJ2W4RFvYGbv9hjhV66r9y61Lm84Qda4yQMC2jQw/GM+u2c3fF4nfjXQ==}
     peerDependencies:
       '@luma.gl/core': ~9.3.0
       '@luma.gl/engine': ~9.3.0
@@ -1056,6 +1056,11 @@ packages:
 
   '@luma.gl/shadertools@9.3.3':
     resolution: {integrity: sha512-4ZfG4/Utix951vqyiG/JIx+Eg+GMNwOxgr/07/i0gf7bK1gJZIEQ5BxVcDw4MCQfdoVlGPGzl0cQKbdqBvaCAQ==}
+    peerDependencies:
+      '@luma.gl/core': ~9.3.0
+
+  '@luma.gl/shadertools@9.3.4':
+    resolution: {integrity: sha512-6JszXZ1uBpwkfvgqe9l64fuxjduJSNndzDb9IitqTNLapF5ioM3ISDpWF4qRluCaLd9lvNgGPgpc48xrO27KZw==}
     peerDependencies:
       '@luma.gl/core': ~9.3.0
 
@@ -1170,17 +1175,17 @@ packages:
   '@microsoft/tsdoc@0.16.0':
     resolution: {integrity: sha512-xgAyonlVVS+q7Vc7qLW0UrJU7rSFcETRWsqdXZtjzRU8dF+6CkozTK4V4y1LwOX7j8r/vHphjDeMeGI4tNGeGA==}
 
-  '@napi-rs/wasm-runtime@1.1.4':
-    resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
+  '@napi-rs/wasm-runtime@1.1.5':
+    resolution: {integrity: sha512-AWPoBRJ9tsnVhor4sjO7rkni+7p+2IAEFj6cx06UgP10jkQHqay/36uRV/bFkgrh18D9vb4cr8Q0Pthskgzy+Q==}
     peerDependencies:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
-  '@nodable/entities@2.1.0':
-    resolution: {integrity: sha512-nyT7T3nbMyBI/lvr6L5TyWbFJAI9FTgVRakNoBqCD+PmID8DzFrrNdLLtHMwMszOtqZa8PAOV24ZqDnQrhQINA==}
+  '@nodable/entities@2.2.0':
+    resolution: {integrity: sha512-9uGyhaQavEUMC8AIddIjau4NsnsXhou+j5sBAGojCM1oxmQpVKTWR/9JxABD6UAv12vpIms55fPZKFQEhG6uBg==}
 
-  '@oxc-project/types@0.128.0':
-    resolution: {integrity: sha512-huv1Y/LzBJkBVHt3OlC7u0zHBW9qXf1FdD7sGmc1rXc2P1mTwHssYv7jyGx5KAACSCH+9B3Bhn6Z9luHRvf7pQ==}
+  '@oxc-project/types@0.133.0':
+    resolution: {integrity: sha512-KzkdCd6Uxqnf6l3HOw1xfatAlUURA0g14cvBYFyJ5SaNOQbOUvBr9PKArcPcrNIeRsBdgcUzOGrhKveVpvOIGA==}
 
   '@plausible-analytics/tracker@0.4.5':
     resolution: {integrity: sha512-6BfAGejXY+YA3Cw6LYT2Zpn4hTxDtPQAawFsYUsQCOg78wIS5C4deAGXTfJffa5VleMWITv5lpJ/EYuQBl1tPA==}
@@ -1588,106 +1593,106 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@rolldown/binding-android-arm64@1.0.0-rc.18':
-    resolution: {integrity: sha512-lIDyUAfD7U3+BWKzdxMbJcsYHuqXqmGz40aeRqvuAm3y5TkJSYTBW2RDrn65DJFPQqVjUAUqq5uz8urzQ8aBdQ==}
+  '@rolldown/binding-android-arm64@1.0.3':
+    resolution: {integrity: sha512-454rs7jHngixp/NMxd5srYD57OnzSlZ/eFTETjORQHLwJG1lRtmNOJcBerZlfu4GjKqeq8aCCIQrMdHyhI51Hw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [android]
 
-  '@rolldown/binding-darwin-arm64@1.0.0-rc.18':
-    resolution: {integrity: sha512-apJq2ktnGp27nSInMR5Vcj8kY6xJzDAvfdIFlpDcAK/w4cDO58qVoi1YQsES/SKiFNge/6e4CUzgjfHduYqWpQ==}
+  '@rolldown/binding-darwin-arm64@1.0.3':
+    resolution: {integrity: sha512-PcAhP+ynjURNyy8SKGl5DQP94aGuB/7JrXJb/t7P+hanXvQVMWzUvRRhBAcg/lNRadBhoUPqSoP4xw5tR/KBEA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
 
-  '@rolldown/binding-darwin-x64@1.0.0-rc.18':
-    resolution: {integrity: sha512-5Ofot8xbs+pxRHJqm9/9N/4sTQOvdrwEsmPE9pdLEEoAbdZtG6F2LMDfO1sp6ZAtXJuJV/21ew2srq3W8NXB5g==}
+  '@rolldown/binding-darwin-x64@1.0.3':
+    resolution: {integrity: sha512-9YpfeUvSE2RS7wysJ81uOZkXJz7f7Q55H2Gvp3VEw/EsahqDtrphrZ0EwDLK5vvKOzaCrBsjF8JmnMLcUt78Gg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [darwin]
 
-  '@rolldown/binding-freebsd-x64@1.0.0-rc.18':
-    resolution: {integrity: sha512-7h8eeOTT1eyqJyx64BFCnWZpNm486hGWt2sqeLLgDxA0xI1oGZ9H7gK1S85uNGmBhkdPwa/6reTxfFFKvIsebw==}
+  '@rolldown/binding-freebsd-x64@1.0.3':
+    resolution: {integrity: sha512-yB1IlAsSNHncV6SCTL27/MVGR5htvQsoGxIv5KMGXALp+Ll1wYsn+x98M9MW7qa+NdSbvrrY7ANI4wLJ0n1e6g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
 
-  '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.18':
-    resolution: {integrity: sha512-eRcm/HVt9U/JFu5RKAEKwGQYtDCKWLiaH6wOnsSEp6NMBb/3Os8LgHZlNyzMpFVNmiiMFlfb2zEnebfzJrHFmg==}
+  '@rolldown/binding-linux-arm-gnueabihf@1.0.3':
+    resolution: {integrity: sha512-Yi30IVAAfLUCy2MseFjbB1jAMDl1VMCAas5StnYp8da9+CKvMd2H2cbEjWcw5NPaPqzvYkVIaF1nNUG+b7u/sw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
 
-  '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.18':
-    resolution: {integrity: sha512-SOrT/cT4ukTmgnrEz/Hg3m7LBnuCLW9psDeMKrimRWY4I8DmnO7Lco8W2vtqPmMkbVu8iJ+g4GFLVLLOVjJ9DQ==}
+  '@rolldown/binding-linux-arm64-gnu@1.0.3':
+    resolution: {integrity: sha512-jsO7R8To+AdlYgUmN5sHSCZbfhtMBkO0WUx8iORQnPcMMdgr7qM2DQmMwgabs3GhNztdmoKkMKQFHD6DTMCIQw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-arm64-musl@1.0.0-rc.18':
-    resolution: {integrity: sha512-QWjdxN1HJCpBTAcZ5N5F7wju3gVPzRzSpmGzx7na0c/1qpN9CFil+xt+l9lV/1M6/gqHSNXCiqPfwhVJPeLnug==}
+  '@rolldown/binding-linux-arm64-musl@1.0.3':
+    resolution: {integrity: sha512-VWkUHwWriDciit80wleYwKILoR/KMvxh/IdwS/paX+ZgpuRpCrKLUdadJbc0NpBEiyhpYawsJ73j9aCvOH+f7Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@rolldown/binding-linux-ppc64-gnu@1.0.0-rc.18':
-    resolution: {integrity: sha512-ugCOyj7a4d9h3q9B+wXmf6g3a68UsjGh6dob5DHevHGMwDUbhsYNbSPxJsENcIttJZ9jv7qGM2UesLw5jqIhdg==}
+  '@rolldown/binding-linux-ppc64-gnu@1.0.3':
+    resolution: {integrity: sha512-5f1laC0SlIR0yDbFCd8acUhvJIag6N3zC5P7oUPN6wX0aOma+uKJ0wBDH5aq7I1PVI2ttTlhJwzwRIBnLiSGEg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-s390x-gnu@1.0.0-rc.18':
-    resolution: {integrity: sha512-kKWRhbsotpXkGbcd5dllUWg5gEXcDAa8u5YnP9AV5DYNbvJHGzzuwv7dpmhc8NqKMJldl0a+x76IHbspEpEmdA==}
+  '@rolldown/binding-linux-s390x-gnu@1.0.3':
+    resolution: {integrity: sha512-Iq4ko0r4XsgbrF/LunNgHtAGLRRVE2kXonAXQ/MV0mC6jQpMOhW1SvtZja2EhC/kd05++bP78dsqBeIQyYJ6Yg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [s390x]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.18':
-    resolution: {integrity: sha512-uCo8ElcCIAMyYAZyuIZ81oFkhTSIllNvUCHCAlbhlN4ji3uC28h7IIdlXyIvGO7HsuqnV9p3rD/bpH7XhIyhRw==}
+  '@rolldown/binding-linux-x64-gnu@1.0.3':
+    resolution: {integrity: sha512-B8m6tD5+/N5FeNQFbKlLA/2yVq9ycQP1SeedyEYYKWBNR3ZQbkvIUcNnDNM03lO1l5F2roiiFJGgvoLLyZXtSg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@rolldown/binding-linux-x64-musl@1.0.0-rc.18':
-    resolution: {integrity: sha512-XNOQZtuE6yUIvx4rwGemwh8kpL1xvU41FXy/s9K7T/3JVcqGzo3NfKM2HrbrGgfPYGFW42f07Wk++aOC6B9NWA==}
+  '@rolldown/binding-linux-x64-musl@1.0.3':
+    resolution: {integrity: sha512-pSdpdUJHkuCxun9LE7jvgUB9qsRgaiyNNCX7m/AvHTcq67AiT/Yhoxvw5zPfhrM8k/BfP8ce/hMOpthKDpEUow==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@rolldown/binding-openharmony-arm64@1.0.0-rc.18':
-    resolution: {integrity: sha512-tSn/kzrfa7tNOXr7sEacDBN4YsIqTyLqh45IO0nHDwtpKIDNDJr+VFojt+4klSpChxB29JLyduSsE0MKEwa65A==}
+  '@rolldown/binding-openharmony-arm64@1.0.3':
+    resolution: {integrity: sha512-OXXS3RKJgX2uLwM+gYyuH5omcH8fL1LJs96pZGgtetVCahON57+d4SJHzTgZiOjxgGkSnpXpOsWuPDGAKAigEg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
 
-  '@rolldown/binding-wasm32-wasi@1.0.0-rc.18':
-    resolution: {integrity: sha512-+J9YGmc+czgqlhYmwun3S3O0FIZhsH8ep2456xwjAdIOmuJxM7xz4P4PtrxU+Bz17a/5bqPA8o3HAAoX0teUdg==}
+  '@rolldown/binding-wasm32-wasi@1.0.3':
+    resolution: {integrity: sha512-JTtb8BWFynicNSoPrehsCzBtOKjZ6jhMiPFEmOiuXg1Fl8dn2KHQob+GuPSGR0dryQa1PQJbzjF3dqO/whhjLg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [wasm32]
 
-  '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.18':
-    resolution: {integrity: sha512-zsu47DgU0FQzSwi6sU9dZoEdUv7pc1AptSEz/Z8HBg54sV0Pbs3N0+CrIbTsgiu6EyoaNN9CHboqbLaz9lhOyQ==}
+  '@rolldown/binding-win32-arm64-msvc@1.0.3':
+    resolution: {integrity: sha512-gEdFFEN70A/jxb2svrWsN3aDL7OUtmvlOy+6fa2jxG8K0wQ1ZbdeLGnidov6Yu5/733dI5ySfzFlQ/cb0bSz1g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [win32]
 
-  '@rolldown/binding-win32-x64-msvc@1.0.0-rc.18':
-    resolution: {integrity: sha512-7H+3yqGgmnlDTRRhw/xpYY9J1kf4GC681nVc4GqKhExZTDrVVrV2tsOR9kso0fvgBdcTCcQShx4SLLoHgaLwhg==}
+  '@rolldown/binding-win32-x64-msvc@1.0.3':
+    resolution: {integrity: sha512-eXB7CHuaQdqmJcc3koCNtNPmT/bj2gc999kUFgBxG8Ac0NdgXc4rkCHhqrgrhN3zddvvvrgzj1e90SuSfmyIXA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
 
-  '@rolldown/pluginutils@1.0.0-rc.18':
-    resolution: {integrity: sha512-CUY5Mnhe64xQBGZEEXQ5WyZwsc1JU3vAZLIxtrsBt3LO6UOb+C8GunVKqe9sT8NeWb4lqSaoJtp2xo6GxT1MNw==}
-
   '@rolldown/pluginutils@1.0.0-rc.7':
     resolution: {integrity: sha512-qujRfC8sFVInYSPPMLQByRh7zhwkGFS4+tyMQ83srV1qrxL4g8E2tyxVVyxd0+8QeBM1mIk9KbWxkegRr76XzA==}
+
+  '@rolldown/pluginutils@1.0.1':
+    resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
@@ -1962,7 +1967,6 @@ packages:
   '@tanstack/router-plugin@1.167.35':
     resolution: {integrity: sha512-UAScU5VAzLYVY4FML/Cbc5S5TucT4I8Ata05yozGOe4ZfepTKRffA5xWLtD2N+ov5svdv0KTX/kqlZnYPe28mA==}
     engines: {node: '>=20.19'}
-    hasBin: true
     peerDependencies:
       '@rsbuild/core': '>=1.0.2 || ^2.0.0'
       '@tanstack/react-router': ^1.169.2
@@ -2062,8 +2066,8 @@ packages:
   '@types/node@25.6.2':
     resolution: {integrity: sha512-sokuT28dxf9JT5Kady1fsXOvI4HVpjZa95NKT5y9PNTIrs2AsobR4GFAA90ZG8M+nxVRLysCXsVj6eGC7Vbrlw==}
 
-  '@types/node@25.9.1':
-    resolution: {integrity: sha512-xfrlY7UD5rMJk3ZVJP8BNzS28J36YJg+xp+LPXV1TdWxr8uMH5A860QNxYDGQe/ylDSgjxE52Q9VnO7p75tJxg==}
+  '@types/node@25.9.3':
+    resolution: {integrity: sha512-603BddQMv3pUcr4U2dhujk83N2tTDVr/34wII2B6bJy6g+8WD6yUb11jszNs0gdi4PesVWl7ABt8nYMVpnLUcg==}
 
   '@types/offscreencanvas@2019.7.3':
     resolution: {integrity: sha512-ieXiYmgSRXUDeOntE1InxjWyvEelZGP63M+cGuquuRLuIKKT1osnkXjxev9B7d1nXSug5vpunx+gNlbVxMlC9A==}
@@ -2220,6 +2224,9 @@ packages:
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
+
+  anynum@1.0.0:
+    resolution: {integrity: sha512-xjR9/zBVnUOP6ztMIIgShjsxui80nQUQH+5xJnvrYLs+90bF25/KJqaAi8mk+B4RDtX1Nspi6fmp4YTEts8SfA==}
 
   apache-arrow@21.1.0:
     resolution: {integrity: sha512-kQrYLxhC+NTVVZ4CCzGF6L/uPVOzJmD1T3XgbiUnP7oTeVFOFgEUu6IKNwCDkpFoBVqDKQivlX4RUFqqnWFlEA==}
@@ -2601,8 +2608,8 @@ packages:
   fast-xml-builder@1.2.0:
     resolution: {integrity: sha512-00aAWieqff+ZJhsXA4g1g7M8k+7AYoMUUHF+/zFb5U6Uv/P0Vl4QZo84/IcufzYalLuEj9928bXN9PbbFzMF0Q==}
 
-  fast-xml-parser@5.8.0:
-    resolution: {integrity: sha512-6bIM7fsJxeo3uXv7OncQYsBAMPJ7V16Slahl/6M98C/i2q+vB1+4a0MtrvYwDFEUrwDSbAmeLDRXsOBwrL7yAg==}
+  fast-xml-parser@5.9.0:
+    resolution: {integrity: sha512-duBuXbyIhEeNO4GjFuVqr0nF047oNwr18aum+zJyqo0MUG/n7Afgs3Qv3D6VN3ONedUKxiuFlPiMGIa0Z11chA==}
     hasBin: true
 
   fault@2.0.1:
@@ -2863,6 +2870,9 @@ packages:
   is-plain-object@2.0.4:
     resolution: {integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==}
     engines: {node: '>=0.10.0'}
+
+  is-unsafe@1.0.1:
+    resolution: {integrity: sha512-CLK2+VdgERgD96EYm5lUQssZYlRg2tkZnbsxZoacmSiRxiFJ4Nk4SzjCl+Ur+v3kXIY9dTIdb3IH22y1mZ56LA==}
 
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -3365,8 +3375,8 @@ packages:
     resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
     engines: {node: '>=4'}
 
-  postcss@8.5.14:
-    resolution: {integrity: sha512-SoSL4+OSEtR99LHFZQiJLkT59C5B1amGO1NzTwj7TT1qCUgUO6hxOvzkOYxD+vMrXBM3XJIKzokoERdqQq/Zmg==}
+  postcss@8.5.15:
+    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   potpack@2.1.0:
@@ -3571,8 +3581,8 @@ packages:
   rfdc@1.4.1:
     resolution: {integrity: sha512-q1b3N5QkRUWUl7iyylaaj3kOpIT0N2i9MqIEQXP73GVsN9cw3fdx8X63cEmWhJGi2PPCF23Ijp7ktmd39rawIA==}
 
-  rolldown@1.0.0-rc.18:
-    resolution: {integrity: sha512-phmyKBpuBdRYDf4hgyynGAYn/rDDe+iZXKVJ7WX5b1zQzpLkP5oJRPGsfJuHdzPMlyyEO/4sPW6yfSx2gf7lVg==}
+  rolldown@1.0.3:
+    resolution: {integrity: sha512-i00lAJ2ks1BYr7rjNjKC7BcqAS7nVfiT3QX1SI5aY+AFHblCmaUf9OE9dbdzDvW6dJxbi2ZCZiy9v3CcwOiX3g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -3685,8 +3695,8 @@ packages:
     resolution: {integrity: sha512-yDPMNjp4WyfYBkHnjIRLfca1i6KMyGCtsVgoKe/z1+6vukgaENdgGBZt+ZmKPc4gavvEZ5OgHfHdrazhgNyG7w==}
     engines: {node: '>=12'}
 
-  strnum@2.3.0:
-    resolution: {integrity: sha512-ums3KNd42PGyx5xaoVTO1mjU1bH3NpY4vsrVlnv9PNGqQj8wd7rJ6nEypLrJ7z5vxK5RP0yMLo6J/Gsm62DI5Q==}
+  strnum@2.4.0:
+    resolution: {integrity: sha512-sHrVyWWdq28RbhjuJdZsA1SnGRJV6NiXbk6AXBxDOsgAcA+lmpUZCYjOdLBxkXMwis6RRe7dlZt4VlIWFVzkmg==}
 
   style-mod@4.1.3:
     resolution: {integrity: sha512-i/n8VsZydrugj3Iuzll8+x/00GH2vnYsk1eomD8QiRrSAeW6ItbCQDtfXCeJHd0iwiNagqjQkvpvREEPtW3IoQ==}
@@ -3746,8 +3756,8 @@ packages:
     resolution: {integrity: sha512-dAqSqE/RabpBKI8+h26GfLq6Vb3JVXs30XYQjdMjaj/c2tS8IYYMbIzP599KtRj7c57/wYApb3QjgRgXmrCukA==}
     engines: {node: '>=18'}
 
-  tinyglobby@0.2.16:
-    resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
+  tinyglobby@0.2.17:
+    resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
     engines: {node: '>=12.0.0'}
 
   tinyqueue@3.0.0:
@@ -3901,8 +3911,8 @@ packages:
     peerDependencies:
       vite: '>=6.3.6'
 
-  vite@8.0.11:
-    resolution: {integrity: sha512-Jz1mxtUBR5xTT65VOdJZUUeoyLtqljmFkiUXhPTLZka3RDc9vpi/xXkyrnsdRcm2lIi3l3GPMnAidTsEGIj3Ow==}
+  vite@8.0.16:
+    resolution: {integrity: sha512-h9bXPmJichP5fLmVQo3PyaGSDE2n3aPuomeAlVRm0JLmt4rY6zmPKd59HYI4LNW8oTK7tlTsuC7l/m7awx9Jcw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -4481,10 +4491,10 @@ snapshots:
     dependencies:
       '@deck.gl/core': 9.3.2
       '@deck.gl/layers': 9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
-      '@luma.gl/constants': 9.3.3
+      '@luma.gl/constants': 9.3.4
       '@luma.gl/core': 9.3.3
       '@luma.gl/engine': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
-      '@luma.gl/shadertools': 9.3.3(@luma.gl/core@9.3.3)
+      '@luma.gl/shadertools': 9.3.4(@luma.gl/core@9.3.3)
       '@math.gl/core': 4.1.0
       '@math.gl/web-mercator': 4.1.0
       d3-hexbin: 0.2.2
@@ -4513,31 +4523,31 @@ snapshots:
   '@deck.gl/extensions@9.2.8(@deck.gl/core@9.3.2)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))':
     dependencies:
       '@deck.gl/core': 9.3.2
-      '@luma.gl/constants': 9.3.3
+      '@luma.gl/constants': 9.3.4
       '@luma.gl/core': 9.3.3
       '@luma.gl/engine': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
-      '@luma.gl/shadertools': 9.3.3(@luma.gl/core@9.3.3)
+      '@luma.gl/shadertools': 9.3.4(@luma.gl/core@9.3.3)
       '@math.gl/core': 4.1.0
 
-  '@deck.gl/geo-layers@9.2.8(@deck.gl/core@9.3.2)(@deck.gl/extensions@9.2.8(@deck.gl/core@9.3.2)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/layers@9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/mesh-layers@9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))':
+  '@deck.gl/geo-layers@9.2.8(@deck.gl/core@9.3.2)(@deck.gl/extensions@9.2.8(@deck.gl/core@9.3.2)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/layers@9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/mesh-layers@9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))':
     dependencies:
       '@deck.gl/core': 9.3.2
       '@deck.gl/extensions': 9.2.8(@deck.gl/core@9.3.2)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
       '@deck.gl/layers': 9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
-      '@deck.gl/mesh-layers': 9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
-      '@loaders.gl/3d-tiles': 4.4.2(@loaders.gl/core@4.4.1)
+      '@deck.gl/mesh-layers': 9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
+      '@loaders.gl/3d-tiles': 4.4.3(@loaders.gl/core@4.4.1)
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/gis': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/mvt': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/terrain': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/tiles': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/wms': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/gis': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/mvt': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/terrain': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/tiles': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/wms': 4.4.3(@loaders.gl/core@4.4.1)
       '@luma.gl/core': 9.3.3
       '@luma.gl/engine': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
-      '@luma.gl/gltf': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
-      '@luma.gl/shadertools': 9.3.3(@luma.gl/core@9.3.3)
+      '@luma.gl/gltf': 9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.4(@luma.gl/core@9.3.3))
+      '@luma.gl/shadertools': 9.3.4(@luma.gl/core@9.3.3)
       '@math.gl/core': 4.1.0
       '@math.gl/culling': 4.1.0
       '@math.gl/web-mercator': 4.1.0
@@ -4571,14 +4581,14 @@ snapshots:
       '@luma.gl/core': 9.3.3
       '@math.gl/web-mercator': 4.1.0
 
-  '@deck.gl/mesh-layers@9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))':
+  '@deck.gl/mesh-layers@9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))':
     dependencies:
       '@deck.gl/core': 9.3.2
-      '@loaders.gl/gltf': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
+      '@loaders.gl/gltf': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
       '@luma.gl/core': 9.3.3
       '@luma.gl/engine': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
-      '@luma.gl/gltf': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
+      '@luma.gl/gltf': 9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
       '@luma.gl/shadertools': 9.3.3(@luma.gl/core@9.3.3)
     transitivePeerDependencies:
       - '@75lb/nature'
@@ -4682,11 +4692,11 @@ snapshots:
       '@fortawesome/fontawesome-svg-core': 7.2.0
       react: 19.2.6
 
-  '@geoarrow/deck.gl-layers@0.3.2(6af0d311225f69f8a2f1ce9062c70aed)':
+  '@geoarrow/deck.gl-layers@0.3.2(5e1308b4c5e1a79a8a15ede73de1294b)':
     dependencies:
       '@deck.gl/aggregation-layers': 9.2.8(@deck.gl/core@9.3.2)(@deck.gl/layers@9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
       '@deck.gl/core': 9.3.2
-      '@deck.gl/geo-layers': 9.2.8(@deck.gl/core@9.3.2)(@deck.gl/extensions@9.2.8(@deck.gl/core@9.3.2)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/layers@9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/mesh-layers@9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
+      '@deck.gl/geo-layers': 9.2.8(@deck.gl/core@9.3.2)(@deck.gl/extensions@9.2.8(@deck.gl/core@9.3.2)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/layers@9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))))(@deck.gl/mesh-layers@9.2.8(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/gltf@9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
       '@deck.gl/layers': 9.3.2(@deck.gl/core@9.3.2)(@loaders.gl/core@4.4.1)(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))
       '@geoarrow/geoarrow-js': 0.3.3(apache-arrow@21.1.0)
       '@math.gl/polygon': 4.1.0
@@ -4999,18 +5009,18 @@ snapshots:
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.10
 
-  '@loaders.gl/3d-tiles@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/3d-tiles@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
-      '@loaders.gl/compression': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/compression': 4.4.3(@loaders.gl/core@4.4.1)
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/crypto': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/draco': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/gltf': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/images': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/math': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/tiles': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/zip': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/crypto': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/draco': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/gltf': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/images': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/math': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/tiles': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/zip': 4.4.3(@loaders.gl/core@4.4.1)
       '@math.gl/core': 4.1.0
       '@math.gl/culling': 4.1.0
       '@math.gl/geospatial': 4.1.0
@@ -5019,11 +5029,11 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/compression@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/compression@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/worker-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/worker-utils': 4.4.3(@loaders.gl/core@4.4.1)
       '@types/pako': 1.0.7
       fflate: 0.7.4
       pako: 1.0.11
@@ -5046,27 +5056,27 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/crypto@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/crypto@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/worker-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/worker-utils': 4.4.3(@loaders.gl/core@4.4.1)
       '@types/crypto-js': 4.2.2
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/draco@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/draco@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/schema-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/worker-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/schema-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/worker-utils': 4.4.3(@loaders.gl/core@4.4.1)
       draco3d: 1.5.7
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/geoarrow@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/geoarrow@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
       '@math.gl/polygon': 4.1.0
@@ -5074,27 +5084,27 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/gis@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/gis@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/geoarrow': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/schema-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/geoarrow': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/schema-utils': 4.4.3(@loaders.gl/core@4.4.1)
       '@mapbox/vector-tile': 1.3.1
       '@math.gl/polygon': 4.1.0
       pbf: 3.3.0
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/gltf@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/gltf@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/draco': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/images': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/textures': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/draco': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/images': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/textures': 4.4.3(@loaders.gl/core@4.4.1)
       '@math.gl/core': 4.1.0
     transitivePeerDependencies:
       - '@75lb/nature'
@@ -5106,10 +5116,10 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/images@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/images@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
     transitivePeerDependencies:
       - '@75lb/nature'
 
@@ -5123,28 +5133,28 @@ snapshots:
       - '@75lb/nature'
       - '@loaders.gl/core'
 
-  '@loaders.gl/loader-utils@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/loader-utils@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/worker-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/worker-utils': 4.4.3(@loaders.gl/core@4.4.1)
       '@probe.gl/log': 4.1.1
       '@probe.gl/stats': 4.1.1
     transitivePeerDependencies:
       - '@75lb/nature'
       - '@loaders.gl/core'
 
-  '@loaders.gl/math@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/math@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
       '@math.gl/core': 4.1.0
 
-  '@loaders.gl/mvt@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/mvt@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/gis': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/images': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
+      '@loaders.gl/gis': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/images': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
       '@math.gl/polygon': 4.1.0
       '@probe.gl/stats': 4.1.1
       pbf: 3.3.0
@@ -5160,10 +5170,10 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/schema-utils@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/schema-utils@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/schema': 4.4.2
+      '@loaders.gl/schema': 4.4.3
       '@types/geojson': 7946.0.16
       apache-arrow: 21.1.0
     transitivePeerDependencies:
@@ -5176,41 +5186,41 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/schema@4.4.2':
+  '@loaders.gl/schema@4.4.3':
     dependencies:
       '@types/geojson': 7946.0.16
       apache-arrow: 21.1.0
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/terrain@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/terrain@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/images': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
+      '@loaders.gl/images': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
       '@mapbox/martini': 0.2.0
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/textures@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/textures@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/images': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/worker-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/images': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/worker-utils': 4.4.3(@loaders.gl/core@4.4.1)
       '@math.gl/types': 4.1.0
       ktx-parse: 0.7.1
       texture-compressor: 1.0.2
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/tiles@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/tiles@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/math': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/math': 4.4.3(@loaders.gl/core@4.4.1)
       '@math.gl/core': 4.1.0
       '@math.gl/culling': 4.1.0
       '@math.gl/geospatial': 4.1.0
@@ -5219,13 +5229,13 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/wms@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/wms@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/images': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      '@loaders.gl/xml': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/images': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      '@loaders.gl/xml': 4.4.3(@loaders.gl/core@4.4.1)
       '@turf/rewind': 5.1.5
       deep-strict-equal: 0.2.0
     transitivePeerDependencies:
@@ -5235,31 +5245,31 @@ snapshots:
     dependencies:
       '@loaders.gl/core': 4.4.1
 
-  '@loaders.gl/worker-utils@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/worker-utils@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
 
-  '@loaders.gl/xml@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/xml@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/schema': 4.4.2
-      fast-xml-parser: 5.8.0
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/schema': 4.4.3
+      fast-xml-parser: 5.9.0
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@loaders.gl/zip@4.4.2(@loaders.gl/core@4.4.1)':
+  '@loaders.gl/zip@4.4.3(@loaders.gl/core@4.4.1)':
     dependencies:
-      '@loaders.gl/compression': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/compression': 4.4.3(@loaders.gl/core@4.4.1)
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/crypto': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/loader-utils': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/crypto': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/loader-utils': 4.4.3(@loaders.gl/core@4.4.1)
       jszip: 3.10.1
       md5: 2.3.0
     transitivePeerDependencies:
       - '@75lb/nature'
 
-  '@luma.gl/constants@9.3.3': {}
+  '@luma.gl/constants@9.3.4': {}
 
   '@luma.gl/core@9.3.3':
     dependencies:
@@ -5278,11 +5288,11 @@ snapshots:
       '@probe.gl/log': 4.1.1
       '@probe.gl/stats': 4.1.1
 
-  '@luma.gl/gltf@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))':
+  '@luma.gl/gltf@9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))':
     dependencies:
       '@loaders.gl/core': 4.4.1
-      '@loaders.gl/gltf': 4.4.2(@loaders.gl/core@4.4.1)
-      '@loaders.gl/textures': 4.4.2(@loaders.gl/core@4.4.1)
+      '@loaders.gl/gltf': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/textures': 4.4.3(@loaders.gl/core@4.4.1)
       '@luma.gl/core': 9.3.3
       '@luma.gl/engine': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
       '@luma.gl/shadertools': 9.3.3(@luma.gl/core@9.3.3)
@@ -5290,7 +5300,25 @@ snapshots:
     transitivePeerDependencies:
       - '@75lb/nature'
 
+  '@luma.gl/gltf@9.3.4(@luma.gl/core@9.3.3)(@luma.gl/engine@9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)))(@luma.gl/shadertools@9.3.4(@luma.gl/core@9.3.3))':
+    dependencies:
+      '@loaders.gl/core': 4.4.1
+      '@loaders.gl/gltf': 4.4.3(@loaders.gl/core@4.4.1)
+      '@loaders.gl/textures': 4.4.3(@loaders.gl/core@4.4.1)
+      '@luma.gl/core': 9.3.3
+      '@luma.gl/engine': 9.3.3(@luma.gl/core@9.3.3)(@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3))
+      '@luma.gl/shadertools': 9.3.4(@luma.gl/core@9.3.3)
+      '@math.gl/core': 4.1.0
+    transitivePeerDependencies:
+      - '@75lb/nature'
+
   '@luma.gl/shadertools@9.3.3(@luma.gl/core@9.3.3)':
+    dependencies:
+      '@luma.gl/core': 9.3.3
+      '@math.gl/core': 4.1.0
+      '@math.gl/types': 4.1.0
+
+  '@luma.gl/shadertools@9.3.4(@luma.gl/core@9.3.3)':
     dependencies:
       '@luma.gl/core': 9.3.3
       '@math.gl/core': 4.1.0
@@ -5508,16 +5536,16 @@ snapshots:
 
   '@microsoft/tsdoc@0.16.0': {}
 
-  '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
+  '@napi-rs/wasm-runtime@1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
       '@tybys/wasm-util': 0.10.2
     optional: true
 
-  '@nodable/entities@2.1.0': {}
+  '@nodable/entities@2.2.0': {}
 
-  '@oxc-project/types@0.128.0': {}
+  '@oxc-project/types@0.133.0': {}
 
   '@plausible-analytics/tracker@0.4.5': {}
 
@@ -5914,58 +5942,58 @@ snapshots:
     dependencies:
       react: 19.2.6
 
-  '@rolldown/binding-android-arm64@1.0.0-rc.18':
+  '@rolldown/binding-android-arm64@1.0.3':
     optional: true
 
-  '@rolldown/binding-darwin-arm64@1.0.0-rc.18':
+  '@rolldown/binding-darwin-arm64@1.0.3':
     optional: true
 
-  '@rolldown/binding-darwin-x64@1.0.0-rc.18':
+  '@rolldown/binding-darwin-x64@1.0.3':
     optional: true
 
-  '@rolldown/binding-freebsd-x64@1.0.0-rc.18':
+  '@rolldown/binding-freebsd-x64@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-arm-gnueabihf@1.0.0-rc.18':
+  '@rolldown/binding-linux-arm-gnueabihf@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-arm64-gnu@1.0.0-rc.18':
+  '@rolldown/binding-linux-arm64-gnu@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-arm64-musl@1.0.0-rc.18':
+  '@rolldown/binding-linux-arm64-musl@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-ppc64-gnu@1.0.0-rc.18':
+  '@rolldown/binding-linux-ppc64-gnu@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-s390x-gnu@1.0.0-rc.18':
+  '@rolldown/binding-linux-s390x-gnu@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-x64-gnu@1.0.0-rc.18':
+  '@rolldown/binding-linux-x64-gnu@1.0.3':
     optional: true
 
-  '@rolldown/binding-linux-x64-musl@1.0.0-rc.18':
+  '@rolldown/binding-linux-x64-musl@1.0.3':
     optional: true
 
-  '@rolldown/binding-openharmony-arm64@1.0.0-rc.18':
+  '@rolldown/binding-openharmony-arm64@1.0.3':
     optional: true
 
-  '@rolldown/binding-wasm32-wasi@1.0.0-rc.18':
+  '@rolldown/binding-wasm32-wasi@1.0.3':
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
-      '@napi-rs/wasm-runtime': 1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+      '@napi-rs/wasm-runtime': 1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
     optional: true
 
-  '@rolldown/binding-win32-arm64-msvc@1.0.0-rc.18':
+  '@rolldown/binding-win32-arm64-msvc@1.0.3':
     optional: true
 
-  '@rolldown/binding-win32-x64-msvc@1.0.0-rc.18':
+  '@rolldown/binding-win32-x64-msvc@1.0.3':
     optional: true
-
-  '@rolldown/pluginutils@1.0.0-rc.18': {}
 
   '@rolldown/pluginutils@1.0.0-rc.7': {}
+
+  '@rolldown/pluginutils@1.0.1': {}
 
   '@rollup/pluginutils@5.3.0':
     dependencies:
@@ -6123,12 +6151,12 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.3.0
 
-  '@tailwindcss/vite@4.3.0(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))':
+  '@tailwindcss/vite@4.3.0(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))':
     dependencies:
       '@tailwindcss/node': 4.3.0
       '@tailwindcss/oxide': 4.3.0
       tailwindcss: 4.3.0
-      vite: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+      vite: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
 
   '@tanstack/devtools-event-client@0.4.3': {}
 
@@ -6226,7 +6254,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@tanstack/router-plugin@1.167.35(@tanstack/react-router@1.169.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))':
+  '@tanstack/router-plugin@1.167.35(@tanstack/react-router@1.169.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.0)
@@ -6243,7 +6271,7 @@ snapshots:
       zod: 3.25.76
     optionalDependencies:
       '@tanstack/react-router': 1.169.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      vite: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+      vite: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
     transitivePeerDependencies:
       - supports-color
 
@@ -6257,7 +6285,7 @@ snapshots:
       babel-dead-code-elimination: 1.0.12
       diff: 9.0.0
       pathe: 2.0.3
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
     transitivePeerDependencies:
       - supports-color
 
@@ -6303,7 +6331,7 @@ snapshots:
 
   '@types/brotli@1.3.5':
     dependencies:
-      '@types/node': 25.9.1
+      '@types/node': 25.9.3
     optional: true
 
   '@types/command-line-args@5.2.3': {}
@@ -6346,7 +6374,7 @@ snapshots:
     dependencies:
       undici-types: 7.19.2
 
-  '@types/node@25.9.1':
+  '@types/node@25.9.3':
     dependencies:
       undici-types: 7.24.6
     optional: true
@@ -6401,10 +6429,10 @@ snapshots:
     optionalDependencies:
       maplibre-gl: 5.24.0
 
-  '@vitejs/plugin-react@6.0.1(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))':
+  '@vitejs/plugin-react@6.0.1(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-rc.7
-      vite: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+      vite: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
 
   '@volar/language-core@2.4.28':
     dependencies:
@@ -6496,6 +6524,8 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 4.0.4
+
+  anynum@1.0.0: {}
 
   apache-arrow@21.1.0:
     dependencies:
@@ -6851,12 +6881,13 @@ snapshots:
       path-expression-matcher: 1.5.0
       xml-naming: 0.1.0
 
-  fast-xml-parser@5.8.0:
+  fast-xml-parser@5.9.0:
     dependencies:
-      '@nodable/entities': 2.1.0
+      '@nodable/entities': 2.2.0
       fast-xml-builder: 1.2.0
+      is-unsafe: 1.0.1
       path-expression-matcher: 1.5.0
-      strnum: 2.3.0
+      strnum: 2.4.0
       xml-naming: 0.1.0
 
   fault@2.0.1:
@@ -7072,6 +7103,8 @@ snapshots:
   is-plain-object@2.0.4:
     dependencies:
       isobject: 3.0.1
+
+  is-unsafe@1.0.1: {}
 
   isarray@1.0.0: {}
 
@@ -7803,7 +7836,7 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss@8.5.14:
+  postcss@8.5.15:
     dependencies:
       nanoid: 3.3.12
       picocolors: 1.1.1
@@ -8028,26 +8061,26 @@ snapshots:
 
   rfdc@1.4.1: {}
 
-  rolldown@1.0.0-rc.18:
+  rolldown@1.0.3:
     dependencies:
-      '@oxc-project/types': 0.128.0
-      '@rolldown/pluginutils': 1.0.0-rc.18
+      '@oxc-project/types': 0.133.0
+      '@rolldown/pluginutils': 1.0.1
     optionalDependencies:
-      '@rolldown/binding-android-arm64': 1.0.0-rc.18
-      '@rolldown/binding-darwin-arm64': 1.0.0-rc.18
-      '@rolldown/binding-darwin-x64': 1.0.0-rc.18
-      '@rolldown/binding-freebsd-x64': 1.0.0-rc.18
-      '@rolldown/binding-linux-arm-gnueabihf': 1.0.0-rc.18
-      '@rolldown/binding-linux-arm64-gnu': 1.0.0-rc.18
-      '@rolldown/binding-linux-arm64-musl': 1.0.0-rc.18
-      '@rolldown/binding-linux-ppc64-gnu': 1.0.0-rc.18
-      '@rolldown/binding-linux-s390x-gnu': 1.0.0-rc.18
-      '@rolldown/binding-linux-x64-gnu': 1.0.0-rc.18
-      '@rolldown/binding-linux-x64-musl': 1.0.0-rc.18
-      '@rolldown/binding-openharmony-arm64': 1.0.0-rc.18
-      '@rolldown/binding-wasm32-wasi': 1.0.0-rc.18
-      '@rolldown/binding-win32-arm64-msvc': 1.0.0-rc.18
-      '@rolldown/binding-win32-x64-msvc': 1.0.0-rc.18
+      '@rolldown/binding-android-arm64': 1.0.3
+      '@rolldown/binding-darwin-arm64': 1.0.3
+      '@rolldown/binding-darwin-x64': 1.0.3
+      '@rolldown/binding-freebsd-x64': 1.0.3
+      '@rolldown/binding-linux-arm-gnueabihf': 1.0.3
+      '@rolldown/binding-linux-arm64-gnu': 1.0.3
+      '@rolldown/binding-linux-arm64-musl': 1.0.3
+      '@rolldown/binding-linux-ppc64-gnu': 1.0.3
+      '@rolldown/binding-linux-s390x-gnu': 1.0.3
+      '@rolldown/binding-linux-x64-gnu': 1.0.3
+      '@rolldown/binding-linux-x64-musl': 1.0.3
+      '@rolldown/binding-openharmony-arm64': 1.0.3
+      '@rolldown/binding-wasm32-wasi': 1.0.3
+      '@rolldown/binding-win32-arm64-msvc': 1.0.3
+      '@rolldown/binding-win32-x64-msvc': 1.0.3
 
   rw@1.3.3: {}
 
@@ -8145,7 +8178,9 @@ snapshots:
     dependencies:
       ansi-regex: 6.2.2
 
-  strnum@2.3.0: {}
+  strnum@2.4.0:
+    dependencies:
+      anynum: 1.0.0
 
   style-mod@4.1.3: {}
 
@@ -8212,7 +8247,7 @@ snapshots:
 
   tinyexec@1.1.2: {}
 
-  tinyglobby@0.2.16:
+  tinyglobby@0.2.17:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
@@ -8352,7 +8387,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-plugin-dts@4.5.4(@types/node@25.6.2)(typescript@5.7.3)(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)):
+  vite-plugin-dts@4.5.4(@types/node@25.6.2)(typescript@5.7.3)(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)):
     dependencies:
       '@microsoft/api-extractor': 7.58.7(@types/node@25.6.2)
       '@rollup/pluginutils': 5.3.0
@@ -8365,30 +8400,30 @@ snapshots:
       magic-string: 0.30.21
       typescript: 5.7.3
     optionalDependencies:
-      vite: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+      vite: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite-plugin-lib-inject-css@2.2.2(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)):
+  vite-plugin-lib-inject-css@2.2.2(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)):
     dependencies:
       '@ast-grep/napi': 0.36.3
       magic-string: 0.30.21
       picocolors: 1.1.1
-      vite: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+      vite: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
 
-  vite-plugin-wasm@3.6.0(vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)):
+  vite-plugin-wasm@3.6.0(vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)):
     dependencies:
-      vite: 8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
+      vite: 8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4)
 
-  vite@8.0.11(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4):
+  vite@8.0.16(@types/node@25.6.2)(jiti@2.7.0)(yaml@2.8.4):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
-      postcss: 8.5.14
-      rolldown: 1.0.0-rc.18
-      tinyglobby: 0.2.16
+      postcss: 8.5.15
+      rolldown: 1.0.3
+      tinyglobby: 0.2.17
     optionalDependencies:
       '@types/node': 25.6.2
       fsevents: 2.3.3
